@@ -1,0 +1,46 @@
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Environment / secrets — never commit
+.env
+.env.local
+*.key
+*.pem
+
+# Large data artifacts — should live on storage, not git
+*.bam
+*.bai
+*.cram
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.vcf
+*.vcf.gz
+*.bcf
+*.h5
+*.hdf5
+*.parquet
+*.feather
+
+# Claude Code local state (session logs, local settings)
+# Project-level CLAUDE.md lives at repo root and is tracked.
+.claude/settings.local.json
+.claude/cache/
+.claude/logs/
+
+# Agent-tool caches
+.aider*
