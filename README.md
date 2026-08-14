@@ -10,10 +10,13 @@ This repo collects the portable, cluster- and domain-agnostic pieces of that pla
 
 **A principle, since this is instruction for science:** every skill here is written for **discovery, not validation**. The goal of an agentic research run is to surface things you didn't expect — anomalies, counter-evidence, overlooked candidates, alternative explanations — not to confirm what you already believe. A skill that only says "yes, your hypothesis holds" is a failure mode, not an output.
 
+> **New to agentic tools?** Most of this repo assumes you already work with Claude Code or similar. If you don't yet, start with the gentle on-ramp in [`docs/`](docs/): it takes a wet-lab scientist from pasting a bench note into a plain chat, up to running a documented project, with no coding or git assumed.
+
 ## What's in here
 
 | Path | What |
 | --- | --- |
+| [`docs/`](docs/) | **An on-ramp to agentic research** — a gentle, no-jargon guide for wet-lab scientists new to these tools. A three-level ramp (chat-only, agentic file access, full starter kit) plus a rubric, glossary, copy-pasteable templates, and a [resources](docs/resources.md) page. Served as a GitHub Pages site from this folder. Start here if you have never used an agentic tool. |
 | [`skills/`](skills/) | Portable `SKILL.md` workflows — named, tool-scoped procedures you can load into Claude Code or follow by hand. |
 | [`setup/`](setup/) | Universal `CLAUDE.md` — session durability (`/rename`, task lists, memory), bash discipline, tool hygiene, discovery-not-validation, cowork state. Drop it into `~/.claude/` or a project root. |
 
