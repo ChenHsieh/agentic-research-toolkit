@@ -71,7 +71,7 @@
   var ARCHETYPES = {
     l1: {
       emoji: "🌱", name: "The Bench Recorder",
-      badge: "Chat is your superpower",
+      badge: "Plain chat is enough",
       blurb: "Your work is one clean observation at a time. You do not need any tooling to get real value — just a chat window and the verify habit.",
       lv: 1, lvName: "Level 1 · Chat only", color: "var(--l1)",
       steps: [
@@ -83,7 +83,7 @@
     },
     l2: {
       emoji: "🔭", name: "The Cross-Referencer",
-      badge: "Time to give a tool file access",
+      badge: "Worth giving a tool file access",
       blurb: "Your data has outgrown the chat box. An agentic tool that can read and search your files will earn its keep — with approval left on.",
       lv: 2, lvName: "Level 2 · Agentic access", color: "var(--l2)",
       steps: [
@@ -95,7 +95,7 @@
     },
     l3: {
       emoji: "🧭", name: "The Project Steward",
-      badge: "You need the fuller pattern",
+      badge: "Time for the fuller pattern",
       blurb: "People depend on your tables and the project is long-lived. Give the assistant a memory it cannot drift from: house rules, a brief, a decision log.",
       lv: 3, lvName: "Level 3 · Starter kit", color: "var(--l3)",
       steps: [
@@ -271,7 +271,7 @@
       '<div class="result">' +
         '<div class="arche-emoji">' + a.emoji + '</div>' +
         '<div class="badge">' + a.badge + '</div>' +
-        '<h3>You are ' + a.name + '</h3>' +
+        '<h3>' + a.name + '</h3>' +
         '<p class="lead" style="margin:10px auto 0">' + a.blurb + '</p>' +
         '<div class="reco">' +
           '<div class="reco-top">' +
