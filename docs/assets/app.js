@@ -58,49 +58,52 @@
      ============================================================ */
   // weights: how much a RIGHT swipe ("that's me") points to each level.
   var QUESTIONS = [
-    { emoji: "📓", text: "Most days I'm recording one experiment at a time.", hint: "one bench session, not a whole dataset", w: { l1: 2 } },
-    { emoji: "✍️", text: "My notes are fast shorthand only I can read.", hint: "abbreviations, no full sentences", w: { l1: 2 } },
-    { emoji: "🚫", text: "I'd rather not install or set up anything.", hint: "a chat window is as far as I want to go", w: { l1: 2 } },
-    { emoji: "📊", text: "My results live in spreadsheets that have grown huge.", hint: "thousands of rows, too big to eyeball", w: { l2: 2 } },
-    { emoji: "🔍", text: "I keep cross-referencing files to answer one question.", hint: "\"which samples also appear in that table?\"", w: { l2: 2 } },
-    { emoji: "🗄️", text: "The same lookup gets repeated across many files.", hint: "not a one-off; a whole folder of them", w: { l2: 1, l3: 1 } },
-    { emoji: "👥", text: "Other people rely on the same tables staying correct.", hint: "a shared or curated analysis", w: { l3: 2 } },
-    { emoji: "🔥", text: "I've been burned by an old copy of a file being wrong.", hint: "or this project has run for months", w: { l3: 2 } }
+    { emoji: "📝", text: "Right now I just want today's messy notes written up cleanly.", hint: "shorthand → a proper entry", w: { l1: 2 } },
+    { emoji: "💬", text: "What I'm working on fits in a single chat message.", hint: "one experiment, one paragraph", w: { l1: 2 } },
+    { emoji: "🛑", text: "I don't want to install anything or learn a new tool.", hint: "a browser tab is as far as I'll go", w: { l1: 2 } },
+    { emoji: "📊", text: "My data is a spreadsheet too big to scroll through.", hint: "thousands of rows", w: { l2: 2 } },
+    { emoji: "🔍", text: "Answering one question means opening and comparing several files.", hint: "“which of these also show up in that sheet?”", w: { l2: 2 } },
+    { emoji: "🔁", text: "I redo the same tedious lookup across many files.", hint: "same filter, twenty files", w: { l2: 1, l3: 1 } },
+    { emoji: "👥", text: "Other people rely on my tables, so they can't quietly go wrong.", hint: "a shared or curated dataset", w: { l3: 2 } },
+    { emoji: "🗓️", text: "This project has run for months and past decisions get lost.", hint: "“wait, why did we do it that way?”", w: { l3: 2 } }
   ];
 
   var ARCHETYPES = {
     l1: {
       emoji: "🌱", name: "The Bench Recorder",
-      badge: "Plain chat is enough",
-      blurb: "Your work is one clean observation at a time. You do not need any tooling to get real value — just a chat window and the verify habit.",
-      lv: 1, lvName: "Level 1 · Chat only", color: "var(--l1)",
+      badge: "The simplest setup is the right one",
+      blurb: "Your work is one clean observation at a time. That does not call for tooling; it calls for a good prompt and your own eyes on the result.",
+      setupLine: "A chat window, the notebook prompt, and the verify habit. Nothing to install.",
+      lv: 1, lvName: "Level 1 · Chat only",
       steps: [
-        "Open Claude or ChatGPT. Copy the notebook-entry prompt below.",
-        "Paste one real bench note. Read what it flags as missing.",
-        "Retype the final entry yourself. You stay the record of truth."
+        "Open Claude or ChatGPT and paste the notebook-entry prompt.",
+        "Drop in one real bench note; read what it says is missing.",
+        "Retype the final entry yourself, so you stay the record of truth."
       ],
       cta: [{ label: "Get the prompt →", href: "#level1" }]
     },
     l2: {
       emoji: "🔭", name: "The Cross-Referencer",
-      badge: "Worth giving a tool file access",
-      blurb: "Your data has outgrown the chat box. An agentic tool that can read and search your files will earn its keep — with approval left on.",
-      lv: 2, lvName: "Level 2 · Agentic access", color: "var(--l2)",
+      badge: "Your data has outgrown the chat box",
+      blurb: "You lose real time opening and comparing files by hand. A tool that can read them for you pays off, as long as approval stays on and it quotes its sources.",
+      setupLine: "One agentic tool (Claude Code or Codex), pointed at your data folder.",
+      lv: 2, lvName: "Level 2 · Agentic access",
       steps: [
-        "Try an agentic tool (Claude Code, Codex) pointed at one folder.",
-        "Ask it to quote the actual rows back, not just a count.",
-        "Keep approval on: it proposes changes, you say yes."
+        "Point an agentic tool at the one folder your files live in.",
+        "Ask it to quote the actual rows back, not just give you a count.",
+        "Keep approval on: it proposes the change, you say yes."
       ],
       cta: [{ label: "When it pays off →", href: "#tools" }, { label: "The templates →", href: "#templates" }]
     },
     l3: {
       emoji: "🧭", name: "The Project Steward",
-      badge: "Time for the fuller pattern",
-      blurb: "People depend on your tables and the project is long-lived. Give the assistant a memory it cannot drift from: house rules, a brief, a decision log.",
-      lv: 3, lvName: "Level 3 · Starter kit", color: "var(--l3)",
+      badge: "Others depend on this, and it's long-lived",
+      blurb: "People trust your tables, and the project outlives any one session. Give the assistant a written memory it cannot drift from.",
+      setupLine: "Three files: AGENT_BRIEF.md, CLAUDE.md, and a dated docs/log/.",
+      lv: 3, lvName: "Level 3 · Starter kit",
       steps: [
-        "Start with AGENT_BRIEF.md — highest value for least effort.",
-        "Add CLAUDE.md house rules: quote before you claim.",
+        "Start with AGENT_BRIEF.md, the most value for the least effort.",
+        "Add CLAUDE.md house rules: quote the source before any claim.",
         "Log each decision in docs/log/YYYYMMDD_topic.md."
       ],
       cta: [{ label: "Grab the templates →", href: "#templates" }]
@@ -245,11 +248,11 @@
   });
 
   function winner() {
-    // highest score; tie-breaks toward the LOWER level (climb only as far as needed)
-    var s = score;
-    if (s.l1 >= s.l2 && s.l1 >= s.l3) return "l1";
-    if (s.l2 >= s.l3) return "l2";
-    return "l3";
+    // Default to the simplest setup. Only move up when the need is clearly signalled,
+    // so agreeing with the heavier cards actually changes the answer.
+    if (score.l3 >= 3) return "l3";   // shared stakes + long-lived, or a strong pair of those
+    if (score.l2 >= 2) return "l2";   // at least one real "too big for chat" signal
+    return "l1";
   }
 
   function showResult() {
@@ -258,6 +261,7 @@
     document.querySelector(".swipe-hint").style.display = "none";
     var a = ARCHETYPES[winner()];
     var lvColor = a.lv === 1 ? "var(--l1)" : a.lv === 2 ? "var(--l2)" : "var(--l3)";
+    var lvSoft = a.lv === 1 ? "var(--l1-soft)" : a.lv === 2 ? "var(--l2-soft)" : "var(--l3-soft)";
 
     var stepsHtml = a.steps.map(function (t) { return "<li>" + t + "</li>"; }).join("");
     var ctaHtml = a.cta.map(function (c) {
@@ -273,6 +277,9 @@
         '<div class="badge">' + a.badge + '</div>' +
         '<h3>' + a.name + '</h3>' +
         '<p class="lead" style="margin:10px auto 0">' + a.blurb + '</p>' +
+        '<div class="setup-line" style="background:' + lvSoft + ';border-color:' + lvColor + '">' +
+          '<span class="si">🧰</span><span><b>Your setup:</b> ' + a.setupLine + '</span>' +
+        '</div>' +
         '<div class="reco">' +
           '<div class="reco-top">' +
             '<span class="lv-chip" style="background:' + lvColor + '">' + a.lvName + '</span>' +
