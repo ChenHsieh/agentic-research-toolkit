@@ -1,8 +1,0 @@
-# GitHub Pages configuration.
-# Uses a built-in supported theme so there is no local build to maintain.
-# To publish: repo Settings -> Pages -> Source: "Deploy from a branch",
-# Branch: main, Folder: /docs. GitHub builds the rest automatically.
-
-theme: jekyll-theme-cayman
-title: An on-ramp to agentic research
-description: A gentle, honest guide for wet-lab scientists new to agentic tools.

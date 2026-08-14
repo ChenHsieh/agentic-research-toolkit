@@ -16,7 +16,7 @@ This repo collects the portable, cluster- and domain-agnostic pieces of that pla
 
 | Path | What |
 | --- | --- |
-| [`docs/`](docs/) | **An on-ramp to agentic research** — a gentle, no-jargon guide for wet-lab scientists new to these tools. A three-level ramp (chat-only, agentic file access, full starter kit) plus a rubric, glossary, copy-pasteable templates, and a [resources](docs/resources.md) page. Served as a GitHub Pages site from this folder. Start here if you have never used an agentic tool. |
+| [`docs/`](docs/) | **An on-ramp to agentic research** — a gentle, no-jargon guide for wet-lab scientists new to these tools, served as an interactive [GitHub Pages site](https://chenhsieh.github.io/agentic-research-toolkit/). Swipe a short archetype test to find your setup, then level up through a three-stage ramp (chat-only → agentic file access → starter-kit templates), with a landscape tool-chain chooser, glossary, copy-pasteable templates, and a [resources](docs/resources.md) page. Long-form write-ups live alongside as Markdown. Start here if you have never used an agentic tool. |
 | [`skills/`](skills/) | Portable `SKILL.md` workflows — named, tool-scoped procedures you can load into Claude Code or follow by hand. |
 | [`setup/`](setup/) | Universal `CLAUDE.md` — session durability (`/rename`, task lists, memory), bash discipline, tool hygiene, discovery-not-validation, cowork state. Drop it into `~/.claude/` or a project root. |
 

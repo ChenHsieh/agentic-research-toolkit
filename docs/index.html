@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>An on-ramp to agentic research</title>
+<meta name="description" content="A gentle, honest guide for wet-lab scientists new to agentic tools. Take the 60-second test, find your archetype, level up.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="An on-ramp to agentic research">
+<meta property="og:description" content="Swipe to find your setup. Level up from plain chat to a documented agentic workflow. No coding assumed.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><span class="dot"></span> agentic research</a>
+    <nav class="nav-links">
+      <a href="#test">Test</a>
+      <a href="#ramp">Ramp</a>
+      <a href="#tools">Tools</a>
+      <a href="#templates">Templates</a>
+      <a href="#resources">Resources</a>
+    </nav>
+  </div>
+  <div class="xpbar"><div class="xpbar-fill" id="xp"></div></div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="mark">🧪</div>
+    <div class="eyebrow">For wet-lab scientists. No coding. No git.</div>
+    <h1>Draft with an agent.<br><span class="grad">Stay the record of truth.</span></h1>
+    <p class="lead">A calm on-ramp to agentic tools for lab notes and documentation. Start by pasting one bench note into a chat. Climb only as far as your work needs.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#test">Take the 60-second test →</a>
+      <a class="btn btn-ghost" href="#ramp">Skip to the ramp</a>
+    </div>
+    <div class="hero-note"><span class="pill">the honest version</span> it can misread and it can invent. So it drafts, you verify.</div>
+
+    <div class="rule reveal">
+      <div class="big">🛡️</div>
+      <div><strong>The one rule everything hangs on.</strong> The assistant drafts and proposes. <strong>You</strong> are the record of truth. Nothing touches your real notebook until you have looked at it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SWIPE TEST -->
+<section id="test" class="quiz">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">Find your setup</div>
+      <h2>Swipe eight cards. Get your archetype.</h2>
+      <p class="lead">There is no single right setup. Yours depends on how you work. Swipe <b>right</b> if it sounds like you, <b>left</b> if it does not.</p>
+    </div>
+
+    <div class="deck-stage reveal">
+      <div class="progress-dots" id="dots"></div>
+      <div class="deck" id="deck" aria-live="polite"></div>
+
+      <div class="swipe-controls" id="controls">
+        <button class="round no" id="btnNo" aria-label="Not me (swipe left)">✕</button>
+        <button class="round yes" id="btnYes" aria-label="That's me (swipe right)">♥</button>
+      </div>
+      <div class="swipe-hint">
+        drag the card, tap <b>✕ / ♥</b>, or use <span class="kbd">←</span> <span class="kbd">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RAMP -->
+<section id="ramp">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">The ramp · level up</div>
+      <h2>Three levels. Each one works on its own.</h2>
+      <p class="lead">Start at Level 1. It needs nothing. Move up a level only when your work outgrows the one below.</p>
+    </div>
+
+    <div class="stages">
+      <article class="stage reveal" data-lv="1">
+        <span class="lv-tag">Level 1</span>
+        <div class="stage-emoji">💬</div>
+        <h3>Chat only</h3>
+        <div class="setup">setup: none</div>
+        <ul>
+          <li>Paste a bench note into a plain chat</li>
+          <li>It cleans shorthand and flags missing fields</li>
+          <li>You retype the final line yourself</li>
+        </ul>
+        <div class="stage-foot">
+          <div class="whenyes">✅ Best for: one experiment, one day, one paragraph.</div>
+          <a class="btn btn-ghost" href="#level1">See how →</a>
+        </div>
+      </article>
+
+      <article class="stage reveal" data-lv="2">
+        <span class="lv-tag">Level 2</span>
+        <div class="stage-emoji">🗂️</div>
+        <h3>Give a tool file access</h3>
+        <div class="setup">setup: some · an agentic tool</div>
+        <ul>
+          <li>It reads and searches your files, not just chats</li>
+          <li>Cross-references big spreadsheets and many files</li>
+          <li>Proposes changes; you approve them</li>
+        </ul>
+        <div class="stage-foot">
+          <div class="whenyes">✅ Worth it when: thousands of rows, many files.</div>
+          <a class="btn btn-ghost" href="#tools">When it pays off →</a>
+        </div>
+      </article>
+
+      <article class="stage reveal" data-lv="3">
+        <span class="lv-tag">Level 3</span>
+        <div class="stage-emoji">🧭</div>
+        <h3>The fuller pattern</h3>
+        <div class="setup">setup: more · once per project</div>
+        <ul>
+          <li>House rules the assistant follows every session</li>
+          <li>A one-page brief as the single front door</li>
+          <li>A dated log so decisions never get lost</li>
+        </ul>
+        <div class="stage-foot">
+          <div class="whenyes">✅ Worth it when: a shared, long-running analysis.</div>
+          <a class="btn btn-ghost" href="#templates">Get the templates →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TOOL-CHAIN LANDSCAPE -->
+<section id="tools" class="quiz">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">Tool-chain · one glance</div>
+      <h2>Chat or agentic? Follow the arrow.</h2>
+      <p class="lead">The honest default: start in plain chat, add tooling only when the task clearly outgrows it.</p>
+    </div>
+
+    <div class="flow reveal">
+      <div class="flow-track">
+        <div class="node">
+          <div class="node-emoji">📝</div>
+          <h4>What are you doing right now?</h4>
+          <p>Start here.</p>
+        </div>
+
+        <div class="branch">
+          <div class="arrow"><span class="line"></span><span class="label">fits in the chat box</span></div>
+          <div class="arrow"><span class="line"></span><span class="label">too big to paste</span></div>
+        </div>
+
+        <div class="branch">
+          <div class="node" style="border-color: color-mix(in srgb, var(--l1) 45%, var(--line))">
+            <div class="node-emoji">💬</div>
+            <h4>Plain chat · Level 1</h4>
+            <p>One day's notes, drafting a paragraph, cleaning shorthand.</p>
+          </div>
+          <div class="node" style="border-color: color-mix(in srgb, var(--l2) 45%, var(--line))">
+            <div class="node-emoji">🗂️</div>
+            <h4>Agentic · Level 2–3</h4>
+            <p>Search thousands of rows, cross-reference files, keep a project consistent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-legend reveal">
+      <span>🌿 <b>Recording at the bench</b> → almost always Level 1.</span>
+      <span>🔬 <b>Curating a shared analysis</b> → agentic earns its keep.</span>
+    </div>
+  </div>
+</section>
+
+<!-- LEVEL 1 in practice: the prompt -->
+<section id="level1">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">Level 1 · try it in 2 minutes</div>
+      <h2>The notebook-entry prompt.</h2>
+      <p class="lead">Copy this. Paste it into Claude or ChatGPT. Add one real bench note where it says so. The magic is point 3: it makes gaps stay gaps instead of getting invented.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="code reveal">
+        <div class="code-head">
+          <span class="fname">notebook-entry-prompt.txt</span>
+          <span class="copy"><button class="copy-btn" data-copy="promptTpl">Copy</button></span>
+        </div>
+        <pre><code id="promptTpl">You are helping me turn a rough bench note into a clean lab-notebook entry.
+
+Do three things:
+1. Rewrite my shorthand into clear, full sentences, using a consistent structured
+   format with these fields: Date, Experiment, Plant material / sample, Treatment,
+   Measurement, Result, Notes. Mark a field "[not recorded]" if my note lacks it.
+2. List separately, under "Missing or unclear," any field a reader would need but
+   cannot find, and any place my note is ambiguous.
+3. Do not invent, guess, or fill in any value I did not write. If a number, unit,
+   date, or ID is missing, say it is missing. Do not assume standard values.
+
+Keep my original meaning. Do not add interpretation I did not state.
+
+Here is my bench note:
+---
+[PASTE YOUR NOTE HERE]
+---</code></pre>
+      </div>
+
+      <div class="card-lite reveal">
+        <h3>What you get back</h3>
+        <p class="muted">A clean, fielded entry — plus a "Missing or unclear" list that names what you forgot to write down (pot volume, units, the scoring key) instead of quietly making it up.</p>
+        <h3 style="margin-top:18px">Then you</h3>
+        <p class="muted">Read every field against what you actually did. Fix anything wrong. Retype the final version into your real notebook. That step is the point.</p>
+        <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/docs/level-1-chat-only.md" target="_blank" rel="noopener">Full walk-through, with example →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<section id="templates" class="quiz">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">Level 3 · starter kit</div>
+      <h2>Copy-pasteable templates.</h2>
+      <p class="lead">Genericized skeletons. Fill in the brackets. Nothing here contains real lab data.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card-lite reveal">
+        <div class="tpl">
+          <div class="tpl-ico">🚪</div>
+          <div style="flex:1">
+            <h4>AGENT_BRIEF.md</h4>
+            <p>One-page front door: the situation, which files are canonical, and the rules that cost the most time when broken.</p>
+            <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/docs/templates/AGENT_BRIEF.md" target="_blank" rel="noopener">Open template →</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-lite reveal">
+        <div class="tpl">
+          <div class="tpl-ico">📏</div>
+          <div style="flex:1">
+            <h4>CLAUDE.md</h4>
+            <p>House rules the assistant follows every session. The load-bearing one: <b>quote before you claim</b>.</p>
+            <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/docs/templates/CLAUDE.md" target="_blank" rel="noopener">Open template →</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-lite reveal">
+        <div class="tpl">
+          <div class="tpl-ico">🗒️</div>
+          <div style="flex:1">
+            <h4>docs/log/YYYYMMDD_topic.md</h4>
+            <p>One dated file per decision. The date goes first so it sorts by name (cloud sync scrambles "date modified").</p>
+            <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/docs/templates/decision-log-template.md" target="_blank" rel="noopener">Open template →</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-lite reveal">
+        <div class="tpl">
+          <div class="tpl-ico">🎒</div>
+          <div style="flex:1">
+            <h4>Chat context pack</h4>
+            <p>No file access? Paste this small summary at the start of each chat. Copy it below.</p>
+            <button class="copy-btn" data-copy="ctxTpl">Copy the pack</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code reveal" style="margin-top:18px">
+      <div class="code-head">
+        <span class="fname">chat-context-pack.txt</span>
+        <span class="copy"><button class="copy-btn" data-copy="ctxTpl">Copy</button></span>
+      </div>
+      <pre><code id="ctxTpl">Project context (read before answering):
+- Project: [one line: what this project is]
+- I am: [your role, e.g. wet-lab, recording phenotype data]
+- Canonical files (the real, trusted ones): [name them, e.g. samples_master_v3.csv]
+- Current state / where we left off: [one or two sentences]
+- Rules that matter here:
+  1. Do not invent numbers, IDs, dates, or units. If something is missing, say so.
+  2. Report [group A] and [group B] separately; do not combine them.
+  3. [any other rule that has bitten you before]
+When you are unsure, ask instead of guessing.</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="glossary">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">Plain words</div>
+      <h2>The jargon, one sentence each.</h2>
+    </div>
+    <div class="gloss reveal">
+      <dl><dt>Agentic tool</dt><dd>Can take actions for you — read files, run a check — not just chat back.</dd></dl>
+      <dl><dt>Prompt</dt><dd>The message you send it, instructions plus any text you paste in.</dd></dl>
+      <dl><dt>Hallucination</dt><dd>When it states a made-up detail with full confidence. The reason you always verify.</dd></dl>
+      <dl><dt>Context window</dt><dd>How much text it can hold in mind at once. Paste too much and older parts fall out.</dd></dl>
+      <dl><dt>Canonical file</dt><dd>The one real, trusted version everything else should agree with.</dd></dl>
+      <dl><dt>Record of truth</dt><dd>You and your raw data. The assistant helps write the record; it does not get to be it.</dd></dl>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources" class="quiz">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">Grow into it</div>
+      <h2>Ready-made skills, when you want more.</h2>
+      <p class="lead">Skill libraries you can read like a protocol before you run them. Links checked Aug 2026.</p>
+    </div>
+    <div class="reslist reveal">
+      <a class="res" href="https://github.com/anthropics/skills" target="_blank" rel="noopener">
+        <span class="res-ico">⭐</span><span><b>anthropics/skills</b><span>Anthropic's official Agent Skills — the cleanest examples of the format.</span></span>
+      </a>
+      <a class="res" href="https://github.com/InternScience/Awesome-Scientific-Skills" target="_blank" rel="noopener">
+        <span class="res-ico">🔬</span><span><b>InternScience/Awesome-Scientific-Skills</b><span>A big curated set for science (bioinformatics, chem, stats, writing). Tool-agnostic.</span></span>
+      </a>
+      <a class="res" href="https://github.com/travisvn/awesome-claude-skills" target="_blank" rel="noopener">
+        <span class="res-ico">📚</span><span><b>travisvn/awesome-claude-skills</b><span>A broader awesome-list of skills, tools, and resources.</span></span>
+      </a>
+      <a class="res" href="https://github.com/ChenHsieh/agentic-research-toolkit/tree/main/skills" target="_blank" rel="noopener">
+        <span class="res-ico">🧰</span><span><b>This toolkit's own skills</b><span>Worked research skills — fuller examples of the pattern the templates sketch.</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-rule">🛡️ The assistant drafts and proposes. You are the record of truth, and you verify before you rely on anything.</div>
+    <div>
+      <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit" target="_blank" rel="noopener">View on GitHub →</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:22px; font-size:.8rem; color:var(--muted)">
+    Part of the Agentic Research Toolkit. Text and templates free to reuse (MIT). Built for scientists, not engineers.
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
