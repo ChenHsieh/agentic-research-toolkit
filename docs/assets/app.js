@@ -54,25 +54,43 @@
   }
 
   /* ============================================================
-     SWIPE TEST
+     SWIPE TEST — a small decision tree
+     Each answer routes to the next question, so every card is
+     relevant and you land on one clear leaf. Swipe right = yes.
      ============================================================ */
-  // weights: how much a RIGHT swipe ("that's me") points to each level.
-  var QUESTIONS = [
-    { emoji: "📝", text: "Right now I just want today's messy notes written up cleanly.", hint: "shorthand → a proper entry", w: { l1: 2 } },
-    { emoji: "💬", text: "What I'm working on fits in a single chat message.", hint: "one experiment, one paragraph", w: { l1: 2 } },
-    { emoji: "🛑", text: "I don't want to install anything or learn a new tool.", hint: "a browser tab is as far as I'll go", w: { l1: 2 } },
-    { emoji: "📊", text: "My data is a spreadsheet too big to scroll through.", hint: "thousands of rows", w: { l2: 2 } },
-    { emoji: "🔍", text: "Answering one question means opening and comparing several files.", hint: "“which of these also show up in that sheet?”", w: { l2: 2 } },
-    { emoji: "🔁", text: "I redo the same tedious lookup across many files.", hint: "same filter, twenty files", w: { l2: 1, l3: 1 } },
-    { emoji: "👥", text: "Other people rely on my tables, so they can't quietly go wrong.", hint: "a shared or curated dataset", w: { l3: 2 } },
-    { emoji: "🗓️", text: "This project has run for months and past decisions get lost.", hint: "“wait, why did we do it that way?”", w: { l3: 2 } }
-  ];
+  var TREE = {
+    start: "scale",
+    steps: 2, // every path is exactly this many questions
+    nodes: {
+      scale: {
+        emoji: "💬",
+        text: "Does what you're working on fit in a single chat message?",
+        hint: "one experiment, a page of notes, a paragraph to draft",
+        yes: "repeat",
+        no: "stakes"
+      },
+      repeat: {
+        emoji: "🔁",
+        text: "Do you keep redoing the same cleanup or lookup, many times over?",
+        hint: "the same task on file after file",
+        yes: "l2",
+        no: "l1"
+      },
+      stakes: {
+        emoji: "👥",
+        text: "Do others depend on this data, or will the project run for months?",
+        hint: "a shared table, a curated dataset, a long project",
+        yes: "l3",
+        no: "l2"
+      }
+    }
+  };
 
   var ARCHETYPES = {
     l1: {
       emoji: "🌱", name: "The Bench Recorder",
       badge: "The simplest setup is the right one",
-      blurb: "Your work is one clean observation at a time. That does not call for tooling; it calls for a good prompt and your own eyes on the result.",
+      blurb: "Your task fits in a chat and it is not a repeating job. That does not call for tooling; it calls for a good prompt and your own eyes on the result.",
       setupLine: "A chat window, the notebook prompt, and the verify habit. Nothing to install.",
       lv: 1, lvName: "Level 1 · Chat only",
       steps: [
@@ -84,8 +102,8 @@
     },
     l2: {
       emoji: "🔭", name: "The Cross-Referencer",
-      badge: "Your data has outgrown the chat box",
-      blurb: "You lose real time opening and comparing files by hand. A tool that can read them for you pays off, as long as approval stays on and it quotes its sources.",
+      badge: "Your work has outgrown a single chat",
+      blurb: "Either the data is too big to paste, or you redo the same lookup constantly. A tool that can read your files pays off, as long as approval stays on and it quotes its sources.",
       setupLine: "One agentic tool (Claude Code or Codex), pointed at your data folder.",
       lv: 2, lvName: "Level 2 · Agentic access",
       steps: [
@@ -113,56 +131,54 @@
   var deck = document.getElementById("deck");
   var dots = document.getElementById("dots");
   var controls = document.getElementById("controls");
-  var idx = 0;
-  var score = { l1: 0, l2: 0, l3: 0 };
-  var order = [];
+  var current = TREE.start;
+  var answered = 0;
+  var trail = []; // {emoji, ans} for the recap on the result screen
 
   function buildDots() {
     dots.innerHTML = "";
-    for (var i = 0; i < QUESTIONS.length; i++) {
-      var d = document.createElement("i");
-      dots.appendChild(d);
-    }
+    for (var i = 0; i < TREE.steps; i++) dots.appendChild(document.createElement("i"));
     updateDots();
   }
   function updateDots() {
     var ds = dots.children;
     for (var i = 0; i < ds.length; i++) {
-      ds[i].className = i < idx ? "done" : (i === idx ? "current" : "");
+      ds[i].className = i < answered ? "done" : (i === answered ? "current" : "");
     }
   }
 
   function render() {
+    var node = TREE.nodes[current];
     deck.innerHTML = "";
-    // render up to 3 stacked cards (top one interactive)
-    for (var i = Math.min(idx + 2, QUESTIONS.length - 1); i >= idx; i--) {
-      var q = QUESTIONS[i];
-      var card = document.createElement("div");
-      card.className = "card";
-      var depth = i - idx;
-      card.style.transform = "translateY(" + (depth * 10) + "px) scale(" + (1 - depth * 0.04) + ")";
-      card.style.zIndex = String(10 - depth);
-      card.innerHTML =
-        '<div class="stamp yes">Me</div><div class="stamp no">Not me</div>' +
-        '<div class="q-emoji">' + q.emoji + '</div>' +
-        '<div><div class="q-text">' + q.text + '</div>' +
-        '<div class="q-hint">' + q.hint + '</div></div>' +
-        '<div class="q-hint">' + (i + 1) + ' / ' + QUESTIONS.length + '</div>';
-      deck.appendChild(card);
-      if (i === idx) attachDrag(card, q);
-    }
+
+    // decorative back card for depth
+    var ghost = document.createElement("div");
+    ghost.className = "card";
+    ghost.style.transform = "translateY(10px) scale(0.96)";
+    ghost.style.zIndex = "1";
+    ghost.setAttribute("aria-hidden", "true");
+    deck.appendChild(ghost);
+
+    var card = document.createElement("div");
+    card.className = "card";
+    card.style.zIndex = "2";
+    card.innerHTML =
+      '<div class="stamp yes">Yes</div><div class="stamp no">No</div>' +
+      '<div class="q-emoji">' + node.emoji + '</div>' +
+      '<div><div class="q-text">' + node.text + '</div>' +
+      '<div class="q-hint">' + node.hint + '</div></div>' +
+      '<div class="q-hint">Question ' + (answered + 1) + ' of ' + TREE.steps + '</div>';
+    deck.appendChild(card);
+    attachDrag(card, node);
     updateDots();
   }
 
-  function decide(dir, q) { // dir: 1 right(yes), -1 left(no)
-    if (dir > 0) {
-      var w = q.w;
-      for (var k in w) if (w.hasOwnProperty(k)) score[k] += w[k];
-    }
-    order.push({ q: q.text, yes: dir > 0 });
-    idx++;
-    if (idx >= QUESTIONS.length) { showResult(); }
-    else { render(); }
+  function decide(dir, node) { // dir: 1 right(yes), -1 left(no)
+    var next = dir > 0 ? node.yes : node.no;
+    trail.push({ emoji: node.emoji, ans: dir > 0 ? "Yes" : "No" });
+    answered++;
+    if (ARCHETYPES.hasOwnProperty(next)) { showResult(next); }
+    else { current = next; render(); }
   }
 
   function flyOut(card, dir, cb) {
@@ -172,7 +188,7 @@
     setTimeout(cb, 240);
   }
 
-  function attachDrag(card, q) {
+  function attachDrag(card, node) {
     var startX = 0, startY = 0, dx = 0, dy = 0, dragging = false;
     var yes = card.querySelector(".stamp.yes");
     var no = card.querySelector(".stamp.no");
@@ -197,10 +213,9 @@
     function up() {
       if (!dragging) return;
       dragging = false;
-      var threshold = 95;
-      if (Math.abs(dx) > threshold) {
+      if (Math.abs(dx) > 95) {
         var dir = dx > 0 ? 1 : -1;
-        flyOut(card, dir, function () { decide(dir, q); });
+        flyOut(card, dir, function () { decide(dir, node); });
       } else {
         card.style.transition = "transform .28s ease";
         card.style.transform = "translateY(0) scale(1)";
@@ -230,38 +245,34 @@
 
   // buttons + keyboard
   function programmatic(dir) {
-    if (idx >= QUESTIONS.length) return;
+    if (ARCHETYPES.hasOwnProperty(current)) return;
     var top = deck.querySelector(".card:last-child");
-    var q = QUESTIONS[idx];
-    if (top) flyOut(top, dir, function () { decide(dir, q); });
-    else decide(dir, q);
+    var node = TREE.nodes[current];
+    if (top) flyOut(top, dir, function () { decide(dir, node); });
+    else decide(dir, node);
   }
   document.getElementById("btnNo").addEventListener("click", function () { programmatic(-1); });
   document.getElementById("btnYes").addEventListener("click", function () { programmatic(1); });
   document.addEventListener("keydown", function (e) {
-    if (idx >= QUESTIONS.length) return;
-    // only when the test is roughly in view
+    if (ARCHETYPES.hasOwnProperty(current)) return;
     var rect = deck.getBoundingClientRect();
     if (rect.bottom < 0 || rect.top > window.innerHeight) return;
     if (e.key === "ArrowRight") { e.preventDefault(); programmatic(1); }
     else if (e.key === "ArrowLeft") { e.preventDefault(); programmatic(-1); }
   });
 
-  function winner() {
-    // Default to the simplest setup. Only move up when the need is clearly signalled,
-    // so agreeing with the heavier cards actually changes the answer.
-    if (score.l3 >= 3) return "l3";   // shared stakes + long-lived, or a strong pair of those
-    if (score.l2 >= 2) return "l2";   // at least one real "too big for chat" signal
-    return "l1";
-  }
-
-  function showResult() {
+  function showResult(leafKey) {
+    current = leafKey; // stops further input
     dots.innerHTML = "";
     controls.style.display = "none";
     document.querySelector(".swipe-hint").style.display = "none";
-    var a = ARCHETYPES[winner()];
+    var a = ARCHETYPES[leafKey];
     var lvColor = a.lv === 1 ? "var(--l1)" : a.lv === 2 ? "var(--l2)" : "var(--l3)";
     var lvSoft = a.lv === 1 ? "var(--l1-soft)" : a.lv === 2 ? "var(--l2-soft)" : "var(--l3-soft)";
+
+    var trailHtml = trail.map(function (t) {
+      return '<span class="trail-chip">' + t.emoji + " " + t.ans + "</span>";
+    }).join('<span class="trail-arrow">→</span>');
 
     var stepsHtml = a.steps.map(function (t) { return "<li>" + t + "</li>"; }).join("");
     var ctaHtml = a.cta.map(function (c) {
@@ -273,6 +284,7 @@
     deck.style.height = "auto";
     deck.innerHTML =
       '<div class="result">' +
+        '<div class="trail">' + trailHtml + '</div>' +
         '<div class="arche-emoji">' + a.emoji + '</div>' +
         '<div class="badge">' + a.badge + '</div>' +
         '<h3>' + a.name + '</h3>' +
@@ -288,18 +300,17 @@
           '<ol>' + stepsHtml + '</ol>' +
           '<div class="reco-cta">' + ctaHtml + '</div>' +
         '</div>' +
-        '<div class="retake"><button id="retake">↺ Retake the test</button></div>' +
+        '<div class="retake"><button id="retake">↺ Start over</button></div>' +
       '</div>';
 
     document.getElementById("retake").addEventListener("click", reset);
-    // celebratory xp nudge
     var r = deck.querySelector(".result");
     r.animate ? r.animate([{ opacity: 0, transform: "scale(.96)" }, { opacity: 1, transform: "scale(1)" }], { duration: 380, easing: "cubic-bezier(.2,.7,.2,1)" }) : null;
   }
 
   function reset() {
-    idx = 0; score = { l1: 0, l2: 0, l3: 0 }; order = [];
-    deck.style.height = ""; deck.style.height = "340px";
+    current = TREE.start; answered = 0; trail = [];
+    deck.style.height = "340px";
     controls.style.display = "";
     document.querySelector(".swipe-hint").style.display = "";
     buildDots(); render();
