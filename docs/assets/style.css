@@ -320,6 +320,27 @@ pre code { white-space: pre; }
 .tier li::before { content: "–"; position: absolute; left: 0; color: var(--accent-ink); }
 .cost-note { margin-top: 20px; font-size: .85rem; color: var(--muted); }
 
+/* decision tables */
+.dtable-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+table.dtable { width: 100%; border-collapse: collapse; font-size: .9rem; background: var(--surface); min-width: 560px; }
+.dtable th, .dtable td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.dtable thead th { background: var(--surface-2); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; }
+.dtable tbody tr:last-child td { border-bottom: none; }
+.dtable td b { font-weight: 700; }
+.tag { display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.tag.start { background: var(--l1-soft); color: var(--accent-ink); }
+.tag.learn { background: var(--l2-soft); color: var(--l2); }
+.tag.over { background: var(--l3-soft); color: var(--l3); }
+.route { margin-top: 16px; font-size: .9rem; color: var(--muted); }
+
+/* verification checklist */
+.checklist { list-style: none; padding: 0; margin: 0; }
+.checklist li { position: relative; padding: 14px 0 14px 32px; border-bottom: 1px solid var(--line); }
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before { content: "✓"; position: absolute; left: 4px; top: 14px; color: var(--accent); font-weight: 800; }
+.checklist b { display: block; margin-bottom: 2px; }
+.checklist span { font-size: .9rem; color: var(--muted); }
+
 /* glossary */
 .gloss { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 @media (max-width: 720px) { .gloss { grid-template-columns: 1fr; } }

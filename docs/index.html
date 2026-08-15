@@ -21,7 +21,9 @@
     <nav class="nav-links">
       <a href="#test">Test</a>
       <a href="#ramp">Ramp</a>
-      <a href="#tools">Tools</a>
+      <a href="#interfaces">Interfaces</a>
+      <a href="#modes">Modes</a>
+      <a href="#verify">Verify</a>
       <a href="#templates">Templates</a>
       <a href="#cost">Cost</a>
       <a href="#resources">Resources</a>
@@ -181,6 +183,57 @@
   </div>
 </section>
 
+<!-- INTERFACES -->
+<section id="interfaces">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">Where you type</div>
+      <h2>Same assistant, different windows.</h2>
+      <p class="lead">The interfaces differ in how much of your computer they can touch, not in how smart they are. A non-coder does most useful work in the website or desktop app.</p>
+    </div>
+    <div class="dtable-wrap reveal">
+      <table class="dtable">
+        <thead><tr><th>You want to</th><th>Touches your files?</th><th>Use this</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Paste text and chat, on any computer, nothing installed</td><td>No</td><td><b>claude.ai website</b></td><td><span class="tag start">start here</span></td></tr>
+          <tr><td>Chat and reach into Gmail, Drive, or Calendar in plain language</td><td>No local files</td><td><b>Desktop app + connectors</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+          <tr><td>An agent that reads and writes files in a project folder</td><td>Yes</td><td><b>Claude Code</b> (terminal)</td><td><span class="tag learn">learn when needed</span></td></tr>
+          <tr><td>The same engine with a nicer side-by-side view of changes</td><td>Yes</td><td><b>VS Code / JetBrains extension</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+          <tr><td>A helper prefers one all-in-one editor</td><td>Yes</td><td><b>Cursor</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+          <tr><td>Hand off a self-contained task and review a finished result</td><td>Yes</td><td><b>Codex</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="route reveal"><b>The route for a bench scientist:</b> the website, then the desktop app with connectors, then Claude Code only once a helper has set it up. The swipe test picks your level; this table picks the window.</p>
+  </div>
+</section>
+
+<!-- MODES -->
+<section id="modes" class="quiz">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">How much freedom</div>
+      <h2>Plan, approve, or auto.</h2>
+      <p class="lead">Once a tool can touch your files, one setting decides whether it changes them while you watch or on its own. Know which mode you are in before you say go.</p>
+    </div>
+    <div class="dtable-wrap reveal">
+      <table class="dtable">
+        <thead><tr><th>Situation</th><th>Mode</th><th>What it does</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>First time on a task, real files, want to see the whole plan first</td><td><b>Plan mode</b></td><td>Reads only, writes you a plan, changes nothing</td><td><span class="tag start">start here</span></td></tr>
+          <tr><td>Plan accepted, want to watch each edit land</td><td><b>Approve each step</b></td><td>Pauses before every edit or command</td><td><span class="tag start">start here</span></td></tr>
+          <tr><td>Low-stakes throwaway work, a folder with no unpublished data</td><td><b>Auto-accept</b> (keep shell approval on)</td><td>Makes edits itself, pauses for riskier actions</td><td><span class="tag learn">learn when needed</span></td></tr>
+          <tr><td>Large repetitive software job</td><td><b>Full-auto</b> / skip permissions</td><td>Acts unattended</td><td><span class="tag over">usually overkill</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="boundary reveal">
+      <div class="bi">⚠️</div>
+      <div><b>Heads-up (Aug 2026):</b> auto mode is now the default for new Pro, Max, and Team Claude Code sessions, so check the mode indicator before you start. Auto is best-effort, not a safety boundary: the more the tool does on its own, the more changes you have to read. Modes do not exist at Level 1 (no file access), and no mode replaces the verify step.</div>
+    </div>
+  </div>
+</section>
+
 <!-- CAPTURE -> DRAFT -> VERIFY -->
 <section id="loop">
   <div class="wrap">
@@ -207,6 +260,30 @@
         <p>Capture and draft both mishear things, numbers and units most of all. You read it against what you saw, and then it is yours.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SPOTTING ERRORS -->
+<section id="verify" class="quiz">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">The verify step, in practice</div>
+      <h2>How to catch its mistakes.</h2>
+      <p class="lead">The rule is "you are the record of truth." This is how you actually do the checking, no coding required. Run the whole list when the output will touch a figure, an order, a database query, or a manuscript.</p>
+    </div>
+    <div class="card-lite reveal">
+      <ul class="checklist">
+        <li><b>Quote before claim.</b><span>Tell it: before you state any value, paste the exact source row it came from. The receipt should sit next to the claim.</span></li>
+        <li><b>Cross-check against the file.</b><span>Open the real file and confirm counts, sample IDs, and accession numbers. An ID that is off by one character is still wrong.</span></li>
+        <li><b>Watch the confident-but-vague words.</b><span>"Appears to", "should be", "consistent with", "roughly" are the spots to demand a specific source or number.</span></li>
+        <li><b>Check the citations.</b><span>Make it give the exact supporting quote, then confirm the paper and the quote are real. Fabricated references are a known failure.</span></li>
+        <li><b>Restart and run all.</b><span>For any notebook it edited, rerun from a clean slate to catch stale leftover state.</span></li>
+        <li><b>Ask it to critique itself.</b><span>"Find the weakest step in your own answer" often surfaces the shaky assumption. Helps, but is not a guarantee.</span></li>
+        <li><b>Diff against a known-good value.</b><span>Compare new output to a control, a prior result, or a total you counted by hand.</span></li>
+        <li><b>Sanity-check units and orders of magnitude.</b><span>Does the concentration, p-value, read count, or fold-change land in a physically plausible range?</span></li>
+      </ul>
+    </div>
+    <p class="route reveal">The biggest trap is fluent confidence. Clean prose is not evidence, and the tool will happily apologize and then repeat the same error.</p>
   </div>
 </section>
 
