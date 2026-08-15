@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Spotting errors — An on-ramp to agentic research</title>
+<title>Spotting errors · An on-ramp to agentic research</title>
 <meta name="description" content="A practical checklist for catching an assistant's mistakes before they reach your data or a manuscript. No coding.">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="assets/style.css">
@@ -24,7 +24,7 @@
       <li><b>Restart and run all.</b><span>For any notebook it edited, rerun from a clean slate to catch stale leftover state.</span></li>
       <li><b>Ask it to critique itself.</b><span>"Find the weakest step in your own answer" often surfaces the shaky assumption. Helps, but is not a guarantee.</span></li>
       <li><b>Diff against a known-good value.</b><span>Compare new output to a control, a prior result, or a total you counted by hand.</span></li>
-      <li><b>Sanity-check units and orders of magnitude.</b><span>Does the concentration, p-value, read count, or fold-change land in a physically plausible range?</span></li>
+      <li><b>Sanity-check units and orders of magnitude.</b><span>Does the concentration, p-value, read count, or fold-change land in a physically plausible range? Naming the specific unit or calculation slip that would produce a result off by exactly that factor catches more than just asking "does this look right?"</span></li>
     </ul>
   </div>
 
@@ -33,6 +33,11 @@
   <div class="callout tip">
     <span class="ci">🔒</span>
     <p>Doing your checks in plain <a href="level-1.html">chat</a> keeps unpublished data off the tool entirely. When you do give it file access, the first item on this list, "quote before claim," is your best defense.</p>
+  </div>
+
+  <div class="callout tip">
+    <span class="ci">👥</span>
+    <p>In a lab with several experience levels, name out loud who spot-checks whose AI-assisted work (mentor checks trainee, postdoc or PI checks grad student) so this checklist has an owner at each step, not just a step. See <a href="roles.html">Skills by role</a>.</p>
   </div>
 
   <div class="related">

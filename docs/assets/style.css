@@ -431,7 +431,7 @@ footer { border-top: 1px solid var(--line); background: var(--surface-2); paddin
 
 /* inline verdict tag already defined (.tag). Level pill for headings */
 .lvpill { display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #fff; padding: 3px 9px; border-radius: 999px; vertical-align: middle; margin-left: 8px; }
-.lvpill.l1 { background: var(--l1); } .lvpill.l2 { background: var(--l2); } .lvpill.l3 { background: var(--l3); }
+.lvpill.l1 { background: var(--l1); } .lvpill.l2 { background: var(--l2); } .lvpill.l3 { background: var(--l3); } .lvpill.cc { background: var(--accent); }
 
 /* related + prev/next */
 .related { margin-top: 2.4em; border-top: 1px solid var(--line); padding-top: 1.2em; }
@@ -461,3 +461,31 @@ footer { border-top: 1px solid var(--line); background: var(--surface-2); paddin
   body.nav-open .scrim { display: block; position: fixed; inset: 0; z-index: 70; background: rgba(0,0,0,.4); }
   .content { padding: 26px 20px 60px; max-width: 100%; }
 }
+
+/* ============================================================
+   ROLE TASK CARDS (roles.html)
+   ============================================================ */
+.role-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 1.2em 0 2em; }
+.role-nav a { font-size: .85rem; font-weight: 600; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+.role-nav a:hover { text-decoration: none; background: var(--surface-2); }
+
+.role-section { margin-top: 2.8em; padding-top: .4em; border-top: 2px solid var(--line); }
+.role-section:first-of-type { border-top: none; margin-top: 1em; }
+.role-section h2 { display: flex; align-items: center; gap: 10px; }
+
+.taskcard { border-left: 3px solid var(--lv, var(--accent)); padding: 2px 0 2px 16px; margin: 1.4em 0; }
+.taskcard[data-level="Level 1"] { --lv: var(--l1); }
+.taskcard[data-level="Level 2"] { --lv: var(--l2); }
+.taskcard[data-level="Level 3"] { --lv: var(--l3); }
+.taskcard[data-level="Cross-cutting"] { --lv: var(--accent); }
+.tc-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.tc-head h4 { margin: 0; font-size: 1rem; }
+.tc-one { margin: .3em 0 .6em; color: var(--muted); font-size: .92rem; }
+.tc-prompt-wrap { margin: .6em 0; }
+.tc-prompt-label { display: flex; align-items: center; justify-content: space-between; font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+.tc-prompt-label .copy-btn { font-size: .72rem; padding: 3px 9px; }
+.tc-prompt { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-family: var(--mono); font-size: .82rem; line-height: 1.5; white-space: pre-wrap; margin: 0; color: var(--ink); }
+.tc-caution { font-size: .85rem; color: var(--muted); margin: .5em 0 0; display: flex; gap: 6px; align-items: flex-start; }
+.tc-caution::before { content: "⚠️"; flex: none; }
+.tc-links { font-size: .8rem; color: var(--muted); margin: .35em 0 0; }
+.tc-links a { color: var(--muted); text-decoration: underline; }

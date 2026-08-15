@@ -18,6 +18,9 @@
       { key: "level-2", label: "Level 2 · File access", href: "level-2.html" },
       { key: "level-3", label: "Level 3 · Starter kit", href: "level-3.html" },
     ]},
+    { title: "By role", items: [
+      { key: "roles", label: "Skills by role", href: "roles.html" },
+    ]},
     { title: "Reference", items: [
       { key: "interfaces", label: "Interfaces", href: "interfaces.html" },
       { key: "modes", label: "Modes", href: "modes.html" },

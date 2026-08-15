@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skills by role · An on-ramp to agentic research</title>
+<meta name="description" content="What changes at each stage of a lab career: undergraduate researcher, lab technician, graduate student, and postdoc. Concrete tasks, sample prompts, and role-specific cautions.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="roles">
+  <div class="page-eyebrow">By role</div>
+  <h1>Skills by role</h1>
+  <p class="lede">The ramp and the recipes apply to everyone. What changes by role is less about the tools and more about supervision, stakes, and who checks whose work. This page collects what is specific to four common stages in a research lab: undergraduate researcher, lab technician, graduate student, and postdoc. Genericized for any plant, cell, or molecular biology lab that combines bench work with computational analysis.</p>
+
+  <div class="role-nav reveal">
+    <a href="#undergrad">🧑‍🎓 Undergraduate researcher</a>
+    <a href="#technician">🔧 Lab technician</a>
+    <a href="#grad-student">🎓 Graduate student</a>
+    <a href="#postdoc">🧭 Postdoc</a>
+  </div>
+
+  <div class="callout tip">
+    <span class="ci">🧩</span>
+    <p>Everything below builds on the rest of the site rather than replacing it. Unless a task says otherwise, the <a href="spotting-errors.html">verification checklist</a> and the <a href="protect-your-data.html">data rules</a> still apply exactly as written elsewhere. Each sample prompt is a starting point to adapt to your own project, not a script to paste blind.</p>
+  </div>
+
+  <!-- ===== UNDERGRADUATE ===== -->
+  <section class="role-section" id="undergrad">
+    <h2>🧑‍🎓 Undergraduate researcher</h2>
+    <p>This section is for undergraduate researchers who are often new to research entirely, learning bench technique and lab conventions for the first time while working closely with a grad student or postdoc mentor. What changes here is not the tools, it is how much weight you can put on their answers alone: almost everything you produce, AI-assisted or not, gets checked by your mentor before it counts, so the habit worth building early is being honest about what you verified yourself and what you did not.</p>
+    <div class="callout warn">
+      <span class="ci">🧑‍🏫</span>
+      <p><strong>Everything you produce with AI still needs your mentor's sign-off before it counts</strong>, exactly as it would without AI. This goes wrong quietly, when a confident-sounding answer replaces that check instead of feeding into it, especially on something you are doing for the first time. If you are not yet experienced enough to catch its mistake yourself, that is precisely when your mentor needs to see it before you act on it, not a reason to skip them.</p>
+    </div>
+
+    <div class="taskcard" data-level="Cross-cutting">
+      <div class="tc-head"><h4>Walk the Home decision tree with your mentor first</h4><span class="lvpill cc">Cross-cutting</span></div>
+      <p class="tc-one">In your first week, ask your mentor to spend 15 minutes running the <a href="index.html">Home page's</a> two-question tree with you using real examples from your project, instead of clicking through it alone and guessing at your level.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="ug1">Copy</button></div><pre class="tc-prompt" id="ug1">Here are two example files I might work with in this lab. Based on the site's decision tree, would Level 1 or Level 2 make sense for each, and why?</pre></div>
+      <p class="tc-caution">A tool that fits a grad student's Level 2 workflow may not fit what you are allowed to do yet with raw lab data; let your mentor set the starting level rather than picking the one that sounds most advanced.</p>
+      <p class="tc-links">See also: <a href="index.html">Home</a>, <a href="how-it-works.html">How it works</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 1">
+      <div class="tc-head"><h4>Flag what still needs your mentor's check</h4><span class="lvpill l1">Level 1</span></div>
+      <p class="tc-one">When you draft a notebook entry or table with AI help, end it with an explicit list of exactly which numbers or claims you have not personally verified yet, since your mentor is the one who checks it next.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="ug2">Copy</button></div><pre class="tc-prompt" id="ug2">Draft this bench note from my raw notes below, and list at the end exactly which numbers or claims I still need to double-check against my notebook before I show this to my mentor.</pre></div>
+      <p class="tc-caution">Your mentor can only catch a mistake if they know where to look for it. If you polish the draft so it reads as finished, you erase the one signal that would have told them where to check.</p>
+      <p class="tc-links">See also: <a href="spotting-errors.html">Spotting errors</a>, <a href="level-1.html">Level 1</a>, <a href="recipes.html">Recipes</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 2">
+      <div class="tc-head"><h4>Stay in approve-each-step mode until it's automatic</h4><span class="lvpill l2">Level 2</span></div>
+      <p class="tc-one">Even after your lab moves to auto-accept for routine work, keep an agentic tool in approve-each-step mode yourself until you can reliably predict what it will do next.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="ug3">Copy</button></div><pre class="tc-prompt" id="ug3">Before you touch any files, tell me exactly which file you plan to open and what change you want to make, and wait for me to say yes.</pre></div>
+      <p class="tc-caution">Auto-accept is a convenience your mentor may have earned through practice, not a default you inherit with their files. If you copy their settings before you have built the habit of checking each step, a mistake on real data can happen faster than you can catch it.</p>
+      <p class="tc-links">See also: <a href="modes.html">Modes</a>, <a href="level-2.html">Level 2</a>, <a href="spotting-errors.html">Spotting errors</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Use the lab's shared house-rules file, don't rewrite it</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">If your lab already has a shared CLAUDE.md or AGENTS.md file covering conventions like units and file naming, point your tool at that file instead of writing your own from scratch.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="ug4">Copy</button></div><pre class="tc-prompt" id="ug4">Read the lab's CLAUDE.md file in this project folder and follow its conventions when you help me rename these files.</pre></div>
+      <p class="tc-caution">This file sets conventions the whole lab depends on, including people more senior than you. If something in it looks wrong or out of date, flag it to whoever maintains it rather than quietly editing around it.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 1">
+      <div class="tc-head"><h4>Get unfamiliar protocol terms explained before you're at the bench</h4><span class="lvpill l1">Level 1</span></div>
+      <p class="tc-one">Before running a protocol for the first time, paste the unfamiliar terms or steps into plain chat for a plain-language explanation, then confirm your understanding with your mentor before you rely on it.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="ug5">Copy</button></div><pre class="tc-prompt" id="ug5">Explain what these terms mean in plain language, and tell me which steps in this protocol are the ones where getting it wrong would be a safety issue or ruin the sample.</pre></div>
+      <p class="tc-caution">A confident explanation from chat is not the same as a person confirming you understood it correctly. Never let it be the last check before a first-time step, especially anything safety-related; that confirmation has to come from your mentor.</p>
+      <p class="tc-links">See also: <a href="how-it-works.html">How it works</a>, <a href="level-1.html">Level 1</a>, <a href="spotting-errors.html">Spotting errors</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 1">
+      <div class="tc-head"><h4>Sanity-check a first result before calling it surprising</h4><span class="lvpill l1">Level 1</span></div>
+      <p class="tc-one">When an early result looks off, ask chat to help you check units and order of magnitude against a typical published range before you tell your mentor something looks wrong, as a first pass, not a verdict.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="ug6">Copy</button></div><pre class="tc-prompt" id="ug6">My result came out to X units for this assay. Given the typical published range, does this look plausible, and what unit or calculation errors would produce a result off by exactly this factor?</pre></div>
+      <p class="tc-caution">This is a sense check, not a ruling. If it says your number looks fine, that does not make it right; still bring anything unexpected to your mentor, who knows things about your specific instrument and reagents that a general model does not.</p>
+      <p class="tc-links">See also: <a href="spotting-errors.html">Spotting errors</a>, <a href="level-1.html">Level 1</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Read the decision log before re-asking questions it already answers</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">When you join an ongoing project that keeps a dated <code>docs/log/</code> decision log, read recent entries first to see why past AI-assisted calls were made, instead of re-asking your mentor things the log already covers.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="ug7">Copy</button></div><pre class="tc-prompt" id="ug7">Summarize the last two months of entries in this decision log for me, especially anything about naming conventions or analysis choices I should follow.</pre></div>
+      <p class="tc-caution">Treat the log as orientation, not ground truth. If an entry seems inconsistent with what you are seeing at the bench, ask your mentor about it rather than silently following it.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+  </section>
+
+  <!-- ===== TECHNICIAN ===== -->
+  <section class="role-section" id="technician">
+    <h2>🔧 Lab technician / research specialist</h2>
+    <p>This section is for the people who keep the lab running day to day: ordering and inventory, plant, animal, or cell-culture care, instrument upkeep, sample tracking, and training whoever just walked in the door. You are usually the one who outlasts several generations of grad students, so what changes here is less about writing a methods paragraph and more about setting up shared conventions once, checking them carefully, and making sure the record survives turnover.</p>
+    <div class="callout warn">
+      <span class="ci">📦</span>
+      <p><strong>Never let the assistant finalize a quantity, catalog number, or order.</strong> Treat any draft reorder list as a starting point you check against the shelf and the current price list yourself. A hallucinated catalog number becomes a real invoice, and a wrong quantity is a delay the whole lab feels.</p>
+    </div>
+
+    <div class="taskcard" data-level="Level 2">
+      <div class="tc-head"><h4>Reconcile a stock check against the order list</h4><span class="lvpill l2">Level 2</span></div>
+      <p class="tc-one">Turn a shelf count into a draft reorder list you check by hand before anyone hits buy.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="tech1">Copy</button></div><pre class="tc-prompt" id="tech1">Here's this week's shelf count (attached) and last month's order log (attached). Flag anything that's low or missing, and draft a reorder list with quantities. Don't invent catalog numbers, leave those blank if you're not sure.</pre></div>
+      <p class="tc-caution">Every catalog number, quantity, and price it drafts is a placeholder, not a fact, until you have checked it against the actual shelf and the supplier's current listing. You sign off on the real order, not the draft.</p>
+      <p class="tc-links">See also: <a href="level-2.html">Level 2</a>, <a href="spotting-errors.html">Spotting errors</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 2">
+      <div class="tc-head"><h4>Summarize instrument logs to catch maintenance patterns</h4><span class="lvpill l2">Level 2</span></div>
+      <p class="tc-one">Turn weeks of raw usage and error log entries into a summary that flags which instrument needs attention.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="tech2">Copy</button></div><pre class="tc-prompt" id="tech2">Here's the instrument log export for the last two months (attached). Summarize usage and any recurring errors by instrument, and flag anything that looks overdue for maintenance.</pre></div>
+      <p class="tc-caution">A tidy summary can smooth over a real warning sign buried in the raw entries. Open the actual log and confirm any flagged instrument before you schedule or skip a service call.</p>
+      <p class="tc-links">See also: <a href="level-2.html">Level 2</a>, <a href="spotting-errors.html">Spotting errors</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Build and own the lab's shared CLAUDE.md</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">Write one house-rules file covering units, file naming, and instrument export formats so every grad student and undergrad points their tool at the same conventions instead of inventing their own.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="tech3">Copy</button></div><pre class="tc-prompt" id="tech3">Here are three of our SOPs and a sample instrument export file (attached). Draft a CLAUDE.md that states our unit conventions, file naming pattern, and how to read this export format, based only on what's in these files.</pre></div>
+      <p class="tc-caution">Once this file is shared lab-wide, an error in it repeats silently in everyone's work. Review it yourself before circulating it, and update it the same day a convention changes rather than letting it drift out of date.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Turn repeated sample accessioning into a skill</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">If you log new samples the same way every week, write that routine down once as a SKILL.md instead of re-explaining it to the assistant each time.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="tech4">Copy</button></div><pre class="tc-prompt" id="tech4">Here's how we accession a new sample: assign an ID, record source and date, log it in the tracking sheet, and print a label. Write this up as a SKILL.md so the assistant can walk through these steps with me for each new sample.</pre></div>
+      <p class="tc-caution">A skill that is slightly wrong runs wrong every single time it is used. Pilot it on a handful of real samples and check the tracking sheet by hand before trusting it for a full day's accessioning.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Keep the decision log alive across student turnover</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">You outlast several generations of grad students, so use that to make sure the <code>docs/log/</code> decision log actually gets handed off instead of abandoned when someone graduates.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="tech5">Copy</button></div><pre class="tc-prompt" id="tech5">Here's this project's decision log so far (attached). A student is graduating next month, summarize the open questions and unresolved AI-assisted calls that whoever inherits this project needs to know about.</pre></div>
+      <p class="tc-caution">You are often the only continuous presence across a project's lifetime. Treat the decision log as part of the lab's actual record, not a nice-to-have, and check a departing student's entries make sense before the next person inherits them.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Cross-cutting">
+      <div class="tc-head"><h4>Default newcomers to approve-each-step, regardless of who they are</h4><span class="lvpill cc">Cross-cutting</span></div>
+      <p class="tc-one">An undergrad and a postdoc new to agentic tools both start in approve-each-step, even if you run the shared setup in auto-accept yourself.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="tech6">Copy</button></div><pre class="tc-prompt" id="tech6">Set this up in approve-each-step mode for now, we'll move to auto-accept once you've caught a few mistakes yourself and trust the pattern.</pre></div>
+      <p class="tc-caution">Comfort with a tool and comfort catching its mistakes are not the same thing. Someone can be an experienced scientist and still be new to spotting agentic errors, so match the mode to their AI-tool experience, not their title.</p>
+      <p class="tc-links">See also: <a href="modes.html">Modes</a>, <a href="level-2.html">Level 2</a></p>
+    </div>
+  </section>
+
+  <!-- ===== GRAD STUDENT ===== -->
+  <section class="role-section" id="grad-student">
+    <h2>🎓 Graduate student</h2>
+    <p>This section is for the graduate student (MS or PhD) running a dissertation project end to end: bench work, computational analysis, reading, writing, and eventually a thesis. Most of what you need is already in the main ramp and in <a href="recipes.html">Recipes</a>; what is collected here is specific to living inside one project for years, and to the shift from being mentored to mentoring someone else.</p>
+    <div class="callout warn">
+      <span class="ci">🧭</span>
+      <p>Earlier in training, someone else usually double-checked your notebook before it mattered. As a graduate student, increasingly no one does that for you before it reaches your committee, a reviewer, or the mentee you now supervise. Treat "you are the record of truth" as literal, especially at your defense: an assistant's confident summary of your own multi-year project can be wrong in ways only you, working from the primary log, will catch.</p>
+    </div>
+
+    <div class="taskcard" data-level="Level 2">
+      <div class="tc-head"><h4>Draft your committee meeting update from the log</h4><span class="lvpill l2">Level 2</span></div>
+      <p class="tc-one">Turn a semester's worth of notebook entries and decision-log lines into a progress summary, so prep time goes to the science, not reformatting.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="grad1">Copy</button></div><pre class="tc-prompt" id="grad1">Here are my notebook entries and decision log since March. Draft a one-page committee update: what I did, what changed since the last meeting, and open questions. Don't add conclusions that aren't in these files.</pre></div>
+      <p class="tc-caution">A committee update is where your committee decides whether the project is on track, so any smoothing-over of a stalled experiment or an unresolved contradiction needs to survive your own read before it goes in the deck, not just the assistant's.</p>
+      <p class="tc-links">See also: <a href="level-2.html">Level 2</a>, <a href="templates.html">Templates</a>, <a href="recipes.html">Recipes</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Build a Level 3 setup around your own project, not just the lab's</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">A shared lab house-rules file covers common conventions; your dissertation likely has its own recurring analysis or writing step worth turning into a skill of your own.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="grad2">Copy</button></div><pre class="tc-prompt" id="grad2">I run this same 8-step analysis on every new batch of data. Help me write a SKILL.md that documents the steps, the file-naming convention, and where the output should go, so I can point you at it next time instead of re-explaining.</pre></div>
+      <p class="tc-caution">A personal skill file is one more thing to keep in sync with the lab's shared conventions. If the lab's house-rules file changes units or naming, your personal skill can silently go stale and start producing output that no longer matches the lab standard.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Keep one decision log for the whole degree, and hand it off when you leave</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">A PhD is years of small analysis and methods calls. A dated log you can point back to at your defense, and pass on to whoever inherits the project, saves you from reconstructing your own reasoning from memory.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="grad3">Copy</button></div><pre class="tc-prompt" id="grad3">Summarize this project's decision log into a one-page timeline of the major methodological choices and why each was made, so I can hand it to the student taking over this line of work.</pre></div>
+      <p class="tc-caution">The log is only useful to a successor if you wrote the actual reason down at the time, not just the conclusion. An assistant can format old entries nicely but it cannot invent the reasoning you did not record.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 1">
+      <div class="tc-head"><h4>Draft fellowship or grant sections without losing your own voice</h4><span class="lvpill l1">Level 1</span></div>
+      <p class="tc-one">Chat can turn rough notes into a structured specific-aims or personal-statement draft, but review panels are reading for your voice and your judgment, not a generic version of it.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="grad4">Copy</button></div><pre class="tc-prompt" id="grad4">Here are my rough notes on the project rationale and my career goals. Draft a specific-aims paragraph and a personal-statement outline from these, in a plain, direct voice, without adding claims I haven't given you.</pre></div>
+      <p class="tc-caution">Check your program's actual policy on AI assistance for that specific application before you draft anything with a tool. Some fellowship and grant mechanisms require disclosure or restrict AI use outright, and that rule matters more here than for an internal lab document.</p>
+      <p class="tc-links">See also: <a href="level-1.html">Level 1</a>, <a href="spotting-errors.html">Spotting errors</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Cross-cutting">
+      <div class="tc-head"><h4>Onboard the undergrad or rotation student you now supervise</h4><span class="lvpill cc">Cross-cutting</span></div>
+      <p class="tc-one">The first time you are the one training someone else on these tools, walk them through the Home decision tree on your own data, and default them to approve-each-step until they have built the verification habit you already have.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="grad5">Copy</button></div><pre class="tc-prompt" id="grad5">Walk me through how I'd explain the two habits, protect your data and verify the output, to a new rotation student using our actual protocol files as the example, in about 15 minutes.</pre></div>
+      <p class="tc-caution">Spot-check a new mentee's AI-assisted notebook entries before they become part of the permanent record. The record-of-truth rule falls on you as their supervisor as much as it falls on them, especially in their first few weeks.</p>
+      <p class="tc-links">See also: <a href="index.html">Home</a>, <a href="modes.html">Modes</a>, <a href="spotting-errors.html">Spotting errors</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 1">
+      <div class="tc-head"><h4>Turn your reading list into practice questions for your qualifying exam</h4><span class="lvpill l1">Level 1</span></div>
+      <p class="tc-one">Attach your reading list or key papers and have chat generate practice questions to test your own understanding before your qualifying exam (quals, prelims, or candidacy exam, whatever your program calls it), an oral-exam-style stress test rather than a summary.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="grad6">Copy</button></div><pre class="tc-prompt" id="grad6">Attached are the five papers on my qualifying-exam reading list. Generate ten practice questions a committee member might ask me, ranging from basic recall to 'defend this design choice,' and don't answer them, just ask.</pre></div>
+      <p class="tc-caution">Practice questions are only as good as the papers you attach. Ask without attaching the actual PDFs and the assistant may generate plausible-sounding questions about the topic instead of ones grounded in what your committee will have actually read.</p>
+      <p class="tc-links">See also: <a href="level-1.html">Level 1</a>, <a href="recipes.html">Recipes</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Draft a dissertation methods chapter from years of logged decisions</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">Unlike a single methods paragraph for a paper, a dissertation chapter needs to explain why you changed approach partway through. Your decision log across years is the raw material for that narrative.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="grad7">Copy</button></div><pre class="tc-prompt" id="grad7">Using my decision log from this whole project, draft a first pass of the methods chapter section on the analysis pipeline, including the point where I switched approaches, and cite the log entry for each choice.</pre></div>
+      <p class="tc-caution">This draft will read as more coherent than your actual multi-year process was. Go back to the primary notebook entries for any claim about what you observed, not just the assistant's narrative synthesis of the log.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a>, <a href="recipes.html">Recipes</a></p>
+    </div>
+  </section>
+
+  <!-- ===== POSTDOC ===== -->
+  <section class="role-section" id="postdoc">
+    <h2>🧭 Postdoc</h2>
+    <p>This section is for postdocs running projects, mentoring students, and reviewing other people's work while using these tools themselves. What changes at this level is not the ramp, it is that you are now the one setting the defaults, noticing when a mentee has outgrown a level, and making the judgment calls that protect other people's data and other people's confidential work, not just your own.</p>
+    <div class="callout danger">
+      <span class="ci">🔒</span>
+      <p><strong>If you review manuscripts or grants, that material is confidential under the terms of peer review, full stop.</strong> Never paste it into any third-party AI tool, even one with training turned off, a paid tier, or a BAA. Work from your own notes, or don't use AI for that part.</p>
+    </div>
+
+    <div class="taskcard" data-level="Level 1">
+      <div class="tc-head"><h4>Draft review comments without ever pasting the manuscript</h4><span class="lvpill l1">Level 1</span></div>
+      <p class="tc-one">Turn your own notes into clear reviewer comments in plain chat, keeping the actual manuscript or grant text off any third-party tool.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="pd1">Copy</button></div><pre class="tc-prompt" id="pd1">Here are my own bullet-point notes on this manuscript's strengths, weaknesses, and questions (the manuscript itself is not included). Turn these into clear, professional reviewer comments organized by major and minor points.</pre></div>
+      <p class="tc-caution">Turning off training or paying for a subscription does not make it acceptable to paste embargoed data, figures, or manuscript text into an AI tool. Work from your own notes, never the source document.</p>
+      <p class="tc-links">See also: <a href="protect-your-data.html">Protect your data</a>, <a href="level-1.html">Level 1</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Cross-cutting">
+      <div class="tc-head"><h4>Walk a new grad student through the decision tree yourself</h4><span class="lvpill cc">Cross-cutting</span></div>
+      <p class="tc-one">Run the Home page's two questions live with the newcomer using your lab's own file types, instead of leaving them to click through it alone on day one.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="pd2">Copy</button></div><pre class="tc-prompt" id="pd2">We're about to try this on one of our real instrument export files. Can you read it and tell me what columns it has, before we decide whether to let you edit anything?</pre></div>
+      <p class="tc-caution">A 15-minute live run costs you little and saves weeks of a newcomer picking the wrong level or granting file access before they understand what that means.</p>
+      <p class="tc-links">See also: <a href="index.html">Home</a>, <a href="level-1.html">Level 1</a>, <a href="level-2.html">Level 2</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Notice when a mentee is stuck redoing the same Level 2 steps</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">When a grad student re-explains the same file-cleanup steps to their tool every week, help them turn it into a Level 3 skill instead of letting the habit calcify.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="pd3">Copy</button></div><pre class="tc-prompt" id="pd3">My mentee re-runs this same column-renaming and unit-conversion routine on new instrument files every week. Help me write a SKILL.md that describes the steps once so their tool can reuse it.</pre></div>
+      <p class="tc-caution">Writing the skill for them is not mentoring. Sit with them while they write it so they understand what it does and can catch it when a new file breaks the assumption.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a>, <a href="recipes.html">Recipes</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Review your own connector scope before telling the lab to copy it</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">Before you tell the lab "connect yours the same way I did," check exactly what your Drive, Gmail, or Zotero connector actually exposes to the tool.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="pd4">Copy</button></div><pre class="tc-prompt" id="pd4">List exactly which folders and file types this connector currently has access to, and flag anything that looks broader than our shared project folder.</pre></div>
+      <p class="tc-caution">A connector scoped too broadly by the first person to set it up becomes the lab default once others copy it. Check it before it spreads, not after someone notices a folder that should not have been shared.</p>
+      <p class="tc-links">See also: <a href="connect-sources.html">Connect your sources</a>, <a href="level-3.html">Level 3</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Cross-cutting">
+      <div class="tc-head"><h4>Set up who spot-checks whose AI-assisted work</h4><span class="lvpill cc">Cross-cutting</span></div>
+      <p class="tc-one">Make the lab's escalation chain explicit: undergrads' entries get spot-checked by grad students, grad students' analyses get spot-checked by you, before anything reaches a manuscript or grant.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="pd5">Copy</button></div><pre class="tc-prompt" id="pd5">Here is the checklist we use to catch AI errors. Help me turn it into a short onboarding note that says whose work each level of the lab is responsible for spot-checking.</pre></div>
+      <p class="tc-caution">"You are the record of truth" names an individual's responsibility, not the lab's chain. Without you stating who checks whom, an undergrad's AI-assisted error can reach a manuscript with nobody's name attached to catching it.</p>
+      <p class="tc-links">See also: <a href="spotting-errors.html">Spotting errors</a>, <a href="how-it-works.html">How it works</a></p>
+    </div>
+
+    <div class="taskcard" data-level="Level 3">
+      <div class="tc-head"><h4>Hand off the decision log, not just the data, when you move on</h4><span class="lvpill l3">Level 3</span></div>
+      <p class="tc-one">When a grad student graduates or you take the next job, pass along the <code>docs/log/</code> decision log so the next person understands why AI-assisted calls were made, not only what was concluded.</p>
+      <div class="tc-prompt-wrap"><div class="tc-prompt-label">Try this <button class="copy-btn" data-copy="pd6">Copy</button></div><pre class="tc-prompt" id="pd6">Summarize the decisions in this project's log where we relied on AI-assisted analysis, so I can hand this summary to whoever inherits the project.</pre></div>
+      <p class="tc-caution">Data without the reasoning behind it forces the next person to redo the verification work from scratch, or worse, trust a conclusion they cannot actually check.</p>
+      <p class="tc-links">See also: <a href="level-3.html">Level 3</a>, <a href="templates.html">Templates</a></p>
+    </div>
+  </section>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="how-it-works.html">How it works</a></li>
+      <li><a href="modes.html">Modes</a></li>
+      <li><a href="spotting-errors.html">Spotting errors</a></li>
+      <li><a href="protect-your-data.html">Protect your data</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>
