@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Level 3 · Starter kit — An on-ramp to agentic research</title>
+<meta name="description" content="A standing setup for a long-running project: house-rules files (CLAUDE.md / AGENTS.md), skills, a decision log, and connectors.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="level-3">
+  <div class="page-eyebrow">The ramp</div>
+  <h1>Level 3 · The fuller pattern <span class="lvpill l3">learn when needed</span></h1>
+  <p class="lede">Worth setting up once a project runs long enough that you want the assistant to behave the same way every session. Left to itself it starts each conversation from nothing and guesses; these small files give it a written memory you can see and correct.</p>
+
+  <h2>3.1 · Instruction files (CLAUDE.md, AGENTS.md)</h2>
+  <p>Write your standing rules down once so you stop retyping them every session: which files are canonical, what it must not edit without asking, how to report numbers.</p>
+  <ul>
+    <li><strong>CLAUDE.md</strong> if Claude Code is your only tool. As of Aug 2026 it reads CLAUDE.md and does <em>not</em> natively read AGENTS.md. <span class="tag learn">verify</span></li>
+    <li><strong>AGENTS.md</strong> if you switch between tools. It is the shared cross-tool format that Codex, Cursor, Copilot, and Gemini CLI read.</li>
+    <li><strong>Want both?</strong> Keep AGENTS.md as the real file and add one line, <code>@AGENTS.md</code>, at the top of CLAUDE.md so Claude Code pulls it in. <span class="tag learn">verify</span></li>
+    <li><strong>Use a one-page brief instead</strong> (just a chat message) when the instructions are for a single task, not standing policy.</li>
+  </ul>
+  <div class="callout warn">
+    <span class="ci">⚠️</span>
+    <p>A rule in the file is <strong>a request, not a lock.</strong> "Do not edit /raw_data" is a reminder, not a wall, so still verify. Keep it under about 200 lines, and remember a synced folder carries your rules, and everything else in it, up to the cloud.</p>
+  </div>
+  <p>Grab the fill-in-the-blanks starters on the <a href="templates.html">Templates</a> page.</p>
+
+  <h2>3.2 · Skills, and when a skill is the wrong tool</h2>
+  <p>A <strong>skill</strong> (a small folder with a <code>SKILL.md</code> file) packages a repeated, do-it-exactly-this-way task so the assistant applies it the same way each time without you re-explaining. The plain answer for which tool to reach for:</p>
+  <div class="dtable-wrap">
+    <table class="dtable">
+      <thead><tr><th>Use…</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><b>A prompt</b></td><td>A one-off. It vanishes when the chat ends.</td></tr>
+        <tr><td><b>An instruction file</b></td><td>Context you want loaded into every session (your project, your writing style).</td></tr>
+        <tr><td><b>A skill</b></td><td>A set of steps that should load only for one recurring task and stay out of the way otherwise.</td></tr>
+        <tr><td><b>A template</b></td><td>You just need a fill-in-the-blanks document.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Ready-made document skills (Word, PDF, PowerPoint, Excel) at <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener">github.com/anthropics/skills</a> work out of the box. Only install skills from sources you trust, keep truly sensitive data out, and see the <a href="resources.html">Resources</a> page for curated libraries.</p>
+
+  <h2>3.3 · The dated decision log</h2>
+  <p>Keep the <em>reasoning</em> ("chose primer set B because…") in a durable file, not trapped in a chat that will reset. Name files by date so they sort correctly: <code>docs/log/20260314_topic.md</code>.</p>
+  <div class="callout tip">
+    <span class="ci">🗓️</span>
+    <p>Cloud sync (OneDrive, Dropbox, Drive) changes files' "date modified" when it syncs. So find your newest log by sorting on the <strong>date in the filename</strong>, not by modified time.</p>
+  </div>
+
+  <h2>3.4 · Connect your sources</h2>
+  <p>Let the assistant search a live service (Drive, Gmail, PubMed, Zotero) instead of you copy-pasting the same material every session. This is powerful and has real privacy risks, so it gets its own page: <a href="connect-sources.html">Connect your sources</a>.</p>
+
+  <h2>A word on trust</h2>
+  <p>None of these files make the assistant trustworthy on their own. They make it <strong>auditable</strong>: every claim traces to a file, every decision has a dated record, and nothing canonical changes without your approval. That is the realistic goal.</p>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="templates.html">Templates</a></li>
+      <li><a href="connect-sources.html">Connect your sources</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="protect-your-data.html">Protect your data</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

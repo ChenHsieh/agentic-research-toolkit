@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spotting errors — An on-ramp to agentic research</title>
+<meta name="description" content="A practical checklist for catching an assistant's mistakes before they reach your data or a manuscript. No coding.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="spotting-errors">
+  <div class="page-eyebrow">Reference · the verify step</div>
+  <h1>Spotting errors</h1>
+  <p class="lede">The rule is "you are the record of truth." This is how you actually do the checking, no coding required. Run the whole list when the output will touch a figure, an order, a database query, or a manuscript. Pick one or two for throwaway brainstorming.</p>
+
+  <div class="card-lite">
+    <ul class="checklist">
+      <li><b>Quote before claim.</b><span>Tell it: before you state any value, paste the exact source row it came from. The receipt should sit next to the claim.</span></li>
+      <li><b>Cross-check against the file.</b><span>Open the real file and confirm counts, sample IDs, and accession numbers. An ID that is off by one character is still wrong.</span></li>
+      <li><b>Watch the confident-but-vague words.</b><span>"Appears to", "should be", "consistent with", "roughly" are the spots to demand a specific source or number.</span></li>
+      <li><b>Check the citations.</b><span>Make it give the exact supporting quote, then confirm the paper and the quote are real. Fabricated references are a known failure.</span></li>
+      <li><b>Restart and run all.</b><span>For any notebook it edited, rerun from a clean slate to catch stale leftover state.</span></li>
+      <li><b>Ask it to critique itself.</b><span>"Find the weakest step in your own answer" often surfaces the shaky assumption. Helps, but is not a guarantee.</span></li>
+      <li><b>Diff against a known-good value.</b><span>Compare new output to a control, a prior result, or a total you counted by hand.</span></li>
+      <li><b>Sanity-check units and orders of magnitude.</b><span>Does the concentration, p-value, read count, or fold-change land in a physically plausible range?</span></li>
+    </ul>
+  </div>
+
+  <p class="route">The biggest trap is fluent confidence. Clean prose is not evidence, and the tool will happily apologize and then repeat the same error.</p>
+
+  <div class="callout tip">
+    <span class="ci">🔒</span>
+    <p>Doing your checks in plain <a href="level-1.html">chat</a> keeps unpublished data off the tool entirely. When you do give it file access, the first item on this list, "quote before claim," is your best defense.</p>
+  </div>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="how-it-works.html">The capture → draft → verify loop</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="protect-your-data.html">Protect your data</a></li>
+      <li><a href="refusals.html">When it wrongly refuses</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interfaces — An on-ramp to agentic research</title>
+<meta name="description" content="The same assistant shows up in many windows. Which one to use: website, desktop app, Claude Code, VS Code, Cursor, Codex.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="interfaces">
+  <div class="page-eyebrow">Reference</div>
+  <h1>Interfaces: where you type</h1>
+  <p class="lede">The interfaces differ in how much of your computer they can touch, not in how smart they are. A non-coder does about 90 percent of useful work in the website or desktop app.</p>
+
+  <div class="dtable-wrap">
+    <table class="dtable">
+      <thead><tr><th>You want to</th><th>Touches files?</th><th>Use this</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>Paste text and chat, any computer, nothing installed</td><td>No</td><td><b>claude.ai website</b></td><td><span class="tag start">start here</span></td></tr>
+        <tr><td>Chat and reach into Gmail, Drive, or Calendar in plain language</td><td>No local files</td><td><b>Desktop app + connectors</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+        <tr><td>An agent that reads and writes files in a project folder</td><td>Yes</td><td><b>Claude Code</b> (terminal)</td><td><span class="tag learn">learn when needed</span></td></tr>
+        <tr><td>Same engine, a nicer side-by-side view of changes, and you already work there</td><td>Yes</td><td><b>VS Code / JetBrains extension</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+        <tr><td>A technical helper prefers one all-in-one editor</td><td>Yes</td><td><b>Cursor</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+        <tr><td>Hand off a self-contained task and review a finished result</td><td>Yes</td><td><b>Codex</b></td><td><span class="tag learn">learn when needed</span></td></tr>
+        <tr><td>Split a job across many parallel agents</td><td>Yes, at scale</td><td><b>Subagents / large runs</b></td><td><span class="tag over">usually overkill</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="route"><strong>The route for a bench scientist:</strong> the website, then the desktop app with connectors, then Claude Code only once a helper has set it up. The <a href="index.html">swipe test</a> picks your level; this table picks the window once you are there.</p>
+
+  <h2>A little more on each</h2>
+  <ul>
+    <li><strong>Website / desktop app.</strong> Nothing installed. It cannot touch your files unless you attach them, which is a feature. The desktop app adds <a href="connect-sources.html">connectors</a> so it can read across Gmail, Drive, or Calendar in plain language.</li>
+    <li><strong>Claude Code.</strong> A terminal window where an agent works across a folder. This is where <a href="modes.html">modes</a> and <a href="level-3.html">instruction files</a> matter.</li>
+    <li><strong>Editor extensions and Cursor.</strong> The same agent, shown next to your files with a clearer view of proposed changes. Best if you or a helper already live in that editor.</li>
+    <li><strong>Codex.</strong> Good for handing off a self-contained task and reviewing a finished result rather than watching each step.</li>
+  </ul>
+  <div class="callout tip">
+    <span class="ci">📄</span>
+    <p>All of these can read a <a href="level-3.html">house-rules file</a> to stay inside your guardrails, so the setup you write once travels between windows.</p>
+  </div>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="modes.html">Modes</a></li>
+      <li><a href="connect-sources.html">Connect your sources</a></li>
+      <li><a href="level-2.html">Level 2 · File access</a></li>
+      <li><a href="cost.html">What it costs</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

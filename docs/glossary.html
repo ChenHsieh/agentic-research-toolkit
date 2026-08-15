@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glossary — An on-ramp to agentic research</title>
+<meta name="description" content="Plain-sentence definitions for every term on the site: agentic, interface, context window, connector, CLAUDE.md, prompt injection, and more.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="glossary">
+  <div class="page-eyebrow">More</div>
+  <h1>Glossary</h1>
+  <p class="lede">Plain-sentence definitions for the words that come up on this site. One idea each, no jargon inside the definitions.</p>
+
+  <div class="gloss">
+    <dl><dt>AI</dt><dd>The broad, familiar umbrella term; this site says "chat assistant" or "agentic tool" instead, because those name what the tool can actually do.</dd></dl>
+    <dl><dt>Agentic tool / agent</dt><dd>A tool that can take actions for you (read files, run a check), not just chat back. "Agentic" means able to do things, not only talk.</dd></dl>
+    <dl><dt>Interface</dt><dd>The window you type into. The same assistant appears in a website, a desktop app, a terminal (Claude Code), and editor plugins; they differ in what they can touch. See <a href="interfaces.html">Interfaces</a>.</dd></dl>
+    <dl><dt>Prompt</dt><dd>The message you send, instructions plus any text you paste in. A clearer prompt gets a better answer.</dd></dl>
+    <dl><dt>Hallucination</dt><dd>When it states a made-up detail with full confidence. The reason you always verify.</dd></dl>
+    <dl><dt>Context window</dt><dd>The chat's short-term memory. Paste too much or run too long and the earliest parts fall out of view. See <a href="level-1.html">Level 1</a>.</dd></dl>
+    <dl><dt>Token</dt><dd>The chunk of text these tools read and are billed in, very roughly a word. Usage limits and API prices are counted in tokens.</dd></dl>
+    <dl><dt>Model tier</dt><dd>The size of the model: small (fast, cheap), mid (the everyday default), top (most capable, slower, priciest). The labels change; the tiers do not.</dd></dl>
+    <dl><dt>Thinking mode</dt><dd>A setting that makes the model reason longer before answering. It does not touch the internet or your files.</dd></dl>
+    <dl><dt>Artifact</dt><dd>A chart, document, or mini-tool the chat builds in a side panel. Good for see-it-and-share-it, not for a reproducible result. See <a href="level-1.html">Level 1</a>.</dd></dl>
+    <dl><dt>Plan / approve / auto mode</dt><dd>How much an agentic tool may do on its own: plan (reads only), approve-each-step (asks every time), auto (acts, pausing for risky things). See <a href="modes.html">Modes</a>.</dd></dl>
+    <dl><dt>Allowlist</dt><dd>A list of commands a tool may run without asking. Should only ever cover harmless read-only commands.</dd></dl>
+    <dl><dt>Subagent</dt><dd>A helper agent the main one spins up to run part of a job. Rarely needed for the bench. See <a href="beyond-the-ramp.html">Beyond the ramp</a>.</dd></dl>
+    <dl><dt>CLAUDE.md</dt><dd>A plain-text house-rules file Claude Code reads each session. The name is a convention; the contents are rules you wrote.</dd></dl>
+    <dl><dt>AGENTS.md</dt><dd>The same idea in a shared format other tools (Codex, Cursor, Copilot, Gemini CLI) read. See <a href="level-3.html">Level 3</a>.</dd></dl>
+    <dl><dt>SKILL.md / skill</dt><dd>A small folder that teaches the assistant one repeated task, loaded only when that task comes up.</dd></dl>
+    <dl><dt>Connector / MCP</dt><dd>A plug that lets the assistant reach into another account or database (Drive, Gmail, PubMed, Zotero). MCP is the open standard behind it. See <a href="connect-sources.html">Connect your sources</a>.</dd></dl>
+    <dl><dt>Prompt injection</dt><dd>A hidden instruction planted in a document, email, or web page that tries to hijack the assistant into leaking data or taking an unwanted action.</dd></dl>
+    <dl><dt>git / GitHub</dt><dd>A tool (git) that keeps a timeline of file changes, and a website (GitHub) that stores those histories online. Built for software teams; usually overkill at the bench.</dd></dl>
+    <dl><dt>BAA</dt><dd>A signed Business Associate Agreement, required before real patient data goes to a service. Offered only on Enterprise or qualifying API plans.</dd></dl>
+    <dl><dt>Zero data retention</dt><dd>An arrangement where a provider does not store your requests. You have to request and qualify for it; it is not a default.</dd></dl>
+    <dl><dt>Dictation (speech-to-text)</dt><dd>Turns spoken words into text, handy at the bench. It mishears too, so verify.</dd></dl>
+    <dl><dt>Canonical file</dt><dd>The one real, trusted version everything else should agree with.</dd></dl>
+    <dl><dt>Record of truth</dt><dd>You and your raw data. The assistant helps write the record; it does not get to be it.</dd></dl>
+  </div>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="how-it-works.html">How it works</a></li>
+      <li><a href="interfaces.html">Interfaces</a></li>
+      <li><a href="modes.html">Modes</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

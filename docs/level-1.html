@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Level 1 · Chat only — An on-ramp to agentic research</title>
+<meta name="description" content="Do most useful work in a plain chat: clean up a bench note, keep the chat sharp, build a quick chart, and pick a model.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="level-1">
+  <div class="page-eyebrow">The ramp</div>
+  <h1>Level 1 · Chat only <span class="lvpill l1">start here</span></h1>
+  <p class="lede">The assistant sees only what you paste or attach. Nothing on your computer is touched. This needs a free chat account and copy-paste, and for most people it is the only level they ever need.</p>
+
+  <h2>1.1 · The notebook-entry prompt</h2>
+  <p>Copy this, paste it into Claude or ChatGPT, and add one real bench note where it says so. The magic is point 3: it makes gaps stay gaps instead of getting invented.</p>
+  <div class="code">
+    <div class="code-head">
+      <span class="fname">notebook-entry-prompt.txt</span>
+      <span class="copy"><button class="copy-btn" data-copy="promptTpl">Copy</button></span>
+    </div>
+    <pre><code id="promptTpl">You are helping me turn a rough bench note into a clean lab-notebook entry.
+
+Do three things:
+1. Rewrite my shorthand into clear, full sentences, using a consistent structured
+   format with these fields: Date, Experiment, Plant material / sample, Treatment,
+   Measurement, Result, Notes. Mark a field "[not recorded]" if my note lacks it.
+2. List separately, under "Missing or unclear," any field a reader would need but
+   cannot find, and any place my note is ambiguous.
+3. Do not invent, guess, or fill in any value I did not write. If a number, unit,
+   date, or ID is missing, say it is missing. Do not assume standard values.
+
+Keep my original meaning. Do not add interpretation I did not state.
+
+Here is my bench note:
+---
+[PASTE YOUR NOTE HERE]
+---</code></pre>
+  </div>
+  <p>You get back a clean, fielded entry plus a "Missing or unclear" list that names what you forgot to write down. Then <strong>you</strong> read every field against what you actually did, fix anything wrong, and retype the final version into your real notebook. That step is the point. See the <a href="spotting-errors.html">verification checklist</a>.</p>
+
+  <h2>1.2 · Keeping a chat sharp (the context window)</h2>
+  <p>A chat has a limited short-term memory, called the <a href="glossary.html">context window</a>. When it fills up, the assistant starts to forget.</p>
+  <ul>
+    <li><strong>Open a fresh chat per task</strong> rather than running one endless thread.</li>
+    <li><strong>Start it with a short "context pack"</strong> (the goal, a few key facts, any correction you already made) instead of re-pasting whole documents.</li>
+    <li><strong>Signs the window is full:</strong> it forgets an instruction you gave, repeats itself, or gets vaguer.</li>
+  </ul>
+  <p>At Level 2 and up, Claude Code adds <code>/clear</code> and <code>/compact</code>. Compaction throws away detail to save room, so verify anything important afterward. When facts must survive a reset entirely, move them into a <a href="level-3.html">Level 3</a> file.</p>
+
+  <h2>1.3 · Artifacts (a chart or mini-tool beside the chat)</h2>
+  <p>The chat can build a quick chart, a small calculator, or a one-page handout in a side panel, with no coding.</p>
+  <ul>
+    <li><strong>Artifact = see-it-and-share-it:</strong> a throwaway chart, a dilution or molarity calculator, a shareable one-pager.</li>
+    <li><strong>A notebook, or a Level 2/3 script = prove-it-and-keep-it:</strong> anything reproducible, reviewed, or headed for a paper.</li>
+  </ul>
+  <div class="callout danger">
+    <span class="ci">🚫</span>
+    <p>An Artifact has no saved, rerunnable code behind it and can get arithmetic wrong without warning, so check every number. <strong>Never share an Artifact link built from unpublished data</strong> — a shared link can expose that data to anyone who opens it.</p>
+  </div>
+
+  <h2>1.4 · Which model, and when to turn on "thinking"</h2>
+  <p>Every assistant comes in a few sizes. The marketing labels churn, but the tiers are stable, so read the picker rather than a name you remember.</p>
+  <div class="dtable-wrap">
+    <table class="dtable">
+      <thead><tr><th>Tier</th><th>Use for</th><th>Thinking</th></tr></thead>
+      <tbody>
+        <tr><td><b>Mid</b> (the everyday default)</td><td>Most drafting, summarizing, and question-answering</td><td>Off</td></tr>
+        <tr><td><b>Top</b> (most capable, slower, priciest)</td><td>Reasoning-heavy or high-stakes work: checking a calculation, testing a manuscript's logic, planning a multi-step analysis</td><td>On</td></tr>
+        <tr><td><b>Small</b> (fastest, cheapest)</td><td>Many repeated simple jobs (not a beginner concern)</td><td>Off</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn">
+    <span class="ci">⚠️</span>
+    <p>A smarter model is not a more truthful one; the top tier can still be confidently wrong, so verify regardless. Thinking mode only makes the model reason longer. It does not give it access to the internet or your files. File access is a separate step (<a href="level-2.html">Level 2</a>).</p>
+  </div>
+
+  <h2>When Level 1 is all you need</h2>
+  <p>If your job is "make today's messy notes readable and consistent," you are done. Move to <a href="level-2.html">Level 2</a> only when you find yourself pasting the same background over and over, or wishing the assistant could look across many files or a big spreadsheet.</p>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="recipes.html">Recipes</a> — more Level 1 patterns</li>
+      <li><a href="spotting-errors.html">Spotting errors</a></li>
+      <li><a href="protect-your-data.html">Protect your data</a></li>
+      <li><a href="templates.html">Chat context-pack template</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

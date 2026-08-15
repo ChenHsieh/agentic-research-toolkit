@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Templates — An on-ramp to agentic research</title>
+<meta name="description" content="Copy-pasteable, genericized starter files for running a project with an agent: CLAUDE.md, AGENT_BRIEF.md, a decision log, and a chat context pack.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="templates">
+  <div class="page-eyebrow">Practical · Level 3</div>
+  <h1>Templates</h1>
+  <p class="lede">Copy-pasteable, genericized starting points. Everything in brackets like <code>[fill this in]</code> is a blank for you to complete. None contain real lab data. Start with AGENT_BRIEF.md; it is the highest value for the least work.</p>
+
+  <div class="grid-2">
+    <div class="card-lite">
+      <div class="tpl"><div class="tpl-ico">🚪</div><div style="flex:1">
+        <h4>AGENT_BRIEF.md</h4>
+        <p>One-page front door: the situation, which files are canonical, and the rules that cost the most time when broken.</p>
+        <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/docs/templates/AGENT_BRIEF.md" target="_blank" rel="noopener">Open template →</a>
+      </div></div>
+    </div>
+    <div class="card-lite">
+      <div class="tpl"><div class="tpl-ico">📏</div><div style="flex:1">
+        <h4>CLAUDE.md</h4>
+        <p>House rules the assistant follows every session. The load-bearing one: <b>quote before you claim</b>.</p>
+        <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/docs/templates/CLAUDE.md" target="_blank" rel="noopener">Open template →</a>
+      </div></div>
+    </div>
+    <div class="card-lite">
+      <div class="tpl"><div class="tpl-ico">🗒️</div><div style="flex:1">
+        <h4>docs/log/YYYYMMDD_topic.md</h4>
+        <p>One dated file per decision. The date goes first so it sorts by name (cloud sync scrambles "date modified").</p>
+        <a class="btn btn-ghost" href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/docs/templates/decision-log-template.md" target="_blank" rel="noopener">Open template →</a>
+      </div></div>
+    </div>
+    <div class="card-lite">
+      <div class="tpl"><div class="tpl-ico">🎒</div><div style="flex:1">
+        <h4>Chat context pack</h4>
+        <p>No file access? Paste this small summary at the start of each chat. Copy it below.</p>
+        <button class="copy-btn" data-copy="ctxTpl">Copy the pack</button>
+      </div></div>
+    </div>
+  </div>
+
+  <h2>Chat context pack (copy and re-paste each conversation)</h2>
+  <div class="code">
+    <div class="code-head">
+      <span class="fname">chat-context-pack.txt</span>
+      <span class="copy"><button class="copy-btn" data-copy="ctxTpl">Copy</button></span>
+    </div>
+    <pre><code id="ctxTpl">Project context (read before answering):
+- Project: [one line: what this project is]
+- I am: [your role, e.g. wet-lab, recording phenotype data]
+- Canonical files (the real, trusted ones): [name them, e.g. samples_master_v3.csv]
+- Current state / where we left off: [one or two sentences]
+- Rules that matter here:
+  1. Do not invent numbers, IDs, dates, or units. If something is missing, say so.
+  2. Report [group A] and [group B] separately; do not combine them.
+  3. [any other rule that has bitten you before]
+When you are unsure, ask instead of guessing.</code></pre>
+  </div>
+
+  <div class="callout tip">
+    <span class="ci">📄</span>
+    <p>For a real, lived-in example of a house-rules file, see the toolkit's own <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/setup/CLAUDE.md" target="_blank" rel="noopener">setup/CLAUDE.md</a>. These templates are the beginner version of that.</p>
+  </div>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="level-3.html">Level 3 · Starter kit</a></li>
+      <li><a href="resources.html">Resources (skill libraries)</a></li>
+      <li><a href="connect-sources.html">Connect your sources</a></li>
+      <li><a href="protect-your-data.html">Protect your data</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

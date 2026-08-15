@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modes — An on-ramp to agentic research</title>
+<meta name="description" content="Plan, approve-each-step, or auto. The one setting that decides whether the tool changes your files while you watch, or on its own.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="modes">
+  <div class="page-eyebrow">Reference</div>
+  <h1>Modes: how much freedom</h1>
+  <p class="lede">Once a tool can touch your files, one setting decides whether it changes them while you watch or on its own. Know which mode you are in before you say go.</p>
+
+  <div class="dtable-wrap">
+    <table class="dtable">
+      <thead><tr><th>Situation</th><th>Mode</th><th>What it does</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>First time on a task, real files, want to see the whole plan first</td><td><b>Plan mode</b></td><td>Reads only, writes you a plan, changes nothing</td><td><span class="tag start">start here</span></td></tr>
+        <tr><td>Plan accepted, want to watch each edit land</td><td><b>Approve each step</b></td><td>Pauses before every edit or command</td><td><span class="tag start">start here</span></td></tr>
+        <tr><td>Low-stakes throwaway work, a folder with no unpublished data</td><td><b>Auto-accept</b> (keep shell approval on)</td><td>Makes edits itself, pauses for riskier actions</td><td><span class="tag learn">learn when needed</span></td></tr>
+        <tr><td>Large repetitive software job</td><td><b>Full-auto</b> / skip permissions</td><td>Acts unattended</td><td><span class="tag over">usually overkill</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="ci">⚠️</span>
+    <p><strong>Heads-up (Aug 2026):</strong> auto mode is now the default for new Pro, Max, and Team Claude Code sessions, so check the mode indicator before you start. <span class="tag learn">verify</span> Auto is best-effort, not a safety boundary: the more the tool does on its own, the more changes you have to read.</p>
+  </div>
+
+  <h2>How to think about it</h2>
+  <ul>
+    <li><strong>Plan mode first</strong> for most work. It reads and proposes, changes nothing, and lets you catch a bad plan before any file moves.</li>
+    <li><strong>Approve each step</strong> once you accept a plan and want to watch each edit land.</li>
+    <li><strong>Auto-accept</strong> only for throwaway work in a folder that holds no unpublished data, and keep approval for shell commands on.</li>
+    <li><strong>An allowlist</strong> should only ever silence harmless read-only commands, never a command that deletes, moves, or sends.</li>
+  </ul>
+  <div class="callout tip">
+    <span class="ci">🛡️</span>
+    <p>Modes do not exist at <a href="level-1.html">Level 1</a> (no file access), and no mode replaces the <a href="spotting-errors.html">verify step</a>. Approving a plan flips you from "just planning" into "actually acting," so read what it switches you into.</p>
+  </div>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="interfaces.html">Interfaces</a></li>
+      <li><a href="level-2.html">Level 2 · File access</a></li>
+      <li><a href="spotting-errors.html">Spotting errors</a></li>
+      <li><a href="beyond-the-ramp.html">Beyond the ramp</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beyond the ramp — An on-ramp to agentic research</title>
+<meta name="description" content="Heavy orchestration and GitHub. What the words mean, and why you almost certainly do not need them for the bench.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="beyond-the-ramp">
+  <div class="page-eyebrow">Reference · advanced</div>
+  <h1>Beyond the ramp</h1>
+  <p class="lede">Honestly, this is mostly software-team territory. Here is what the words mean so nobody feels behind, and a clear steer on why you probably do not need them.</p>
+
+  <h2>Heavy orchestration <span class="lvpill l3">usually overkill</span></h2>
+  <p>Instead of one assistant working on one thing while you watch, you can let it split a job into many copies of itself running at once (a "fan-out"), run long jobs in the background, or spin up named helper-agents that each own a piece.</p>
+  <ul>
+    <li><strong>One agent in one window</strong> covers everything this site is about: an email, a table, a summary, one figure. Faster to follow, easier to verify.</li>
+    <li><strong>Subagents or background tasks</strong> only when a single run genuinely cannot hold the whole job, or an identical step repeats across many items you can each check independently.</li>
+    <li><strong>Large parallel runs</strong> (tens to hundreds of agents at once) only for codebase-wide audits or big migrations. A software-team need.</li>
+  </ul>
+  <div class="callout warn">
+    <span class="ci">💸</span>
+    <p>The honest catch: this is <a href="cost.html">pay-as-you-go</a> territory, and each agent burns its own tokens. Background agents approve their own actions unattended, which is dangerous near unpublished data, and more agents means more places to be confidently wrong. When in doubt, run one agent and see whether it is actually too slow.</p>
+  </div>
+
+  <h2>Version control and GitHub <span class="lvpill l3">usually overkill</span></h2>
+  <p>git and GitHub exist. For nearly everyone here, dated filenames plus cloud history do the same job with no learning curve.</p>
+  <ul>
+    <li><strong>Dated filenames</strong> (<code>protocol_2026-08-14_v3.docx</code>) so you never overwrite yesterday's work.</li>
+    <li><strong>Cloud sync with version history</strong> (Drive, OneDrive, Dropbox, Google Docs) for automatic backups and easy rollback.</li>
+    <li><strong>The Level 3 <a href="level-3.html">decision log</a></strong> to preserve reasoning.</li>
+    <li><strong>git / GitHub</strong> only when you are actually shipping code someone else will run, or a journal requires a public repository. Pull requests and code review matter only once you already work in a shared repo.</li>
+  </ul>
+  <div class="callout danger">
+    <span class="ci">🚫</span>
+    <p><strong>Never put unpublished data, patient data, or embargoed sequences on GitHub.</strong> Public repos are visible to the whole world, and git history remembers files even after you delete them. "Private" still means uploaded to a company's servers, so check your institutional rules. GitHub Desktop hides the command line, but it is still git underneath.</p>
+  </div>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="modes.html">Modes</a></li>
+      <li><a href="cost.html">What it costs</a></li>
+      <li><a href="protect-your-data.html">Protect your data</a></li>
+      <li><a href="level-3.html">Level 3 · Starter kit</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

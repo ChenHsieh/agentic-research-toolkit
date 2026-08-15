@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Protect your data — An on-ramp to agentic research</title>
+<meta name="description" content="Know what leaves your machine before you send it. Keeping unpublished, IRB, or patient data safe, and where durable memory fits.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+</head>
+<body>
+<main class="content" data-page="protect-your-data">
+  <div class="page-eyebrow">Cross-cutting · applies at every level</div>
+  <h1>Protect your data</h1>
+  <p class="lede">Before you paste or open anything real, know where it goes, whether it can be kept or used to train a model, and keep unpublished, IRB, or patient data out of the wrong places. This is one of the two habits that run through every page.</p>
+
+  <h2>Match the tool to how sensitive the data is</h2>
+  <div class="dtable-wrap">
+    <table class="dtable">
+      <thead><tr><th>Your data is…</th><th>Do this</th></tr></thead>
+      <tbody>
+        <tr><td>Made-up practice text, or already published</td><td>Relax and just learn the tool.</td></tr>
+        <tr><td>Unpublished, identifiable, or embargoed</td><td>Turn training off first, remove names and identifiers, and keep files local rather than piping them through a connector.</td></tr>
+        <tr><td>Genuinely sensitive (real patient information)</td><td>Use a paid API key or an Enterprise/Team plan (not trained on by default) with a signed HIPAA agreement (a "BAA") in place, or simply de-identify first. <span class="tag learn">verify which plans qualify</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout tip">
+    <span class="ci">⚙️</span>
+    <p><strong>Turn training off</strong> before pasting anything real. Claude: Settings &gt; Privacy. ChatGPT: Settings &gt; Data Controls. <span class="tag learn">verify menu names</span></p>
+  </div>
+
+  <h2>Honest holes, stated plainly</h2>
+  <ul>
+    <li>Turning off training has a carve-out: chats flagged for safety review can still be looked at. <span class="tag learn">verify</span></li>
+    <li>"Zero data retention" is something you request and qualify for, not an automatic setting, and it does not cover ordinary consumer or Team chats. <span class="tag learn">verify</span></li>
+    <li><a href="connect-sources.html">Connectors</a> are the quiet leak: each one sends real file or email contents out to a company's servers.</li>
+    <li>A HIPAA BAA covers only specific plans and endpoints, never a personal Plus or Pro plan. <span class="tag learn">verify</span></li>
+    <li>You do <strong>not</strong> need a special security gateway, a VPN, or a compliance consultant to start.</li>
+  </ul>
+
+  <hr>
+
+  <h2>Durable memory (the safe place for facts)</h2>
+  <p>The other half of protecting your data is not scattering it across throwaway chats. Move any fact you must keep out of chat memory and into a durable file.</p>
+  <ul>
+    <li><strong>A fresh chat plus a short context pack</strong> at <a href="level-1.html">Level 1</a>.</li>
+    <li><strong><code>/clear</code></strong> in Claude Code when you start something unrelated; <strong><code>/compact</code></strong> to declutter while staying on the same task (it also compacts automatically near the limit).</li>
+    <li><strong>A house-rules file plus a dated <a href="level-3.html">decision log</a></strong> when facts must survive a reset entirely.</li>
+  </ul>
+  <p>Compaction throws away detail, so treat anything important as verify-do-not-trust. Keeping notes in a durable file also means less sensitive material floating around in throwaway chats.</p>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="connect-sources.html">Connect your sources</a></li>
+      <li><a href="cost.html">What it costs</a></li>
+      <li><a href="beyond-the-ramp.html">GitHub and unpublished data</a></li>
+      <li><a href="spotting-errors.html">Spotting errors</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>
