@@ -26,7 +26,7 @@ This repo collects the portable, cluster- and domain-agnostic pieces of that pla
 
 ## Featured skills
 
-All four currently included skills are **adapted from upstream community / Anthropic example skills**, not original to this repo. Only `SKILL.md` was ported — companion `references/`, `scripts/`, and `example/` directories from the originals are not included. See [`skills/README.md`](skills/README.md#attribution) for the attribution and porting caveats.
+Four of the ten included skills are **adapted from upstream community / Anthropic example skills**; the other six are original to this repo. For the adapted four, only `SKILL.md` was ported — companion `references/`, `scripts/`, and `example/` directories from the originals are not included. See [`skills/README.md`](skills/README.md#attribution) for the attribution and porting caveats, and note that `ecosystem-mapper`'s port is **incomplete enough that it is a design document rather than a runnable procedure**.
 
 | Skill | Purpose |
 | --- | --- |
@@ -34,6 +34,12 @@ All four currently included skills are **adapted from upstream community / Anthr
 | [`trait-gene-miner`](skills/trait-gene-miner/) | Mine experimentally validated trait–gene associations from ontology databases and literature into an interactive dashboard. |
 | [`ml-genomics-best-practices`](skills/ml-genomics-best-practices/) | Checklist-driven workflow for reproducible, defensible ML in genomics. |
 | [`scientific-schematics`](skills/scientific-schematics/) | Publication-quality scientific workflow diagrams as interactive HTML with one-click SVG export for Figma. |
+| [`tikz-figures`](skills/tikz-figures/) | Template-first TikZ/pgfplots figures that match the manuscript's fonts and regenerate from a data file. |
+| [`design-confound-audit`](skills/design-confound-audit/) | Which questions can this design actually answer? Run before choosing a test. |
+| [`statistic-null`](skills/statistic-null/) | Give a derived statistic its own null before believing it. |
+| [`result-autopsy`](skills/result-autopsy/) | Execute the checks most likely to kill your own finding, before someone else does. |
+| [`second-opinion-concordance`](skills/second-opinion-concordance/) | Validate a call set with an independent method; the disagreements are the product. |
+| [`accession-paper-crosswalk`](skills/accession-paper-crosswalk/) | Link an SRA/BioProject accession to its paper and back; the gaps are the finding. |
 
 ## Honest limits
 
