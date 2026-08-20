@@ -4,13 +4,17 @@ Universal Claude Code hygiene — the rules and practices that apply on any mach
 
 ## What's in scope
 
-Each rule in `CLAUDE.md` names its own *why* in one line. If you want to change a rule, know what it's protecting against first. The full list:
+Each section in `CLAUDE.md` names what it's protecting against. If you want to change a rule, know what it's protecting against first. The full list:
 
-- **Session durability** — `/rename` early; task lists for multi-step work; memory discipline. Keeps work findable across sessions and survivable across context compaction.
-- **Bash discipline** — no shell state persists between Bash tool calls; chain commands. The single most common silent-failure source in agentic sessions.
-- **Tool hygiene** — dedicated tools over Bash; parallel calls when independent; plan mode before non-trivial changes. Produces faster, more reviewable work than free-form shell.
+- **Session durability** — `/rename` early; task lists for multi-step work; conclusions to a file, not just the chat; memory discipline. Keeps work findable across sessions and survivable across context compaction.
+- **Bash discipline** — no shell state persists between Bash tool calls; chain commands; verify the environment actually took. The single most common silent-failure source in agentic sessions.
+- **Long-running work** — background anything past a couple of minutes, log to a file, record the job handle, and don't call a submitted job a finished one. Scientific jobs outlive the agent's attention span.
+- **Tool hygiene** — dedicated tools over Bash; parallel calls when independent; plan mode before non-trivial changes; read before you edit. Produces faster, more reviewable work than free-form shell.
+- **Data safety** — never modify raw data in place; destructive operations need an explicit yes; credentials and unpublished data stay off the wire. Raw data is often irreplaceable.
+- **Provenance** — record the exact command, pin versions and seeds, keep parameters out of edited-in-place constants, note what you skipped. A result you can't regenerate is an anecdote.
+- **Claims, citations, and reporting** — don't cite what you haven't read; mark unverified claims as unverified; report failures with the output; "it ran" is not "it worked." The failure mode is confident, well-formatted, and wrong.
 - **Discovery over validation** — skills and explorations exist to surface the unexpected, not to confirm what you already believe. An agent that only produces "yes, your hypothesis holds" is broken.
-- **Cowork state** — if there's a shared tracker doc, read it in and update it out. That's the durable handoff.
+- **Cowork state** — if there's a shared tracker doc, read it in and update it out, and leave the next session what's blocked and on whom. That's the durable handoff.
 
 ## What's not here
 
