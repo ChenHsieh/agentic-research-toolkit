@@ -96,6 +96,24 @@ You can keep this template in a sticky note, a text file, or the top of your not
 part that does the heavy lifting is point 3: it tells the assistant to leave gaps as gaps instead
 of papering over them.
 
+**If a mentor handed you this prompt** rather than you finding it yourself, what changes is
+not the drafting, it is the check afterward: it has to come from them, not just from you
+rereading your own draft. You cannot catch an error in a field you were never sure about in
+the first place.
+
+## A note on Artifacts (a chart or mini-tool beside the chat)
+
+Chat assistants can build a quick chart, a small dilution or molarity calculator, or a
+one-page handout in a side panel, with no coding from you. The honest division of labor:
+
+- **An Artifact is see-it-and-share-it** — a throwaway chart, a quick calculator, a handout.
+- **A notebook or a script is prove-it-and-keep-it** — anything reproducible, reviewed, or
+  headed for a paper.
+
+Two cautions. An Artifact has no saved, rerunnable code behind it, and it can get arithmetic
+wrong without warning, so check every number it shows you. And **never share an Artifact link
+built from unpublished data** — a shared link can expose that data to anyone who opens it.
+
 ## The failure mode, stated plainly
 
 The assistant is a fast, tireless copy editor with one dangerous habit: when something is missing

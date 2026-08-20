@@ -57,6 +57,23 @@ follows each session; the name is a convention, the contents are just rules you 
 A short dated file recording what you did and decided, so the reasoning behind a project can
 be reconstructed later; see the [template](templates/decision-log-template.md).
 
+**SOP (standard operating procedure)**
+A written step-by-step description of how your lab performs a routine task the same way every
+time, such as accessioning a sample or running an instrument; an SOP is essentially the same
+shape as an agent instruction file, written for people.
+
+**Accessioning**
+The process of logging a new sample into your lab's tracking system with an ID, source, and
+date when it first arrives.
+
+**Specific aims**
+The short opening section of an NIH-style grant or fellowship application that states, in a
+few sentences each, the specific goals the proposed work will accomplish.
+
+**Rotation student**
+A graduate student who works in a lab for a short trial period, often one term, before
+deciding whether to join it for their thesis.
+
 ---
 
 Previous: **[Rubric](rubric.md)**  |  Next: **[Resources](resources.md)**

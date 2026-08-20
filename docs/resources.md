@@ -22,6 +22,24 @@ check it against your own data before you rely on the output.
 - **[travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills)** — a
   broader "awesome list" of skills, tools, and resources, including scientific collections.
   Good for browsing beyond research tasks.
+- **[K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills)**
+  — company-backed, 160+ skills, including real integrations with electronic lab notebooks and
+  LIMS (Benchling, LabArchives, Open Notebook, protocols.io) and a grant-writing skill. If
+  your lab already uses one of those platforms, a packaged skill may beat a DIY recipe. Its
+  usage numbers are a vendor claim, not a quality signal; read the specific `SKILL.md` before
+  trusting it with a real write.
+- **[GoekeLab/awesome-genomic-skills](https://github.com/GoekeLab/awesome-genomic-skills)** — a
+  smaller, lab-maintained list specifically for genomics and bioinformatics: skills plus MCP
+  servers for databases like UniProt, Ensembl, and ClinVar. Good when the broader lists above
+  feel too general.
+
+## Scientific writing
+
+- **[labarba/sciwrite](https://github.com/labarba/sciwrite)** — editorial review in five passes
+  (clutter, weak verbs, sentence flow, keyword consistency, number and citation integrity),
+  based on Stanford's Writing in the Sciences method. It gives you feedback rather than
+  rewriting, and does not touch your data or your claims — a strong fit for the "it drafts,
+  you verify" habit.
 
 Links checked August 2026. These are community and vendor lists that change often; a skill
 that looks abandoned or contradicts your data is not worth forcing.

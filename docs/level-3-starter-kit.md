@@ -1,7 +1,7 @@
 # Level 3: The fuller pattern (starter kit)
 
 **Setup needed: more, but only once per project.** This level is for when a project has grown
-big enough that you want an assistant assistant to stay consistent across many sessions: same rules,
+big enough that you want an assistant to stay consistent across many sessions: same rules,
 same canonical files, same record of decisions. Everything here is copy-pasteable and
 genericized. Fill in the bracketed blanks with your own project's details.
 
@@ -10,7 +10,7 @@ when "keep this project's documentation coherent over months" becomes the actual
 
 ## The idea
 
-Left to itself, an assistant assistant starts every conversation from nothing. It does not remember
+Left to itself, an assistant starts every conversation from nothing. It does not remember
 your project, which spreadsheet is the real one, or the decision you made last week. So it
 guesses, and guesses drift.
 
@@ -30,7 +30,7 @@ Each links to a ready-to-copy file. Open it, copy the contents, and fill in the 
 
 ### 1. `CLAUDE.md` — house rules
 
-The standing rules an assistant assistant should follow every time it works in this project: which
+The standing rules an assistant should follow every time it works in this project: which
 files are canonical (the real, trusted ones), what it must never edit without asking, how to
 report numbers, and where to write things down. Named `CLAUDE.md` by convention for one
 common tool, but the content is useful to any assistant. Put it at the top of your project
@@ -64,6 +64,11 @@ this is how you (or a collaborator, or the assistant) reconstruct why the analys
 does. The filename pattern matters: `20260314_drought_scoring_rubric.md`, not `notes.md`.
 
 **[Open the decision-log template](templates/decision-log-template.md)**
+
+A decision log outlives any one person's time on the project. When whoever wrote an entry is
+about to leave the lab, have them note **who inherits any open question** in that entry, not
+just what they concluded. A log that records only conclusions leaves the next person with the
+answer but not the thread.
 
 ### 4. Chat context pack — for people with chat only
 

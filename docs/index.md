@@ -50,12 +50,35 @@ Each level works on its own. Start at Level 1. Climb only as far as your work ac
 | **[Level 2: Giving a tool file access](level-2-agentic-access.md)** | What "agentic" means, and when the setup is worth it versus when plain chat is enough. | Some. |
 | **[Level 3: The fuller pattern](level-3-starter-kit.md)** | Copy-pasteable templates for a consistent, documented project. | More. |
 
-Supporting pages:
+Supporting pages, also as Markdown:
 
 - **[Rubric: is this worth the setup?](rubric.md)**
 - **[Glossary](glossary.md)** for the words that come up.
 - **[Resources](resources.md)** curated skill libraries to grow into once you are comfortable.
 - **[Templates](templates/)** you can copy for your own project.
+
+## The rest of the guide is on the site
+
+These Markdown files are the long-form write-ups of the three levels and their supporting
+pages. The guide has since grown past them, and the following pages exist **only** on the
+[web version](https://chenhsieh.github.io/agentic-research-toolkit/), which is the more
+complete and more current of the two:
+
+| Page | What it covers |
+|---|---|
+| [How it works](https://chenhsieh.github.io/agentic-research-toolkit/how-it-works.html) | What "agentic" means and the two habits that run through every level. |
+| [Skills by role](https://chenhsieh.github.io/agentic-research-toolkit/roles.html) | Task-by-task starting points for undergraduates, technicians, grad students, and postdocs. |
+| [Interfaces](https://chenhsieh.github.io/agentic-research-toolkit/interfaces.html) | Which window to run a tool in: terminal, editor extension, or hand-off. |
+| [Modes](https://chenhsieh.github.io/agentic-research-toolkit/modes.html) | Plan mode, step approval, and how much rope to give a tool. |
+| [Recipes](https://chenhsieh.github.io/agentic-research-toolkit/recipes.html) | More worked patterns beyond the notebook-entry prompt. |
+| [Spotting errors](https://chenhsieh.github.io/agentic-research-toolkit/spotting-errors.html) | A verification checklist: what wrong output actually looks like. |
+| [Connect your sources](https://chenhsieh.github.io/agentic-research-toolkit/connect-sources.html) | Drive, Gmail, PubMed, Zotero, and the privacy cost of each. |
+| [Protect your data](https://chenhsieh.github.io/agentic-research-toolkit/protect-your-data.html) | Matching the tool to how sensitive the data is; unpublished, IRB, and peer-review material. |
+| [What it costs](https://chenhsieh.github.io/agentic-research-toolkit/cost.html) | Free tiers, paid plans, and what you actually need. |
+| [When it wrongly refuses](https://chenhsieh.github.io/agentic-research-toolkit/refusals.html) | Why a legitimate research request gets declined, and what to do about it. |
+| [Beyond the ramp](https://chenhsieh.github.io/agentic-research-toolkit/beyond-the-ramp.html) | Where to go once Level 3 is comfortable. |
+
+If a detail here and on the site disagree, trust the site.
 
 ## If you only have five minutes
 

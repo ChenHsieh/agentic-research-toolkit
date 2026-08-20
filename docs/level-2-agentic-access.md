@@ -80,6 +80,23 @@ The two habits that keep this safe:
    edits and tells you afterward. The Level 3 [`CLAUDE.md` template](templates/CLAUDE.md)
    sets this up as a house rule.
 
+## Always point it at a copy
+
+Before any of that, one rule that costs nothing and prevents the worst outcome:
+
+> **Point a file tool at a copy, never at your only copy of raw data.**
+
+Work in a duplicate folder, so a mistaken edit can never reach the original. This covers more
+than experimental data: give it copies of instrument export logs or inventory shelf counts
+too, not the live files that an instrument or an ordering system writes to directly. A tool
+that is told to "clean up" a file an instrument is still appending to can corrupt both.
+
+Two related choices become non-optional at this level, and both have fuller treatments on the
+guide site: **which window you run it in** (a terminal tool like Claude Code, an editor
+extension, or a hand-off tool like Codex) and **which operating mode it runs in**. On mode,
+the short version is: start in **plan mode**, where it reads and proposes but changes nothing,
+and only approve individual steps once you accept the plan.
+
 ## The extra failure mode at this level
 
 Everything from Level 1 still applies: the assistant can misread and can invent. Two things get
