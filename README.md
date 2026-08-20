@@ -2,59 +2,63 @@
 
 Reusable scaffolding for doing real scientific research with Claude Code — portable skills and universal session hygiene, independent of cluster or domain.
 
+### 📖 [Read the guide →](https://chenhsieh.github.io/agentic-research-toolkit/)
+
+New to agentic tools? That site is a gentle, no-jargon on-ramp for wet-lab scientists: a three-stage ramp from pasting a bench note into a plain chat, up to running a documented project. No coding or git assumed.
+
 ## Why this exists
 
-Scientific work runs for hours on shared infrastructure, touches real data, fails in informative ways, and has to be reproducible. The gap between "Claude can do science" and "Claude actually does my science" is the platform around the prompt, not the prompt.
+The gap between "Claude can do science" and "Claude actually does my science" is the platform around the prompt, not the prompt. Scientific work runs for hours, touches real data, fails in informative ways, and has to be reproducible.
 
-This repo collects the portable, cluster- and domain-agnostic pieces of that platform: **skills** that encode repeatable research procedures, and a universal **setup** (`CLAUDE.md`) covering session durability, bash discipline, tool hygiene, and the cowork pattern with a human collaborator. Cluster- and project-specific configs live in their own boilerplate repos.
-
-**A principle, since this is instruction for science:** every skill here is written for **discovery, not validation**. The goal of an agentic research run is to surface things you didn't expect — anomalies, counter-evidence, overlooked candidates, alternative explanations — not to confirm what you already believe. A skill that only says "yes, your hypothesis holds" is a failure mode, not an output.
-
-> **New to agentic tools?** Most of this repo assumes you already work with Claude Code or similar. If you don't yet, start with the gentle on-ramp in [`docs/`](docs/): it takes a wet-lab scientist from pasting a bench note into a plain chat, up to running a documented project, with no coding or git assumed.
+**Every skill here is written for discovery, not validation.** The job of an agentic research run is to surface what you didn't expect — anomalies, counter-evidence, overlooked candidates. A skill that only says "yes, your hypothesis holds" is a failure mode, not an output.
 
 ## What's in here
 
 | Path | What |
 | --- | --- |
-| [`docs/`](docs/) | **An on-ramp to agentic research** — a gentle, no-jargon guide for wet-lab scientists new to these tools, served as an interactive [GitHub Pages site](https://chenhsieh.github.io/agentic-research-toolkit/). Swipe a short archetype test to find your setup, then level up through a three-stage ramp (chat-only → agentic file access → starter-kit templates), with a landscape tool-chain chooser, glossary, copy-pasteable templates, and a [resources](docs/resources.md) page. Long-form write-ups live alongside as Markdown. Start here if you have never used an agentic tool. |
-| [`skills/`](skills/) | Portable `SKILL.md` workflows — named, tool-scoped procedures you can load into Claude Code or follow by hand. |
-| [`setup/`](setup/) | Universal `CLAUDE.md` — session durability (`/rename`, task lists, memory), bash discipline, tool hygiene, discovery-not-validation, cowork state. Drop it into `~/.claude/` or a project root. |
+| [`docs/`](docs/) | The beginner on-ramp, served as a [site](https://chenhsieh.github.io/agentic-research-toolkit/). Long-form write-ups live alongside as Markdown. |
+| [`skills/`](skills/) | Portable `SKILL.md` workflows — named, tool-scoped procedures for Claude Code or as a plain checklist. |
+| [`setup/`](setup/) | Universal `CLAUDE.md`: session durability, bash discipline, data safety, provenance, citation integrity. Drop into `~/.claude/` or a project root. |
 
-## Companion repos
+## Skills
 
-- [`sapelo2-boilerplate`](https://github.com/ChenHsieh/sapelo2-boilerplate) — applied HPC case: a fully worked Claude Code setup for UGA's GACRC Sapelo2 cluster (`CLAUDE.md` ruleset, permission allowlist, colorized statusline) alongside a collection of per-tool sbatch scripts and snakemake pipelines. Uses the universal `setup/CLAUDE.md` from this repo as its base.
-
-## Featured skills
-
-Four of the ten included skills are **adapted from upstream community / Anthropic example skills**; the other six are original to this repo. For the adapted four, only `SKILL.md` was ported — companion `references/`, `scripts/`, and `example/` directories from the originals are not included. See [`skills/README.md`](skills/README.md#attribution) for the attribution and porting caveats, and note that `ecosystem-mapper`'s port is **incomplete enough that it is a design document rather than a runnable procedure**.
+Four compose in order, and each is designed to output something you did not want to hear:
 
 | Skill | Purpose |
 | --- | --- |
-| [`ecosystem-mapper`](skills/ecosystem-mapper/) | Map research fields, funding landscapes, and innovation ecosystems as interactive network graphs from public data. |
-| [`trait-gene-miner`](skills/trait-gene-miner/) | Mine experimentally validated trait–gene associations from ontology databases and literature into an interactive dashboard. |
-| [`ml-genomics-best-practices`](skills/ml-genomics-best-practices/) | Checklist-driven workflow for reproducible, defensible ML in genomics. |
-| [`scientific-schematics`](skills/scientific-schematics/) | Publication-quality scientific workflow diagrams as interactive HTML with one-click SVG export for Figma. |
-| [`tikz-figures`](skills/tikz-figures/) | Template-first TikZ/pgfplots figures that match the manuscript's fonts and regenerate from a data file. |
-| [`design-confound-audit`](skills/design-confound-audit/) | Which questions can this design actually answer? Run before choosing a test. |
+| [`design-confound-audit`](skills/design-confound-audit/) | Which questions can this design answer? Run before choosing a test. |
 | [`statistic-null`](skills/statistic-null/) | Give a derived statistic its own null before believing it. |
-| [`result-autopsy`](skills/result-autopsy/) | Execute the checks most likely to kill your own finding, before someone else does. |
-| [`second-opinion-concordance`](skills/second-opinion-concordance/) | Validate a call set with an independent method; the disagreements are the product. |
+| [`result-autopsy`](skills/result-autopsy/) | Execute the checks most likely to kill your own finding. |
+| [`second-opinion-concordance`](skills/second-opinion-concordance/) | Independent second method; the disagreements are the product. |
+
+Plus:
+
+| Skill | Purpose |
+| --- | --- |
 | [`accession-paper-crosswalk`](skills/accession-paper-crosswalk/) | Link an SRA/BioProject accession to its paper and back; the gaps are the finding. |
+| [`tikz-figures`](skills/tikz-figures/) | Template-first TikZ/pgfplots figures that match the manuscript's fonts. |
+| [`ml-genomics-best-practices`](skills/ml-genomics-best-practices/) | Checklist-driven workflow for defensible ML in genomics. |
+| [`scientific-schematics`](skills/scientific-schematics/) | Workflow diagrams as interactive HTML with SVG export. |
+| [`trait-gene-miner`](skills/trait-gene-miner/) | Mine validated trait–gene associations into an interactive dashboard. |
+| [`ecosystem-mapper`](skills/ecosystem-mapper/) | Map research fields and funding landscapes as network graphs. ⚠ Port incomplete — a design document, not a runnable procedure. |
+
+Six are original to this repo; four are adapted from upstream community / Anthropic examples, `SKILL.md` only. See [`skills/README.md`](skills/README.md) for attribution and porting caveats.
+
+## Companion repo
+
+[`sapelo2-boilerplate`](https://github.com/ChenHsieh/sapelo2-boilerplate) — a worked HPC case built on this repo's `setup/CLAUDE.md`.
 
 ## Honest limits
 
-- Memories and references drift; skills written against a specific tool version or data schema will rot. Re-verify anything load-bearing.
-- Agents summarizing literature sometimes cite papers that don't support the claim. Spot-check citations before they leave the chat window.
-- Long sessions lose intermediate reasoning when context is compacted. Task lists and tracker docs are the backup; conversation alone is not durable.
-- Even discovery-oriented skills filter through what the agent already knows. Genuinely novel findings need a human to notice that the output is strange.
-- Choosing which procedure to run, and deciding what "valid output" looks like, is still the scientist's job.
+- Skills written against a specific tool version or data schema will rot. Re-verify anything load-bearing.
+- Agents summarizing literature sometimes cite papers that don't support the claim. Spot-check before it leaves the chat window.
+- Long sessions lose intermediate reasoning to compaction. Task lists and tracker docs are the backup; conversation is not durable.
+- Discovery-oriented skills still filter through what the agent knows. Genuinely novel findings need a human to notice the output is strange.
 
-## What this is NOT
+Not a tutorial, not a benchmark, not a framework. Markdown files and shell snippets you copy, fork, and modify.
 
-Not a Claude Code tutorial; not a benchmark; not a framework. Markdown files, configs, and shell snippets you copy, fork, and modify.
+## License
 
-## License & author
+Code [MIT](LICENSE); content [CC BY 4.0](LICENSE-CONTENT). Fork, adapt, attribute.
 
-Code under [MIT](LICENSE); content under [CC BY 4.0](LICENSE-CONTENT). Fork, adapt, attribute.
-
-Chen Hsieh — bioinformatics PhD candidate, University of Georgia, graduating Summer 2026. <chen.hsieh.uga@gmail.com>
+By [Chen Hsieh](https://github.com/ChenHsieh) — bioinformatics PhD candidate. Issues and pull requests welcome.
