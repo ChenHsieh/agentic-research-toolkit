@@ -226,8 +226,13 @@ def permutation_test_auc(X, y, model_fn, n_permutations=100, observed_auc=None, 
         y_perm = rng.permutation(y)
         null_aucs.append(model_fn(X, y_perm))
     null_aucs = np.array(null_aucs)
-    p_value = (null_aucs >= observed_auc).mean()
-    print(f'Observed AUC={observed_auc:.4f}, Null median={np.median(null_aucs):.4f}, p={p_value:.3f}')
+    # Add-one estimator: a permutation test cannot yield p = 0. The naive
+    # .mean() prints p=0.000 when no permutation beats the observed AUC, which
+    # is an artifact of finite n_permutations, not evidence. Floor is 1/(n+1),
+    # so raise n_permutations if you need to claim a smaller p than that.
+    p_value = (np.sum(null_aucs >= observed_auc) + 1) / (n_permutations + 1)
+    print(f'Observed AUC={observed_auc:.4f}, Null median={np.median(null_aucs):.4f}, '
+          f'p={p_value:.4f} (floor {1/(n_permutations+1):.4f} at n={n_permutations})')
     return p_value, null_aucs
 ```
 
@@ -325,13 +330,20 @@ test_hashes = set(map(tuple, X_test.tolist()))
 overlap = len(train_hashes & test_hashes)
 if overlap > 0: print(f"WARNING: {overlap} identical rows in train and test")
 
-# 3. Sanity check: LR AUC should be <= tree AUC (if not, check features)
-assert lr_auc <= cb_auc + 0.02, f"LR ({lr_auc:.3f}) outperforms CatBoost ({cb_auc:.3f}) -- suspect feature issue"
+# 3. LR AUC is usually <= tree AUC. If it is NOT, that is a finding, not an error:
+#    a simple baseline beating a complex model is a legitimate, publishable result.
+#    Check features for leakage first, but never crash on it -- see section 3.
+if lr_auc > cb_auc + 0.02:
+    print(f"NOTE: LR ({lr_auc:.3f}) outperforms CatBoost ({cb_auc:.3f}). "
+          "Rule out a feature issue; if the features are clean, this IS the result. Report it.")
 
-# 4. Verify haplotype CV is symmetric (within +/- 0.02)
+# 4. Haplotype CV symmetry (within +/- 0.05). Asymmetry is a finding about the
+#    assembly or the label, not a precondition to assert away -- report both directions.
 h1_to_h2_auc = ...
 h2_to_h1_auc = ...
-assert abs(h1_to_h2_auc - h2_to_h1_auc) < 0.05, f"Haplotype CV asymmetric: {h1_to_h2_auc:.3f} vs {h2_to_h1_auc:.3f}"
+if abs(h1_to_h2_auc - h2_to_h1_auc) >= 0.05:
+    print(f"NOTE: haplotype CV asymmetric: {h1_to_h2_auc:.3f} vs {h2_to_h1_auc:.3f}. "
+          "Report both directions and say the finding holds on only one axis.")
 
 # 5. AUC from balanced subsample should be within 0.02 of imbalanced AUC
 # (larger delta = suspect that imbalance is masking real performance)

@@ -2,6 +2,7 @@
 name: trait-gene-miner
 description: >
   Systematic workflow for mining experimentally validated genes associated with a biological trait from literature and ontology databases, with an interactive HTML dashboard output linking to source databases. Use whenever a user wants to collect, curate, or systematically identify genes linked to a phenotype or trait (e.g., flowering time, drought tolerance, seed size) from Planteome, Gramene, TAIR, Gene Ontology, or the literature. Trigger on: "genes associated with", "mine genes for", "collect gene sets for", "find genes validated for", "trait-gene list", "ontology-based gene mining", or any request to build a curated gene set for a biological trait. Also trigger when users want to explore trait-gene results interactively with links to PubMed, TAIR, RAP-DB, or MaizeGDB, download TSVs from ontology databases, or ask about evidence codes for gene-trait associations.
+allowed-tools: Read Write Edit Bash Glob Grep WebSearch WebFetch
 ---
 
 # Trait Gene Miner
@@ -48,7 +49,7 @@ Do **not** assume term IDs from training memory. Look them up:
 
 1. Fetch the Planteome term browser: `https://planteome.org/` and search for the trait keyword
 2. Fetch OBO Foundry: `https://obofoundry.org/` to find the right ontology namespace (TO, GO, PO, EO)
-3. Use `web_search` with the query `site:obofoundry.org "{trait name}" ontology term` to find candidates
+3. Use `WebSearch` with the query `site:obofoundry.org "{trait name}" ontology term` to find candidates
 
 **Key ontology namespaces for plant traits:**
 | Namespace | Covers | Example |
@@ -66,7 +67,7 @@ For each target term, fetch its descendant terms:
 ```
 https://www.ebi.ac.uk/ols4/api/ontologies/to/terms/{term_id_encoded}/descendants
 ```
-Or use `web_search`: `"{TO:XXXXXXX}" descendants plant trait ontology`
+Or use `WebSearch`: `"{TO:XXXXXXX}" descendants plant trait ontology`
 
 Collect the full set of term IDs to query (parent + all descendants).
 
@@ -215,10 +216,12 @@ For each PMID returned:
 # Verification protocol for each PMID
 for gene, pmid in lit_records:
     url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
-    page = web_fetch(url, prompt="What is the title and topic of this paper?")
+    page = WebFetch(url, prompt="Give the title and abstract of this paper.")
 
     # Check: does the paper actually describe this gene in this species?
-    if gene_name in page_title or species in abstract:
+    # BOTH must hold. Species match alone is not evidence -- any paper on the
+    # right organism would rubber-stamp any gene claim about that organism.
+    if gene_name in page.title and species in page.abstract:
         mark pmid_verified = True
     else:
         mark pmid_verified = False
@@ -257,7 +260,7 @@ Before merging, classify each record's ID stability. This determines which recor
 Add an `id_stable` boolean column to every record. In the dashboard, display a ⚠️ icon next to records where `id_stable = False` and link to the appropriate resolution database.
 
 To resolve descriptive names → stable IDs:
-- Use Gramene BioMart: `https://plants.ensembl.org/biomart/`
+- Use Gramene BioMart: `https://plants.ensembl.org/biomart/martview`
 - For rice: RAP-DB batch query: `https://rapdb.dna.affrc.go.jp/tools/`
 - For wheat/barley: URGI WheatIS: `https://urgi.versailles.inrae.fr/blast/`
 
@@ -421,7 +424,7 @@ Report spot-check results as a table in the dashboard output.
 
 **On species coverage:**
 - Planteome TO gene-level files currently exist mainly for *Oryza sativa* and *Zea mays*. This creates an apparent rice/maize dominance that reflects annotation effort, not biology.
-- For wheat and barley: check GrainGenes (`https://wheat.pw.usda.gov/GG3/`) and IWGSC resources.
+- For wheat and barley: check GrainGenes (`https://graingenes.org`) and IWGSC resources.
 - For *Panicum*, *Setaria*, *Miscanthus*: use Phytozome and Europe PMC literature search.
 - Always report species with 0 records as **database gaps**, not as evidence the trait doesn't exist in that species.
 
@@ -449,7 +452,7 @@ Report spot-check results as a table in the dashboard output.
 | RAP-DB | https://rapdb.dna.affrc.go.jp | Rice locus IDs + gene pages |
 | MaizeGDB | https://www.maizegdb.org | Maize gene IDs + literature |
 | Ensembl Plants | https://plants.ensembl.org | Genome browser + BioMart for stable IDs |
-| GrainGenes | https://wheat.pw.usda.gov/GG3/ | Wheat/barley/rye gene-trait associations |
+| GrainGenes | https://graingenes.org | Wheat/barley/rye gene-trait associations |
 | Phytozome | https://phytozome-next.jgi.doe.gov | Plant genome sequences + IDs |
 | Europe PMC | https://europepmc.org | Literature mining |
 | PubMed | https://pubmed.ncbi.nlm.nih.gov | PMID verification + article retrieval |

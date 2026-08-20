@@ -13,9 +13,28 @@ description: >
   always a first-class layer in every map produced. Use this skill even if the
   user only mentions "research" or "organizations" in a field — the funding layer
   will make the result dramatically more useful.
+allowed-tools: Read Write Edit Bash Glob Grep WebSearch WebFetch
 ---
 
 # Ecosystem Mapper
+
+> **⚠ Port status: incomplete. Read this before running.**
+>
+> Only `SKILL.md` was ported from upstream. This skill reads six companion files that are
+> **not in this repo** — `references/schema_library.md`, `sprint_protocol.md`,
+> `visualization.md`, `due_diligence.md`, `documentation.md`, and a `scripts/` directory.
+> Two of those reads are load-bearing, not optional context:
+> - **Phase 3** defines its only deliverable as "the Canvas 2D template described in
+>   `visualization.md`." Without that file there is no specification of what to build.
+> - **Phase 1** consists of choosing a template from `schema_library.md`. The seven template
+>   names listed inline are all that survive of it.
+>
+> It also assumes the **Cowork desktop sandbox**, not Claude Code: it writes to
+> `/sessions/<session>/mnt/outputs/`, hands back `computer://` links, and calls
+> `mcp__cowork__*` tools. None of those resolve in a Claude Code session.
+>
+> Treat this as a design document to adapt, not a runnable procedure. Define your own output
+> spec and output path before starting.
 
 You map research fields, funding landscapes, and innovation ecosystems as interactive network graphs. Every map shows who does what, who funds whom, and how the pieces connect — starting from raw public data and ending with a working visualization the user can open in a browser.
 
