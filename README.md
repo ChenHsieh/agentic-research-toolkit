@@ -4,6 +4,32 @@ Notes, templates, and skills for using agentic tools (mainly Claude Code) in res
 
 **[Read the guide](https://chenhsieh.github.io/agentic-research-toolkit/)**. Start with [How I actually use it](https://chenhsieh.github.io/agentic-research-toolkit/how-i-use-it.html): what I ask for, what makes it work, what went wrong, and a first-week plan.
 
+## The idea
+
+Agentic coding is a medium, not the point. It makes doing things cheap. What to do, and whether the answer is right, still comes from you.
+
+```mermaid
+flowchart LR
+  subgraph You
+    I[Imagination] 
+    E[Experience]
+    N[Instinct]
+    T[Taste]
+  end
+  I --> D[Agent does the work]
+  E --> D
+  D --> R[Results]
+  R --> N
+  R --> T
+  N --> I
+  T --> I
+```
+
+- **Imagination** asks the question.
+- **Experience** knows what usually goes wrong, and writes it into the rules file.
+- **Instinct** notices when a result is too clean.
+- **Taste** decides what is worth doing next.
+
 The skills here are mostly about checking results: finding the confound, giving a statistic a null, running the check most likely to kill a finding.
 
 ## What's in here

@@ -11,6 +11,7 @@
   var GROUPS = [
     { title: "Start", items: [
       { key: "home", label: "Home", href: "index.html" },
+      { key: "the-idea", label: "The idea", href: "the-idea.html" },
       { key: "how-i-use-it", label: "How I actually use it", href: "how-i-use-it.html" },
       { key: "how-it-works", label: "How it works", href: "how-it-works.html" },
     ]},
