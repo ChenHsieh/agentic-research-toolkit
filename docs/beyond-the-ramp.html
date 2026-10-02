@@ -23,7 +23,6 @@
     <li><strong>Large parallel runs</strong> (tens to hundreds of agents at once) only for codebase-wide audits or big migrations. A software-team need.</li>
   </ul>
   <div class="callout warn">
-    <span class="ci">💸</span>
     <p>The honest catch: this is <a href="cost.html">pay-as-you-go</a> territory, and each agent burns its own tokens. Background agents approve their own actions unattended, which is dangerous near unpublished data, and more agents means more places to be confidently wrong. When in doubt, run one agent and see whether it is actually too slow.</p>
   </div>
 
@@ -36,7 +35,6 @@
     <li><strong>git / GitHub</strong> only when you are actually shipping code someone else will run, or a journal requires a public repository. Pull requests and code review matter only once you already work in a shared repo.</li>
   </ul>
   <div class="callout danger">
-    <span class="ci">🚫</span>
     <p><strong>Never put unpublished data, patient data, or embargoed sequences on GitHub.</strong> Public repos are visible to the whole world, and git history remembers files even after you delete them. "Private" still means uploaded to a company's servers, so check your institutional rules. GitHub Desktop hides the command line, but it is still git underneath.</p>
   </div>
 

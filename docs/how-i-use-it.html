@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How I actually use it: agentic research</title>
+<meta name="description" content="What a computational biology PhD student actually uses Claude Code for, day to day, on a university cluster. What works, what broke, and how to start.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<main class="content" data-page="how-i-use-it">
+  <div class="page-eyebrow">Start</div>
+  <h1>How I actually use it</h1>
+  <p class="lede">I'm a PhD student in plant genomics. Since September 2026 I've run about 75 Claude Code sessions on our university cluster, plus a handful on my laptop, mostly for reviewing and planning. This page is what that looks like in practice, written for labmates who keep asking.</p>
+
+  <h2>The setup</h2>
+  <ul>
+    <li><strong>Claude Code, in a terminal, on the cluster.</strong> I open a compute node inside <code>tmux</code>, start <code>claude</code> in the project folder, and leave it running. The agent reads files, writes scripts, submits Slurm jobs, checks on them, and commits to git.</li>
+    <li><strong>My phone.</strong> Remote Control lets me read and answer a running session from my phone. Most of my prompts are short replies between other things.</li>
+    <li><strong>Several sessions at once.</strong> Usually one per project. They are not aware of each other unless I tell them, which matters (see below).</li>
+    <li><strong>Codex, occasionally.</strong> Mostly as a second pair of eyes on something Claude set up.</li>
+  </ul>
+  <p>You do not need a cluster to start. The same tool runs on a laptop in any folder.</p>
+
+  <h2>What I ask it to do</h2>
+  <p>Roughly in order of how often:</p>
+  <div class="dtable-wrap">
+    <table class="dtable">
+      <thead><tr><th>Kind of work</th><th>What the prompt looks like</th></tr></thead>
+      <tbody>
+        <tr><td>Status and catch-up</td><td>"Brief me on the 16S project." "Where are we on the duplication work, and what's still open?"</td></tr>
+        <tr><td>Run an analysis end to end</td><td>"Run phylostratr and one other tool on the same genes so we can compare to genEra." It writes the scripts, sizes the jobs, submits them, and reports back.</td></tr>
+        <tr><td>Follow up on feedback</td><td>"After my talk people asked X and Y. Work out what we can answer with data we already have."</td></tr>
+        <tr><td>Figures</td><td>"Redo these plots with log10 axes and the sample size on every panel." I keep my figure rules in a file so I don't repeat them.</td></tr>
+        <tr><td>Literature</td><td>"Read this group's last few papers on duplication and epigenetics. What are their standard methods, and which apply to my data?"</td></tr>
+        <tr><td>Reproducibility checks</td><td>"In a fresh folder, rebuild these results from the Methods text only, without the existing intermediate files. Tell me where the text is not enough."</td></tr>
+        <tr><td>Second opinion</td><td>"Read this public page and flag every claim the data doesn't support." "Here is a proposed set of criteria. What's missing or wrong?"</td></tr>
+        <tr><td>Housekeeping</td><td>Organize a messy directory into a GitHub repo, clean up branches, move data to the right storage.</td></tr>
+        <tr><td>Reports for people</td><td>"Summarize this week's results for my advisor in Slack, with the plots, so she knows what to discuss tomorrow."</td></tr>
+        <tr><td>Side projects</td><td>Small web games and explainers, published as GitHub Pages sites.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>In those sessions the agent ran about 13,000 actions. Most were ordinary: reading files, running Python, editing scripts, checking the job queue, using git. It is less "AI" than it sounds. It's a fast, tireless person at a terminal who needs supervising.</p>
+
+  <h2>What makes it work</h2>
+  <ol>
+    <li><strong>A rules file per project.</strong> Claude Code reads a <code>CLAUDE.md</code> file at startup. Mine says where data lives, which partitions to use, how to load software, what never to delete, and how I want figures to look. Every time the agent makes a mistake I'd rather not see again, one line goes in. <a href="templates.html">Template here.</a></li>
+    <li><strong>Hand-off notes in files, not in chat.</strong> Conversations get long and older parts get summarized away. I ask the agent to keep a short status file (what's done, what's open, where outputs are) and to start new sessions by reading it.</li>
+    <li><strong>Results go into git.</strong> Scripts, small result tables, and figures get committed with a plain message. If a number only exists in a chat window, it doesn't exist.</li>
+    <li><strong>Ask it to break its own result.</strong> "What would this look like if it were an artifact? Run that check." This has caught more errors than anything else I do.</li>
+    <li><strong>One working copy per session.</strong> When two sessions edit the same git checkout, one eventually commits the other's half-finished work. Each session now gets its own <code>git worktree</code>.</li>
+    <li><strong>Let the scheduler wait, not the agent.</strong> Chain jobs with Slurm dependencies instead of having the agent sit and poll. It's cheaper and nothing gets forgotten.</li>
+  </ol>
+
+  <h2>What went wrong</h2>
+  <p>All of these happened to me, more than once:</p>
+  <ul>
+    <li><strong>A control that never ran.</strong> A comparison came back empty, and the summary reported it as "passed". Now I check that every control produced real numbers.</li>
+    <li><strong>A plausible number with no source.</strong> Always ask where a number came from, and open the file.</li>
+    <li><strong>The wrong unit of analysis.</strong> A result looked strong when every gene was counted separately and disappeared when related genes were grouped. The agent will not catch this by default. You have to ask.</li>
+    <li><strong>Confident wrong facts about the environment.</strong> Software versions, paths, which partitions I can use. It guesses. The rules file fixes this over time.</li>
+    <li><strong>Sessions stepping on each other.</strong> See the worktree rule above.</li>
+    <li><strong>Lost work.</strong> A job crashed while printing its summary, before the results were saved. Save first, then print.</li>
+  </ul>
+  <p>None of these are exotic. They're the mistakes a new rotation student makes, at ten times the speed.</p>
+
+  <h2>If you're starting this week</h2>
+  <ol>
+    <li>Install Claude Code on your laptop and log in with the lab account. (Setup steps are in the <a href="https://docs.claude.com/en/docs/claude-code/overview">official docs</a>.)</li>
+    <li>Pick one small, real task you already know the answer to. For example: "Read this folder and tell me what each script does and what order to run them in."</li>
+    <li>Leave permission prompts on. Read what it wants to run before you approve it.</li>
+    <li>After the first session, write a <code>CLAUDE.md</code> with five lines about your project. Add a line every time something goes wrong.</li>
+    <li>Only then try something you don't know the answer to, and check it as if a student had done it.</li>
+  </ol>
+  <p>Not ready for a terminal? A plain chat is still useful. Start at <a href="level-1.html">Level 1</a>.</p>
+
+  <div class="related">
+    <h3>Related</h3>
+    <ul>
+      <li><a href="templates.html">Templates (CLAUDE.md, project brief)</a></li>
+      <li><a href="spotting-errors.html">Spotting errors</a></li>
+      <li><a href="protect-your-data.html">Protect your data</a></li>
+      <li><a href="https://github.com/ChenHsieh/agentic-research-toolkit/tree/main/skills">Skills I use for checking results</a></li>
+    </ul>
+  </div>
+</main>
+<script src="assets/nav.js"></script>
+</body>
+</html>

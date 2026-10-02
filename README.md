@@ -1,23 +1,17 @@
 # Agentic Research Toolkit
 
-Reusable scaffolding for doing real scientific research with Claude Code — portable skills and universal session hygiene, independent of cluster or domain.
+Notes, templates, and skills for using agentic tools (mainly Claude Code) in research, from a plant genomics PhD student who uses them most days.
 
-### 📖 [Read the guide →](https://chenhsieh.github.io/agentic-research-toolkit/)
+**[Read the guide](https://chenhsieh.github.io/agentic-research-toolkit/)**. Start with [How I actually use it](https://chenhsieh.github.io/agentic-research-toolkit/how-i-use-it.html): what I ask for, what makes it work, what went wrong, and a first-week plan.
 
-New to agentic tools? That site is a gentle, no-jargon on-ramp for wet-lab scientists: a three-stage ramp from pasting a bench note into a plain chat, up to running a documented project. No coding or git assumed.
-
-## Why this exists
-
-The gap between "Claude can do science" and "Claude actually does my science" is the platform around the prompt, not the prompt. Scientific work runs for hours, touches real data, fails in informative ways, and has to be reproducible.
-
-**Every skill here is written for discovery, not validation.** The job of an agentic research run is to surface what you didn't expect — anomalies, counter-evidence, overlooked candidates. A skill that only says "yes, your hypothesis holds" is a failure mode, not an output.
+The skills here are mostly about checking results: finding the confound, giving a statistic a null, running the check most likely to kill a finding.
 
 ## What's in here
 
 | Path | What |
 | --- | --- |
 | [`docs/`](docs/) | The beginner on-ramp, served as a [site](https://chenhsieh.github.io/agentic-research-toolkit/). Long-form write-ups live alongside as Markdown. |
-| [`skills/`](skills/) | Portable `SKILL.md` workflows — named, tool-scoped procedures for Claude Code or as a plain checklist. |
+| [`skills/`](skills/) | Portable `SKILL.md` workflows: named, tool-scoped procedures for Claude Code or as a plain checklist. |
 | [`setup/`](setup/) | Universal `CLAUDE.md`: session durability, bash discipline, data safety, provenance, citation integrity. Drop into `~/.claude/` or a project root. |
 
 ## Skills
@@ -40,13 +34,13 @@ Plus:
 | [`ml-genomics-best-practices`](skills/ml-genomics-best-practices/) | Checklist-driven workflow for defensible ML in genomics. |
 | [`scientific-schematics`](skills/scientific-schematics/) | Workflow diagrams as interactive HTML with SVG export. |
 | [`trait-gene-miner`](skills/trait-gene-miner/) | Mine validated trait–gene associations into an interactive dashboard. |
-| [`ecosystem-mapper`](skills/ecosystem-mapper/) | Map research fields and funding landscapes as network graphs. ⚠ Port incomplete — a design document, not a runnable procedure. |
+| [`ecosystem-mapper`](skills/ecosystem-mapper/) | Map research fields and funding landscapes as network graphs. ⚠ Port incomplete: a design document, not a runnable procedure. |
 
 Six are original to this repo; four are adapted from upstream community / Anthropic examples, `SKILL.md` only. See [`skills/README.md`](skills/README.md) for attribution and porting caveats.
 
 ## Companion repo
 
-[`sapelo2-boilerplate`](https://github.com/ChenHsieh/sapelo2-boilerplate) — a worked HPC case built on this repo's `setup/CLAUDE.md`.
+[`sapelo2-boilerplate`](https://github.com/ChenHsieh/sapelo2-boilerplate): a worked HPC case built on this repo's `setup/CLAUDE.md`.
 
 ## Honest limits
 
@@ -61,4 +55,4 @@ Not a tutorial, not a benchmark, not a framework. Markdown files and shell snipp
 
 Code [MIT](LICENSE); content [CC BY 4.0](LICENSE-CONTENT). Fork, adapt, attribute.
 
-By [Chen Hsieh](https://github.com/ChenHsieh) — bioinformatics PhD candidate. Issues and pull requests welcome.
+By [Chen Hsieh](https://github.com/ChenHsieh): bioinformatics PhD candidate. Issues and pull requests welcome.
