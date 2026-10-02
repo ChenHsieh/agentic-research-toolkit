@@ -30,6 +30,8 @@ flowchart LR
 - **Instinct** notices when a result is too clean.
 - **Taste** decides what is worth doing next.
 
+Then: [A framework](https://chenhsieh.github.io/agentic-research-toolkit/framework.html) (question, context, doing, checking, keeping) and the [Playbook](https://chenhsieh.github.io/agentic-research-toolkit/playbook.html) (prompts, a CLAUDE.md skeleton, plotting rules, and workflows).
+
 The skills here are mostly about checking results: finding the confound, giving a statistic a null, running the check most likely to kill a finding.
 
 ## What's in here

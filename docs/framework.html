@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A framework: agentic research</title>
+<meta name="description" content="Five layers for doing research with an agent: question, context, doing, checking, keeping.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<style>.mermaid{margin:1.2em auto;text-align:center;max-width:420px} pre.p{white-space:pre-wrap}</style>
+</head>
+<body>
+<main class="content" data-page="framework">
+  <div class="page-eyebrow">Start</div>
+  <h1>A framework</h1>
+  <p class="lede">Five layers. The agent does most of the middle one. The other four decide whether the work is any good.</p>
+<pre class="mermaid">
+flowchart TB
+  Q["<b>1. Question</b><br>what would change my mind?"] --> C["<b>2. Context</b><br>rules file, brief, data map"]
+  C --> D["<b>3. Doing</b><br>agent: code, jobs, reading"]
+  D --> K["<b>4. Checking</b><br>try to break it"]
+  K -->|survives| P["<b>5. Keeping</b><br>git, status file, a page"]
+  K -->|breaks| Q
+  P -->|next question| Q
+</pre>
+
+  <h2>1. Question</h2>
+  <p>Before any compute, write one sentence: what result would change what I believe? If every possible outcome leaves you where you started, the analysis is busywork, however fast it runs.</p>
+  <ul>
+    <li>Say what a pure artifact would look like <em>before</em> you see the result.</li>
+    <li>Ask the cheap version first: "how much of this signal is even in the data?" before "does the fancy model use it?"</li>
+    <li>Prefer exploring to confirming. Ask the agent for what you didn't expect.</li>
+  </ul>
+
+  <h2>2. Context</h2>
+  <p>The agent knows nothing about your project except what is written down. Three files do most of the work:</p>
+  <ul>
+    <li><strong><code>CLAUDE.md</code></strong>, the standing rules: where data lives, what never to touch, how to run jobs, how figures should look. Grows by one line per mistake.</li>
+    <li><strong>A brief</strong> for each piece of work: goal, inputs, what "done" means, known traps.</li>
+    <li><strong>A status file</strong>: what's done, what's open, where outputs are. New sessions start by reading it.</li>
+  </ul>
+
+  <h2>3. Doing</h2>
+  <p>Let it run. Give it the whole task, not one step at a time, and let it write, submit, and check its own jobs. Your time goes to layers 1, 4 and 5.</p>
+
+  <h2>4. Checking</h2>
+  <p>The step people skip. A result is not a result until something tried to kill it.</p>
+  <ul>
+    <li><strong>Make the boring explanation impossible by design</strong>, rather than controlling for it afterwards (same composition, same sample size, same depth in both arms).</li>
+    <li><strong>Check that the control actually ran.</strong> An empty comparison can look like a pass.</li>
+    <li><strong>Name the unit.</strong> Genes in families, samples in batches, cells in animals. If units are grouped, report within groups.</li>
+    <li><strong>Be equally hard on nulls.</strong> Was there enough power to see the effect? Would you accept this evidence if it said the opposite?</li>
+    <li><strong>Provenance before assertion.</strong> Every number in a sentence comes from a file you can open.</li>
+  </ul>
+
+  <h2>5. Keeping</h2>
+  <p>Chat is not memory. Anything worth keeping goes into git, a status file, or a page someone can open on their phone. Corrections get logged, not quietly overwritten.</p>
+
+  <h2>Ways of thinking</h2>
+  <ul>
+    <li><strong>The agent is a fast new student.</strong> Capable, eager, and confidently wrong sometimes. Supervise accordingly.</li>
+    <li><strong>Rules beat reminders.</strong> If you've said it twice, put it in the rules file. If it matters a lot, turn it into a check that runs.</li>
+    <li><strong>Ship a visible thing early.</strong> A rough page that loads beats a polished plan.</li>
+    <li><strong>Reuse before recompute.</strong> Check what already exists before asking for a GPU.</li>
+    <li><strong>Size it once.</strong> If compute isn't the limit, request what the job needs up front instead of creeping up in five rounds.</li>
+    <li><strong>Plain words.</strong> Lead with what exists and what it shows. Put the jargon in parentheses.</li>
+  </ul>
+  <p>Concrete prompts and setups are in the <a href="playbook.html">Playbook</a>.</p>
+</main>
+<script src="assets/nav.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:true, theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'neutral'});
+</script>
+</body>
+</html>

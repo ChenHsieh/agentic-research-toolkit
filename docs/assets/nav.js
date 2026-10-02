@@ -12,7 +12,9 @@
     { title: "Start", items: [
       { key: "home", label: "Home", href: "index.html" },
       { key: "the-idea", label: "The idea", href: "the-idea.html" },
+      { key: "framework", label: "A framework", href: "framework.html" },
       { key: "how-i-use-it", label: "How I actually use it", href: "how-i-use-it.html" },
+      { key: "playbook", label: "Playbook", href: "playbook.html" },
       { key: "how-it-works", label: "How it works", href: "how-it-works.html" },
     ]},
     { title: "The ramp", items: [
