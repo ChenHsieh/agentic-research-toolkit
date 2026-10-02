@@ -7,7 +7,7 @@
 <meta name="description" content="Recurring prompts, rules files, and workflows I actually use.">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="assets/style.css">
-<style>.mermaid{margin:1.2em auto;text-align:center;max-width:420px} pre.p{white-space:pre-wrap}</style>
+<style>.mermaid{margin:1.2em auto;text-align:center;max-width:420px} pre.p,pre.p code{white-space:pre-wrap!important;word-break:break-word;overflow-x:visible}</style>
 </head>
 <body>
 <main class="content" data-page="playbook">
@@ -103,11 +103,9 @@ flowchart TB
   <p>One static site that lets people browse every gene (or sample, or site) with all the layers from different analyses in one place.</p>
 <pre class="mermaid">
 flowchart TB
-  A["Analysis repo A"] --> S["Build scripts<br>pin each source file + checksum"]
-  B["Analysis repo B"] --> S
-  S --> D["Small JSON shards<br>committed in the site repo"]
-  D --> W["Static site on Pages<br>search, tables, per-gene page"]
-  L["Each repo's corrections log"] -.->|read before rebuild| S
+  A["Analysis repos<br>+ their corrections logs"] --> S["Build scripts<br>pin each source + checksum"]
+  S --> D["Small JSON files<br>committed in the site repo"]
+  D --> W["Static site on Pages<br>search, tables, gene pages"]
 </pre>
   <ul>
     <li><strong>The committed data is the artifact.</strong> The site never computes; it just reads shards.</li>
