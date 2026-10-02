@@ -16,6 +16,7 @@
       { key: "how-i-use-it", label: "How I actually use it", href: "how-i-use-it.html" },
       { key: "playbook", label: "Playbook", href: "playbook.html" },
       { key: "long-sessions", label: "Models and long sessions", href: "long-sessions.html" },
+      { key: "local", label: "Running it locally", href: "local.html" },
       { key: "how-it-works", label: "How it works", href: "how-it-works.html" },
     ]},
     { title: "The ramp", items: [

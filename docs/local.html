@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Running it locally: agentic research</title>
+<meta name="description" content="How realistic a fully local, offline agent setup is for research.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="assets/style.css">
+<style>.mermaid{margin:1.2em auto;text-align:center;max-width:420px} pre.p{white-space:pre-wrap}</style>
+</head>
+<body>
+<main class="content" data-page="local">
+  <div class="page-eyebrow">Practice</div>
+  <h1>Running it locally</h1>
+  <p class="lede">Can you do all this with a model on your own machine, with nothing leaving it? Partly. Here's what works, what doesn't yet, and the setups in between.</p>
+
+  <h2>The short answer</h2>
+  <ul>
+    <li><strong>Local chat: realistic today.</strong> Summarizing, rewording, explaining code, drafting notes, on a recent laptop.</li>
+    <li><strong>Local agent on small, well-defined tasks: workable.</strong> Edit this script, write this function, fix this error.</li>
+    <li><strong>Local agent running a multi-hour research session: not yet, for most people.</strong> Planning, keeping track of many files, noticing that a result is wrong: this is where the gap to the best hosted models is widest, and it's exactly the part research needs.</li>
+  </ul>
+
+  <h2>Why: speed is set by memory</h2>
+  <p>When a model writes text, every word requires reading all of its weights from memory. So speed is roughly:</p>
+<pre class="p"><code>words per second ≈ memory bandwidth / model size in memory</code></pre>
+  <p>Measured on a base M4 Mac (about 100 GB/s), with 4-bit models:</p>
+  <div class="dtable-wrap">
+    <table class="dtable">
+      <thead><tr><th>Model size</th><th>Memory</th><th>Tokens/s</th></tr></thead>
+      <tbody>
+        <tr><td>3B</td><td>~1.7 GB</td><td>55</td></tr>
+        <tr><td>7B</td><td>~4 GB</td><td>24</td></tr>
+        <tr><td>7B, 8-bit</td><td>~7.5 GB</td><td>13</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Small models are fast but make more mistakes. Bigger ones are better but need more memory and get slower. An agent also reads a lot (files, logs, long instructions) before it writes anything, so a session feels slower than chat. More memory bandwidth (Pro/Max/Ultra chips, or a GPU) helps directly. I wrote a <a href="https://github.com/ChenHsieh/mlx-roofline">small tool</a> that predicts this from a model's config before you download it.</p>
+
+  <h2>Setups in between</h2>
+<pre class="mermaid">
+flowchart TB
+  A["Fully hosted<br>best quality, data leaves your machine"] --> B["Hosted plans, local builds<br>strong model designs, local model types"]
+  B --> C["Hosted model, local data<br>agent sees summaries, not raw files"]
+  C --> D["Fully local<br>private, weaker on long tasks"]
+</pre>
+  <ul>
+    <li><strong>Hosted plans, local builds.</strong> The strong model writes the plan and reviews; a local model does the routine edits (I tried this with Aider). Saves cost; quality depends on how small the steps are.</li>
+    <li><strong>Hosted model, local data.</strong> The agent works on code and on summaries or a de-identified subset, never the sensitive raw data. Often the most practical option for protected data.</li>
+    <li><strong>Your institution's GPUs.</strong> An open model on a university cluster GPU is "local" in the sense that matters (data stays in-house) and is much bigger than a laptop can run. Ask your research computing group what is allowed.</li>
+    <li><strong>Fully local.</strong> Right when data truly cannot leave, or you have no internet. Expect to break tasks into smaller pieces and check more.</li>
+  </ul>
+
+  <h2>How to decide</h2>
+  <ol>
+    <li><strong>Start from the data, not the model.</strong> What are you allowed to send where? Check your institution's and funder's rules, and your lab subscription's terms. See <a href="protect-your-data.html">Protect your data</a>.</li>
+    <li>If hosted is allowed, use it for the hard parts. It's where the time savings are.</li>
+    <li>If it isn't, use a local or in-house model and shrink the tasks: one script, one question, one figure at a time, with you as the planner.</li>
+    <li>Whatever you choose, test it on a task you already know the answer to.</li>
+  </ol>
+  <p>This changes fast. Open models improve every few months, so re-test once or twice a year rather than settling the question for good.</p>
+</main>
+<script src="assets/nav.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:true, theme: matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'neutral'});
+</script>
+</body>
+</html>
