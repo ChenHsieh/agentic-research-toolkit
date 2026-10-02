@@ -24,18 +24,13 @@
 
   <h2>Why: speed is set by memory</h2>
   <p>When a model writes text, every word requires reading all of its weights from memory. So speed is roughly:</p>
-<pre class="p"><code>words per second ≈ memory bandwidth / model size in memory</code></pre>
+<p><strong>speed ≈ memory bandwidth ÷ model size</strong></p>
   <p>Measured on a base M4 Mac (about 100 GB/s), with 4-bit models:</p>
-  <div class="dtable-wrap">
-    <table class="dtable">
-      <thead><tr><th>Model size</th><th>Memory</th><th>Tokens/s</th></tr></thead>
-      <tbody>
-        <tr><td>3B</td><td>~1.7 GB</td><td>55</td></tr>
-        <tr><td>7B</td><td>~4 GB</td><td>24</td></tr>
-        <tr><td>7B, 8-bit</td><td>~7.5 GB</td><td>13</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <ul>
+    <li>3B model (~1.7 GB): 55 tokens/s</li>
+    <li>7B model (~4 GB): 24 tokens/s</li>
+    <li>7B at 8-bit (~7.5 GB): 13 tokens/s</li>
+  </ul>
   <p>Small models are fast but make more mistakes. Bigger ones are better but need more memory and get slower. An agent also reads a lot (files, logs, long instructions) before it writes anything, so a session feels slower than chat. More memory bandwidth (Pro/Max/Ultra chips, or a GPU) helps directly. I wrote a <a href="https://github.com/ChenHsieh/mlx-roofline">small tool</a> that predicts this from a model's config before you download it.</p>
 
   <h2>Setups in between</h2>
