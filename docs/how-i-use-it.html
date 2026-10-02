@@ -25,23 +25,18 @@
 
   <h2>What I ask it to do</h2>
   <p>Roughly in order of how often:</p>
-  <div class="dtable-wrap">
-    <table class="dtable">
-      <thead><tr><th>Kind of work</th><th>What the prompt looks like</th></tr></thead>
-      <tbody>
-        <tr><td>Status and catch-up</td><td>"Brief me on the 16S project." "Where are we on the duplication work, and what's still open?"</td></tr>
-        <tr><td>Run an analysis end to end</td><td>"Run phylostratr and one other tool on the same genes so we can compare to genEra." It writes the scripts, sizes the jobs, submits them, and reports back.</td></tr>
-        <tr><td>Follow up on feedback</td><td>"After my talk people asked X and Y. Work out what we can answer with data we already have."</td></tr>
-        <tr><td>Figures</td><td>"Redo these plots with log10 axes and the sample size on every panel." I keep my figure rules in a file so I don't repeat them.</td></tr>
-        <tr><td>Literature</td><td>"Read this group's last few papers on duplication and epigenetics. What are their standard methods, and which apply to my data?"</td></tr>
-        <tr><td>Reproducibility checks</td><td>"In a fresh folder, rebuild these results from the Methods text only, without the existing intermediate files. Tell me where the text is not enough."</td></tr>
-        <tr><td>Second opinion</td><td>"Read this public page and flag every claim the data doesn't support." "Here is a proposed set of criteria. What's missing or wrong?"</td></tr>
-        <tr><td>Housekeeping</td><td>Organize a messy directory into a GitHub repo, clean up branches, move data to the right storage.</td></tr>
-        <tr><td>Reports for people</td><td>"Summarize this week's results for my advisor in Slack, with the plots, so she knows what to discuss tomorrow."</td></tr>
-        <tr><td>Side projects</td><td>Small web games and explainers, published as GitHub Pages sites.</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <ul>
+    <li><strong>Status and catch-up.</strong> "Brief me on the 16S project." "Where are we on the duplication work, and what's still open?"</li>
+    <li><strong>Run an analysis end to end.</strong> "Run phylostratr and one other tool on the same genes so we can compare to genEra." It writes the scripts, sizes the jobs, submits them, and reports back.</li>
+    <li><strong>Follow up on feedback.</strong> "After my talk people asked X and Y. Work out what we can answer with data we already have."</li>
+    <li><strong>Figures.</strong> "Redo these plots with log10 axes and the sample size on every panel." I keep my figure rules in a file so I don't repeat them.</li>
+    <li><strong>Literature.</strong> "Read this group's last few papers on duplication and epigenetics. What are their standard methods, and which apply to my data?"</li>
+    <li><strong>Reproducibility checks.</strong> "In a fresh folder, rebuild these results from the Methods text only, without the existing intermediate files. Tell me where the text is not enough."</li>
+    <li><strong>Second opinion.</strong> "Read this public page and flag every claim the data doesn't support." "Here is a proposed set of criteria. What's missing or wrong?"</li>
+    <li><strong>Housekeeping.</strong> Organize a messy directory into a GitHub repo, clean up branches, move data to the right storage.</li>
+    <li><strong>Reports for people.</strong> "Summarize this week's results for my advisor in Slack, with the plots, so she knows what to discuss tomorrow."</li>
+    <li><strong>Side projects.</strong> Small web games and explainers, published as GitHub Pages sites.</li>
+  </ul>
   <p>In those sessions the agent ran about 13,000 actions. Most were ordinary: reading files, running Python, editing scripts, checking the job queue, using git. It is less "AI" than it sounds. It's a fast, tireless person at a terminal who needs supervising.</p>
 
   <h2>What makes it work</h2>
