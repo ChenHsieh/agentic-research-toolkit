@@ -125,6 +125,31 @@ flowchart TB
     <li><strong>Large files aren't repo files.</strong> Commit a manifest and checksum; keep the file on storage.</li>
   </ul>
 
+  <h2>Workflow: clean-room reproduction</h2>
+  <p>Before a chapter or paper goes out, have an agent rebuild the results from scratch, in a new folder, using only the raw inputs and the Methods text. It's the closest thing to a reviewer trying to reproduce your work, and it costs an afternoon of compute.</p>
+<pre class="mermaid">
+flowchart TB
+  M["Methods text + raw inputs only"] --> R["Agent rebuilds in a new folder<br>no old intermediate files"]
+  R --> T["Compare against the reported numbers<br>PASS / FAIL / BLOCKED per number"]
+  T --> F["List every gap<br>missing parameter, unwritten step"]
+  F --> W["Fix the Methods text"]
+</pre>
+  <ul>
+    <li><strong>Forbid the shortcuts.</strong> No existing intermediate files, or it will just copy them and "reproduce" perfectly.</li>
+    <li><strong>Write the targets first</strong>: a short table of the numbers that must come out, with tolerances.</li>
+    <li><strong>The gaps are the product.</strong> In mine, one unrecorded software setting (a search sensitivity mode) changed the result for about 5% of the genes, and a filtering step that the numbers depended on was written down nowhere. Both were invisible to me because I knew them.</li>
+    <li>It also finds the opposite: inputs I thought were hand-curated turned out to be fully derivable, so they could be computed instead of frozen.</li>
+  </ul>
+
+  <h2>Working with people who live in Word</h2>
+  <p>Many advisors and collaborators review in Word, not git. Meet them there:</p>
+  <ul>
+    <li><strong>Edits as tracked changes.</strong> An agent can edit a <code>.docx</code> so every change shows up as a tracked insertion or deletion, under a named author. Your advisor accepts or rejects them like any other review.</li>
+    <li><strong>Questions as Word comments</strong> anchored to the sentence, instead of a separate list.</li>
+    <li><strong>Read their comments back.</strong> Hand the agent the returned file and ask for a table: each comment, what it asks for, and a proposed response.</li>
+    <li><strong>Keep the original.</strong> Work on a copy, and check the result opens cleanly in Word before sending.</li>
+  </ul>
+
   <h2>Workflow: several agents at once</h2>
   <ul>
     <li>One git worktree per session. Never two sessions in one working copy.</li>
