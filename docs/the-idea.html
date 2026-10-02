@@ -7,7 +7,7 @@
 <meta name="description" content="Agentic coding is a medium. The research still comes from imagination, experience, instinct and taste.">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="assets/style.css">
-<style>.mermaid{margin:1.2em 0;text-align:center}</style>
+<style>.mermaid{margin:1.2em auto;text-align:center;max-width:420px}</style>
 </head>
 <body>
 <main class="content" data-page="the-idea">
@@ -17,23 +17,10 @@
 
   <h2>What you bring, what it brings</h2>
 <pre class="mermaid">
-flowchart LR
-  subgraph You
-    I[Imagination<br>what could be true]
-    E[Experience<br>what usually goes wrong]
-    N[Instinct<br>this looks off]
-    T[Taste<br>what is worth doing]
-  end
-  subgraph Agent
-    D[Doing<br>code, jobs, files, reading]
-  end
-  I --> D
-  E --> D
-  D --> R[Results]
-  R --> N
-  R --> T
-  N --> I
-  T --> I
+flowchart TB
+  Y["<b>You</b><br>imagination · experience"] -->|a question| A["<b>Agent</b><br>code, jobs, reading"]
+  A -->|results| J["<b>You</b><br>instinct · taste"]
+  J -->|the next question| Y
 </pre>
   <ul>
     <li><strong>Imagination</strong> asks the question. "What if young genes behave differently?" The agent never asks that on its own.</li>
@@ -45,23 +32,21 @@ flowchart LR
   <h2>What changes</h2>
   <p>Doing the work used to be the slow part. Now it isn't, so the loop turns much faster.</p>
 <pre class="mermaid">
-flowchart LR
-  Q[Question] --> A[Try it] --> L[Look] --> J{Judge}
-  J -- surprising --> C[Try to break it] --> L
-  J -- boring or wrong --> Q
-  J -- holds up --> K[Keep: commit, write down]
+flowchart TB
+  Q[Question] --> T[Try it] --> L[Look]
+  L --> J{Judge}
+  J -- surprising --> B[Try to break it] --> L
+  J -- holds up --> K[Keep it]
+  J -- boring --> Q
 </pre>
   <p>The agent speeds up "Try it" and "Try to break it". "Look" and "Judge" stay yours. A faster loop means you need more judgement, because you're making more calls per day, and some of the results will be confidently wrong.</p>
 
   <h2>Where the value moves</h2>
 <pre class="mermaid">
 flowchart TB
-  subgraph Before
-    B1[Idea] --- B2[Weeks of coding and debugging] --- B3[Judging the result]
-  end
-  subgraph Now
-    N1[Idea] --- N2[Hours of agent work] --- N3[Judging the result]
-  end
+  B["<b>Before</b><br>idea → weeks of coding → judgement"]
+  N["<b>Now</b><br>idea → hours of agent work → judgement"]
+  B --> N
 </pre>
   <p>When doing things is cheap, the scarce parts are the ideas and the judgement. That's the good news. The parts of research people actually train for are worth more now, not less.</p>
 
