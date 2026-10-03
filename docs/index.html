@@ -2,54 +2,91 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>An on-ramp to agentic research: for wet-lab scientists</title>
-<meta name="description" content="A gentle, honest guide to using agentic tools for lab notes and documentation. No coding. Take the swipe test to find your setup, then work up the ramp.">
-<meta name="color-scheme" content="light dark">
-<meta property="og:title" content="An on-ramp to agentic research">
-<meta property="og:description" content="Find your setup, then work up from plain chat to a documented agentic workflow. The agent drafts; you stay the record of truth.">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='42' fill='%230f9d76'/></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Using an agent for research</title>
+<style>
+body{max-width:36em;margin:3em auto;padding:0 1em;font:17px/1.55 Georgia,serif;color:#111;background:#fff}
+h1{font-size:1.5em;font-weight:normal}
+h2{font-size:1.1em;font-weight:normal;margin-top:2.5em;font-style:italic}
+code,pre{font:14px/1.5 Menlo,Consolas,monospace}
+pre{padding:1em;background:#f4f4f4;overflow-x:auto;white-space:pre-wrap}
+a{color:#06c}
+p.small{font-size:.85em;color:#555}
+</style>
 </head>
 <body>
-<main class="content" data-page="home">
-  <div class="page-eyebrow">Agentic tools for research</div>
-  <h1>Using agentic tools for research</h1>
-  <p class="lede">Notes from a plant genomics PhD student who uses Claude Code most days, for labmates and friends who keep asking how to start. Plain chat is covered too, for when you don't need more.</p>
 
-  <p><strong>Start here:</strong> <a href="the-idea.html">The idea</a> (the agent is a medium; imagination, experience, instinct and taste are still yours), <a href="framework.html">A framework</a>, <a href="how-i-use-it.html">How I actually use it</a>, the <a href="playbook.html">Playbook</a> of prompts and setups, and <a href="long-sessions.html">Models and long sessions</a>. What I ask for, what makes it work, what went wrong, and a first-week plan.</p>
+<h1>Using an agent for research</h1>
+<p class="small">Chen Hsieh, October 2026. Plant genomics PhD student, University of Georgia. Code and files at <a href="https://github.com/ChenHsieh/agentic-research-toolkit">github.com/ChenHsieh/agentic-research-toolkit</a>.</p>
 
-  <div class="callout rule">
-    <p>The one rule: the tool drafts and proposes, you check and decide. Treat its output the way you would treat a new student's.</p>
-  </div>
+<p>People keep asking me how I use Claude Code for research. This is the answer. It is one page because the answer is short, and because most of what I could add would be decoration.</p>
 
-  <h2>Not sure where to start?</h2>
-  <p>Two quick questions, and the second adapts to your first answer. Swipe <b>right</b> for yes, <b>left</b> for no.</p>
+<h2>What it is</h2>
 
-  <div class="deck-stage reveal">
-    <div class="progress-dots" id="dots"></div>
-    <div class="deck" id="deck" aria-live="polite"></div>
-    <div class="swipe-controls" id="controls">
-      <button class="round no" id="btnNo" aria-label="No (swipe left)">✕</button>
-      <button class="round yes" id="btnYes" aria-label="Yes (swipe right)">✓</button>
-    </div>
-    <div class="swipe-hint">drag the card, tap <b>✕ / ✓</b>, or use <span class="kbd">←</span> <span class="kbd">→</span></div>
-  </div>
-  <p class="route">Training a new lab member? This works just as well as a five-minute live walkthrough with one of your own files as it does self-serve. See <a href="roles.html">Skills by role</a>.</p>
+<p>An agent is a program that runs a language model in a loop with a terminal. You type what you want. It reads files, writes code, runs it, reads the error, fixes it, runs it again, and tells you what happened. The difference from chat is that it does things rather than describing them.</p>
 
-  <h2>New here? Start with the basics</h2>
-  <ul>
-    <li><a href="how-it-works.html">How it works</a>: what "agentic" means, and the two habits that keep you safe.</li>
-    <li><a href="level-1.html">Level 1 · Chat only</a>: clean up a bench note with nothing installed. Most people should stay here the longest.</li>
-    <li><a href="level-2.html">Level 2 · File access</a> and <a href="level-3.html">Level 3 · Starter kit</a>: for when your work outgrows a single chat.</li>
-    <li><a href="roles.html">Skills by role</a>: undergraduate researcher, lab technician, graduate student, or postdoc, what's different for you.</li>
-  </ul>
+<p>I run it on the university cluster, in a terminal, inside tmux, in the folder of whatever project I'm on. I leave it running and check on it from my phone between other things. Several run at once, one per project.</p>
 
-  <div class="callout tip">
-    <p><strong>Two questions people always ask.</strong> "Will it corrupt my data?" No: it drafts, you approve, and nothing overwrites your notebook without you looking. "Do I need to code?" No: Level 1 needs only a chat window. See <a href="protect-your-data.html">Protect your data</a>.</p>
-  </div>
-</main>
-<script src="assets/nav.js"></script>
-<script src="assets/app.js"></script>
+<p>That is the whole setup. There is nothing else to install. The rest of this page is about what goes wrong and what I do about it.</p>
+
+<h2>What I ask it to do</h2>
+
+<p>Catch me up on a project I haven't touched in a week. Run an analysis end to end, including writing and submitting the cluster jobs. Take the questions I got after a talk and work out which ones we can answer with data we already have. Redo the figures with the sample size on every panel. Read a lab's last five papers and tell me what they treat as standard. Rebuild my results from the Methods text alone, in an empty folder, and tell me where the text was not enough. Write the week's update for my advisor.</p>
+
+<p>In short, the work of a good research assistant who never sleeps, types very fast, and is confidently wrong about one thing in ten. The last part is the part that matters.</p>
+
+<h2>The one thing I learned</h2>
+
+<p>I wrote down the rules. The agent reads a file called CLAUDE.md when it starts, and mine says where the data lives, what never to delete, how to submit jobs, how figures should look, and which mistakes have already happened. Every time it did something I didn't want to see again, I added a line.</p>
+
+<p>That file grew to several hundred lines and the mistakes kept happening anyway. On one day in September, three defects shipped in one project that the file already forbade in plain words. A control that was matched on the wrong quantity. A null result read as evidence from an arm that could not have moved. A correlation pooled across groups that reversed sign within them.</p>
+
+<p>The agent had read the rules. So had I. The problem is that the moment a rule applies gives no signal that it has arrived. Nobody goes looking for the rule about pooled correlations while they are computing a correlation, because it feels like computing a correlation, not like a situation with a rule.</p>
+
+<p>So now the rules that matter are code. A script refuses to report a null without a power check. A hook refuses to let a session commit inside a shared checkout. A save function refuses a figure with no sample size on it. The rule fires whether or not anyone remembered it.</p>
+
+<p>That is the only general lesson I have. Don't try to remember the rules. Run them.</p>
+
+<h2>What broke</h2>
+
+<p>I'll list these because each one cost something.</p>
+
+<p>A comparison came back empty, and the summary reported it as passed. Nothing compared to nothing is not a difference. Now every control has to produce a number before the result counts.</p>
+
+<p>Two sessions were working in the same folder. One committed the other's half-finished edits. Now each session gets its own copy of the repository, and a hook blocks the alternative.</p>
+
+<p>A website I maintain kept serving results that had been withdrawn upstream, for four days, with every check green. Every check compared the site to itself. Now the build reads each source's corrections log first.</p>
+
+<p>A job finished 25 minutes of GPU work and then crashed while printing the summary, before it had saved anything. Save first. Print second.</p>
+
+<p>A result looked strong when each gene counted separately and vanished when related genes were grouped. The agent will not notice this on its own. You have to name the unit before you count.</p>
+
+<p>Rebuilding my own results from the Methods text found a software setting I had never written down. With the default instead, about five percent of the genes in a key table changed category. I knew the setting. That is why I never wrote it down.</p>
+
+<h2>Long sessions</h2>
+
+<p>A session that runs for hours forgets. Old parts of the conversation get summarized, and the numbers and decisions from three hours ago drop out. So anything that matters goes in a file: a brief before starting, a task list during, a status file and a commit after each real step. When the session ends, a fresh one reads the files and the commits and tells me what was actually done. I trust that more than the summary written by the session itself, which is a story about what it believes it did.</p>
+
+<p>Jobs that take hours don't need an agent watching them. The cluster scheduler can chain them. An agent that polls a queue every minute is spending money to wait.</p>
+
+<h2>Which model</h2>
+
+<p>The strongest one you have, for anything where being wrong is expensive, which in research is almost everything. The cost difference between models is small next to a wrong result you act on. Use the cheaper ones for volume, then have the strong one check. And test on a task you already know the answer to, not a leaderboard.</p>
+
+<p>Fully local, with nothing leaving your machine, works for chat and for small, well-defined edits. It does not yet work for a multi-hour session on a real project. A seven-billion-parameter model on a laptop writes about 25 words a second and is noticeably worse at exactly the part research needs: noticing that something is wrong. If your data cannot leave, use the hosted model on code and summaries and keep the raw data out of its reach, or run an open model on your institution's GPUs.</p>
+
+<h2>Where to start</h2>
+
+<p>Install it. Open it in a folder you already understand. Ask it to tell you what every file does and what order to run them in. You know the answer, so you will know how good it is.</p>
+
+<p>Then write five lines of CLAUDE.md. Then give it a real task. Then check the result the way you would check a new student's. When it does something you don't like, add a line. When a line stops working, turn it into code.</p>
+
+<p>The agent does the typing. What's worth doing, and whether the answer is right, is still you. That part was always the job.</p>
+
+<h2>Files</h2>
+
+<p><a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/setup/CLAUDE.md">setup/CLAUDE.md</a>, the rules file I start new projects from.<br>
+<a href="https://github.com/ChenHsieh/agentic-research-toolkit/tree/main/skills">skills/</a>, procedures for trying to break a result.</p>
+
 </body>
 </html>
