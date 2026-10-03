@@ -19,69 +19,71 @@ p.small{font-size:.85em;color:#555}
 <h1>Using an agent for research</h1>
 <p class="small">Chen Hsieh, October 2026. Plant genomics PhD student, University of Georgia. Code and files at <a href="https://github.com/ChenHsieh/agentic-research-toolkit">github.com/ChenHsieh/agentic-research-toolkit</a>.</p>
 
-<p>People keep asking me how I use Claude Code for research. This is the answer. It is one page because the answer is short, and because most of what I could add would be decoration.</p>
+<p>Several people have asked me how I use Claude Code for research. This page lists what I do, what failed, and what I changed after each failure. Dates are 2026.</p>
 
-<h2>What it is</h2>
+<h2>Setup</h2>
 
-<p>An agent is a program that runs a language model in a loop with a terminal. You type what you want. It reads files, writes code, runs it, reads the error, fixes it, runs it again, and tells you what happened. The difference from chat is that it does things rather than describing them.</p>
+<p>Claude Code is a command-line program. It runs a language model that can read and edit files and run shell commands in the folder where you start it. Each command it wants to run can require your approval.</p>
 
-<p>I run it on the university cluster, in a terminal, inside tmux, in the folder of whatever project I'm on. I leave it running and check on it from my phone between other things. Several run at once, one per project.</p>
+<p>I run it on the university cluster (Slurm scheduler) inside tmux, one session per project, usually several at once on the strongest available model. I answer most prompts from my phone through Remote Control. From 2 September to 2 October I ran about 75 sessions on the cluster and about 10 on my laptop. I used Codex in 3 sessions.</p>
 
-<p>That is the whole setup. There is nothing else to install. The rest of this page is about what goes wrong and what I do about it.</p>
+<p>That plan and that volume matter. Some of what I get done is the budget, not the method. The failures below happened at that budget anyway.</p>
 
-<h2>What I ask it to do</h2>
+<h2>Tasks I use it for</h2>
 
-<p>Catch me up on a project I haven't touched in a week. Run an analysis end to end, including writing and submitting the cluster jobs. Take the questions I got after a talk and work out which ones we can answer with data we already have. Redo the figures with the sample size on every panel. Read a lab's last five papers and tell me what they treat as standard. Rebuild my results from the Methods text alone, in an empty folder, and tell me where the text was not enough. Write the week's update for my advisor.</p>
+<p>Status summaries of a project from its files and git history. End-to-end analyses, including writing, submitting and checking cluster jobs. Answering questions from a talk with data that already exists. Redrawing figures to a written set of rules. Summaries of a lab's published methods, with each claim quoted from the paper. Rebuilding my results from the Methods text in an empty folder. Weekly updates for my advisor.</p>
 
-<p>In short, the work of a good research assistant who never sleeps, types very fast, and is confidently wrong about one thing in ten. The last part is the part that matters.</p>
+<h2>Rules in a file, then rules in code</h2>
 
-<h2>The one thing I learned</h2>
+<p>Claude Code reads a file called CLAUDE.md when it starts. (Codex reads AGENTS.md.) Mine lists where data lives, what must not be deleted, how to submit jobs, figure requirements, and past mistakes. I add a line after each mistake.</p>
 
-<p>I wrote down the rules. The agent reads a file called CLAUDE.md when it starts, and mine says where the data lives, what never to delete, how to submit jobs, how figures should look, and which mistakes have already happened. Every time it did something I didn't want to see again, I added a line.</p>
+<p>On 4 September three defects shipped in one project that the file already prohibited:</p>
 
-<p>That file grew to several hundred lines and the mistakes kept happening anyway. On one day in September, three defects shipped in one project that the file already forbade in plain words. A control that was matched on the wrong quantity. A null result read as evidence from an arm that could not have moved. A correlation pooled across groups that reversed sign within them.</p>
+<p>1. A control arm matched on the number of accepted edits, not the number of positions actually changed. It received 3.4 times the dose of the arm it controlled. The corrected headline went from 0.21–0.39 to 0.60–0.78.<br>
+2. A null result reported from an arm whose sampler could barely move.<br>
+3. A correlation over 48 units in 6 groups: rho +0.45 (p = 0.001) pooled, -0.11 (p = 0.47) within groups.</p>
 
-<p>The agent had read the rules. So had I. The problem is that the moment a rule applies gives no signal that it has arrived. Nobody goes looking for the rule about pooled correlations while they are computing a correlation, because it feels like computing a correlation, not like a situation with a rule.</p>
+<p>The rules were in the file and were not applied, because nothing at the moment of the analysis pointed to them. I moved the important ones into code that stops the work:</p>
 
-<p>So now the rules that matter are code. A script refuses to report a null without a power check. A hook refuses to let a session commit inside a shared checkout. A save function refuses a figure with no sample size on it. The rule fires whether or not anyone remembered it.</p>
+<p>A script raises an error when two arms are matched on different quantities, and refuses to report a null without a power check.<br>
+A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
+A figure-saving function refuses a figure with no sample size, text under 20 pt, or overlapping labels.</p>
 
-<p>That is the only general lesson I have. Don't try to remember the rules. Run them.</p>
+<h2>Failures and fixes</h2>
 
-<h2>What broke</h2>
+<p><b>Empty control reported as passed.</b> A comparison returned no values and the summary read it as a pass. Fix: a control with no values is BLOCKED, not PASS, and each control must point to the job and file that produced it.</p>
 
-<p>I'll list these because each one cost something.</p>
+<p><b>Two sessions in one checkout (10 September).</b> One session committed another's unfinished edit; another moved the shared checkout to a different branch. Fix: each session works in its own git worktree, and the hook above blocks the shared checkout. Worktrees still share the same disk, data and job queue, so outputs need separate paths.</p>
 
-<p>A comparison came back empty, and the summary reported it as passed. Nothing compared to nothing is not a difference. Now every control has to produce a number before the result counts.</p>
+<p><b>Withdrawn results served for four days.</b> A gene atlas website kept showing a gene set that had been corrected upstream on 9 September. Every build check passed because the checks compared the site to its own pinned inputs, and the correction changed the selection rule, not the input files. Fix: the build reads each source repository's corrections log and fails when it has changed.</p>
 
-<p>Two sessions were working in the same folder. One committed the other's half-finished edits. Now each session gets its own copy of the repository, and a hook blocks the alternative.</p>
+<p><b>Results lost after a crash.</b> A job finished 25 minutes of GPU work and crashed in the summary print, before saving. Fix: write results to disk before printing.</p>
 
-<p>A website I maintain kept serving results that had been withdrawn upstream, for four days, with every check green. Every check compared the site to itself. Now the build reads each source's corrections log first.</p>
+<p><b>Wrong unit of analysis.</b> See defect 3 above. Fix: before any correlation, name the unit and report the within-group result if units are grouped.</p>
 
-<p>A job finished 25 minutes of GPU work and then crashed while printing the summary, before it had saved anything. Save first. Print second.</p>
+<p><b>Unrecorded method parameter.</b> An agent rebuilt one chapter's results from the Methods text without access to intermediate files. The Methods did not state the DIAMOND sensitivity mode. With the default mode, 732 of 13,663 candidate genes (5.4%) were missed. A second filtering step was not written down anywhere. Fix: both are now in the Methods. Rule for these runs: when the text is missing something, the agent stops and marks that number BLOCKED. It does not guess, because a guess that happens to match hides the gap.</p>
 
-<p>A result looked strong when each gene counted separately and vanished when related genes were grouped. The agent will not notice this on its own. You have to name the unit before you count.</p>
-
-<p>Rebuilding my own results from the Methods text found a software setting I had never written down. With the default instead, about five percent of the genes in a key table changed category. I knew the setting. That is why I never wrote it down.</p>
+<p><b>Submitted is not finished.</b> A job that was submitted, or that exited with code 0, can still have produced an empty or partial output. Fix: a step counts as done only after the scheduler reports completion and the output file is checked.</p>
 
 <h2>Long sessions</h2>
 
-<p>A session that runs for hours forgets. Old parts of the conversation get summarized, and the numbers and decisions from three hours ago drop out. So anything that matters goes in a file: a brief before starting, a task list during, a status file and a commit after each real step. When the session ends, a fresh one reads the files and the commits and tells me what was actually done. I trust that more than the summary written by the session itself, which is a story about what it believes it did.</p>
+<p>When a conversation gets long, older parts are summarized and details are lost. I keep a brief, a task list and a status file on disk, and commit after each step. At the end, a new session reads the files and commits and reports what was done. I use that report, not the original session's own summary.</p>
 
-<p>Jobs that take hours don't need an agent watching them. The cluster scheduler can chain them. An agent that polls a queue every minute is spending money to wait.</p>
+<p>Waiting is done by the scheduler (job dependencies) or by one background check that ends when the job leaves the queue. Not by an agent polling.</p>
 
-<h2>Which model</h2>
+<h2>Models</h2>
 
-<p>The strongest one you have, for anything where being wrong is expensive, which in research is almost everything. The cost difference between models is small next to a wrong result you act on. Use the cheaper ones for volume, then have the strong one check. And test on a task you already know the answer to, not a leaderboard.</p>
+<p>I use the strongest model for design, interpretation and review. Cheaper models are fine for bulk edits if the result is checked. Tools can switch to another model when one is overloaded; the session status shows which model answered.</p>
 
-<p>Fully local, with nothing leaving your machine, works for chat and for small, well-defined edits. It does not yet work for a multi-hour session on a real project. A seven-billion-parameter model on a laptop writes about 25 words a second and is noticeably worse at exactly the part research needs: noticing that something is wrong. If your data cannot leave, use the hosted model on code and summaries and keep the raw data out of its reach, or run an open model on your institution's GPUs.</p>
+<p>Local models: on a base M4 Mac, a 7-billion-parameter model at 4-bit generates about 24 tokens per second (my measurement). That works for chat and small edits. I have not run a multi-hour project session on a local model. If data cannot leave your institution, options are a hosted model that sees only code and summaries, or an open model on institutional GPUs.</p>
 
-<h2>Where to start</h2>
+<h2>Starting</h2>
 
-<p>Install it. Open it in a folder you already understand. Ask it to tell you what every file does and what order to run them in. You know the answer, so you will know how good it is.</p>
-
-<p>Then write five lines of CLAUDE.md. Then give it a real task. Then check the result the way you would check a new student's. When it does something you don't like, add a line. When a line stops working, turn it into code.</p>
-
-<p>The agent does the typing. What's worth doing, and whether the answer is right, is still you. That part was always the job.</p>
+<p>1. Install Claude Code. Open it in a folder whose contents you already know.<br>
+2. Ask what each file does and in what order they run. Compare with what you know.<br>
+3. Keep command approval on.<br>
+4. Write a CLAUDE.md with five lines about the project. Add a line after each mistake.<br>
+5. For a rule that keeps being broken, write a check that fails.</p>
 
 <h2>Files</h2>
 
