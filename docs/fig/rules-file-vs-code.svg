@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300">
+<text x="160" y="28.0" font-family="Georgia,Times New Roman,serif" font-size="21" fill="#1a1a1a" text-anchor="middle" font-style="italic">Rule in a file</text>
+<text x="480" y="28.0" font-family="Georgia,Times New Roman,serif" font-size="21" fill="#1a1a1a" text-anchor="middle" font-style="italic">Rule in code</text>
+<path d="M39.8,59.2 Q98.9,58.4 159.0,59.8" fill="none" stroke="#999" stroke-width="1.6" stroke-linecap="round" />
+<path d="M160.6,59.3 Q161.7,86.2 160.1,109.5" fill="none" stroke="#999" stroke-width="1.6" stroke-linecap="round" />
+<path d="M159.3,111.0 Q98.7,108.4 40.8,110.7" fill="none" stroke="#999" stroke-width="1.6" stroke-linecap="round" />
+<path d="M39.5,110.3 Q41.2,83.8 40.6,60.9" fill="none" stroke="#999" stroke-width="1.6" stroke-linecap="round" />
+<text x="100.0" y="90.85" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#999" text-anchor="middle" >CLAUDE.md</text>
+<path d="M30.3,190.4 Q161.5,188.3 290.0,189.2" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" />
+<path d="M291.0,190.9 Q284.9,186.0 280.1,184.9" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" />
+<path d="M290.9,190.8 Q286.6,192.6 280.0,194.4" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" />
+<text x="100" y="175.0" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#1a1a1a" text-anchor="middle" >analysis</text>
+<text x="160" y="230.0" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#999" text-anchor="middle" >the file was read at the start;</text>
+<text x="160" y="250.8" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#999" text-anchor="middle" >nothing points to it now</text>
+<text x="300" y="165.0" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#a33" text-anchor="end" >defect ships</text>
+<path d="M319.2,39.5 Q320.4,159.7 320.8,278.9" fill="none" stroke="#ccc" stroke-width="1.6" stroke-linecap="round" />
+<path d="M349.5,190.1 Q408.2,190.5 469.9,189.6" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" />
+<path d="M469.8,189.3 Q467.0,186.5 460.3,184.8" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" />
+<path d="M469.6,190.1 Q464.4,193.3 461.0,193.7" fill="none" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round" />
+<text x="400" y="175.0" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#1a1a1a" text-anchor="middle" >analysis</text>
+<rect x="475" y="150" width="22" height="80" fill="#f6e6e6" stroke="none"/>
+<path d="M475.6,150.3 Q484.2,148.9 496.4,149.6" fill="none" stroke="#a33" stroke-width="1.6" stroke-linecap="round" />
+<path d="M495.9,150.5 Q495.7,189.8 498.0,231.1" fill="none" stroke="#a33" stroke-width="1.6" stroke-linecap="round" />
+<path d="M495.8,229.5 Q486.9,231.8 476.1,230.7" fill="none" stroke="#a33" stroke-width="1.6" stroke-linecap="round" />
+<path d="M475.3,230.8 Q474.6,191.8 474.5,149.3" fill="none" stroke="#a33" stroke-width="1.6" stroke-linecap="round" />
+<text x="486" y="250.0" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#a33" text-anchor="middle" >check</text>
+<text x="560" y="180.0" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#a33" text-anchor="middle" >stops:</text>
+<text x="560" y="200.8" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#a33" text-anchor="middle" >no power check,</text>
+<text x="560" y="221.6" font-family="Georgia,Times New Roman,serif" font-size="17" fill="#a33" text-anchor="middle" >no result</text>
+</svg>

@@ -4,17 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Using an agent for research</title>
-<style>
-body{max-width:36em;margin:3em auto;padding:0 1em;font:17px/1.55 Georgia,serif;color:#111;background:#fff}
-h1{font-size:1.5em;font-weight:normal}
-h2{font-size:1.1em;font-weight:normal;margin-top:2.5em;font-style:italic}
-code,pre{font:14px/1.5 Menlo,Consolas,monospace}
-pre{padding:1em;background:#f4f4f4;overflow-x:auto;white-space:pre-wrap}
-a{color:#06c}
-p.small{font-size:.85em;color:#555}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<nav><a href="index.html" class="here">Essay</a><a href="examples.html">Examples</a><a href="practice.html">Practice</a><a href="reading.html">Reading</a><a href="session.html">Session</a></nav>
 
 <h1>Using an agent for research</h1>
 <p class="small">Chen Hsieh, October 2026. Plant genomics PhD student, University of Georgia. Code and files at <a href="https://github.com/ChenHsieh/agentic-research-toolkit">github.com/ChenHsieh/agentic-research-toolkit</a>.</p>
@@ -24,6 +17,8 @@ p.small{font-size:.85em;color:#555}
 <h2>Setup</h2>
 
 <p>Claude Code is a command-line program. It runs a language model that can read and edit files and run shell commands in the folder where you start it. Each command it wants to run can require your approval.</p>
+
+<figure><img src="fig/chat-vs-agent.svg" alt="Chat returns text that you run yourself. An agent runs the read, run, fix loop on its own."><figcaption>Chat returns text that you run yourself. An agent runs the read, run, fix loop on its own.</figcaption></figure>
 
 <p>I run it on the university cluster (Slurm scheduler) inside tmux, one session per project, usually several at once on the strongest available model. I answer most prompts from my phone through Remote Control. From 2 September to 2 October I ran about 75 sessions on the cluster and about 10 on my laptop. I used Codex in 3 sessions.</p>
 
@@ -35,6 +30,10 @@ p.small{font-size:.85em;color:#555}
 
 <h2>Rules in a file, then rules in code</h2>
 
+<figure><img src="fig/you-and-agent.svg" alt="The agent does the work in between. Deciding what to ask, and whether the answer is right, stays with you."><figcaption>The agent does the work in between. Deciding what to ask, and whether the answer is right, stays with you.</figcaption></figure>
+
+
+
 <p>Claude Code reads a file called CLAUDE.md when it starts. (Codex reads AGENTS.md.) Mine lists where data lives, what must not be deleted, how to submit jobs, figure requirements, and past mistakes. I add a line after each mistake.</p>
 
 <p>On 4 September three defects shipped in one project that the file already prohibited:</p>
@@ -44,6 +43,8 @@ p.small{font-size:.85em;color:#555}
 3. A correlation over 48 units in 6 groups: rho +0.45 (p = 0.001) pooled, -0.11 (p = 0.47) within groups.</p>
 
 <p>The rules were in the file and were not applied, because nothing at the moment of the analysis pointed to them. I moved the important ones into code that stops the work:</p>
+
+<figure><img src="fig/rules-file-vs-code.svg" alt="A rule in a file is read once, at the start. A rule in code sits on the path and stops the analysis when it applies."><figcaption>A rule in a file is read once, at the start. A rule in code sits on the path and stops the analysis when it applies.</figcaption></figure>
 
 <p>A script raises an error when two arms are matched on different quantities, and refuses to report a null without a power check.<br>
 A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
@@ -63,11 +64,15 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p><b>Unrecorded method parameter.</b> An agent rebuilt one chapter's results from the Methods text without access to intermediate files. The Methods did not state the DIAMOND sensitivity mode. With the default mode, 732 of 13,663 candidate genes (5.4%) were missed. A second filtering step was not written down anywhere. Fix: both are now in the Methods. Rule for these runs: when the text is missing something, the agent stops and marks that number BLOCKED. It does not guess, because a guess that happens to match hides the gap.</p>
 
+<figure><img src="fig/clean-room.svg" alt="Rebuilding results from the Methods text alone. Each number either matches, does not, or cannot be computed from what is written."><figcaption>Rebuilding results from the Methods text alone. Each number either matches, does not, or cannot be computed from what is written.</figcaption></figure>
+
 <p><b>Submitted is not finished.</b> A job that was submitted, or that exited with code 0, can still have produced an empty or partial output. Fix: a step counts as done only after the scheduler reports completion and the output file is checked.</p>
 
 <h2>Long sessions</h2>
 
 <p>When a conversation gets long, older parts are summarized and details are lost. I keep a brief, a task list and a status file on disk, and commit after each step. At the end, a new session reads the files and commits and reports what was done. I use that report, not the original session's own summary.</p>
+
+<figure><img src="fig/long-session.svg" alt="Over hours, early conversation is summarized and details drop out. Files written along the way stay complete."><figcaption>Over hours, early conversation is summarized and details drop out. Files written along the way stay complete.</figcaption></figure>
 
 <p>Waiting is done by the scheduler (job dependencies) or by one background check that ends when the job leaves the queue. Not by an agent polling.</p>
 
@@ -84,6 +89,10 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 3. Keep command approval on.<br>
 4. Write a CLAUDE.md with five lines about the project. Add a line after each mistake.<br>
 5. For a rule that keeps being broken, write a check that fails.</p>
+
+<h2>More</h2>
+
+<p><a href="examples.html">Examples</a>: a rules file, a brief, a status file, prompts I reuse. <a href="practice.html">Practice</a>: six real cases, decide whether each result was done. <a href="reading.html">Reading</a>: papers, tools, and guides. <a href="session.html">A 20-minute session</a> with me, if you want to go through it on your own project.</p>
 
 <h2>Files</h2>
 

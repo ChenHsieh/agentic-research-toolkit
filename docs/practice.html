@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice: is this result done?</title>
+<meta name="description" content="Seven real cases: decide PASS, FAIL or BLOCKED.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav><a href="index.html">Essay</a><a href="examples.html">Examples</a><a href="practice.html" class="here">Practice</a><a href="reading.html">Reading</a><a href="session.html">Session</a></nav>
+<h1>Practice</h1>
+<p>Seven cases. Each happened in my work, lightly simplified. For each, decide whether the result is done (PASS), wrong (FAIL), or cannot be judged yet (BLOCKED). Then see what happened.</p>
+<div class="case" data-a="BLOCKED" style="margin:2.2em 0;padding-top:.2em">
+<p><b>1.</b> A comparison against a control came back. The agent&#x27;s summary: &quot;No significant difference from control. Check passed.&quot; The control table has 0 rows.</p>
+<p class="opts"><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">PASS</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">FAIL</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">BLOCKED</button></p>
+<p class="why" hidden><span class="verdict"></span> Nothing compared with nothing is not a difference. The control never ran. This one happened to me; now an empty control fails loudly.</p>
+</div>
+<div class="case" data-a="BLOCKED" style="margin:2.2em 0;padding-top:.2em">
+<p><b>2.</b> A cluster job exited with code 0. The output file exists. It has a header and no data rows.</p>
+<p class="opts"><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">PASS</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">FAIL</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">BLOCKED</button></p>
+<p class="why" hidden><span class="verdict"></span> Exit code 0 means the program stopped without an error, not that it produced anything. A step is done when the output is checked.</p>
+</div>
+<div class="case" data-a="FAIL" style="margin:2.2em 0;padding-top:.2em">
+<p><b>3.</b> Across 48 attention heads in 6 layers, a score correlates with an effect: rho = +0.45, p = 0.001. Computed within each layer, the same correlation is rho = -0.11, p = 0.47.</p>
+<p class="opts"><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">PASS</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">FAIL</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">BLOCKED</button></p>
+<p class="why" hidden><span class="verdict"></span> The heads are grouped. The pooled correlation came from differences between layers, not between heads. The claim about heads does not hold.</p>
+</div>
+<div class="case" data-a="BLOCKED" style="margin:2.2em 0;padding-top:.2em">
+<p><b>4.</b> Rebuilding a chapter from its Methods text, the agent&#x27;s count matches the paper exactly. Its log notes that the Methods did not state a software setting, so it picked the one that matched.</p>
+<p class="opts"><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">PASS</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">FAIL</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">BLOCKED</button></p>
+<p class="why" hidden><span class="verdict"></span> A guess that matches hides the gap. The Methods are incomplete. In my case, the default setting changed 732 of 13,663 genes.</p>
+</div>
+<div class="case" data-a="BLOCKED" style="margin:2.2em 0;padding-top:.2em">
+<p><b>5.</b> A website build passes every check: inputs pinned, checksums match. The source repository&#x27;s corrections log changed yesterday.</p>
+<p class="opts"><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">PASS</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">FAIL</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">BLOCKED</button></p>
+<p class="why" hidden><span class="verdict"></span> Pinned inputs prove the site matches what it was built from, not that the source still stands. My site served a withdrawn gene set for four days with every check green.</p>
+</div>
+<div class="case" data-a="BLOCKED" style="margin:2.2em 0;padding-top:.2em">
+<p><b>6.</b> An intervention shows no effect. In that arm, 2% of the positions that could change actually changed.</p>
+<p class="opts"><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">PASS</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">FAIL</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">BLOCKED</button></p>
+<p class="why" hidden><span class="verdict"></span> An arm that barely moved cannot show an effect. The null is a fact about the sampler, not about the system.</p>
+</div>
+<div class="case" data-a="PASS" style="margin:2.2em 0;padding-top:.2em">
+<p><b>7.</b> Two classification methods are run on the same reads. They agree on 99.5% or more of reads at family level. Most genus-level disagreement is between two genera in the same family. The report says: family-level results are robust; a few named genera depend on the method.</p>
+<p class="opts"><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">PASS</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">FAIL</button><button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">BLOCKED</button></p>
+<p class="why" hidden><span class="verdict"></span> The claim matches the evidence and states its limit. The disagreements are reported, not averaged away.</p>
+</div>
+<p class="small">Most of these are BLOCKED. That matches my experience: the common failure is not a wrong number, it is a number that was never really measured.</p>
+<p class="small" style="margin-top:4em">Chen Hsieh · <a href="https://github.com/ChenHsieh/agentic-research-toolkit">source</a> · text CC BY 4.0</p>
+<script>
+document.querySelectorAll('.case').forEach(function(c){c.querySelectorAll('.ans').forEach(function(b){b.onclick=function(){
+var ok=b.textContent===c.dataset.a;var w=c.querySelector('.why');w.hidden=false;
+w.querySelector('.verdict').innerHTML=(ok?'Yes, ':'No, ')+'<b>'+c.dataset.a+'</b>.';
+c.querySelectorAll('.ans').forEach(function(x){x.style.borderColor=x.textContent===c.dataset.a?'#a33':'#ccc';x.style.color=x.textContent===c.dataset.a?'#a33':'#999'})}})});
+</script>
+</body>
+</html>

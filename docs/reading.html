@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading: agents for research</title>
+<meta name="description" content="Papers, tools, benchmarks and critiques on agents for research, checked October 2026.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav><a href="index.html">Essay</a><a href="examples.html">Examples</a><a href="practice.html">Practice</a><a href="reading.html" class="here">Reading</a><a href="session.html">Session</a></nav>
+<h1>Reading</h1>
+<p>Papers, tools and guides on agents for research, checked on 6 October 2026. Every link was opened at its source. Numbers are quoted from the source.</p>
+<figure><img src="fig/landscape.svg" alt="From tools you drive to systems that drive themselves"><figcaption>Rough placement by how much a person stays in the loop. The further right, the more of the checking the system claims to do for you.</figcaption></figure>
+<h2>Start here</h2>
+<p><a href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a> <span class="small">(Anthropic, 2024)</span>. Start with one model call; add agent steps only when the simpler version measurably falls short.</p>
+<p><a href="https://code.claude.com/docs/en/best-practices">Best practices for Claude Code</a> <span class="small">(Anthropic docs)</span>. Give the agent a check it can run. Keep the rules file short. Use hooks for anything that must always happen.</p>
+<p><a href="https://simonwillison.net/2025/Sep/30/designing-agentic-loops/">Designing agentic loops</a> <span class="small">(Simon Willison, 2025)</span>. Run unattended agents only in a sandbox, with limited credentials, on problems with clear success criteria. His definition: "An LLM agent runs tools in a loop to achieve a goal."</p>
+<p><a href="https://arxiv.org/abs/2605.18661">AI for Auto-Research: Roadmap and User Guide</a> <span class="small">(Kong et al., 2026)</span>. A map of AI use across the research cycle. Conclusion: more automation can hide failure modes rather than remove them.</p>
+<h2>What the benchmarks say</h2>
+<p>The consistent finding: agents run code well and choose methods and interpret biology poorly.</p>
+<p><a href="https://arxiv.org/abs/2503.00096">BixBench</a> <span class="small">(FutureHouse, 2025)</span>. About 300 open-answer bioinformatics questions. GPT-4o and Claude 3.5 Sonnet: 17% correct.</p>
+<p><a href="https://www.biorxiv.org/content/10.64898/2026.06.12.731844v1">FlowBench</a> <span class="small">(Kurjan and Cribbs, 2026)</span>. 23 models. Choosing a toolchain from the biological goal alone: 44 to 57%. Agents often "fix" a failing run so it exits cleanly while the data stay invalid.</p>
+<p><a href="https://www.biorxiv.org/content/10.64898/2026.05.12.724604v1">BiomniBench</a> <span class="small">(Qu et al., 2026)</span>. Scores the agent's whole working trail against expert rubrics. The harness around the model moved scores more than a model generation did.</p>
+<p><a href="https://arxiv.org/abs/2410.05080">ScienceAgentBench</a> <span class="small">(Chen et al., 2024)</span>. 102 tasks from 44 papers. Best agent solved 32.4%.</p>
+<p><a href="https://arxiv.org/abs/2407.10362">LAB-Bench</a> <span class="small">(Laurent et al., 2024)</span>. Over 2,400 questions on practical biology tasks: literature, databases, figures, sequences, protocols.</p>
+<h2>Critiques</h2>
+<p><a href="https://arxiv.org/abs/2509.08713">Hidden pitfalls of AI scientist systems</a> <span class="small">(Luo, Kasirzadeh, Shah, 2025)</span>. Data leakage, metric misuse and post-hoc selection are often invisible in the final paper. Recommends requiring trace logs and code.</p>
+<p><a href="https://arxiv.org/abs/2502.14297">Evaluating Sakana's AI Scientist</a> <span class="small">(Beel, Kan, Baumgart, 2025)</span>. 42% of experiments failed on coding errors; established ideas labelled as novel.</p>
+<p><a href="https://arxiv.org/abs/2506.01372">AI scientists fail without strong implementation capability</a> <span class="small">(Zhu et al., 2025)</span>. The bottleneck is running the checks, not generating ideas.</p>
+<p><a href="https://arxiv.org/abs/2608.05179">The verification gap</a> <span class="small">(Ding et al., 2026)</span>. Survey of 24 systems. Most release code; few release what is needed to check their claims.</p>
+<p><a href="https://arxiv.org/abs/2607.00738">Phantom references</a> <span class="small">(Russinovich et al., 2026)</span>. About one in twenty NeurIPS and USENIX Security papers has at least two likely fabricated references.</p>
+<p><a href="https://gptzero.me/news/neurips/">Fabricated citations at NeurIPS 2025</a> <span class="small">(GPTZero, 2026)</span>. 100+ fabricated citations in 53 accepted papers.</p>
+<h2>Systems that run research themselves</h2>
+<p><a href="https://arxiv.org/abs/2408.06292">The AI Scientist</a> <span class="small">(Sakana AI, 2024; Nature 2026)</span>. Idea, code, experiments, paper, automated review. Machine learning only. Sakana lists inaccurate citations and duplicated figures among its limits. <a href="https://arxiv.org/abs/2504.08066">v2</a> uses tree search; one paper passed a workshop review.</p>
+<p><a href="https://arxiv.org/abs/2502.18864">AI co-scientist</a> <span class="small">(Google, 2025)</span>. Agents generate, critique and rank hypotheses in a tournament. Tested on drug repurposing and resistance mechanisms.</p>
+<p><a href="https://arxiv.org/abs/2511.02824">Kosmos</a> <span class="small">(Mitchener et al., 2025)</span>. Long runs over data and literature. Scientists judged 79.4% of report statements accurate.</p>
+<p><a href="https://arxiv.org/abs/2505.13400">Robin</a> <span class="small">(Ghareeb et al., 2025)</span>. Literature and analysis agents; humans do the wet lab. Proposed a drug candidate for dry macular degeneration.</p>
+<p><a href="https://doi.org/10.1038/s41586-025-09442-9">The Virtual Lab</a> <span class="small">(Swanson et al., Nature 2025)</span>. An LLM "PI" runs meetings with specialist agents and a human. Designed 92 nanobodies; two improved binding to new SARS-CoV-2 variants.</p>
+<p><a href="https://doi.org/10.1038/s41586-023-06792-0">Coscientist</a> <span class="small">(Boiko et al., Nature 2023)</span>. Planned and ran chemistry on robotic hardware.</p>
+<p><a href="https://arxiv.org/abs/2501.04227">Agent Laboratory</a> <span class="small">(Schmidgall et al., 2025)</span>. Literature, experiments, report, with optional human feedback. Quality improved markedly with it.</p>
+<p><a href="https://www.biorxiv.org/content/10.1101/2025.06.03.657517v1">CellVoyager</a> <span class="small">(Alber et al., 2025; Nature Methods 2026)</span>. Proposes and runs new analyses on published single-cell data in a notebook.</p>
+<p><a href="https://arxiv.org/abs/2405.17631">BioDiscoveryAgent</a> <span class="small">(Roohani et al., 2024)</span>. Designs rounds of CRISPR screens by reasoning plus literature, without training a model.</p>
+<h2>Tools for a researcher in the loop</h2>
+<p><a href="https://code.claude.com/docs/en/overview">Claude Code</a> <span class="small">(Anthropic)</span>. Terminal, editor, desktop and web. Reads CLAUDE.md and AGENTS.md, skills, hooks.</p>
+<p><a href="https://github.com/openai/codex">Codex CLI</a> <span class="small">(OpenAI)</span>. Terminal coding agent. Reads AGENTS.md.</p>
+<p><a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a> <span class="small">(Google)</span>. Open-source terminal agent with search grounding. Reads GEMINI.md. Has a free tier.</p>
+<p><a href="https://aider.chat/">Aider</a> <span class="small">(open source)</span>. Commits every change to git so it can be reviewed and reverted. Works with local models.</p>
+<p><a href="https://cursor.com/">Cursor</a> <span class="small">(Anysphere)</span>. Code editor with agents.</p>
+<p><a href="https://github.com/jupyterlab/jupyter-ai">Jupyter AI</a> <span class="small">(Project Jupyter)</span>. Connects agents to notebooks; edits and commands need approval.</p>
+<p><a href="https://arxiv.org/abs/2409.13740">PaperQA2</a> <span class="small">(FutureHouse, 2024)</span>. Literature agent that answers with citations. The <a href="https://www.futurehouse.org/research-announcements/launching-futurehouse-platform-ai-agents">FutureHouse platform</a> offers it and three related agents.</p>
+<p><a href="https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1">Biomni</a> <span class="small">(Huang et al., 2025)</span>. General biomedical agent with tools mined from 25 domains. Preprint.</p>
+<p><a href="https://arxiv.org/abs/2509.06917">Paper2Agent</a> <span class="small">(Miao et al., 2025)</span>. Turns a paper and its code into tools an agent can call, with generated tests.</p>
+<p><a href="https://arxiv.org/abs/2407.09811">CellAgent</a> <span class="small">(Xiao et al., 2024)</span>. Planner, executor and evaluator agents for single-cell analysis.</p>
+<p><a href="https://doi.org/10.1038/s42256-024-00832-8">ChemCrow</a> <span class="small">(Bran et al., 2024)</span>. GPT-4 with 18 chemistry tools.</p>
+<p><a href="https://www.anthropic.com/news/claude-for-life-sciences">Claude for Life Sciences</a> <span class="small">(Anthropic, 2025)</span>. Connectors (PubMed, Benchling, 10x Genomics and others) and skills.</p>
+<p><a href="https://agents.md/">AGENTS.md</a> <span class="small">(Linux Foundation)</span>. One instructions file many agents read.</p>
+<p><a href="https://agentskills.io/">Agent Skills</a> <span class="small">(open standard)</span>. A folder with a SKILL.md; loaded only when a task matches.</p>
+<p class="small">Not included: several 2026 preprints seen in search but not read. Affiliations for some arXiv entries are from the author groups, not the abstract pages. Full notes: <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/lit_round_2026-10.md">notes/lit_round_2026-10.md</a>.</p>
+
+<p class="small" style="margin-top:4em">Chen Hsieh · <a href="https://github.com/ChenHsieh/agentic-research-toolkit">source</a> · text CC BY 4.0</p>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Examples: using an agent for research</title>
+<meta name="description" content="Rules file, brief, status file, prompts and figure rules I reuse.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav><a href="index.html">Essay</a><a href="examples.html" class="here">Examples</a><a href="practice.html">Practice</a><a href="reading.html">Reading</a><a href="session.html">Session</a></nav>
+<h1>Examples</h1>
+<p>Files and prompts I reuse. Copy them and change the details. Each one exists because something went wrong without it.</p>
+<h2>A rules file</h2>
+<p>Saved as <code>CLAUDE.md</code> in the project folder (Codex reads <code>AGENTS.md</code>). Read by the agent at the start of every session. Start with five lines; add one after each mistake.</p>
+<pre><code># Project: [name]
+
+## Where things are
+- Raw data: [path]. Read-only. Never modify or delete.
+- Outputs: [path]
+- Status: STATUS.md. Read it first.
+
+## How to run things
+- Heavy work goes in batch jobs, not on the login node.
+- Load software with: [exact commands, exact versions]
+- A job is done when the scheduler reports it finished AND the output file is checked.
+
+## Never
+- Report a number without the file it came from.
+- Commit in a checkout another session is using.
+
+## Mistakes that already happened (newest first)
+- [date] A control returned no values and was reported as a pass. A control with no values is BLOCKED.</code></pre>
+<h2>A brief</h2>
+<p>Written before a long task, in a file. When the conversation gets summarized, this is still there.</p>
+<pre><code># Brief: [task]
+
+Goal: [one sentence: what question this answers]
+Inputs: [paths, with versions or commit]
+Done means: [the files that must exist, and what they must contain]
+Known traps: [what went wrong last time]
+Not in scope: [what not to touch]
+What a pure artifact would look like: [write this before seeing the result]</code></pre>
+<h2>A status file</h2>
+<p>Updated after each real step. A new session starts by reading it.</p>
+<pre><code># STATUS (updated [date])
+
+Done
+- [step]: [output path], commit [hash after push]
+Open
+- [step]: blocked on [what / whom]
+Results and where they live
+- [number]: [file], [how computed]
+Corrections
+- [date] [what changed, and why]</code></pre>
+<h2>Prompts I reuse</h2>
+<h3>Catch up</h3>
+<pre><code>Brief me on [project]. Read STATUS.md and the last ten commits. What is done, what is open, what is blocked and on whom?</code></pre>
+<h3>Before an analysis</h3>
+<pre><code>Before running anything, write in the brief what the result would look like if it were an artifact of how the data was built. Then run it.</code></pre>
+<h3>Try to break it</h3>
+<pre><code>Here is the result. List the three explanations most likely to make it an artifact. Run the checks. Report which it survives, with the file for each check. A check with no values is BLOCKED, not passed.</code></pre>
+<h3>After a talk</h3>
+<pre><code>After my talk people asked: [questions]. For each: can we answer it with data we already have? If yes, do it. If not, say what it would take.</code></pre>
+<h3>Clean-room reproduction</h3>
+<pre><code>In a new empty folder, rebuild [results] from the Methods text and the raw inputs only. Do not read existing intermediate files. When the text is missing something you need, stop and mark that number BLOCKED. Do not guess. End with a table: number, expected, observed, PASS / FAIL / BLOCKED.</code></pre>
+<h3>Literature</h3>
+<pre><code>Read [group]&#x27;s recent papers on [topic]. What methods do they treat as standard? Which apply to my data, and what would each cost? Quote the paper for every claim, with page or section. Mark anything you could not open.</code></pre>
+<h3>Update for my advisor</h3>
+<pre><code>Summarize what changed this week. Results first, one line each, with the figure and file. Flag anything that reverses what I reported before.</code></pre>
+<h3>Fresh-eyes review</h3>
+<pre><code>Another session worked on this today. Read its commits and output files, not its summary. What did it actually do? What is unsupported, unfinished, or wrong?</code></pre>
+<h2>Figure rules</h2>
+<p>Kept in one file the agent reads before any plot.</p>
+<pre><code>- One figure per file. Compose panels later.
+- Every plot states n. A stats table is written from the same data frame that was plotted.
+- Bounded values: box plus points. Counts: bars from zero.
+- Log axis only when values span 2+ orders of magnitude, and never for bars. Say &quot;log10&quot; in the axis title.
+- Colours come from one palette file. Each group keeps its colour across the project. Colourblind-safe.
+- Thresholds are justified, cited, or shown as a range.
+- Do not average across groups a reader would consider distinct.
+- No titles. Context goes in the filename and caption.
+- Open the saved image and check it before calling it done.</code></pre>
+<h2>Working in Word</h2>
+<p>Many advisors review in Word. An agent with a document tool can make its edits as tracked changes under a named author, put questions in as Word comments, and turn a returned file's comments into a table of requests and proposed responses. Work on a copy, and open the result in Word before sending it.</p>
+
+<p class="small" style="margin-top:4em">Chen Hsieh · <a href="https://github.com/ChenHsieh/agentic-research-toolkit">source</a> · text CC BY 4.0</p>
+<script>
+document.querySelectorAll('pre').forEach(function(p){var b=document.createElement('button');b.className='copy';b.textContent='copy';
+b.onclick=function(){navigator.clipboard.writeText(p.querySelector('code').innerText).then(function(){b.textContent='copied';setTimeout(function(){b.textContent='copy'},1200)})};p.appendChild(b)});
+</script>
+</body>
+</html>
