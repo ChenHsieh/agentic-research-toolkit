@@ -7,7 +7,7 @@ function hideTip(){tip.style.opacity=0}
 var C={you:'#8a2c2c',agent:'#2f4a5c',file:'#5c5a2f',bad:'#b03a2e',ok:'#2e6b45',muted:'#8a8a8a'};
 
 function graph(el,spec){
-  var W=el.clientWidth||640,H=spec.height||320,narrow=W<520;
+  var W=el.clientWidth||640,narrow=W<520,H=(spec.height||320)*(narrow?1.35:1);
   var svg=d3.select(el).append('svg').attr('viewBox',[0,0,W,H]).attr('width','100%').attr('height',H);
   var id='a'+Math.random().toString(36).slice(2,7);
   svg.append('defs').append('marker').attr('id',id).attr('viewBox','0 -4 8 8').attr('refX',8).attr('markerWidth',7).attr('markerHeight',7).attr('orient','auto')
@@ -15,6 +15,9 @@ function graph(el,spec){
   var nodes=spec.nodes.map(function(n){return Object.assign({},n,{tx:n.x*W,ty:n.y*H,x:n.x*W,y:n.y*H})});
   var byId={};nodes.forEach(function(n){byId[n.id]=n});
   var links=(spec.links||[]).map(function(l){return Object.assign({},l,{source:byId[l.s],target:byId[l.t]})});
+  if(spec.axis){var ay=H-14;svg.append('line').attr('x1',4).attr('x2',W-4).attr('y1',ay).attr('y2',ay).attr('stroke','#bbb').attr('marker-end','url(#'+id+')');
+    svg.append('text').attr('class','glabel').attr('x',4).attr('y',ay-6).text(spec.axis[0]);
+    svg.append('text').attr('class','glabel').attr('x',W-6).attr('y',ay-6).attr('text-anchor','end').text(spec.axis[1]);}
   var link=svg.append('g').selectAll('g').data(links).join('g');
   var lp=link.append('path').attr('fill','none').attr('stroke',function(l){return l.color?C[l.color]:'#aaa'}).attr('stroke-width',1.4)
     .attr('stroke-dasharray',function(l){return l.dash?'4 4':null}).attr('marker-end','url(#'+id+')');
@@ -48,6 +51,7 @@ function graph(el,spec){
     .on('start',function(ev,n){if(!ev.active)sim.alphaTarget(0.3).restart();d3.select(this).style('cursor','grabbing')})
     .on('drag',function(ev,n){n.tx=n.x=ev.x;n.ty=n.y=ev.y})
     .on('end',function(ev){if(!ev.active)sim.alphaTarget(0);d3.select(this).style('cursor','grab')}));
+  if(spec.legend){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.legend.map(function(l){return '<span style="display:inline-block;width:.8em;height:.8em;border-radius:3px;background:'+C[l[0]]+';margin:0 .35em 0 .9em;vertical-align:-1px"></span>'+l[1]}).join('')+'</div>')}
   if(spec.note){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.note+'</div>')}
 }
 

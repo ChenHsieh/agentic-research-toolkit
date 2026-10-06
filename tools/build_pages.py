@@ -114,20 +114,20 @@ page('session.html','A 20-minute session',se,'Go through this on your own projec
 print('ok')
 
 LAND='''<script src="https://cdn.jsdelivr.net/npm/d3@7"></script><script src="graph.js"></script><script>
-drawDiagrams({land:{height:360,nodes:[
+drawDiagrams({land:{height:380,axis:['you drive','it drives'],legend:[['you','coding agents'],['file','research assistants'],['agent','autonomous research systems'],['bad','idea-to-paper']],nodes:[
 {id:'cc',label:'Claude Code',kind:'you',x:.08,y:.2,info:'Terminal agent. You approve commands and set the rules.',url:'https://code.claude.com/docs/en/overview'},
 {id:'cx',label:'Codex CLI',kind:'you',x:.1,y:.42,info:'Terminal agent from OpenAI. Reads AGENTS.md.',url:'https://github.com/openai/codex'},
 {id:'gm',label:'Gemini CLI',kind:'you',x:.08,y:.64,info:'Open-source terminal agent with a free tier.',url:'https://github.com/google-gemini/gemini-cli'},
-{id:'ai',label:'Aider',kind:'you',x:.12,y:.86,info:'Commits every change to git; works with local models.',url:'https://aider.chat/'},
+{id:'ai',label:'Aider',kind:'you',x:.12,y:.8,info:'Commits every change to git; works with local models.',url:'https://aider.chat/'},
 {id:'pq',label:'PaperQA2',kind:'file',x:.33,y:.25,info:'Literature agent that answers with citations.',url:'https://arxiv.org/abs/2409.13740'},
 {id:'bm',label:'Biomni',kind:'file',x:.35,y:.55,info:'General biomedical agent; tools mined from 25 domains. Its own benchmark finds weak method choice.',url:'https://www.biorxiv.org/content/10.1101/2025.05.30.656746v1'},
-{id:'p2',label:'Paper2Agent',kind:'file',x:.32,y:.82,info:'Turns a paper plus its code into callable tools, with tests.',url:'https://arxiv.org/abs/2509.06917'},
+{id:'p2',label:'Paper2Agent',kind:'file',x:.32,y:.78,info:'Turns a paper plus its code into callable tools, with tests.',url:'https://arxiv.org/abs/2509.06917'},
 {id:'cv',label:'CellVoyager',kind:'agent',x:.55,y:.2,info:'Proposes and runs new analyses on published single-cell data.',url:'https://www.biorxiv.org/content/10.1101/2025.06.03.657517v1'},
 {id:'vl',label:'Virtual Lab',kind:'agent',x:.56,y:.48,info:'LLM PI plus specialist agents plus a human. 92 nanobodies designed; 2 improved.',url:'https://doi.org/10.1038/s41586-025-09442-9'},
-{id:'rb',label:'Robin',kind:'agent',x:.58,y:.76,info:'Literature and analysis agents; humans run the wet lab.',url:'https://arxiv.org/abs/2505.13400'},
+{id:'rb',label:'Robin',kind:'agent',x:.58,y:.74,info:'Literature and analysis agents; humans run the wet lab.',url:'https://arxiv.org/abs/2505.13400'},
 {id:'co',label:'AI co-scientist',kind:'agent',x:.78,y:.3,info:'Agents generate and rank hypotheses in a tournament.',url:'https://arxiv.org/abs/2502.18864'},
 {id:'ks',label:'Kosmos',kind:'agent',x:.8,y:.6,info:'Long autonomous runs. 79.4% of report statements judged accurate.',url:'https://arxiv.org/abs/2511.02824'},
-{id:'as',label:'AI Scientist',kind:'bad',x:.9,y:.85,info:'Idea to paper with automated review, machine learning only. Independent test: 42% of experiments failed on coding errors.',url:'https://arxiv.org/abs/2408.06292'}],links:[]}});
+{id:'as',label:'AI Scientist',kind:'bad',x:.9,y:.78,info:'Idea to paper with automated review, machine learning only. Independent test: 42% of experiments failed on coding errors.',url:'https://arxiv.org/abs/2408.06292'}],links:[]}});
 </script>'''
 def it(name,url,who,what):
     return f'<p><a href="{url}">{name}</a> <span class="small">({who})</span>. {what}</p>\n'
