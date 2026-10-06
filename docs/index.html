@@ -18,7 +18,7 @@
 
 <p>Claude Code is a command-line program. It runs a language model that can read and edit files and run shell commands in the folder where you start it. Each command it wants to run can require your approval.</p>
 
-<figure><img src="fig/chat-vs-agent.svg" alt="Chat returns text that you run yourself. An agent runs the read, run, fix loop on its own."><figcaption>Chat returns text that you run yourself. An agent runs the read, run, fix loop on its own.</figcaption></figure>
+<figure><div class="g" data-g="loop"></div><figcaption>Chat returns text that you run yourself. An agent runs the read, run, fix loop on its own.</figcaption></figure>
 
 <p>I run it on the university cluster (Slurm scheduler) inside tmux, one session per project, usually several at once on the strongest available model. I answer most prompts from my phone through Remote Control. From 2 September to 2 October I ran about 75 sessions on the cluster and about 10 on my laptop. I used Codex in 3 sessions.</p>
 
@@ -30,7 +30,7 @@
 
 <h2>Rules in a file, then rules in code</h2>
 
-<figure><img src="fig/you-and-agent.svg" alt="The agent does the work in between. Deciding what to ask, and whether the answer is right, stays with you."><figcaption>The agent does the work in between. Deciding what to ask, and whether the answer is right, stays with you.</figcaption></figure>
+<figure><div class="g" data-g="roles"></div><figcaption>The agent does the work in between. Deciding what to ask, and whether the answer is right, stays with you.</figcaption></figure>
 
 
 
@@ -44,7 +44,7 @@
 
 <p>The rules were in the file and were not applied, because nothing at the moment of the analysis pointed to them. I moved the important ones into code that stops the work:</p>
 
-<figure><img src="fig/rules-file-vs-code.svg" alt="A rule in a file is read once, at the start. A rule in code sits on the path and stops the analysis when it applies."><figcaption>A rule in a file is read once, at the start. A rule in code sits on the path and stops the analysis when it applies.</figcaption></figure>
+<figure><div class="g" data-g="rules"></div><figcaption>A rule in a file is read once, at the start. A rule in code sits on the path and stops the analysis when it applies.</figcaption></figure>
 
 <p>A script raises an error when two arms are matched on different quantities, and refuses to report a null without a power check.<br>
 A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
@@ -64,7 +64,7 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p><b>Unrecorded method parameter.</b> An agent rebuilt one chapter's results from the Methods text without access to intermediate files. The Methods did not state the DIAMOND sensitivity mode. With the default mode, 732 of 13,663 candidate genes (5.4%) were missed. A second filtering step was not written down anywhere. Fix: both are now in the Methods. Rule for these runs: when the text is missing something, the agent stops and marks that number BLOCKED. It does not guess, because a guess that happens to match hides the gap.</p>
 
-<figure><img src="fig/clean-room.svg" alt="Rebuilding results from the Methods text alone. Each number either matches, does not, or cannot be computed from what is written."><figcaption>Rebuilding results from the Methods text alone. Each number either matches, does not, or cannot be computed from what is written.</figcaption></figure>
+<figure><div class="g" data-g="clean"></div><figcaption>Rebuilding results from the Methods text alone. Each number either matches, does not, or cannot be computed from what is written.</figcaption></figure>
 
 <p><b>Submitted is not finished.</b> A job that was submitted, or that exited with code 0, can still have produced an empty or partial output. Fix: a step counts as done only after the scheduler reports completion and the output file is checked.</p>
 
@@ -72,7 +72,7 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p>When a conversation gets long, older parts are summarized and details are lost. I keep a brief, a task list and a status file on disk, and commit after each step. At the end, a new session reads the files and commits and reports what was done. I use that report, not the original session's own summary.</p>
 
-<figure><img src="fig/long-session.svg" alt="Over hours, early conversation is summarized and details drop out. Files written along the way stay complete."><figcaption>Over hours, early conversation is summarized and details drop out. Files written along the way stay complete.</figcaption></figure>
+<figure><div class="g" data-g="session"></div><figcaption>Over hours, early conversation is summarized and details drop out. Files written along the way stay complete.</figcaption></figure>
 
 <p>Waiting is done by the scheduler (job dependencies) or by one background check that ends when the job leaves the queue. Not by an agent polling.</p>
 
@@ -99,5 +99,8 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 <p><a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/setup/CLAUDE.md">setup/CLAUDE.md</a>, the rules file I start new projects from.<br>
 <a href="https://github.com/ChenHsieh/agentic-research-toolkit/tree/main/skills">skills/</a>, procedures for trying to break a result.</p>
 
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="graph.js"></script>
+<script src="diagrams.js"></script>
 </body>
 </html>

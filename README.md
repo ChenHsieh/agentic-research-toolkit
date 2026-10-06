@@ -4,11 +4,9 @@
 
 How I use Claude Code for research on a university cluster, what failed, and what I changed. Written for friends and labmates who asked.
 
-![Chat versus agent](docs/fig/chat-vs-agent.svg)
 
 The one lesson: rules written in a file get skipped at the moment they apply. The important ones should be code that stops the work.
 
-![Rule in a file versus rule in code](docs/fig/rules-file-vs-code.svg)
 
 ## On the site
 
@@ -23,6 +21,6 @@ The one lesson: rules written in a file get skipped at the moment they apply. Th
 - `setup/CLAUDE.md`: the rules file I start projects from.
 - `skills/`: procedures for testing a result (design confounds, nulls for derived statistics, result autopsy, a second method). Attribution in `skills/README.md`.
 - `docs/`: the site. Plain HTML, no build step.
-- `tools/draw.py`: draws the figures. `tools/build_pages.py`: writes Examples, Practice and Session.
+- `tools/build_pages.py`: writes Examples, Practice and Session.
 
 Code MIT. Text and figures CC BY 4.0.

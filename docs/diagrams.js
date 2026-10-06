@@ -1,0 +1,48 @@
+drawDiagrams({
+loop:{height:300,note:'Drag the boxes. Hover for detail.',nodes:[
+ {id:'you',label:'You',kind:'you',x:.1,y:.5,info:'<b>You</b><br>Type a goal in plain language: "rebuild Table 2 from the raw counts".'},
+ {id:'model',label:'Model',kind:'agent',x:.27,y:.5,info:'<b>Language model</b><br>Decides the next action. In chat it can only reply with text.'},
+ {id:'read',label:'Read files',kind:'agent',x:.66,y:.13,info:'<b>Read</b><br>Opens your scripts, data headers, logs and the rules file.'},
+ {id:'run',label:'Run commands',kind:'agent',x:.88,y:.5,info:'<b>Run</b><br>Executes Python, R, shell, submits cluster jobs. Each command can need your approval.'},
+ {id:'err',label:'Read output',kind:'agent',x:.66,y:.87,info:'<b>Read the output</b><br>Errors, tracebacks, empty files. This is where it notices (or misses) that something went wrong.'},
+ {id:'edit',label:'Edit',kind:'agent',x:.47,y:.5,info:'<b>Edit</b><br>Changes code and runs again. The loop repeats until it decides it is done.'},
+ {id:'res',label:'Result',kind:'you',x:.27,y:.87,info:'<b>Result</b><br>Files, numbers, a summary. The summary is its own account; the files are the evidence.'}],
+ links:[{s:'you',t:'model',label:'goal'},{s:'model',t:'read',bend:-.1},{s:'read',t:'run'},{s:'run',t:'err'},{s:'err',t:'edit'},{s:'edit',t:'read',dash:1},{s:'err',t:'res'},{s:'res',t:'you',bend:.2,label:'you check'}]},
+
+roles:{height:250,nodes:[
+ {id:'q',label:'What to ask',kind:'you',x:.13,y:.25,info:'Choosing the question. The agent will not tell you a question is uninteresting.'},
+ {id:'j',label:'Is it right?',kind:'you',x:.13,y:.75,info:'Judging the result. Most of my failures were results nobody had really checked.'},
+ {id:'code',label:'Write code',kind:'agent',x:.6,y:.15,info:'Fast and usually correct for routine analysis.'},
+ {id:'jobs',label:'Run jobs',kind:'agent',x:.85,y:.4,info:'Writes and submits batch jobs, checks the queue.'},
+ {id:'lit',label:'Read papers',kind:'agent',x:.6,y:.6,info:'Summaries with quotes. Check that each quote exists.'},
+ {id:'fig',label:'Draw figures',kind:'agent',x:.85,y:.85,info:'Follows a written figure spec well; checks its own rendering only if told to.'}],
+ links:[{s:'q',t:'code'},{s:'q',t:'lit'},{s:'jobs',t:'j'},{s:'fig',t:'j'}]},
+
+rules:{height:280,note:'Hover the check to see what it refuses.',nodes:[
+ {id:'file',label:'CLAUDE.md',kind:'file',x:.12,y:.15,info:'<b>Rules file</b><br>Read once when the session starts. Hours later, nothing points back to it.'},
+ {id:'a1',label:'Analysis',kind:'agent',x:.12,y:.6,info:'The analysis that was supposed to follow the rule.'},
+ {id:'bad',label:'Defect ships',kind:'bad',x:.38,y:.6,info:'4 Sept: three defects the file already prohibited. A control at 3.4x dose; a null from an arm that barely moved; a pooled correlation that reversed within groups.'},
+ {id:'a2',label:'Analysis',kind:'agent',x:.6,y:.6,info:'Same analysis, with the rule in its path.'},
+ {id:'chk',label:'Check (code)',kind:'you',x:.8,y:.6,info:'<b>Refuses:</b><br>a null without a power check<br>arms matched on different quantities<br>a figure with no sample size<br>a commit in a shared checkout'},
+ {id:'ok',label:'Result',kind:'ok',x:.8,y:.15,info:'Only results that passed the check get here.'},
+ {id:'stop',label:'Stops',kind:'bad',x:.8,y:.9,info:'The run fails with a message saying which rule applied.'}],
+ links:[{s:'file',t:'a1',dash:1,label:'read at start'},{s:'a1',t:'bad'},{s:'a2',t:'chk'},{s:'chk',t:'ok'},{s:'chk',t:'stop'}]},
+
+session:{type:'timeline',window:3,steps:[
+ {talk:'Goal and constraints discussed in detail.',file:'brief',disk:'BRIEF.md: goal, inputs, what done means, known traps.'},
+ {talk:'Decided to exclude two samples, and why.',file:'tasks',disk:'Task list with the exclusion recorded as a step.'},
+ {talk:'First job failed; fixed the module version.',file:'commit',disk:'Commit with the fixed job script.'},
+ {talk:'Numbers for the main comparison.',file:'status',disk:'STATUS.md: result, file path, how computed.'},
+ {talk:'Control looked odd; reran it.',file:'commit',disk:'Commit with the rerun control and its output.'},
+ {talk:'Wrote the summary.',file:'status',disk:'STATUS.md updated; a fresh session reviews from here.'}]},
+
+clean:{height:300,nodes:[
+ {id:'m',label:'Methods text',kind:'file',x:.1,y:.25,info:'Only what is written down. No access to the original scripts or intermediate files.'},
+ {id:'raw',label:'Raw inputs',kind:'file',x:.1,y:.75,info:'Genome, annotation, reads: the starting files.'},
+ {id:'rb',label:'Agent rebuilds',kind:'agent',x:.42,y:.5,info:'In an empty folder. When the text is missing a detail, it must stop and say so instead of guessing.'},
+ {id:'cmp',label:'Compare',kind:'agent',x:.68,y:.5,info:'Each reported number against the rebuilt one.'},
+ {id:'p',label:'PASS',kind:'ok',x:.9,y:.15,info:'Matches the paper.'},
+ {id:'f',label:'FAIL',kind:'bad',x:.9,y:.5,info:'Does not match. A real discrepancy to explain.'},
+ {id:'b',label:'BLOCKED',kind:'you',x:.9,y:.85,info:'Cannot be computed from the text. Mine: an unstated search setting changed 732 of 13,663 genes, and one filtering step was written nowhere.'}],
+ links:[{s:'m',t:'rb'},{s:'raw',t:'rb'},{s:'rb',t:'cmp'},{s:'cmp',t:'p'},{s:'cmp',t:'f'},{s:'cmp',t:'b'}]}
+});
