@@ -2,7 +2,7 @@
 (function(){
 var tip=document.createElement('div');tip.className='gtip';document.body.appendChild(tip);
 function showTip(ev,html){if(!html)return;tip.innerHTML=html;tip.style.opacity=1;moveTip(ev)}
-function moveTip(ev){var x=ev.clientX+14,y=ev.clientY+14,w=tip.offsetWidth;if(x+w>innerWidth-8)x=ev.clientX-w-14;tip.style.left=x+'px';tip.style.top=y+'px'}
+function moveTip(ev){var x=ev.clientX+14,y=ev.clientY+14,w=tip.offsetWidth;if(x+w>innerWidth-8)x=ev.clientX-w-14;if(x<8)x=8;tip.style.left=x+'px';tip.style.top=y+'px'}
 function hideTip(){tip.style.opacity=0}
 var C={you:'#8a2c2c',agent:'#2f4a5c',file:'#5c5a2f',bad:'#b03a2e',ok:'#2e6b45',muted:'#8a8a8a'};
 
@@ -21,7 +21,7 @@ function graph(el,spec){
   var link=svg.append('g').selectAll('g').data(links).join('g');
   var lp=link.append('path').attr('fill','none').attr('stroke',function(l){return l.color?C[l.color]:'#aaa'}).attr('stroke-width',1.4)
     .attr('stroke-dasharray',function(l){return l.dash?'4 4':null}).attr('marker-end','url(#'+id+')');
-  var lt=link.append('text').attr('class','glabel').text(function(l){return l.label||''});
+  var lt=link.append('text').attr('class','glabel').text(function(l){return narrow?'':(l.label||'')});
   var node=svg.append('g').selectAll('g').data(nodes).join('g').attr('class','gnode').style('cursor','grab');
   node.append('rect').attr('rx',7);
   node.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('fill','#fff').attr('class','gname')
