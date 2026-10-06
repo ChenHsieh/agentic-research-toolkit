@@ -1,4 +1,4 @@
-// Small interactive diagrams: draggable nodes, hover for detail. Needs d3 v7.
+// Small static diagrams with hover (and keyboard focus) for detail. Needs d3 v7.
 (function(){
 var tip=document.createElement('div');tip.className='gtip';document.body.appendChild(tip);
 function showTip(ev,html){if(!html)return;tip.innerHTML=html;tip.style.opacity=1;moveTip(ev)}
@@ -22,35 +22,34 @@ function graph(el,spec){
   var lp=link.append('path').attr('fill','none').attr('stroke',function(l){return l.color?C[l.color]:'#aaa'}).attr('stroke-width',1.4)
     .attr('stroke-dasharray',function(l){return l.dash?'4 4':null}).attr('marker-end','url(#'+id+')');
   var lt=link.append('text').attr('class','glabel').text(function(l){return narrow?'':(l.label||'')});
-  var node=svg.append('g').selectAll('g').data(nodes).join('g').attr('class','gnode').style('cursor','grab');
+  var node=svg.append('g').selectAll('g').data(nodes).join('g').attr('class','gnode');
   node.append('rect').attr('rx',7);
   node.append('text').attr('text-anchor','middle').attr('dy','0.35em').attr('fill','#fff').attr('class','gname')
     .text(function(n){return n.label});
   node.each(function(n){var t=d3.select(this).select('text').node().getBBox();n.w=t.width+22;n.h=t.height+12;
     d3.select(this).select('rect').attr('x',-n.w/2).attr('y',-n.h/2).attr('width',n.w).attr('height',n.h)
       .attr('fill',C[n.kind]||C.agent).attr('fill-opacity',n.faint?0.35:1)});
+  node.attr('tabindex',0).attr('role','img').attr('aria-label',function(n){return n.label+(n.info?': '+n.info.replace(/<[^>]+>/g,' '):'')})
+    .on('focus',function(ev,n){var r=this.getBoundingClientRect();showTip({clientX:r.right,clientY:r.bottom},n.info)}).on('blur',hideTip);
   node.on('mouseover',function(ev,n){showTip(ev,n.info);
       lp.attr('stroke-opacity',function(l){return l.source===n||l.target===n?1:0.25})})
     .on('mousemove',moveTip).on('mouseout',function(){hideTip();lp.attr('stroke-opacity',1)})
     .on('click',function(ev,n){if(n.url)window.open(n.url,'_blank')});
-  var sim=d3.forceSimulation(nodes)
-    .force('x',d3.forceX(function(n){return n.tx}).strength(0.25))
-    .force('y',d3.forceY(function(n){return n.ty}).strength(0.25))
-    .force('c',d3.forceCollide(function(n){return n.w/2+4}).strength(0.6))
-    .on('tick',function(){
-      nodes.forEach(function(n){n.x=Math.max(n.w/2+2,Math.min(W-n.w/2-2,n.x));n.y=Math.max(n.h/2+2,Math.min(H-n.h/2-2,n.y))});
-      node.attr('transform',function(n){return 'translate('+n.x+','+n.y+')'});
-      lp.attr('d',function(l){var a=l.source,b=l.target,dx=b.x-a.x,dy=b.y-a.y;
-        var p=edge(a,dx,dy),q=edge(b,-dx,-dy);var bend=l.bend||0;
-        var mx=(p[0]+q[0])/2-dy*bend,my=(p[1]+q[1])/2+dx*bend;l.mx=mx;l.my=my;
-        return 'M'+p[0]+','+p[1]+'Q'+mx+','+my+' '+q[0]+','+q[1]});
-      lt.attr('x',function(l){return l.mx}).attr('y',function(l){return l.my-5}).attr('text-anchor','middle');
-    });
+  // settle overlaps once, off-screen, then draw a static layout
+  var sim=d3.forceSimulation(nodes).stop()
+    .force('x',d3.forceX(function(n){return n.tx}).strength(0.4))
+    .force('y',d3.forceY(function(n){return n.ty}).strength(0.4))
+    .force('c',d3.forceCollide(function(n){return n.w/2+6}).strength(0.8));
+  for(var i=0;i<200;i++){sim.tick();nodes.forEach(function(n){n.x=Math.max(n.w/2+2,Math.min(W-n.w/2-2,n.x));n.y=Math.max(n.h/2+2,Math.min(H-n.h/2-2,n.y))})}
+  node.attr('transform',function(n){return 'translate('+n.x+','+n.y+')'}).style('cursor',function(n){return n.url?'pointer':'default'});
+  lp.attr('d',function(l){var a=l.source,b=l.target,dx=b.x-a.x,dy=b.y-a.y;
+    var p=edge(a,dx,dy),q=edge(b,-dx,-dy),bend=l.bend||0;
+    var mx=(p[0]+q[0])/2-dy*bend,my=(p[1]+q[1])/2+dx*bend;l.mx=mx;l.my=my;
+    return 'M'+p[0]+','+p[1]+'Q'+mx+','+my+' '+q[0]+','+q[1]});
+  lt.attr('x',function(l){return l.mx}).attr('y',function(l){return l.my-5}).attr('text-anchor','middle');
+  node.on('mouseover.hl',function(){d3.select(this).select('rect').attr('stroke','#111').attr('stroke-width',1.5)})
+      .on('mouseout.hl',function(){d3.select(this).select('rect').attr('stroke',null)});
   function edge(n,dx,dy){var hw=n.w/2+3,hh=n.h/2+3,s=Math.min(Math.abs(dx)>1e-6?hw/Math.abs(dx):1e9,Math.abs(dy)>1e-6?hh/Math.abs(dy):1e9);return [n.x+dx*s,n.y+dy*s]}
-  node.call(d3.drag()
-    .on('start',function(ev,n){if(!ev.active)sim.alphaTarget(0.3).restart();d3.select(this).style('cursor','grabbing')})
-    .on('drag',function(ev,n){n.tx=n.x=ev.x;n.ty=n.y=ev.y})
-    .on('end',function(ev){if(!ev.active)sim.alphaTarget(0);d3.select(this).style('cursor','grab')}));
   if(spec.legend){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.legend.map(function(l){return '<span style="display:inline-block;width:.8em;height:.8em;border-radius:3px;background:'+C[l[0]]+';margin:0 .35em 0 .9em;vertical-align:-1px"></span>'+l[1]}).join('')+'</div>')}
   if(spec.note){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.note+'</div>')}
 }

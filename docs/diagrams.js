@@ -1,5 +1,5 @@
 drawDiagrams({
-loop:{height:300,note:'Drag the boxes. Hover for detail.',nodes:[
+loop:{height:300,note:'Hover a box for detail.',nodes:[
  {id:'you',label:'You',kind:'you',x:.1,y:.5,info:'<b>You</b><br>Type a goal in plain language: "rebuild Table 2 from the raw counts".'},
  {id:'model',label:'Model',kind:'agent',x:.27,y:.5,info:'<b>Language model</b><br>Decides the next action. In chat it can only reply with text.'},
  {id:'read',label:'Read files',kind:'agent',x:.66,y:.13,info:'<b>Read</b><br>Opens your scripts, data headers, logs and the rules file.'},

@@ -25,3 +25,4 @@ hr{border:0;border-top:1px solid #ddd;margin:3em 0}
 .gtip{position:fixed;z-index:9;max-width:280px;pointer-events:none;opacity:0;transition:opacity .12s;background:#fff;border:1px solid #ccc;padding:.55em .7em;font:13px/1.45 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#222;box-shadow:0 2px 10px rgba(0,0,0,.08)}
 @media (prefers-color-scheme:dark){.gtip{background:#222;color:#eee;border-color:#444}.glabel{fill:#aaa}}
 input[type=range]{accent-color:#8a2c2c}
+.gnode:focus{outline:none}.gnode:focus rect{stroke:#111;stroke-width:2}

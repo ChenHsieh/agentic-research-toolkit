@@ -133,7 +133,7 @@ def it(name,url,who,what):
     return f'<p><a href="{url}">{name}</a> <span class="small">({who})</span>. {what}</p>\n'
 rd='''<h1>Reading</h1>
 <p>Papers, tools and guides on agents for research, checked on 6 October 2026. Every link was opened at its source. Numbers are quoted from the source.</p>
-<figure><div class="g" data-g="land"></div><figcaption>Left: you drive, the tool assists. Right: the system plans and runs the research itself. Placement is my reading of each paper. Hover for a summary; click to open.</figcaption></figure>
+<figure><div class="g" data-g="land"></div><figcaption>Left: you drive, the tool assists. Right: the system plans and runs the research itself. Placement is my reading of each paper. Hover for a summary; click to open the paper.</figcaption></figure>
 <h2>Start here</h2>
 '''
 rd+=it("Building effective agents","https://www.anthropic.com/engineering/building-effective-agents","Anthropic, 2024","Start with one model call; add agent steps only when the simpler version measurably falls short.")
