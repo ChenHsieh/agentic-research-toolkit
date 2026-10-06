@@ -26,3 +26,4 @@ hr{border:0;border-top:1px solid #ddd;margin:3em 0}
 @media (prefers-color-scheme:dark){.gtip{background:#222;color:#eee;border-color:#444}.glabel{fill:#aaa}}
 input[type=range]{accent-color:#8a2c2c}
 .gnode:focus{outline:none}.gnode:focus rect{stroke:#111;stroke-width:2}
+.principles li{margin:.45em 0}.principles a{font-size:.85em}

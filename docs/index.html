@@ -18,7 +18,20 @@
 
 <p>Several people have asked me how I use Claude Code for research. This page lists what I do, what failed, and what I changed after each failure. Dates are 2026.</p>
 
-<h2>Setup</h2>
+<h2>Eight principles</h2>
+<ol class="principles">
+<li><b>Doing is cheap now; checking is not.</b> Spend the saved time on <a href="#quiet">checks</a>.</li>
+<li><b>Make every check fail once</b> before trusting it. A check that has never said no is a description. <a href="#quiet">Why</a></li>
+<li><b>Empty is BLOCKED, not PASS.</b> A control with no values measured nothing. <a href="#failures">Case</a></li>
+<li><b>Rules that matter become code.</b> A rule in a file is read once and forgotten. <a href="#rules">Case</a></li>
+<li><b>Name the unit before you count.</b> Grouped units are reported within groups. <a href="#rules">Case</a></li>
+<li><b>Files are the record, not the chat.</b> Brief, task list, status, commit. <a href="#long">Why</a></li>
+<li><b>Reproduce from the Methods alone.</b> Gaps are marked BLOCKED, never guessed. <a href="#failures">Case</a></li>
+<li><b>Use the strongest model where being wrong is expensive.</b> In research that is most places. <a href="#models">Why</a></li>
+</ol>
+<p class="small">The numbered form is borrowed from <a href="https://rewrites.bio/">rewrites.bio</a> (Seqera), principles for rewriting bioinformatics tools with AI. Its line "Fast code is now cheap. Scientific insight, validation, and trust are not" is the same idea from the software side.</p>
+
+<h2 id="setup">Setup</h2>
 
 <p>Claude Code is a command-line program. It runs a language model that can read and edit files and run shell commands in the folder where you start it. Each command it wants to run can require your approval.</p>
 
@@ -28,11 +41,11 @@
 
 <p>That plan and that volume matter. Some of what I get done is the budget, not the method. The failures below happened at that budget anyway.</p>
 
-<h2>Tasks I use it for</h2>
+<h2 id="tasks">Tasks I use it for</h2>
 
 <p>Status summaries of a project from its files and git history. End-to-end analyses, including writing, submitting and checking cluster jobs. Answering questions from a talk with data that already exists. Redrawing figures to a written set of rules. Summaries of a lab's published methods, with each claim quoted from the paper. Rebuilding my results from the Methods text in an empty folder. Weekly updates for my advisor.</p>
 
-<h2>Why the failures are quiet</h2>
+<h2 id="quiet">Why the failures are quiet</h2>
 
 <p>Look at the failures further down this page. None of them crashed. A control returned nothing and was read as a pass. A job exited cleanly with an empty file. A website passed every check because every check compared it with itself. A loop over a list ran once instead of fourteen times and reported a clean result. Each had a check, and each check could not have said no.</p>
 
@@ -44,7 +57,7 @@
 
 <p>What is new is the volume. An agent writes checks faster than anyone writes positive controls for them. So the habit I would pass on is small: before trusting a check, make it fail once. Feed it the empty file, the shuffled labels, the case built to be wrong, and watch it say no. A check that has never said no is a description, not a test.</p>
 
-<h2>Rules in a file, then rules in code</h2>
+<h2 id="rules">Rules in a file, then rules in code</h2>
 
 <figure><div class="g" data-g="roles"></div><figcaption>The agent does the work in between. Deciding what to ask, and whether the answer is right, stays with you.</figcaption></figure>
 
@@ -66,7 +79,7 @@
 A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
 A figure-saving function refuses a figure with no sample size, text under 20 pt, or overlapping labels.</p>
 
-<h2>Failures and fixes</h2>
+<h2 id="failures">Failures and fixes</h2>
 
 <p><b>Empty control reported as passed.</b> A comparison returned no values and the summary read it as a pass. Fix: a control with no values is BLOCKED, not PASS, and each control must point to the job and file that produced it.</p>
 
@@ -84,7 +97,7 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p><b>Submitted is not finished.</b> A job that was submitted, or that exited with code 0, can still have produced an empty or partial output. Fix: a step counts as done only after the scheduler reports completion and the output file is checked.</p>
 
-<h2>Long sessions</h2>
+<h2 id="long">Long sessions</h2>
 
 <p>When a conversation gets long, older parts are summarized and details are lost. I keep a brief, a task list and a status file on disk, and commit after each step. At the end, a new session reads the files and commits and reports what was done. I use that report, not the original session's own summary.</p>
 
@@ -92,13 +105,13 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p>Waiting is done by the scheduler (job dependencies) or by one background check that ends when the job leaves the queue. Not by an agent polling.</p>
 
-<h2>Models</h2>
+<h2 id="models">Models</h2>
 
 <p>I use the strongest model for design, interpretation and review. Cheaper models are fine for bulk edits if the result is checked. Tools can switch to another model when one is overloaded; the session status shows which model answered.</p>
 
 <p>Local models: on a base M4 Mac, a 7-billion-parameter model at 4-bit generates about 24 tokens per second (my measurement). That works for chat and small edits. I have not run a multi-hour project session on a local model. If data cannot leave your institution, options are a hosted model that sees only code and summaries, or an open model on institutional GPUs.</p>
 
-<h2>Starting</h2>
+<h2 id="start">Starting</h2>
 
 <p>1. Install Claude Code. Open it in a folder whose contents you already know.<br>
 2. Ask what each file does and in what order they run. Compare with what you know.<br>

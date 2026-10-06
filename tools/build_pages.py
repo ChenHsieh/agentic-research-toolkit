@@ -140,6 +140,7 @@ rd='''<h1>Reading</h1>
 rd+=it("Building effective agents","https://www.anthropic.com/engineering/building-effective-agents","Anthropic, 2024","Start with one model call; add agent steps only when the simpler version measurably falls short.")
 rd+=it("Best practices for Claude Code","https://code.claude.com/docs/en/best-practices","Anthropic docs","Give the agent a check it can run. Keep the rules file short. Use hooks for anything that must always happen.")
 rd+=it("Designing agentic loops","https://simonwillison.net/2025/Sep/30/designing-agentic-loops/","Simon Willison, 2025","Run unattended agents only in a sandbox, with limited credentials, on problems with clear success criteria. His definition: \"An LLM agent runs tools in a loop to achieve a goal.\"")
+rd+=it("rewrites.bio","https://rewrites.bio/","Seqera, 2026","Twelve principles for rewriting bioinformatics tools with AI: credit the original authors, match outputs exactly, say how AI was used, validate each small step against the original.")
 rd+=it("AI for Auto-Research: Roadmap and User Guide","https://arxiv.org/abs/2605.18661","Kong et al., 2026","A map of AI use across the research cycle. Conclusion: more automation can hide failure modes rather than remove them.")
 rd+='<h2>What the benchmarks say</h2>\n<p>The consistent finding: agents run code well and choose methods and interpret biology poorly.</p>\n'
 rd+=it("BixBench","https://arxiv.org/abs/2503.00096","FutureHouse, 2025","About 300 open-answer bioinformatics questions. GPT-4o and Claude 3.5 Sonnet: 17% correct.")
