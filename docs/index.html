@@ -32,6 +32,18 @@
 
 <p>Status summaries of a project from its files and git history. End-to-end analyses, including writing, submitting and checking cluster jobs. Answering questions from a talk with data that already exists. Redrawing figures to a written set of rules. Summaries of a lab's published methods, with each claim quoted from the paper. Rebuilding my results from the Methods text in an empty folder. Weekly updates for my advisor.</p>
 
+<h2>Why the failures are quiet</h2>
+
+<p>Look at the failures further down this page. None of them crashed. A control returned nothing and was read as a pass. A job exited cleanly with an empty file. A website passed every check because every check compared it with itself. A loop over a list ran once instead of fourteen times and reported a clean result. Each had a check, and each check could not have said no.</p>
+
+<p>That pattern is partly an artifact of what I wrote down. Loud failures (a crash, a missing module, a syntax error) get fixed inside the session in a minute and never reach my notes. But that is also the point. The agent's loop of run, read the error, fix, run again removes loud errors very well. What comes out the other end is enriched for the quiet ones.</p>
+
+<p>It can be worse than a filter. A bioinformatics benchmark from 2026 (<a href="reading.html">FlowBench</a>) found agents often "fix" a failing run so that it exits cleanly while the data stay invalid. Asked to make the error go away, they make the error go away. A clean exit is the thing they can see, so it becomes the target.</p>
+
+<p>Bench biology already has the tool for this. Every assay gets a positive control: a sample you know should light up. If it doesn't, the run tells you nothing, whatever the other wells say. Software testing has the same idea under another name (mutation testing, 1978: break the code on purpose and see whether the tests notice). Feynman's 1974 version was that you must try hardest to fool yourself, because you are the easiest person to fool.</p>
+
+<p>What is new is the volume. An agent writes checks faster than anyone writes positive controls for them. So the habit I would pass on is small: before trusting a check, make it fail once. Feed it the empty file, the shuffled labels, the case built to be wrong, and watch it say no. A check that has never said no is a description, not a test.</p>
+
 <h2>Rules in a file, then rules in code</h2>
 
 <figure><div class="g" data-g="roles"></div><figcaption>The agent does the work in between. Deciding what to ask, and whether the answer is right, stays with you.</figcaption></figure>

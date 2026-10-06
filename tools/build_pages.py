@@ -54,6 +54,7 @@ for t,p in [("Catch up","Brief me on [project]. Read STATUS.md and the last ten 
 ("Clean-room reproduction","In a new empty folder, rebuild [results] from the Methods text and the raw inputs only. Do not read existing intermediate files. When the text is missing something you need, stop and mark that number BLOCKED. Do not guess. End with a table: number, expected, observed, PASS / FAIL / BLOCKED."),
 ("Literature","Read [group]'s recent papers on [topic]. What methods do they treat as standard? Which apply to my data, and what would each cost? Quote the paper for every claim, with page or section. Mark anything you could not open."),
 ("Update for my advisor","Summarize what changed this week. Results first, one line each, with the figure and file. Flag anything that reverses what I reported before."),
+("Make the check fail once","Before we trust this check, show it failing. Run it on an input built to be wrong (empty file, shuffled labels, a known-bad case) and show me that it reports a failure. If it passes, the check is broken."),
 ("Fresh-eyes review","Another session worked on this today. Read its commits and output files, not its summary. What did it actually do? What is unsupported, unfinished, or wrong?")]:
     ex+=f'<h3>{t}</h3>\n'+pre(p)
 ex+='<h2>Figure rules</h2>\n<p>Kept in one file the agent reads before any plot.</p>\n'+pre('''
