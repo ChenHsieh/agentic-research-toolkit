@@ -1,5 +1,5 @@
 """Shared page shell. Usage: from page import page; page('x.html','Title','<body html>')"""
-PAGES=[("index.html","Essay"),("examples.html","Examples"),("practice.html","Practice"),("reading.html","Reading"),("session.html","Session")]
+PAGES=[("index.html","Essay"),("examples.html","Examples"),("reading.html","Reading"),("session.html","Session")]
 def page(fn,title,body,desc="",script=""):
     nav='<nav>'+''.join(f'<a href="{h}"'+(' class="here"' if h==fn else '')+f'>{t}</a>' for h,t in PAGES)+'</nav>'
     open('docs/'+fn,'w').write(f'''<!DOCTYPE html>
@@ -26,4 +26,8 @@ def page(fn,title,body,desc="",script=""):
 COPY='''<script>
 document.querySelectorAll('pre').forEach(function(p){var b=document.createElement('button');b.className='copy';b.textContent='copy';
 b.onclick=function(){navigator.clipboard.writeText(p.querySelector('code').innerText).then(function(){b.textContent='copied';setTimeout(function(){b.textContent='copy'},1200)})};p.appendChild(b)});
+</script>'''
+COPY2='''<script>
+document.querySelectorAll('pre,.prompt').forEach(function(el){var b=document.createElement('button');b.className='copy';b.type='button';b.textContent='Copy';
+b.onclick=function(){var t=el.matches('pre')?el.querySelector('code').innerText:el.querySelector('p').innerText;navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1400)})};el.appendChild(b)});
 </script>'''

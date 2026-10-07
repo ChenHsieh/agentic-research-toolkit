@@ -41,3 +41,10 @@ input[type=range]{accent-color:#8a2c2c}
 h2[id]{scroll-margin-top:1.2em}
 html{scroll-behavior:smooth}
 @media (prefers-color-scheme:dark){.toc ol{border-color:#333}.toc li a.on,.toc li a:hover{color:#eee}}
+pre{padding-top:2.1em}
+button.copy{position:absolute;top:.45em;right:.5em;font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#777;background:transparent;border:1px solid #d6d2c8;border-radius:4px;padding:2px 9px;cursor:pointer}
+button.copy:hover{color:#222;border-color:#999}
+.prompt{position:relative;border-left:2px solid #8a2c2c;padding:.15em 0 .15em 1em;margin:1.6em 0}
+.prompt .ph{font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2em}
+.prompt p{margin:0;padding-right:4.5em}
+.prompt button.copy{top:0}

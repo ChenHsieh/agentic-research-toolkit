@@ -1,75 +1,45 @@
 import sys; sys.path.insert(0,'tools')
-from page import page, COPY
+from page import page, COPY, COPY2
 from html import escape as e
 def pre(t): return f'<pre><code>{e(t.strip())}</code></pre>\n'
 
-ex='<h1>Examples</h1>\n<p>Files and prompts I reuse. Copy them and change the details. Each one exists because something went wrong without it.</p>\n'
-ex+='<h2>A rules file</h2>\n<p>Saved as <code>CLAUDE.md</code> in the project folder (Codex reads <code>AGENTS.md</code>). Read by the agent at the start of every session. Start with five lines; add one after each mistake.</p>\n'+pre('''
-# Project: [name]
+ex='<h1>Examples</h1>\n<p>Two files and six prompts I actually use. Copy them, then change the details to fit your project.</p>\n'
+ex+='<h2>A rules file</h2>\n<p>Save it as <code>CLAUDE.md</code> in your project folder (Codex reads <code>AGENTS.md</code>). The agent reads it at the start of every session. Five lines is enough to begin; add one each time something goes wrong.</p>\n'+pre("""
+# [Project name]
 
-## Where things are
-- Raw data: [path]. Read-only. Never modify or delete.
-- Outputs: [path]
-- Status: STATUS.md. Read it first.
+Raw data is in [path]. Never modify or delete it.
+Write outputs to [path].
+Read STATUS.md before starting.
+Load software with: [your exact module or conda commands]
+A job is finished when its output file has been checked, not when it exits.
 
-## How to run things
-- Heavy work goes in batch jobs, not on the login node.
-- Load software with: [exact commands, exact versions]
-- A job is done when the scheduler reports it finished AND the output file is checked.
+## Things that went wrong before
+- [date] A control came back empty and was reported as a pass.
+""")
+ex+='<h2>A status file</h2>\n<p>Save it as <code>STATUS.md</code>. Ask the agent to update it after each real step. When a session ends or gets long, the next one starts from here instead of from memory.</p>\n'+pre("""
+# Status ([date])
 
-## Never
-- Report a number without the file it came from.
-- Commit in a checkout another session is using.
+Goal: [one sentence]
+Done when: [which files exist, and what they show]
 
-## Mistakes that already happened (newest first)
-- [date] A control returned no values and was reported as a pass. A control with no values is BLOCKED.
-''')
-ex+='<h2>A brief</h2>\n<p>Written before a long task, in a file. When the conversation gets summarized, this is still there.</p>\n'+pre('''
-# Brief: [task]
+## Done
+- [step]: [output file]
 
-Goal: [one sentence: what question this answers]
-Inputs: [paths, with versions or commit]
-Done means: [the files that must exist, and what they must contain]
-Known traps: [what went wrong last time]
-Not in scope: [what not to touch]
-What a pure artifact would look like: [write this before seeing the result]
-''')
-ex+='<h2>A status file</h2>\n<p>Updated after each real step. A new session starts by reading it.</p>\n'+pre('''
-# STATUS (updated [date])
+## Open
+- [step]: waiting on [what or whom]
 
-Done
-- [step]: [output path], commit [hash after push]
-Open
-- [step]: blocked on [what / whom]
-Results and where they live
-- [number]: [file], [how computed]
-Corrections
-- [date] [what changed, and why]
-''')
-ex+='<h2>Prompts I reuse</h2>\n'
-for t,p in [("Catch up","Brief me on [project]. Read STATUS.md and the last ten commits. What is done, what is open, what is blocked and on whom?"),
-("Before an analysis","Before running anything, write in the brief what the result would look like if it were an artifact of how the data was built. Then run it."),
-("Try to break it","Here is the result. List the three explanations most likely to make it an artifact. Run the checks. Report which it survives, with the file for each check. A check with no values is BLOCKED, not passed."),
-("After a talk","After my talk people asked: [questions]. For each: can we answer it with data we already have? If yes, do it. If not, say what it would take."),
-("Clean-room reproduction","In a new empty folder, rebuild [results] from the Methods text and the raw inputs only. Do not read existing intermediate files. When the text is missing something you need, stop and mark that number BLOCKED. Do not guess. End with a table: number, expected, observed, PASS / FAIL / BLOCKED."),
-("Literature","Read [group]'s recent papers on [topic]. What methods do they treat as standard? Which apply to my data, and what would each cost? Quote the paper for every claim, with page or section. Mark anything you could not open."),
-("Update for my advisor","Summarize what changed this week. Results first, one line each, with the figure and file. Flag anything that reverses what I reported before."),
-("Make the check fail once","Before we trust this check, show it failing. Run it on an input built to be wrong (empty file, shuffled labels, a known-bad case) and show me that it reports a failure. If it passes, the check is broken."),
-("Fresh-eyes review","Another session worked on this today. Read its commits and output files, not its summary. What did it actually do? What is unsupported, unfinished, or wrong?")]:
-    ex+=f'<h3>{t}</h3>\n'+pre(p)
-ex+='<h2>Figure rules</h2>\n<p>Kept in one file the agent reads before any plot.</p>\n'+pre('''
-- One figure per file. Compose panels later.
-- Every plot states n. A stats table is written from the same data frame that was plotted.
-- Bounded values: box plus points. Counts: bars from zero.
-- Log axis only when values span 2+ orders of magnitude, and never for bars. Say "log10" in the axis title.
-- Colours come from one palette file. Each group keeps its colour across the project. Colourblind-safe.
-- Thresholds are justified, cited, or shown as a range.
-- Do not average across groups a reader would consider distinct.
-- No titles. Context goes in the filename and caption.
-- Open the saved image and check it before calling it done.
-''')
-ex+='<h2>Working in Word</h2>\n<p>Many advisors review in Word. An agent with a document tool can make its edits as tracked changes under a named author, put questions in as Word comments, and turn a returned file\'s comments into a table of requests and proposed responses. Work on a copy, and open the result in Word before sending it.</p>\n'
-page('examples.html','Examples: using an agent for research',ex,'Rules file, brief, status file, prompts and figure rules I reuse.',COPY)
+## Numbers and where they came from
+- [number]: [file], [how it was computed]
+""")
+ex+='<h2>Prompts</h2>\n'
+for t,p in [("Catch me up","Read STATUS.md and the last ten commits. What is done, what is still open, and what is waiting on someone?"),
+("Before I trust this check","Run this check on an input that should fail, such as an empty file or shuffled labels, and show me that it fails."),
+("Try to break this result","What are the three most likely ways this result could be an artifact? Check each one and show me the file for each check."),
+("Rebuild from the Methods","In an empty folder, rebuild these results using only the Methods text and the raw data. If the text leaves something out, stop and tell me instead of guessing. Finish with a table of each number: expected, what you got, and whether it matched."),
+("Read the papers","Read these papers and tell me which methods they treat as standard. Quote the paper for each claim, with the section. Tell me which papers you could not open."),
+("Review today's work","Another session worked on this today. Read its commits and output files, not its summary. What was actually done, and what is not supported?")]:
+    ex+=f'<div class="prompt"><div class="ph">{t}</div><p>{e(p)}</p></div>\n'
+page('examples.html','Examples: using an agent for research',ex,'A rules file, a status file, and six prompts I use.',COPY2)
 
 cases=[
 ("A comparison against a control came back. The agent's summary: \"No significant difference from control. Check passed.\" The control table has 0 rows.","BLOCKED","Nothing compared with nothing is not a difference. The control never ran. This one happened to me; now an empty control fails loudly."),
@@ -109,7 +79,7 @@ se='''<h1>A 20-minute session</h1>
 <h2>How to ask</h2>
 <p>Message me on Slack, or open an issue on the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/issues">repository</a> with a sentence about your project.</p>
 <h2>Before the call</h2>
-<p>Read the <a href="index.html">essay</a> (10 minutes) and try the <a href="practice.html">practice cases</a> (5 minutes).</p>
+<p>Read the <a href="index.html">essay</a> (10 minutes). If you have five more, try <a href="practice.html">seven cases</a> from my own work: for each result, decide whether it was done, wrong, or not yet measured. We can start the call from whichever one surprised you.</p>
 '''
 page('session.html','A 20-minute session',se,'Go through this on your own project with me in 20 minutes.')
 print('ok')
