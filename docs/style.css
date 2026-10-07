@@ -27,3 +27,17 @@ hr{border:0;border-top:1px solid #ddd;margin:3em 0}
 input[type=range]{accent-color:#8a2c2c}
 .gnode:focus{outline:none}.gnode:focus rect{stroke:#111;stroke-width:2}
 .principles li{margin:.45em 0}.principles a{font-size:.85em}
+.progress{position:fixed;top:0;left:0;height:2px;background:#8a2c2c;z-index:10;width:0}
+.toc{display:none}
+@media (min-width:1180px){
+ .toc{display:block;position:fixed;top:5.5em;left:calc(50% - 19em - 15.5em);width:13em;font:13px/1.45 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;max-height:calc(100vh - 8em);overflow-y:auto}
+ .toc-h{color:#999;text-transform:uppercase;letter-spacing:.06em;font-size:11px;margin-bottom:.8em}
+ .toc ol{list-style:none;margin:0;padding:0;border-left:1px solid #e2ded5}
+ .toc li a{display:block;padding:.28em 0 .28em .9em;color:#888;text-decoration:none;margin-left:-1px;border-left:2px solid transparent}
+ .toc li a span{display:inline-block;width:1.6em;color:#bbb}
+ .toc li a:hover{color:#222}
+ .toc li a.on{color:#222;border-left-color:#8a2c2c}
+}
+h2[id]{scroll-margin-top:1.2em}
+html{scroll-behavior:smooth}
+@media (prefers-color-scheme:dark){.toc ol{border-color:#333}.toc li a.on,.toc li a:hover{color:#eee}}
