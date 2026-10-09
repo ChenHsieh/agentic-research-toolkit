@@ -24,24 +24,28 @@ loop:{height:300,nodes:[
  {id:'res',label:'Result',kind:'you',x:.27,y:.87,info:'<b>Result</b><br>Files, numbers, a summary. The summary is its own account; the files are the evidence.'}],
  links:[{s:'you',t:'model',label:'goal'},{s:'model',t:'read',bend:-.1},{s:'read',t:'run'},{s:'run',t:'err'},{s:'err',t:'edit'},{s:'edit',t:'read',dash:1},{s:'err',t:'res'},{s:'res',t:'you',bend:.2,label:'you check'}]},
 
-roles:{height:250,nodes:[
- {id:'q',label:'What to ask',kind:'you',x:.13,y:.25,info:'Choosing the question. The agent will not tell you a question is uninteresting.'},
- {id:'j',label:'Is it right?',kind:'you',x:.13,y:.75,info:'Judging the result. Most of my failures were results nobody had really checked.'},
- {id:'code',label:'Write code',kind:'agent',x:.6,y:.15,info:'Fast and usually correct for routine analysis.'},
- {id:'jobs',label:'Run jobs',kind:'agent',x:.85,y:.4,info:'Writes and submits batch jobs, checks the queue.'},
- {id:'lit',label:'Read papers',kind:'agent',x:.6,y:.6,info:'Summaries with quotes. Check that each quote exists.'},
- {id:'fig',label:'Draw figures',kind:'agent',x:.85,y:.85,info:'Follows a written figure spec well; checks its own rendering only if told to.'}],
- links:[{s:'q',t:'code'},{s:'q',t:'lit'},{s:'jobs',t:'j'},{s:'fig',t:'j'}]},
+roles:{height:210,narrow:{height:330,pos:{q:[.5,.07],code:[.28,.42],jobs:[.72,.42],lit:[.28,.6],fig:[.72,.6],j:[.5,.93]}},
+ groups:[{id:'ag',label:'the agent does',members:['code','jobs','lit','fig']}],
+ nodes:[
+ {id:'q',label:'What to ask',kind:'you',x:.11,y:.55,info:'Choosing the question. The agent will not tell you a question is uninteresting.'},
+ {id:'code',label:'Write code',kind:'agent',x:.4,y:.42,info:'Fast and usually correct for routine analysis.'},
+ {id:'jobs',label:'Run jobs',kind:'agent',x:.62,y:.42,info:'Writes and submits batch jobs, checks the queue.'},
+ {id:'lit',label:'Read papers',kind:'agent',x:.4,y:.7,info:'Summaries with quotes. Check that each quote exists.'},
+ {id:'fig',label:'Draw figures',kind:'agent',x:.62,y:.7,info:'Follows a written figure spec well; checks its own rendering only if told to.'},
+ {id:'j',label:'Is it right?',kind:'you',x:.89,y:.55,info:'Judging the result. Most of my failures were results nobody had really checked.'}],
+ links:[{s:'q',t:'ag'},{s:'ag',t:'j'}]},
 
-rules:{height:280,narrow:{height:330,pos:{file:[.25,.08],a1:[.25,.42],bad:[.25,.78],a2:[.72,.08],chk:[.72,.42],ok:[.55,.8],stop:[.88,.8]}},nodes:[
- {id:'file',label:'CLAUDE.md',kind:'file',x:.12,y:.15,info:'<b>Rules file</b><br>Read once when the session starts. Hours later, nothing points back to it.'},
- {id:'a1',label:'Analysis',kind:'agent',x:.12,y:.6,info:'The analysis that was supposed to follow the rule.'},
- {id:'bad',label:'Defect ships',kind:'bad',x:.38,y:.6,info:'4 Sept: three defects the file already prohibited. A control at 3.4x dose; a null from an arm that barely moved; a pooled correlation that reversed within groups.'},
- {id:'a2',label:'Analysis',kind:'agent',x:.6,y:.6,info:'Same analysis, with the rule in its path.'},
- {id:'chk',label:'Check (code)',kind:'you',x:.8,y:.6,info:'<b>Refuses:</b><br>a null without a power check<br>arms matched on different quantities<br>a figure with no sample size<br>a commit in a shared checkout'},
- {id:'ok',label:'Result',kind:'ok',x:.8,y:.15,info:'Only results that passed the check get here.'},
- {id:'stop',label:'Stops',kind:'bad',x:.8,y:.9,info:'The run fails with a message saying which rule applied.'}],
- links:[{s:'file',t:'a1',dash:1,label:'read at start'},{s:'a1',t:'bad'},{s:'a2',t:'chk'},{s:'chk',t:'ok'},{s:'chk',t:'stop'}]},
+rules:{height:270,narrow:{height:310,pos:{file:[.18,.17],a1:[.5,.17],bad:[.79,.17],a2:[.15,.62],chk:[.45,.62],ok:[.8,.52],stop:[.7,.85]}},
+ groups:[{id:'g1',label:'rule in a file',members:['file','a1','bad']},{id:'g2',label:'rule in code',members:['a2','chk','ok','stop']}],
+ nodes:[
+ {id:'file',label:'CLAUDE.md',kind:'file',x:.12,y:.2,info:'<b>Rules file</b><br>Read once when the session starts. Hours later, nothing points back to it.'},
+ {id:'a1',label:'Analysis',kind:'agent',x:.45,y:.2,info:'The analysis that was supposed to follow the rule.'},
+ {id:'bad',label:'Defect ships',kind:'bad',x:.82,y:.2,info:'4 September: three defects the file already prohibited.'},
+ {id:'a2',label:'Analysis',kind:'agent',x:.12,y:.67,info:'Same analysis, with the rule in its path.'},
+ {id:'chk',label:'Check (code)',kind:'you',x:.45,y:.67,info:'<b>Refuses:</b><br>"no effect" without enough data to see one<br>a control matched on a different measure<br>a figure with no sample size<br>a commit in a shared checkout'},
+ {id:'ok',label:'Result',kind:'ok',x:.82,y:.56,info:'Only results that passed the check get here.'},
+ {id:'stop',label:'Stops with a reason',kind:'bad',x:.82,y:.82,info:'The run fails with a message saying which rule applied.'}],
+ links:[{s:'file',t:'a1',dash:1,label:'read at start'},{s:'a1',t:'bad',label:'hours later'},{s:'a2',t:'chk'},{s:'chk',t:'ok',label:'passes'},{s:'chk',t:'stop',label:'fails'}]},
 
 session:{type:'timeline',window:3,steps:[
  {talk:'Goal and constraints discussed in detail.',file:'brief',disk:'BRIEF.md: goal, inputs, what done means, known traps.'},

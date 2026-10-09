@@ -14,6 +14,8 @@ function graph(el,spec){
     .append('path').attr('d','M0,-4L8,0L0,4').attr('fill','#999');
   var nodes=spec.nodes.map(function(n){var q=alt&&spec.narrow.pos[n.id]?spec.narrow.pos[n.id]:[n.x,n.y];return Object.assign({},n,{tx:q[0]*W,ty:q[1]*H,x:q[0]*W,y:q[1]*H})});
   var byId={};nodes.forEach(function(n){byId[n.id]=n});
+  var groups=(spec.groups||[]).map(function(g){var o={id:g.id,label:g.label,members:g.members,group:true,x:0,y:0,w:0,h:0};byId[g.id]=o;return o});
+  var gl=svg.append('g');
   var links=(spec.links||[]).map(function(l){return Object.assign({},l,{source:byId[l.s],target:byId[l.t]})});
   if(spec.axis&&!alt){var ay=H-14;svg.append('line').attr('x1',4).attr('x2',W-4).attr('y1',ay).attr('y2',ay).attr('stroke','#bbb').attr('marker-end','url(#'+id+')');
     svg.append('text').attr('class','glabel').attr('x',4).attr('y',ay-6).text(spec.axis[0]);
@@ -47,6 +49,13 @@ function graph(el,spec){
   if(spec.collide)sim.force('c',d3.forceCollide(function(n){return n.w/2+6}).strength(0.8));
   for(var i=0;i<200;i++){sim.tick();nodes.forEach(function(n){n.x=Math.max(n.w/2+2,Math.min(W-n.w/2-2,n.x));n.y=Math.max(n.h/2+2,Math.min(H-n.h/2-2,n.y))})}
   node.attr('transform',function(n){return 'translate('+n.x+','+n.y+')'}).style('cursor','pointer');
+  groups.forEach(function(g){var ms=g.members.map(function(id){return byId[id]}),pad=14,top=22;
+    var x0=d3.min(ms,function(n){return n.x-n.w/2})-pad,x1=d3.max(ms,function(n){return n.x+n.w/2})+pad,
+        y0=d3.min(ms,function(n){return n.y-n.h/2})-top,y1=d3.max(ms,function(n){return n.y+n.h/2})+pad;
+    x0=Math.max(1,x0);x1=Math.min(W-1,x1);y0=Math.max(1,y0);y1=Math.min(H-1,y1);
+    g.x=(x0+x1)/2;g.y=(y0+y1)/2;g.w=x1-x0;g.h=y1-y0;
+    gl.append('rect').attr('x',x0).attr('y',y0).attr('width',x1-x0).attr('height',y1-y0).attr('rx',10).attr('fill','none').attr('stroke','#cfc9bd').attr('stroke-dasharray','4 4');
+    gl.append('text').attr('class','glabel').attr('x',x0+10).attr('y',y0+15).text(g.label);});
   lp.attr('d',function(l){var a=l.source,b=l.target,dx=b.x-a.x,dy=b.y-a.y;
     var p=edge(a,dx,dy),q=edge(b,-dx,-dy),bend=l.bend||0;
     var mx=(p[0]+q[0])/2-dy*bend,my=(p[1]+q[1])/2+dx*bend;l.mx=mx;l.my=my;
