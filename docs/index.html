@@ -131,6 +131,8 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
 A figure-saving function refuses a figure with no sample size, text under 20 pt, or overlapping labels.</p>
 
+<p>Code only helps if something runs it. A cleanup round on my cluster found five correct control functions that no script anywhere called; "controls enforced in code" described a library nothing imported. A check that is never called is BLOCKED, not PASS. So the last step of writing a check is to find the line that calls it.</p>
+
 <h2 id="failures">Seven ways it will go wrong</h2>
 
 <p>These are patterns, not bad luck. You will meet most of them in your first month. Each of them happened to me at least once.</p>
@@ -211,7 +213,7 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <h2 id="models">Models</h2>
 
-<p>I use the strongest model for design, interpretation and review. Cheaper models are fine for bulk edits if the result is checked. Tools can switch to another model when one is overloaded; the session status shows which model answered.</p>
+<p>I use the strongest model for design, interpretation and review. Cheaper models are fine for bulk edits if the result is checked. One setup I use: the strong model writes a plan of small numbered steps, each with a test command; a cheaper model, through <a href="https://aider.chat/">Aider</a>, does each step; only the pass or fail and the end of any error come back. The judgement stays with the strong model and the typing goes to the cheap one. Tools can switch to another model when one is overloaded; the session status shows which model answered.</p>
 
 <p>Local models: on a base M4 Mac, a 7-billion-parameter model at 4-bit generates about 24 tokens per second (my measurement). That works for chat and small edits. I have not run a multi-hour project session on a local model. If data cannot leave your institution, options are a hosted model that sees only code and summaries, or an open model on institutional GPUs.</p>
 
