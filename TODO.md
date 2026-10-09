@@ -12,8 +12,8 @@ Constraint: quiet, fact-based, no AI-vibe aesthetics. Verify every change live.
 - [x] 3. Merge Codex findings + audit into a ranked change list (notes/plan_2026-10-09.md)
 
 ## Phase 3: build (one commit each, verify live)
-- [ ] 4..n  from the plan
+- [x] 4..n  from the plan
 
 ## Phase 4: final check
-- [ ] all pages at 390 / 1440, no console errors, links 200, preview card
-- [ ] summary for Chen
+- [x] all pages at 390 / 1440, no console errors, links 200, preview card
+- [x] summary for Chen

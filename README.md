@@ -11,10 +11,10 @@ The one lesson: rules written in a file get skipped at the moment they apply. Th
 ## On the site
 
 - [Essay](https://chenhsieh.github.io/agentic-research-toolkit/): setup, tasks, failures with dates and numbers, long sessions, models, how to start.
-- [Examples](https://chenhsieh.github.io/agentic-research-toolkit/examples.html): a rules file, a brief, a status file, prompts, figure rules.
-- [Practice](https://chenhsieh.github.io/agentic-research-toolkit/practice.html): seven real cases. Is the result done, wrong, or not yet measurable?
+- [Prompts & files](https://chenhsieh.github.io/agentic-research-toolkit/examples.html): a rules file, a brief, a status file, prompts, figure rules.
+
 - [Reading](https://chenhsieh.github.io/agentic-research-toolkit/reading.html): papers, tools and guides, with links checked.
-- [Session](https://chenhsieh.github.io/agentic-research-toolkit/session.html): 20 minutes with me on your own project.
+- [Walkthrough](https://chenhsieh.github.io/agentic-research-toolkit/session.html): 20 minutes with me on your own project.
 
 ## In the repository
 
