@@ -59,81 +59,6 @@
 
 
 
-<h2 id="quiet">Why the failures are quiet</h2>
-
-<p>Look back at the failures above. Only one of them crashed. A control returned nothing and was read as a pass. A job exited cleanly with an empty file. A website passed every check because every check compared it with itself. And the fourteen-repository check from the top of the page ran once. Each had a check, and each check could not have said no.</p>
-
-<p>That pattern is partly an artifact of what I wrote down. Loud failures (a crash, a missing module, a syntax error) get fixed inside the session in a minute and never reach my notes. But that is also the point. The agent's loop of run, read the error, fix, run again removes loud errors very well. What comes out the other end is enriched for the quiet ones.</p>
-
-<p>It can be worse than a filter. A bioinformatics benchmark from 2026 (<a href="reading.html">FlowBench</a>) found agents often "fix" a failing run so that it exits cleanly while the data stay invalid. Asked to make the error go away, they make the error go away. A clean exit is the thing they can see, so it becomes the target.</p>
-
-<p>Bench biology already has the tool for this. Every assay gets a negative control that should stay dark and a positive control that should light up. If either does the wrong thing, the run tells you nothing, whatever the other wells say. The shuffled labels and the planted signal in the table above are those two controls. Software testing has the same idea under another name (mutation testing, 1978: break the code on purpose and see whether the tests notice). Feynman put it in 1974: "The first principle is that you must not fool yourself, and you are the easiest person to fool" (<a href="https://calteches.library.caltech.edu/51/2/CargoCult.htm">Cargo Cult Science</a>).</p>
-
-<figure class="explore" id="nofail">
-<p class="ex-q">Guess first: which of these checks will never say no, whatever the input? Then try each input.</p>
-<div class="ex-inputs"><button data-i="0" class="on">Real data</button><button data-i="1">Empty file</button><button data-i="2">Labels shuffled</button><button data-i="3">Planted known signal</button></div>
-<table class="ex-grid"><thead><tr><th>Check</th><th>Result</th><th>Has it ever said no?</th></tr></thead><tbody>
-<tr><td>The agent's summary says it worked</td><td></td><td></td></tr>
-<tr><td>The job exited with code 0</td><td></td><td></td></tr>
-<tr><td>The output has rows</td><td></td><td></td></tr>
-<tr><td>The expected effect is detected</td><td></td><td></td></tr>
-</tbody></table>
-<p class="ex-say"></p>
-<figcaption>Try all four inputs. A check that passes on everything, including inputs built to be wrong, cannot tell you anything about your result.</figcaption>
-</figure>
-<script>
-(function(){var R=[["pass","pass","pass","pass"],["pass","pass","pass","pass"],["pass","no","pass","pass"],["pass","no","no","pass"]];
-var why=["Real data: all four pass. Nothing to see yet; this is why one input is not enough.","Empty file: the summary and the exit code still pass. The row count catches it.","Shuffled labels: the effect should be gone, and only the last check notices. The others still pass on data that has lost its meaning.","Planted known signal: the last check finds it. A check that says no on the shuffled input and yes on the planted one has earned some trust on your real data."];
-var seen=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],f=document.getElementById('nofail'),rows=f.querySelectorAll('tbody tr');
-function show(i){f.querySelectorAll('.ex-inputs button').forEach(function(b){b.classList.toggle('on',+b.dataset.i===i)});
- rows.forEach(function(r,k){seen[k][i]=1;var c=r.children,v=R[k][i];c[1].textContent=v==='pass'?'pass':'says no';c[1].className=v==='pass'?'p':'n';
-  var tried=seen[k].reduce(function(a,b){return a+b}),nos=R[k].filter(function(x,j){return seen[k][j]&&x==='no'}).length;
-  c[2].textContent=nos?'yes':(tried===4?'never, on any input':'not yet ('+tried+' of 4 inputs tried)');c[2].className=nos?'':(tried===4?'n':'')});
- f.querySelector('.ex-say').textContent=why[i];}
-f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function(){show(+b.dataset.i)}});show(0);})();
-</script>
-
-<p>What is new is the volume. An agent writes checks faster than anyone writes positive controls for them. So the habit I would pass on is small: before trusting a check, make it fail once. Feed it the empty file, the shuffled labels, the case built to be wrong, and watch it say no. A check you have never seen say no is a description, not a test. Then give it a case you know is right and watch it pass: a check that says no to good data gets switched off.</p>
-
-<h2 id="harder">Why this gets harder, not easier</h2>
-
-<p>In 1983 Lisanne Bainbridge described the "ironies of automation" (<a href="https://gwern.net/doc/sociology/technology/1983-bainbridge.pdf">PDF</a>): the more of a process is automated, the more the person's remaining job is the abnormal cases, noticing and recovering from what the automation got wrong, while they get less practice at the normal ones. Agents fit that description. They take the routine runs; you are left with the quiet failures, with less time spent inside the data than before.</p>
-
-<p>Philosophy of science has words for what a good check is. The Stanford Encyclopedia summarizes Popper: "Every genuine test of a scientific theory, then, is logically an attempt to refute or to falsify it" (<a href="https://plato.stanford.edu/archives/spr2007/entries/popper/">SEP</a>). Deborah Mayo's version is the severe test: only infer what the procedure had a real chance of showing to be wrong (<a href="https://www.journals.uchicago.edu/doi/abs/10.1093/bjps/axl003">Mayo and Spanos 2006</a>). An exit code is not a severe test of a biological result. A planted signal that the pipeline must find is.</p>
-
-<p>Gelman and Loken's "garden of forking paths" (<a href="https://sites.stat.columbia.edu/gelman/research/unpublished/forking.pdf">PDF</a>) is the other risk. Choices made after seeing the data (which filter, which threshold, which samples to drop) multiply the ways to reach a clean result, without anyone fishing on purpose. An agent can walk many of those paths in an hour and report the one that worked. The fix is old: write the decision down before seeing the result, and keep a log of what was tried and dropped. There is a place for it in the <a href="examples.html#a-brief">brief</a>, written before the run, and in the <a href="examples.html#a-status-file">status file</a>.</p>
-
-<p>Merton listed "organized skepticism" among the norms of science (<a href="https://www.nationalacademies.org/read/1864/chapter/4">National Academies summary</a>): claims are checked by someone other than their author. A fresh session that reads the files instead of the summary is a small, cheap version of that. It catches work that was claimed and not done. It runs on the same model, though, so it tends to share the first session's blind spots. A different model is more independent, and a labmate more so.</p>
-
-<p><a href="https://doi.org/10.1518/001872097778543886">Parasuraman and Riley's 1997 paper</a> "Humans and automation: use, misuse, disuse, abuse" gives four ways to get the balance wrong or right. The agent examples are mine:</p>
-
-<table class="uma">
-<tr><th>Use</th><td>Handing over routine runs that end in a check you have seen fail.</td></tr>
-<tr><th>Misuse</th><td>Treating the exit code or the agent's own summary as the result.</td></tr>
-<tr><th>Disuse</th><td>Refusing it after one bad experience, even for routine runs a tested check could cover. Or switching off a check that keeps saying no to good data. Learning a method by hand is not disuse.</td></tr>
-<tr><th>Abuse</th><td>Setting it up without regard for the people involved: unbounded jobs on a shared cluster, more output or more sessions than anyone can review, or no way to see and stop what it is doing.</td></tr>
-</table>
-
-<h2 id="rules">Rules in a file, then rules in code</h2>
-
-<p>Claude Code reads a file called CLAUDE.md when it starts. (Codex reads AGENTS.md.) Mine lists where data lives, what must not be deleted, how to submit jobs, figure requirements, and past mistakes. I add a line after each mistake.</p>
-
-<p>On 4 September three defects shipped in one project that the file already prohibited:</p>
-
-<p>1. A control was given about three times as much change as the condition it was meant to control. Fixing it moved the main result from 0.21–0.39 to 0.60–0.78.<br>
-2. A "no effect" result came from a condition in which almost nothing had actually changed.<br>
-3. A correlation across 48 items in 6 groups: +0.45 when pooled (p = 0.001), −0.11 within the groups (p = 0.47).</p>
-
-<p>The rules were in the file and were not applied, because nothing at the moment of the analysis pointed to them. I moved the important ones into code that stops the work:</p>
-
-<figure><div class="g" data-g="rules"></div><figcaption>A rule in a file is read once, at the start. A rule in code sits on the path and stops the analysis when it applies.</figcaption></figure>
-
-<p>A script raises an error when a control and its condition are matched on different measures, and refuses to report "no effect" without checking there was enough data to see one.<br>
-A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
-A figure-saving function refuses a figure with no sample size, text under 20 pt, or overlapping labels.</p>
-
-<p>Code only helps if something runs it. A cleanup round on my cluster found five correct control functions that no script anywhere called; "controls enforced in code" described a library nothing imported. A check that is never called is BLOCKED, not PASS. So the last step of writing a check is to find the line that calls it.</p>
-
 <h2 id="failures">Seven ways it will go wrong</h2>
 
 <p>These are patterns, not bad luck. Each of them happened to me at least once.</p>
@@ -174,6 +99,81 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 </div></article>
 
 <figure><div class="g" data-g="clean"></div><figcaption>A way to find silent guesses on purpose: have an agent rebuild your results from the Methods alone, in an empty folder. Each number matches, does not, or cannot be computed from what is written.</figcaption></figure>
+
+<h2 id="quiet">Why the failures are quiet</h2>
+
+<p>Look back at the failures above. Only one of them crashed. A control returned nothing and was read as a pass. A job exited cleanly with an empty file. A website passed every check because every check compared it with itself. And the fourteen-repository check from the top of the page ran once. Each had a check, and each check could not have said no.</p>
+
+<p>That pattern is partly an artifact of what I wrote down. Loud failures (a crash, a missing module, a syntax error) get fixed inside the session in a minute and never reach my notes. But that is also the point. The agent's loop of run, read the error, fix, run again removes loud errors very well. What comes out the other end is enriched for the quiet ones.</p>
+
+<p>It can be worse than a filter. A bioinformatics benchmark from 2026 (<a href="reading.html">FlowBench</a>) found agents often "fix" a failing run so that it exits cleanly while the data stay invalid. Asked to make the error go away, they make the error go away. A clean exit is the thing they can see, so it becomes the target.</p>
+
+<p>Bench biology already has the tool for this. Every assay gets a negative control that should stay dark and a positive control that should light up. If either does the wrong thing, the run tells you nothing, whatever the other wells say. The shuffled labels and the planted signal in the table above are those two controls. Software testing has the same idea under another name (mutation testing, 1978: break the code on purpose and see whether the tests notice). Feynman put it in 1974: "The first principle is that you must not fool yourself, and you are the easiest person to fool" (<a href="https://calteches.library.caltech.edu/51/2/CargoCult.htm">Cargo Cult Science</a>).</p>
+
+<figure class="explore" id="nofail">
+<p class="ex-q">Guess first: which of these checks will never say no, whatever the input? Then try each input.</p>
+<div class="ex-inputs"><button data-i="0" class="on">Real data</button><button data-i="1">Empty file</button><button data-i="2">Labels shuffled</button><button data-i="3">Planted known signal</button></div>
+<table class="ex-grid"><thead><tr><th>Check</th><th>Result</th><th>Has it ever said no?</th></tr></thead><tbody>
+<tr><td>The agent's summary says it worked</td><td></td><td></td></tr>
+<tr><td>The job exited with code 0</td><td></td><td></td></tr>
+<tr><td>The output has rows</td><td></td><td></td></tr>
+<tr><td>The expected effect is detected</td><td></td><td></td></tr>
+</tbody></table>
+<p class="ex-say"></p>
+<figcaption>Try all four inputs. A check that passes on everything, including inputs built to be wrong, cannot tell you anything about your result.</figcaption>
+</figure>
+<script>
+(function(){var R=[["pass","pass","pass","pass"],["pass","pass","pass","pass"],["pass","no","pass","pass"],["pass","no","no","pass"]];
+var why=["Real data: all four pass. Nothing to see yet; this is why one input is not enough.","Empty file: the summary and the exit code still pass. The row count catches it.","Shuffled labels: the effect should be gone, and only the last check notices. The others still pass on data that has lost its meaning.","Planted known signal: the last check finds it. A check that says no on the shuffled input and yes on the planted one has earned some trust on your real data."];
+var seen=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],f=document.getElementById('nofail'),rows=f.querySelectorAll('tbody tr');
+function show(i){f.querySelectorAll('.ex-inputs button').forEach(function(b){b.classList.toggle('on',+b.dataset.i===i)});
+ rows.forEach(function(r,k){seen[k][i]=1;var c=r.children,v=R[k][i];c[1].textContent=v==='pass'?'pass':'says no';c[1].className=v==='pass'?'p':'n';
+  var tried=seen[k].reduce(function(a,b){return a+b}),nos=R[k].filter(function(x,j){return seen[k][j]&&x==='no'}).length;
+  c[2].textContent=nos?'yes':(tried===4?'never, on any input':'not yet ('+tried+' of 4 inputs tried)');c[2].className=nos?'':(tried===4?'n':'')});
+ f.querySelector('.ex-say').textContent=why[i];}
+f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function(){show(+b.dataset.i)}});show(0);})();
+</script>
+
+<p>What is new is the volume. An agent writes checks faster than anyone writes positive controls for them. So the habit I would pass on is small: before trusting a check, make it fail once. Feed it the empty file, the shuffled labels, the case built to be wrong, and watch it say no. A check you have never seen say no is a description, not a test. Then give it a case you know is right and watch it pass: a check that says no to good data gets switched off.</p>
+
+<h2 id="rules">Rules in a file, then rules in code</h2>
+
+<p>Claude Code reads a file called CLAUDE.md when it starts. (Codex reads AGENTS.md.) Mine lists where data lives, what must not be deleted, how to submit jobs, figure requirements, and past mistakes. I add a line after each mistake.</p>
+
+<p>On 4 September three defects shipped in one project that the file already prohibited:</p>
+
+<p>1. A control was given about three times as much change as the condition it was meant to control. Fixing it moved the main result from 0.21–0.39 to 0.60–0.78.<br>
+2. A "no effect" result came from a condition in which almost nothing had actually changed.<br>
+3. A correlation across 48 items in 6 groups: +0.45 when pooled (p = 0.001), −0.11 within the groups (p = 0.47).</p>
+
+<p>The rules were in the file and were not applied, because nothing at the moment of the analysis pointed to them. I moved the important ones into code that stops the work:</p>
+
+<figure><div class="g" data-g="rules"></div><figcaption>A rule in a file is read once, at the start. A rule in code sits on the path and stops the analysis when it applies.</figcaption></figure>
+
+<p>A script raises an error when a control and its condition are matched on different measures, and refuses to report "no effect" without checking there was enough data to see one.<br>
+A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
+A figure-saving function refuses a figure with no sample size, text under 20 pt, or overlapping labels.</p>
+
+<p>Code only helps if something runs it. A cleanup round on my cluster found five correct control functions that no script anywhere called; "controls enforced in code" described a library nothing imported. A check that is never called is BLOCKED, not PASS. So the last step of writing a check is to find the line that calls it.</p>
+
+<h2 id="harder">Why this gets harder, not easier</h2>
+
+<p>In 1983 Lisanne Bainbridge described the "ironies of automation" (<a href="https://gwern.net/doc/sociology/technology/1983-bainbridge.pdf">PDF</a>): the more of a process is automated, the more the person's remaining job is the abnormal cases, noticing and recovering from what the automation got wrong, while they get less practice at the normal ones. Agents fit that description. They take the routine runs; you are left with the quiet failures, with less time spent inside the data than before.</p>
+
+<p>Philosophy of science has words for what a good check is. The Stanford Encyclopedia summarizes Popper: "Every genuine test of a scientific theory, then, is logically an attempt to refute or to falsify it" (<a href="https://plato.stanford.edu/archives/spr2007/entries/popper/">SEP</a>). Deborah Mayo's version is the severe test: only infer what the procedure had a real chance of showing to be wrong (<a href="https://www.journals.uchicago.edu/doi/abs/10.1093/bjps/axl003">Mayo and Spanos 2006</a>). An exit code is not a severe test of a biological result. A planted signal that the pipeline must find is.</p>
+
+<p>Gelman and Loken's "garden of forking paths" (<a href="https://sites.stat.columbia.edu/gelman/research/unpublished/forking.pdf">PDF</a>) is the other risk. Choices made after seeing the data (which filter, which threshold, which samples to drop) multiply the ways to reach a clean result, without anyone fishing on purpose. An agent can walk many of those paths in an hour and report the one that worked. The fix is old: write the decision down before seeing the result, and keep a log of what was tried and dropped. There is a place for it in the <a href="examples.html#a-brief">brief</a>, written before the run, and in the <a href="examples.html#a-status-file">status file</a>.</p>
+
+<p>Merton listed "organized skepticism" among the norms of science (<a href="https://www.nationalacademies.org/read/1864/chapter/4">National Academies summary</a>): claims are checked by someone other than their author. A fresh session that reads the files instead of the summary is a small, cheap version of that. It catches work that was claimed and not done. It runs on the same model, though, so it tends to share the first session's blind spots. A different model is more independent, and a labmate more so.</p>
+
+<p><a href="https://doi.org/10.1518/001872097778543886">Parasuraman and Riley's 1997 paper</a> "Humans and automation: use, misuse, disuse, abuse" gives four ways to get the balance wrong or right. The agent examples are mine:</p>
+
+<table class="uma">
+<tr><th>Use</th><td>Handing over routine runs that end in a check you have seen fail.</td></tr>
+<tr><th>Misuse</th><td>Treating the exit code or the agent's own summary as the result.</td></tr>
+<tr><th>Disuse</th><td>Refusing it after one bad experience, even for routine runs a tested check could cover. Or switching off a check that keeps saying no to good data. Learning a method by hand is not disuse.</td></tr>
+<tr><th>Abuse</th><td>Setting it up without regard for the people involved: unbounded jobs on a shared cluster, more output or more sessions than anyone can review, or no way to see and stop what it is doing.</td></tr>
+</table>
 
 <h2 id="long">Long sessions</h2>
 
