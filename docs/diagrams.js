@@ -1,11 +1,11 @@
 drawDiagrams({
-modes:{height:120,axis:['you watch every step','you check the result'],nodes:[
+modes:{height:120,narrow:{height:230,pos:{a:[.5,.1],p:[.5,.37],u:[.5,.63],n:[.5,.9]}},axis:['you watch every step','you check the result'],nodes:[
  {id:'a',label:'Approve each step',kind:'you',x:.12,y:.3,info:'<b>Approve each command</b><br>Use for: your first week, anything touching shared data, deleting files, or submitting many jobs.<br>Cost: you are the bottleneck; long tasks stall when you look away.'},
  {id:'p',label:'Approve the plan',kind:'file',x:.38,y:.3,info:'<b>Plan first, then let it run</b><br>It writes a plan; you read and correct it; then edits run without asking. Safe commands are pre-approved in a list; risky ones still ask.<br>This is where most of my daytime work sits.'},
  {id:'u',label:'Run unattended',kind:'agent',x:.64,y:.3,info:'<b>No questions asked</b><br>Only inside a bounded space: its own copy of the repository, no access to raw data it could overwrite, a limit on jobs it can submit.'},
  {id:'n',label:'Overnight',kind:'agent',x:.88,y:.3,info:'<b>Overnight</b><br>Works when the goal is one sentence, success is a check it can run, and the compute is chained in the scheduler. Fails when it needs your judgement at 2 a.m.'}],
  links:[{s:'a',t:'p'},{s:'p',t:'u'},{s:'u',t:'n'}]},
-night:{height:250,axis:['evening','morning'],nodes:[
+night:{height:250,narrow:{height:430,pos:{b:[.5,.05],s1:[.3,.25],c1:[.3,.43],s2:[.3,.61],c2:[.3,.79],j:[.72,.53],m:[.5,.95]}},axis:['evening','morning'],nodes:[
  {id:'b',label:'Brief + done-check',kind:'you',x:.11,y:.2,info:'<b>Before you leave</b><br>One-sentence goal. Which files must exist, how many rows, what range. Which commands it may run without asking.'},
  {id:'s1',label:'Stage 1',kind:'agent',x:.31,y:.2,info:'A small piece that ends in a file. Committed when done.'},
  {id:'c1',label:'Check',kind:'ok',x:.45,y:.2,info:'A check that has been seen to fail. If it fails, the agent stops and writes why, rather than trying to make it pass.'},
@@ -14,7 +14,7 @@ night:{height:250,axis:['evening','morning'],nodes:[
  {id:'j',label:'Jobs chained in the scheduler',kind:'file',x:.46,y:.6,info:'Long compute runs as batch jobs that start each other when the previous one succeeds. No agent sits polling the queue.'},
  {id:'m',label:'Fresh review',kind:'you',x:.9,y:.6,info:'<b>Morning</b><br>A new session reads the commits, STATUS.md and the output files and reports what was done and what is unsupported. You read that, not the night session\'s own summary.'}],
  links:[{s:'b',t:'s1'},{s:'s1',t:'c1'},{s:'c1',t:'s2'},{s:'s2',t:'c2'},{s:'s1',t:'j',dash:1},{s:'j',t:'s2',dash:1},{s:'c2',t:'m'}]},
-loop:{height:300,note:'Hover a box for detail.',nodes:[
+loop:{height:300,nodes:[
  {id:'you',label:'You',kind:'you',x:.1,y:.5,info:'<b>You</b><br>Type a goal in plain language: "rebuild Table 2 from the raw counts".'},
  {id:'model',label:'Model',kind:'agent',x:.27,y:.5,info:'<b>Language model</b><br>Decides the next action. In chat it can only reply with text.'},
  {id:'read',label:'Read files',kind:'agent',x:.66,y:.13,info:'<b>Read</b><br>Opens your scripts, data headers, logs and the rules file.'},
@@ -33,7 +33,7 @@ roles:{height:250,nodes:[
  {id:'fig',label:'Draw figures',kind:'agent',x:.85,y:.85,info:'Follows a written figure spec well; checks its own rendering only if told to.'}],
  links:[{s:'q',t:'code'},{s:'q',t:'lit'},{s:'jobs',t:'j'},{s:'fig',t:'j'}]},
 
-rules:{height:280,note:'Hover the check to see what it refuses.',nodes:[
+rules:{height:280,narrow:{height:330,pos:{file:[.25,.08],a1:[.25,.42],bad:[.25,.78],a2:[.72,.08],chk:[.72,.42],ok:[.55,.8],stop:[.88,.8]}},nodes:[
  {id:'file',label:'CLAUDE.md',kind:'file',x:.12,y:.15,info:'<b>Rules file</b><br>Read once when the session starts. Hours later, nothing points back to it.'},
  {id:'a1',label:'Analysis',kind:'agent',x:.12,y:.6,info:'The analysis that was supposed to follow the rule.'},
  {id:'bad',label:'Defect ships',kind:'bad',x:.38,y:.6,info:'4 Sept: three defects the file already prohibited. A control at 3.4x dose; a null from an arm that barely moved; a pooled correlation that reversed within groups.'},
@@ -51,7 +51,7 @@ session:{type:'timeline',window:3,steps:[
  {talk:'Control looked odd; reran it.',file:'commit',disk:'Commit with the rerun control and its output.'},
  {talk:'Wrote the summary.',file:'status',disk:'STATUS.md updated; a fresh session reviews from here.'}]},
 
-clean:{height:300,nodes:[
+clean:{height:300,narrow:{height:340,pos:{m:[.25,.07],raw:[.75,.07],rb:[.5,.32],cmp:[.5,.55],p:[.15,.88],f:[.48,.88],b:[.82,.88]}},nodes:[
  {id:'m',label:'Methods text',kind:'file',x:.1,y:.25,info:'Only what is written down. No access to the original scripts or intermediate files.'},
  {id:'raw',label:'Raw inputs',kind:'file',x:.1,y:.75,info:'Genome, annotation, reads: the starting files.'},
  {id:'rb',label:'Agent rebuilds',kind:'agent',x:.42,y:.5,info:'In an empty folder. When the text is missing a detail, it must stop and say so instead of guessing.'},

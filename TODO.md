@@ -1,21 +1,19 @@
-# TODO: site rebuild (2026-10-06)
+# TODO: overnight design round (started 2026-10-09)
 
-Goal: a quiet, readable site and repo to send to friends, plus a 20-minute walkthrough session.
-Style: serif text page, line drawings, one accent colour. No cards, gradients, emoji, badges.
+Goal: improve the site on UI, UX, marketing (people booking a 20-min session),
+agentic-usage depth, media/visual design, and philosophy of science.
+Constraint: quiet, fact-based, no AI-vibe aesthetics. Verify every change live.
 
-- [x] 1. Site shell: 4 pages sharing one small stylesheet and a plain top line of links
-      (Essay / Examples / Reading / Session). No sidebar.
-- [x] 2. Diagrams: hand-drawn-style inline SVG (thin black lines, serif labels):
-      a. chat vs agent loop
-      b. you vs agent (question/judgement vs doing)
-      c. rules in a file vs rules in code
-      d. long session: files survive, conversation is summarized
-      e. clean-room reproduction
-- [x] 3. One interactive piece, small: "Is this result done?" walk through a real failure,
-      answer PASS / FAIL / BLOCKED, then see what actually happened.
-- [x] 4. Examples page: CLAUDE.md skeleton, 6 prompts, a status file, a brief, the figure rules.
-      Copy buttons, plain.
-- [x] 5. Reading page from the literature round (verified links only), grouped.
-- [x] 6. Session page: what a 20-min walkthrough covers, what to bring, how to ask.
-- [x] 7. README rewrite to mirror the site.
-- [x] 8. Push, verify live bytes, screenshot every page at phone and desktop width.
+## Phase 1: research (Codex, sourced)
+- [ ] 1. Codex round: design principles across the six areas -> notes/codex_design_2026-10.md
+- [ ] 2. My own audit: screenshot every page at phone + desktop, list problems -> notes/audit_2026-10-09.md
+
+## Phase 2: synthesis
+- [ ] 3. Merge Codex findings + audit into a ranked change list (notes/plan_2026-10-09.md)
+
+## Phase 3: build (one commit each, verify live)
+- [ ] 4..n  from the plan
+
+## Phase 4: final check
+- [ ] all pages at 390 / 1440, no console errors, links 200, preview card
+- [ ] summary for Chen
