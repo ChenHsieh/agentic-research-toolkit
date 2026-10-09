@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Examples: using an agent for research</title>
-<meta name="description" content="A rules file, a status file, and seven prompts I use.">
+<meta name="description" content="A rules file, a brief, a status file, and the prompts I use.">
 <meta property="og:title" content="Examples: using an agent for research">
-<meta property="og:description" content="A rules file, a status file, and seven prompts I use.">
+<meta property="og:description" content="A rules file, a brief, a status file, and the prompts I use.">
 <meta property="og:image" content="https://chenhsieh.github.io/agentic-research-toolkit/img/card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -18,7 +18,7 @@
 <body>
 <nav><a href="index.html">Essay</a><a href="examples.html" class="here">Prompts &amp; files</a><a href="reading.html">Reading</a><a href="session.html">Walkthrough</a></nav>
 <h1>Examples</h1>
-<p>Two files and seven prompts I actually use. Copy them, then change the details to fit your project.</p>
+<p>Three files and the prompts I actually use. Copy them, then change the details to fit your project.</p>
 <h2 id="a-rules-file">A rules file</h2>
 <p>Save it as <code>CLAUDE.md</code> in your project folder (Codex reads <code>AGENTS.md</code>). The agent reads it at the start of every session. Five lines is enough to begin; add one each time something goes wrong.</p>
 <pre><code># [Project name]
@@ -31,6 +31,20 @@ A job is finished when its output file has been checked, not when it exits.
 
 ## Things that went wrong before
 - [date] A control came back empty and was reported as a pass.</code></pre>
+<h2 id="a-brief">A brief</h2>
+<p>Save it as <code>BRIEF.md</code> before any task longer than an hour, and before every overnight run. It is the morning check written in advance, so the result gets compared with what you asked for and not with the agent's summary. Write the "Done when" line first. If you cannot, the task is not ready to hand over.</p>
+<pre><code># Brief: [task] ([date])
+
+Goal: [one sentence]
+Inputs (read-only): [paths, with versions]
+Done when: [file] exists, has [N] rows, values between [low] and [high]
+Decided before seeing results: [filters, thresholds, samples to drop]
+If the result were an artifact, it would look like: [your guess, written now]
+Before the full run: the check says no to [a known-bad file], and one [sample] is run and checked.
+May run without asking: [commands]
+Ask first: deleting files, more than [N] jobs, anything outside [path]
+If a check fails or an input is missing: stop and write BLOCKED in STATUS.md. Do not change the check.
+Known traps: [what went wrong last time]</code></pre>
 <h2 id="a-status-file">A status file</h2>
 <p>Save it as <code>STATUS.md</code>. Ask the agent to update it after each real step. When a session ends or gets long, the next one starts from here instead of from memory.</p>
 <pre><code># Status ([date])
@@ -51,7 +65,7 @@ Done when: [which files exist, and what they show]
 - [choice made]: [alternatives tried and dropped], decided [before / after] seeing results</code></pre>
 <h2 id="prompts">Prompts</h2>
 <div class="prompt"><div class="ph">Catch me up</div><p>Read STATUS.md and the last ten commits. What is done, what is still open, and what is waiting on someone?</p></div>
-<div class="prompt"><div class="ph">Before I trust this check</div><p>Run this check on an input that should fail, such as an empty file or shuffled labels, and show me that it fails.</p></div>
+<div class="prompt"><div class="ph">Before I trust this check</div><p>Run this check three ways, through the same script the real run uses: on an input built to have the error this check is for (such as shuffled labels), where it should say no; on a copy with only the header line, where it should say no; and on an input with a planted answer, made without the code being checked, where it should say yes. Show me the output each time and the line that calls the check. If it gets any of the three wrong, stop and tell me before changing anything.</p></div>
 <div class="prompt"><div class="ph">Try to break this result</div><p>What are the three most likely ways this result could be an artifact? Check each one and show me the file for each check.</p></div>
 <div class="prompt"><div class="ph">Rebuild from the Methods</div><p>In an empty folder, rebuild these results using only the Methods text and the raw data. If the text leaves something out, stop and tell me instead of guessing. Finish with a table of each number: expected, what you got, and whether it matched.</p></div>
 <div class="prompt"><div class="ph">Read the papers</div><p>Read these papers and tell me which methods they treat as standard. Quote the paper for each claim, with the section. Tell me which papers you could not open.</p></div>

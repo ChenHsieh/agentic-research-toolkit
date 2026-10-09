@@ -13,13 +13,13 @@ Long form: https://chenhsieh.github.io/agentic-research-toolkit/
 6. Before measuring anything about speed or resources, check what else is running on the machine, and log that state in every result row. [An unrelated job held the GPU at 99%; a benchmark read 46 instead of 272.]
 
 ## While working
-7. Make every check fail once. Put a known-bad item inside the set being checked and confirm the check flags it. [A shell loop ran once instead of fourteen times and reported a clean secret scan across 14 repos.]
-8. A control with no values is BLOCKED, not PASS. So is a check that nothing calls: a gate that no script runs protects nothing.
+7. Make every check fail once, on the error it exists to catch. Put a known-bad item with that error inside the set being checked and confirm the check flags it; confirm it passes a known-good item too. Build the planted item without the code under test. [A shell loop ran once instead of fourteen times and reported a clean secret scan across 14 repos.]
+8. A control with no values is BLOCKED, not PASS. So is a check that nothing calls: a gate that no script runs protects nothing. Hold a null to the same standard: before reporting "no effect", show the check could have seen the effect.
 9. Name the sampling unit before any count or correlation. If units are grouped, report within groups.
 10. A job is done when the scheduler reports completion and the output file has been checked. Exit code 0 is not enough.
 11. A result above a physical limit (more than 100% of bandwidth, more reads than were sequenced) is a bug, not a finding.
 12. Save results before printing a summary. Never overwrite results; when a fix invalidates rows, archive them under a name that says what changed. Commit after each real step and update the state file.
-13. Unattended runs: small stages that each end in a file, a commit and a check; compute chained in the scheduler; one lock or claim per background job, not a process ID tracked by hand. If a check fails, stop and write why. Do not make it pass. [A sweep was relaunched three times and reached 14 GB before anyone noticed.]
+13. Unattended runs: small stages that each end in a file, a commit and a check; compute chained in the scheduler; one lock or claim per background job, not a process ID tracked by hand. Every wait has a deadline; a log that stops growing counts as a failure. If a check fails, stop and write why. Do not make it pass: do not delete an assertion, loosen a threshold, edit the test data, or paste the current output into the expected value. Checks that matter live where the working session cannot edit them. [A sweep was relaunched three times and reached 14 GB before anyone noticed.]
 14. Reproducing from Methods: when the text is missing something, stop and mark it BLOCKED. Never guess.
 
 ## Working with other agents and tools
@@ -41,6 +41,7 @@ Long form: https://chenhsieh.github.io/agentic-research-toolkit/
 26. If a result reverses something reported earlier, by the person or by you, say so first.
 27. In a long unattended run, schedule the verification pass before the stop time, not after.
 
-## Ask
-Message the session named "agentic AI playbook" with the situation in two lines. If it is gone, this file is the answer.
-Site-specific traps for a given cluster or machine live in a separate local file, not here.
+## Scope
+If no rule here covers the situation, stop and ask the person in two lines: what you were doing, and what you are unsure about.
+If this file and the project's rules file disagree, follow the project file and say which line you followed.
+Traps specific to one cluster or machine live in a separate local file, not here.

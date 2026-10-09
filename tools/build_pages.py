@@ -3,7 +3,7 @@ from page import page, COPY, COPY2
 from html import escape as e
 def pre(t): return f'<pre><code>{e(t.strip())}</code></pre>\n'
 
-ex='<h1>Examples</h1>\n<p>Two files and seven prompts I actually use. Copy them, then change the details to fit your project.</p>\n'
+ex='<h1>Examples</h1>\n<p>Three files and the prompts I actually use. Copy them, then change the details to fit your project.</p>\n'
 ex+='<h2 id="a-rules-file">A rules file</h2>\n<p>Save it as <code>CLAUDE.md</code> in your project folder (Codex reads <code>AGENTS.md</code>). The agent reads it at the start of every session. Five lines is enough to begin; add one each time something goes wrong.</p>\n'+pre("""
 # [Project name]
 
@@ -15,6 +15,20 @@ A job is finished when its output file has been checked, not when it exits.
 
 ## Things that went wrong before
 - [date] A control came back empty and was reported as a pass.
+""")
+ex+='<h2 id="a-brief">A brief</h2>\n<p>Save it as <code>BRIEF.md</code> before any task longer than an hour, and before every overnight run. It is the morning check written in advance, so the result gets compared with what you asked for and not with the agent\'s summary. Write the "Done when" line first. If you cannot, the task is not ready to hand over.</p>\n'+pre("""
+# Brief: [task] ([date])
+
+Goal: [one sentence]
+Inputs (read-only): [paths, with versions]
+Done when: [file] exists, has [N] rows, values between [low] and [high]
+Decided before seeing results: [filters, thresholds, samples to drop]
+If the result were an artifact, it would look like: [your guess, written now]
+Before the full run: the check says no to [a known-bad file], and one [sample] is run and checked.
+May run without asking: [commands]
+Ask first: deleting files, more than [N] jobs, anything outside [path]
+If a check fails or an input is missing: stop and write BLOCKED in STATUS.md. Do not change the check.
+Known traps: [what went wrong last time]
 """)
 ex+='<h2 id="a-status-file">A status file</h2>\n<p>Save it as <code>STATUS.md</code>. Ask the agent to update it after each real step. When a session ends or gets long, the next one starts from here instead of from memory.</p>\n'+pre("""
 # Status ([date])
@@ -36,29 +50,29 @@ Done when: [which files exist, and what they show]
 """)
 ex+='<h2 id="prompts">Prompts</h2>\n'
 for t,p in [("Catch me up","Read STATUS.md and the last ten commits. What is done, what is still open, and what is waiting on someone?"),
-("Before I trust this check","Run this check on an input that should fail, such as an empty file or shuffled labels, and show me that it fails."),
+("Before I trust this check","Run this check three ways, through the same script the real run uses: on an input built to have the error this check is for (such as shuffled labels), where it should say no; on a copy with only the header line, where it should say no; and on an input with a planted answer, made without the code being checked, where it should say yes. Show me the output each time and the line that calls the check. If it gets any of the three wrong, stop and tell me before changing anything."),
 ("Try to break this result","What are the three most likely ways this result could be an artifact? Check each one and show me the file for each check."),
 ("Rebuild from the Methods","In an empty folder, rebuild these results using only the Methods text and the raw data. If the text leaves something out, stop and tell me instead of guessing. Finish with a table of each number: expected, what you got, and whether it matched."),
 ("Read the papers","Read these papers and tell me which methods they treat as standard. Quote the paper for each claim, with the section. Tell me which papers you could not open."),
 ("Before an overnight run","It is tomorrow morning. This run produced a result that looks convincing but is wrong. List five ways that could have happened. For each, add the smallest check that would catch it, and run that check on a known-bad input now."),
 ("Review today's work","Another session worked on this today. Read its commits and output files, not its summary. What was actually done, and what is not supported?")]:
     ex+=f'<div class="prompt"><div class="ph">{t}</div><p>{e(p)}</p></div>\n'
-page('examples.html','Examples: using an agent for research',ex,'A rules file, a status file, and seven prompts I use.',COPY2)
+page('examples.html','Examples: using an agent for research',ex,'A rules file, a brief, a status file, and the prompts I use.',COPY2)
 
 se='''<h1>A 20-minute walkthrough</h1>
 <p>If you want to try this on your own project, I am happy to spend 20 minutes with you on a video call. Friends and labmates first.</p>
 <h2>What we do</h2>
 <div class="steps">
-<div><span class="min">5 min</span><b>Your project</b><p>What you work on, and one task you would like help with.</p></div>
-<div><span class="min">10 min</span><b>On your screen</b><p>Start a session in a folder you know. Ask it to explain the folder. Check its answer against what you know. Write your first five-line rules file.</p></div>
-<div><span class="min">5 min</span><b>Next week</b><p>What went wrong, what to try on your own, which examples to copy.</p></div>
+<div><span class="min">5 min</span><b>Your project</b><p>What you work on, one task you would like help with, and how you would know that task worked.</p></div>
+<div><span class="min">10 min</span><b>On your screen</b><p>You type; I watch. Ask the agent what each file in your folder does, and find one thing in its answer that is wrong. Then try your task with approval on, and give its check an empty or shuffled input to see whether it says no.</p></div>
+<div><span class="min">5 min</span><b>Before you go</b><p>Write your five-line rules file, with the mistake you found as its first entry. Then what to try on your own. Last, one thing that helped and one that confused you; I use those to fix this page.</p></div>
 </div>
-<p>You leave with a working setup, a rules file for your project, and one task you have already tried. What you will copy: the <a href="examples.html#a-rules-file">rules file</a>, the <a href="examples.html#a-status-file">status file</a>, and the <a href="examples.html#prompts">prompts</a>.</p>
+<p>You leave with a rules file for your project, one task you have already tried, and one check you have watched say no. What you will copy: the <a href="examples.html#a-rules-file">rules file</a>, the <a href="examples.html#a-status-file">status file</a>, and the <a href="examples.html#prompts">prompts</a>.</p>
 <h2>What to bring</h2>
-<p>Claude Code installed and logged in (your lab or personal account). A folder you understand: an analysis, a pipeline, or a set of notes. One real task.</p>
-<p>No data that cannot leave your institution. We look at code and file names, not protected data.</p>
+<p>Claude Code installed and logged in. It needs a paid Claude plan or API access; the free plan does not include it. If installing fails, say so when you ask and we use the 20 minutes for that. A folder you understand: an analysis, a pipeline, or a set of notes. One real task.</p>
+<p>Leave out data that cannot leave your institution: whatever the agent reads is sent to the company that runs the model. We look at code and file names, not protected data.</p>
 <h2>How to ask</h2>
-<p>Message me on Slack, or open an issue on the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/issues">repository</a>. Three lines is enough:</p>
+<p>If we share a Slack workspace, message me there. Otherwise open an issue on the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/issues">repository</a>; issues are public, so keep the project line general. Three lines is enough:</p>
 <div class="prompt"><div class="ph">Request</div><p>I work on [project, one line]. I would like to try [one task]. I have Claude Code installed / need help installing it.</p></div>
 <p>I reply when I can. No obligation either way, and nothing to prepare beyond the three things above.</p>
 <h2>Before the call</h2>
