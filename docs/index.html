@@ -133,48 +133,41 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <h2 id="failures">Seven ways it will go wrong</h2>
 
-<p>These are patterns, not bad luck. You will meet most of them in your first month. Each happened to me at least once; the details are under each one.</p>
+<p>These are patterns, not bad luck. You will meet most of them in your first month. Each of them happened to me at least once.</p>
 
 <article class="pat"><div class="mini" data-mini="empty"></div><div class="pat-t">
 <h3>The empty control</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>A comparison is reported as passed, but the control behind it has no values.</dd><dt class="lbl">What to do</dt><dd>Treat an empty control as not measured. Ask the agent for the row count of every control before reading any comparison.</dd></dl>
-<details><summary>When it happened to me</summary><p>A summary read "no significant difference from control" over a control table with 0 rows.</p></details>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="exit0"></div><div class="pat-t">
 <h3>Finished, but empty</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>The job says it finished without errors. The output file exists. It has a header and nothing else.</dd><dt class="lbl">What to do</dt><dd>Write in your rules file what "done" means: which file, how many rows, what range of values. Exit code 0 only means the program stopped.</dd></dl>
-<details><summary>When it happened to me</summary><p>Recurring on the cluster; now every job step checks its output file before the next one starts.</p></details>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="unit"></div><div class="pat-t">
 <h3>The wrong unit</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>A strong correlation across many items that come in groups: genes in families, cells in animals, samples in batches.</dd><dt class="lbl">What to do</dt><dd>Before any count or correlation, name the unit. If the units are grouped, ask for the result within each group too.</dd></dl>
-<details><summary>When it happened to me</summary><p>48 attention heads in 6 layers: rho +0.45 (p 0.001) pooled, -0.11 (p 0.47) within layers. The pooled result was differences between layers.</p></details>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="gap"></div><div class="pat-t">
 <h3>The silent guess</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>The agent rebuilds your result and it matches, but somewhere it chose a setting your notes never mention.</dd><dt class="lbl">What to do</dt><dd>Tell it to stop and say so when information is missing. A guess that happens to match hides the gap.</dd></dl>
-<details><summary>When it happened to me</summary><p>Rebuilding a chapter from its Methods: one unstated search setting changed 732 of 13,663 genes (5.4%).</p></details>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="stale"></div><div class="pat-t">
 <h3>Checks that compare a thing to itself</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>Something you built from another project's results passes every check, after that project corrected its results.</dd><dt class="lbl">What to do</dt><dd>Before rebuilding, read the source's list of corrections. Pinned inputs prove you match what you built from, not that it still stands.</dd></dl>
-<details><summary>When it happened to me</summary><p>A gene atlas website showed a withdrawn gene set for four days with every check green.</p></details>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="crash"></div><div class="pat-t">
 <h3>Lost at the last step</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>A long job crashes while writing its summary, before it saved anything.</dd><dt class="lbl">What to do</dt><dd>Save results to disk first, then print. Ask for results to be written as they are produced.</dd></dl>
-<details><summary>When it happened to me</summary><p>25 minutes of GPU work lost to a formatting error in the final print.</p></details>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="shared"></div><div class="pat-t">
 <h3>Two agents, one folder</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>One session commits another session's half-finished edit, or switches the branch under it.</dd><dt class="lbl">What to do</dt><dd>Give each session its own copy of the repository (a git worktree).</dd></dl>
-<details><summary>When it happened to me</summary><p>Happened on 10 September. A small script now refuses to let a session commit in the shared copy.</p></details>
 </div></article>
 
 <figure><div class="g" data-g="clean"></div><figcaption>A way to find silent guesses on purpose: have an agent rebuild your results from the Methods alone, in an empty folder. Each number matches, does not, or cannot be computed from what is written.</figcaption></figure>
