@@ -20,7 +20,7 @@ hr{border:0;border-top:1px solid #ddd;margin:3em 0}
 .g{margin:2em 0 .4em;user-select:none}
 .g svg{display:block;overflow:visible}
 .gname{font:13px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;pointer-events:none}
-.glabel{font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#777}
+.glabel{font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#666}
 .gnote{font-size:.82em;color:#666;margin-top:.3em}
 .gtip{position:fixed;z-index:9;max-width:280px;pointer-events:none;opacity:0;transition:opacity .12s;background:#fff;border:1px solid #ccc;padding:.55em .7em;font:13px/1.45 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#222;box-shadow:0 2px 10px rgba(0,0,0,.08)}
 @media (prefers-color-scheme:dark){.gtip{background:#222;color:#eee;border-color:#444}.glabel{fill:#aaa}}
@@ -31,9 +31,9 @@ input[type=range]{accent-color:#8a2c2c}
 .toc{display:none}
 @media (min-width:1180px){
  .toc{display:block;position:fixed;top:5.5em;left:calc(50% - 323px - 250px);width:200px;font:13px/1.45 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;max-height:calc(100vh - 8em);overflow-y:auto}
- .toc-h{color:#999;text-transform:uppercase;letter-spacing:.06em;font-size:11px;margin-bottom:.8em}
+ .toc-h{color:#666;text-transform:uppercase;letter-spacing:.06em;font-size:11px;margin-bottom:.8em}
  .toc ol{list-style:none;margin:0;padding:0;border-left:1px solid #e2ded5}
- .toc li a{display:flex;padding:.28em 0 .28em .9em;color:#888;text-decoration:none;margin-left:-1px;border-left:2px solid transparent}
+ .toc li a{display:flex;padding:.28em 0 .28em .9em;color:#666;text-decoration:none;margin-left:-1px;border-left:2px solid transparent}
  .toc li a span{flex:none;width:1.7em;color:#bbb}
  .toc li a:hover{color:#222}
  .toc li a.on{color:#222;border-left-color:#8a2c2c}
@@ -42,10 +42,10 @@ h2[id]{scroll-margin-top:1.2em}
 html{scroll-behavior:smooth}
 @media (prefers-color-scheme:dark){.toc ol{border-color:#333}.toc li a.on,.toc li a:hover{color:#eee}}
 pre{padding-top:2.1em}
-button.copy{position:absolute;top:.45em;right:.5em;font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#777;background:transparent;border:1px solid #d6d2c8;border-radius:4px;padding:2px 9px;cursor:pointer}
+button.copy{position:absolute;top:.45em;right:.5em;font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#666;background:transparent;border:1px solid #d6d2c8;border-radius:4px;padding:2px 9px;cursor:pointer}
 button.copy:hover{color:#222;border-color:#999}
 .prompt{position:relative;border-left:2px solid #8a2c2c;padding:.15em 0 .15em 1em;margin:1.6em 0}
-.prompt .ph{font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2em}
+.prompt .ph{font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#666;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2em}
 .prompt p{margin:0;padding-right:4.5em}
 .prompt button.copy{top:0}
 .pat{display:grid;grid-template-columns:240px 1fr;gap:1.4em;margin:2.2em 0;align-items:start}
@@ -53,7 +53,7 @@ button.copy:hover{color:#222;border-color:#999}
 .pat p{margin:.35em 0}
 .lbl{font:11px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:#8a2c2c;margin-right:.4em}
 .pat details{font-size:.9em;color:#555;margin-top:.4em}
-.pat summary{cursor:pointer;color:#777;font-size:.92em}
+.pat summary{cursor:pointer;color:#666;font-size:.92em}
 .mini svg{display:block}
 @media (max-width:600px){.pat{grid-template-columns:1fr;gap:.4em}.mini{max-width:280px}}
 .cta{display:flex;gap:1.2em;align-items:center;justify-content:space-between;border:1px solid #e2ded5;border-left:3px solid #8a2c2c;padding:1em 1.2em;margin:3em 0;font-size:.95em}
@@ -66,7 +66,27 @@ button.copy:hover{color:#222;border-color:#999}
 .steps p{font-size:.92em;color:#444;margin:.3em 0}
 @media (max-width:600px){.steps{grid-template-columns:1fr}.steps>div+div{border-left:0;padding-left:0;border-top:1px solid #e2ded5}.cta{flex-direction:column;align-items:flex-start}}
 .gkey{font:13px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#555;margin-top:.5em}
-.gkey summary{cursor:pointer;color:#888}
+.gkey summary{cursor:pointer;color:#666}
 .gkey dl{margin:.5em 0 0;padding-left:.8em;border-left:2px solid #e2ded5}
 .gkey dt{font-weight:600;color:#333;margin-top:.5em}
 .gkey dd{margin:0}
+.route{font:14px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;border-top:1px solid #e2ded5;border-bottom:1px solid #e2ded5;padding:.6em 0;color:#666}
+.route a{text-decoration:none;border-bottom:1px solid #d9b8b8}
+.toc-inline{font:14px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;margin:1.5em 0;color:#555}
+.toc-inline summary{cursor:pointer}
+.toc-inline ol{margin:.4em 0 0;padding-left:1.4em}
+@media (min-width:1180px){.toc-inline{display:none}}
+.explore{border-top:1px solid #e2ded5;border-bottom:1px solid #e2ded5;padding:1em 0}
+.ex-q{font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#555;margin:0 0 .6em}
+.ex-inputs button{font:13px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:none;border:1px solid #ccc;border-radius:4px;padding:.35em .7em;margin:0 .35em .4em 0;cursor:pointer;color:#444}
+.ex-inputs button.on{border-color:#8a2c2c;color:#8a2c2c}
+.ex-grid{width:100%;border-collapse:collapse;font:14px/1.4 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;margin:.6em 0}
+.ex-grid th{text-align:left;font-weight:600;color:#555;border-bottom:1px solid #ddd;padding:.4em .4em .4em 0;font-size:12px}
+.ex-grid td{padding:.5em .4em .5em 0;border-bottom:1px solid #eee;vertical-align:top}
+.ex-grid td.p{color:#2e6b45}.ex-grid td.n{color:#8a2c2c;font-weight:600}
+.ex-say{font-size:.95em;min-height:3em;margin:.4em 0}
+.uma{border-collapse:collapse;margin:1em 0;font-size:.95em}
+.uma th{text-align:left;padding:.45em 1em .45em 0;vertical-align:top;font-weight:normal;font-style:italic;color:#8a2c2c}
+.uma td{padding:.45em 0;border-bottom:1px solid #eee}
+.gpanel{font:14px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#333;border-left:2px solid #8a2c2c;padding:.3em 0 .3em .8em;margin:.5em 0}
+.pdl{margin:.3em 0}.pdl dt{display:inline;margin-right:.4em}.pdl dd{display:inline;margin:0}.pdl dd::after{content:"";display:block;margin-bottom:.45em}

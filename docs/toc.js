@@ -13,6 +13,9 @@
     if(!h.id)h.id=h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
     var li=document.createElement('li');li.innerHTML='<a href="#'+h.id+'"><span>'+(i+1)+'</span>'+h.textContent+'</a>';ol.appendChild(li)});
   nav.appendChild(ol);document.body.appendChild(nav);
+  var inl=document.createElement('details');inl.className='toc-inline';
+  inl.innerHTML='<summary>On this page ('+hs.length+' sections)</summary><ol>'+hs.map(function(h){return '<li><a href="#'+h.id+'">'+h.textContent+'</a></li>'}).join('')+'</ol>';
+  var first=hs[0];first.parentNode.insertBefore(inl,first);
   var links=[].slice.call(ol.querySelectorAll('a'));
   function spy(){var cur=0;hs.forEach(function(h,i){if(h.getBoundingClientRect().top<innerHeight*0.3)cur=i});
     links.forEach(function(a,i){a.classList.toggle('on',i===cur)})}

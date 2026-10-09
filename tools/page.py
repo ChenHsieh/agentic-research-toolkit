@@ -1,5 +1,5 @@
 """Shared page shell. Usage: from page import page; page('x.html','Title','<body html>')"""
-PAGES=[("index.html","Essay"),("examples.html","Examples"),("reading.html","Reading"),("session.html","Session")]
+PAGES=[("index.html","Essay"),("examples.html","Prompts &amp; files"),("reading.html","Reading"),("session.html","Walkthrough")]
 def page(fn,title,body,desc="",script=""):
     nav='<nav>'+''.join(f'<a href="{h}"'+(' class="here"' if h==fn else '')+f'>{t}</a>' for h,t in PAGES)+'</nav>'
     open('docs/'+fn,'w').write(f'''<!DOCTYPE html>

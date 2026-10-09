@@ -1,0 +1,3 @@
+Research memo completed: [codex_design_2026-10.md](/scratch/ch29576/agentic-research-toolkit/notes/codex_design_2026-10.md).
+
+It includes sourced, site-specific principles across all six areas, verified short quotations, a ranked 15-change list, and a clear “Not verified” section.

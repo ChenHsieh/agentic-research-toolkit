@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A 20-minute session</title>
-<meta name="description" content="Go through this on your own project with me in 20 minutes.">
-<meta property="og:title" content="A 20-minute session">
-<meta property="og:description" content="Go through this on your own project with me in 20 minutes.">
+<title>A 20-minute walkthrough</title>
+<meta name="description" content="Go through this on your own project with me in 20 minutes. You leave with a rules file for your project and one task already tried.">
+<meta property="og:title" content="A 20-minute walkthrough">
+<meta property="og:description" content="Go through this on your own project with me in 20 minutes. You leave with a rules file for your project and one task already tried.">
 <meta property="og:image" content="https://chenhsieh.github.io/agentic-research-toolkit/img/card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav><a href="index.html">Essay</a><a href="examples.html">Examples</a><a href="reading.html">Reading</a><a href="session.html" class="here">Session</a></nav>
-<h1>A 20-minute session</h1>
+<nav><a href="index.html">Essay</a><a href="examples.html">Prompts &amp; files</a><a href="reading.html">Reading</a><a href="session.html" class="here">Walkthrough</a></nav>
+<h1>A 20-minute walkthrough</h1>
 <p>If you want to try this on your own project, I am happy to spend 20 minutes with you on a video call. Friends and labmates first.</p>
 <h2>What we do</h2>
 <div class="steps">
@@ -25,17 +25,22 @@
 <div><span class="min">10 min</span><b>On your screen</b><p>Start a session in a folder you know. Ask it to explain the folder. Check its answer against what you know. Write your first five-line rules file.</p></div>
 <div><span class="min">5 min</span><b>Next week</b><p>What went wrong, what to try on your own, which examples to copy.</p></div>
 </div>
-<p>You leave with a working setup, a rules file for your project, and one task you have already tried.</p>
+<p>You leave with a working setup, a rules file for your project, and one task you have already tried. What you will copy: the <a href="examples.html#a-rules-file">rules file</a>, the <a href="examples.html#a-status-file">status file</a>, and the <a href="examples.html#prompts">prompts</a>.</p>
 <h2>What to bring</h2>
 <p>Claude Code installed and logged in (your lab or personal account). A folder you understand: an analysis, a pipeline, or a set of notes. One real task.</p>
 <p>No data that cannot leave your institution. We look at code and file names, not protected data.</p>
 <h2>How to ask</h2>
-<p>Message me on Slack, or open an issue on the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/issues">repository</a> with a sentence about your project.</p>
+<p>Message me on Slack, or open an issue on the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/issues">repository</a>. Three lines is enough:</p>
+<div class="prompt"><div class="ph">Request</div><p>I work on [project, one line]. I would like to try [one task]. I have Claude Code installed / need help installing it.</p></div>
+<p>I reply when I can. No obligation either way, and nothing to prepare beyond the three things below.</p>
 <h2>Before the call</h2>
 <p>Read the <a href="index.html">essay</a> (10 minutes). Note which of the seven failure patterns you think you would have missed. We can start there.</p>
 
 <p class="small" style="margin-top:4em">Chen Hsieh · <a href="https://github.com/ChenHsieh/agentic-research-toolkit">source</a> · text CC BY 4.0</p>
 <script src="toc.js"></script>
-
+<script>
+document.querySelectorAll('pre,.prompt').forEach(function(el){var b=document.createElement('button');b.className='copy';b.type='button';b.textContent='Copy';
+b.onclick=function(){var t=el.matches('pre')?el.querySelector('code').innerText:el.querySelector('p').innerText;navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1400)})};el.appendChild(b)});
+</script>
 </body>
 </html>

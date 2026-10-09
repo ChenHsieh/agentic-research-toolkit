@@ -31,10 +31,14 @@ function graph(el,spec){
       .attr('fill',C[n.kind]||C.agent).attr('fill-opacity',n.faint?0.35:1)});
   node.attr('tabindex',0).attr('role','img').attr('aria-label',function(n){return n.label+(n.info?': '+n.info.replace(/<[^>]+>/g,' '):'')})
     .on('focus',function(ev,n){var r=this.getBoundingClientRect();showTip({clientX:r.right,clientY:r.bottom},n.info)}).on('blur',hideTip);
-  node.on('mouseover',function(ev,n){showTip(ev,n.info);
+  node.on('mouseover',function(ev,n){if(!narrow)showTip(ev,n.info);
       lp.attr('stroke-opacity',function(l){return l.source===n||l.target===n?1:0.25})})
     .on('mousemove',moveTip).on('mouseout',function(){hideTip();lp.attr('stroke-opacity',1)})
-    .on('click',function(ev,n){if(n.url)window.open(n.url,'_blank')});
+    .on('click',function(ev,n){if(n.url&&!narrow){window.open(n.url,'_blank');return}pin(n)})
+    .on('keydown',function(ev,n){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pin(n)}});
+  var panel=document.createElement('div');panel.className='gpanel';panel.hidden=true;el.appendChild(panel);
+  function pin(n){if(!n.info)return;hideTip();panel.hidden=false;panel.innerHTML='<b>'+n.label+'</b> '+n.info.replace(/^<b>[^<]*<\/b><br>/,'')+(n.url?' <a href="'+n.url+'" target="_blank">Open &rarr;</a>':'');
+    node.select('rect').attr('stroke',function(m){return m===n?'#111':null}).attr('stroke-width',1.5)}
   // settle overlaps once, off-screen, then draw a static layout
   var sim=d3.forceSimulation(nodes).stop()
     .force('x',d3.forceX(function(n){return n.tx}).strength(0.4))
@@ -42,14 +46,13 @@ function graph(el,spec){
     ;
   if(spec.collide)sim.force('c',d3.forceCollide(function(n){return n.w/2+6}).strength(0.8));
   for(var i=0;i<200;i++){sim.tick();nodes.forEach(function(n){n.x=Math.max(n.w/2+2,Math.min(W-n.w/2-2,n.x));n.y=Math.max(n.h/2+2,Math.min(H-n.h/2-2,n.y))})}
-  node.attr('transform',function(n){return 'translate('+n.x+','+n.y+')'}).style('cursor',function(n){return n.url?'pointer':'default'});
+  node.attr('transform',function(n){return 'translate('+n.x+','+n.y+')'}).style('cursor','pointer');
   lp.attr('d',function(l){var a=l.source,b=l.target,dx=b.x-a.x,dy=b.y-a.y;
     var p=edge(a,dx,dy),q=edge(b,-dx,-dy),bend=l.bend||0;
     var mx=(p[0]+q[0])/2-dy*bend,my=(p[1]+q[1])/2+dx*bend;l.mx=mx;l.my=my;
     return 'M'+p[0]+','+p[1]+'Q'+mx+','+my+' '+q[0]+','+q[1]});
   lt.attr('x',function(l){return l.mx}).attr('y',function(l){return l.my-5}).attr('text-anchor','middle');
-  node.on('mouseover.hl',function(){d3.select(this).select('rect').attr('stroke','#111').attr('stroke-width',1.5)})
-      .on('mouseout.hl',function(){d3.select(this).select('rect').attr('stroke',null)});
+  
   function edge(n,dx,dy){var hw=n.w/2+3,hh=n.h/2+3,s=Math.min(Math.abs(dx)>1e-6?hw/Math.abs(dx):1e9,Math.abs(dy)>1e-6?hh/Math.abs(dy):1e9);return [n.x+dx*s,n.y+dy*s]}
   if(spec.legend){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.legend.map(function(l){return '<span style="display:inline-block;width:.8em;height:.8em;border-radius:3px;background:'+C[l[0]]+';margin:0 .35em 0 .9em;vertical-align:-1px"></span>'+l[1]}).join('')+'</div>')}
   if(spec.note){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.note+'</div>')}

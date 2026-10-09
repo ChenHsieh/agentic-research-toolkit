@@ -5,11 +5,11 @@ agentic-usage depth, media/visual design, and philosophy of science.
 Constraint: quiet, fact-based, no AI-vibe aesthetics. Verify every change live.
 
 ## Phase 1: research (Codex, sourced)
-- [ ] 1. Codex round: design principles across the six areas -> notes/codex_design_2026-10.md
-- [ ] 2. My own audit: screenshot every page at phone + desktop, list problems -> notes/audit_2026-10-09.md
+- [x] 1. Codex round: design principles across the six areas -> notes/codex_design_2026-10.md
+- [x] 2. My own audit: screenshot every page at phone + desktop, list problems -> notes/audit_2026-10-09.md
 
 ## Phase 2: synthesis
-- [ ] 3. Merge Codex findings + audit into a ranked change list (notes/plan_2026-10-09.md)
+- [x] 3. Merge Codex findings + audit into a ranked change list (notes/plan_2026-10-09.md)
 
 ## Phase 3: build (one commit each, verify live)
 - [ ] 4..n  from the plan

@@ -33,7 +33,7 @@ var D={
   t(s,100,79,'25 min of computing',{a:'middle',c:'#fff'});
   t(s,195,58,'print',{a:'middle'});s.append('text').attr('x',195).attr('y',82).attr('text-anchor','middle').attr('fill',RED).style('font-size','20px').text('×');
   s.append('rect').attr('x',215).attr('y',62).attr('width',30).attr('height',26).attr('rx',4).attr('fill','none').attr('stroke',GREY).attr('stroke-dasharray','3 3');
-  t(s,230,104,'save',{a:'middle',c:'#999'});t(s,20,130,'save first, print second',{c:RED});
+  t(s,230,104,'save',{a:'middle',c:'#666'});t(s,20,130,'save first, print second',{c:RED});
  },
  stale:function(s){
   s.append('rect').attr('x',15).attr('y',40).attr('width',90).attr('height',60).attr('rx',5).attr('fill','none').attr('stroke',INK);
