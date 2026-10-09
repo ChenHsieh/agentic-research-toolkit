@@ -7,6 +7,11 @@
 <meta property="og:title" content="Using an agent for research">
 <meta property="og:description" content="How a genomics PhD student uses Claude Code on a university cluster: what failed, with dates and numbers, and what changed after each failure.">
 <meta property="og:type" content="article">
+<meta property="og:image" content="https://chenhsieh.github.io/agentic-research-toolkit/img/card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chenhsieh.github.io/agentic-research-toolkit/img/card.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%238a2c2c%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -22,7 +27,7 @@
 <ol class="principles">
 <li><b>Doing is cheap now; checking is not.</b> Spend the saved time on <a href="#quiet">checks</a>.</li>
 <li><b>Make every check fail once</b> before trusting it. A check that has never said no is a description. <a href="#quiet">Why</a></li>
-<li><b>Empty is BLOCKED, not PASS.</b> A control with no values measured nothing. <a href="#failures">Case</a></li>
+<li><b>Empty is not measured.</b> A control with no values is not a pass. <a href="#failures">Case</a></li>
 <li><b>Rules that matter become code.</b> A rule in a file is read once and forgotten. <a href="#rules">Case</a></li>
 <li><b>Name the unit before you count.</b> Grouped units are reported within groups. <a href="#rules">Case</a></li>
 <li><b>Files are the record, not the chat.</b> Brief, task list, status, commit. <a href="#long">Why</a></li>
@@ -79,23 +84,60 @@
 A git hook blocks commits, branch switches and stashes in a shared checkout.<br>
 A figure-saving function refuses a figure with no sample size, text under 20 pt, or overlapping labels.</p>
 
-<h2 id="failures">Failures and fixes</h2>
+<h2 id="failures">Seven ways it will go wrong</h2>
 
-<p><b>Empty control reported as passed.</b> A comparison returned no values and the summary read it as a pass. Fix: a control with no values is BLOCKED, not PASS, and each control must point to the job and file that produced it.</p>
+<p>These are patterns, not bad luck. You will meet most of them in your first month. Each happened to me at least once; the details are under each one.</p>
 
-<p><b>Two sessions in one checkout (10 September).</b> One session committed another's unfinished edit; another moved the shared checkout to a different branch. Fix: each session works in its own git worktree, and the hook above blocks the shared checkout. Worktrees still share the same disk, data and job queue, so outputs need separate paths.</p>
+<div class="pat"><div class="mini" data-mini="empty"></div><div class="pat-t">
+<h3>The empty control</h3>
+<p><span class="lbl">You will see</span> A comparison is reported as passed, but the control behind it has no values.</p>
+<p><span class="lbl">What to do</span> Treat an empty control as not measured. Ask the agent for the row count of every control before reading any comparison.</p>
+<details><summary>When it happened to me</summary><p>A summary read "no significant difference from control" over a control table with 0 rows.</p></details>
+</div></div>
 
-<p><b>Withdrawn results served for four days.</b> A gene atlas website kept showing a gene set that had been corrected upstream on 9 September. Every build check passed because the checks compared the site to its own pinned inputs, and the correction changed the selection rule, not the input files. Fix: the build reads each source repository's corrections log and fails when it has changed.</p>
+<div class="pat"><div class="mini" data-mini="exit0"></div><div class="pat-t">
+<h3>Finished, but empty</h3>
+<p><span class="lbl">You will see</span> The job says it finished without errors. The output file exists. It has a header and nothing else.</p>
+<p><span class="lbl">What to do</span> Write in your rules file what "done" means: which file, how many rows, what range of values. Exit code 0 only means the program stopped.</p>
+<details><summary>When it happened to me</summary><p>Recurring on the cluster; now every job step checks its output file before the next one starts.</p></details>
+</div></div>
 
-<p><b>Results lost after a crash.</b> A job finished 25 minutes of GPU work and crashed in the summary print, before saving. Fix: write results to disk before printing.</p>
+<div class="pat"><div class="mini" data-mini="unit"></div><div class="pat-t">
+<h3>The wrong unit</h3>
+<p><span class="lbl">You will see</span> A strong correlation across many items that come in groups: genes in families, cells in animals, samples in batches.</p>
+<p><span class="lbl">What to do</span> Before any count or correlation, name the unit. If the units are grouped, ask for the result within each group too.</p>
+<details><summary>When it happened to me</summary><p>48 attention heads in 6 layers: rho +0.45 (p 0.001) pooled, -0.11 (p 0.47) within layers. The pooled result was differences between layers.</p></details>
+</div></div>
 
-<p><b>Wrong unit of analysis.</b> See defect 3 above. Fix: before any correlation, name the unit and report the within-group result if units are grouped.</p>
+<div class="pat"><div class="mini" data-mini="gap"></div><div class="pat-t">
+<h3>The silent guess</h3>
+<p><span class="lbl">You will see</span> The agent rebuilds your result and it matches, but somewhere it chose a setting your notes never mention.</p>
+<p><span class="lbl">What to do</span> Tell it to stop and say so when information is missing. A guess that happens to match hides the gap.</p>
+<details><summary>When it happened to me</summary><p>Rebuilding a chapter from its Methods: one unstated search setting changed 732 of 13,663 genes (5.4%).</p></details>
+</div></div>
 
-<p><b>Unrecorded method parameter.</b> An agent rebuilt one chapter's results from the Methods text without access to intermediate files. The Methods did not state the DIAMOND sensitivity mode. With the default mode, 732 of 13,663 candidate genes (5.4%) were missed. A second filtering step was not written down anywhere. Fix: both are now in the Methods. Rule for these runs: when the text is missing something, the agent stops and marks that number BLOCKED. It does not guess, because a guess that happens to match hides the gap.</p>
+<div class="pat"><div class="mini" data-mini="stale"></div><div class="pat-t">
+<h3>Checks that compare a thing to itself</h3>
+<p><span class="lbl">You will see</span> Something you built from another project's results passes every check, after that project corrected its results.</p>
+<p><span class="lbl">What to do</span> Before rebuilding, read the source's list of corrections. Pinned inputs prove you match what you built from, not that it still stands.</p>
+<details><summary>When it happened to me</summary><p>A gene atlas website showed a withdrawn gene set for four days with every check green.</p></details>
+</div></div>
 
-<figure><div class="g" data-g="clean"></div><figcaption>Rebuilding results from the Methods text alone. Each number either matches, does not, or cannot be computed from what is written.</figcaption></figure>
+<div class="pat"><div class="mini" data-mini="crash"></div><div class="pat-t">
+<h3>Lost at the last step</h3>
+<p><span class="lbl">You will see</span> A long job crashes while writing its summary, before it saved anything.</p>
+<p><span class="lbl">What to do</span> Save results to disk first, then print. Ask for results to be written as they are produced.</p>
+<details><summary>When it happened to me</summary><p>25 minutes of GPU work lost to a formatting error in the final print.</p></details>
+</div></div>
 
-<p><b>Submitted is not finished.</b> A job that was submitted, or that exited with code 0, can still have produced an empty or partial output. Fix: a step counts as done only after the scheduler reports completion and the output file is checked.</p>
+<div class="pat"><div class="mini" data-mini="shared"></div><div class="pat-t">
+<h3>Two agents, one folder</h3>
+<p><span class="lbl">You will see</span> One session commits another session's half-finished edit, or switches the branch under it.</p>
+<p><span class="lbl">What to do</span> Give each session its own copy of the repository (a git worktree).</p>
+<details><summary>When it happened to me</summary><p>Happened on 10 September. A small script now refuses to let a session commit in the shared copy.</p></details>
+</div></div>
+
+<figure><div class="g" data-g="clean"></div><figcaption>A way to find silent guesses on purpose: have an agent rebuild your results from the Methods alone, in an empty folder. Each number matches, does not, or cannot be computed from what is written.</figcaption></figure>
 
 <h2 id="long">Long sessions</h2>
 
@@ -121,9 +163,11 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p class="small">Written with Claude Code from my own session logs and notes; every number was checked against the file it came from. Mistakes are mine.</p>
 
+<div class="cta"><div><b>Want to try this on your own project?</b><br>I do 20-minute walkthroughs for friends and labmates: your folder, your first rules file, what to try this week.</div><a href="session.html">How it works &rarr;</a></div>
+
 <h2>More</h2>
 
-<p><a href="examples.html">Examples</a>: a rules file, a brief, a status file, prompts I reuse. <a href="practice.html">Seven cases</a>: decide whether each result was done. <a href="reading.html">Reading</a>: papers, tools, and guides. <a href="session.html">A 20-minute session</a> with me, if you want to go through it on your own project.</p>
+<p><a href="examples.html">Examples</a>: a rules file, a brief, a status file, prompts I reuse. <a href="reading.html">Reading</a>: papers, tools, and guides. <a href="session.html">A 20-minute session</a> with me, if you want to go through it on your own project.</p>
 
 <h2>Files</h2>
 
@@ -133,6 +177,7 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="graph.js"></script>
 <script src="diagrams.js"></script>
+<script src="minis.js"></script><script>drawMinis()</script>
 <script src="toc.js"></script>
 </body>
 </html>

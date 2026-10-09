@@ -41,45 +41,22 @@ for t,p in [("Catch me up","Read STATUS.md and the last ten commits. What is don
     ex+=f'<div class="prompt"><div class="ph">{t}</div><p>{e(p)}</p></div>\n'
 page('examples.html','Examples: using an agent for research',ex,'A rules file, a status file, and six prompts I use.',COPY2)
 
-cases=[
-("A comparison against a control came back. The agent's summary: \"No significant difference from control. Check passed.\" The control table has 0 rows.","BLOCKED","Nothing compared with nothing is not a difference. The control never ran. This one happened to me; now an empty control fails loudly."),
-("A cluster job exited with code 0. The output file exists. It has a header and no data rows.","BLOCKED","Exit code 0 means the program stopped without an error, not that it produced anything. A step is done when the output is checked."),
-("Across 48 attention heads in 6 layers, a score correlates with an effect: rho = +0.45, p = 0.001. Computed within each layer, the same correlation is rho = -0.11, p = 0.47.","FAIL","The heads are grouped. The pooled correlation came from differences between layers, not between heads. The claim about heads does not hold."),
-("Rebuilding a chapter from its Methods text, the agent's count matches the paper exactly. Its log notes that the Methods did not state a software setting, so it picked the one that matched.","BLOCKED","A guess that matches hides the gap. The Methods are incomplete. In my case, the default setting changed 732 of 13,663 genes."),
-("A website build passes every check: inputs pinned, checksums match. The source repository's corrections log changed yesterday.","BLOCKED","Pinned inputs prove the site matches what it was built from, not that the source still stands. My site served a withdrawn gene set for four days with every check green."),
-("An intervention shows no effect. In that arm, 2% of the positions that could change actually changed.","BLOCKED","An arm that barely moved cannot show an effect. The null is a fact about the sampler, not about the system."),
-("Two classification methods are run on the same reads. They agree on 99.5% or more of reads at family level. Most genus-level disagreement is between two genera in the same family. The report says: family-level results are robust; a few named genera depend on the method.","PASS","The claim matches the evidence and states its limit. The disagreements are reported, not averaged away."),
-]
-pr='<h1>Practice</h1>\n<p>Seven cases. Each happened in my work, lightly simplified. For each, decide whether the result is done (PASS), wrong (FAIL), or cannot be judged yet (BLOCKED). Then see what happened.</p>\n'
-for i,(q,a,why) in enumerate(cases,1):
-    pr+=f'''<div class="case" data-a="{a}" style="margin:2.2em 0;padding-top:.2em">
-<p><b>{i}.</b> {e(q)}</p>
-<p class="opts">{''.join(f'<button class="ans" style="font:15px Georgia,serif;margin-right:.5em;padding:3px 10px;background:none;border:1px solid #999;cursor:pointer">{o}</button>' for o in ("PASS","FAIL","BLOCKED"))}</p>
-<p class="why" hidden><span class="verdict"></span> {e(why)}</p>
-</div>
-'''
-pr+='<p class="small">Most of these are BLOCKED. That matches my experience: the common failure is not a wrong number, it is a number that was never really measured.</p>'
-js='''<script>
-document.querySelectorAll('.case').forEach(function(c){c.querySelectorAll('.ans').forEach(function(b){b.onclick=function(){
-var ok=b.textContent===c.dataset.a;var w=c.querySelector('.why');w.hidden=false;
-w.querySelector('.verdict').innerHTML=(ok?'Yes, ':'No, ')+'<b>'+c.dataset.a+'</b>.';
-c.querySelectorAll('.ans').forEach(function(x){x.style.borderColor=x.textContent===c.dataset.a?'#a33':'#ccc';x.style.color=x.textContent===c.dataset.a?'#a33':'#999'})}})});
-</script>'''
-page('practice.html','Practice: is this result done?',pr,'Seven real cases: decide PASS, FAIL or BLOCKED.',js)
-
 se='''<h1>A 20-minute session</h1>
 <p>If you want to try this on your own project, I am happy to spend 20 minutes with you on a video call. Friends and labmates first.</p>
 <h2>What we do</h2>
-<p><b>5 minutes.</b> Your project, and one task you would like help with.</p>
-<p><b>10 minutes.</b> On your screen, in a folder you know well: start a session, ask it to explain the folder, check its answer against what you know, and write the first five lines of your rules file.</p>
-<p><b>5 minutes.</b> What went wrong, what to try this week, and which <a href="examples.html">examples</a> to copy.</p>
+<div class="steps">
+<div><span class="min">5 min</span><b>Your project</b><p>What you work on, and one task you would like help with.</p></div>
+<div><span class="min">10 min</span><b>On your screen</b><p>Start a session in a folder you know. Ask it to explain the folder. Check its answer against what you know. Write your first five-line rules file.</p></div>
+<div><span class="min">5 min</span><b>Next week</b><p>What went wrong, what to try on your own, which examples to copy.</p></div>
+</div>
+<p>You leave with a working setup, a rules file for your project, and one task you have already tried.</p>
 <h2>What to bring</h2>
 <p>Claude Code installed and logged in (your lab or personal account). A folder you understand: an analysis, a pipeline, or a set of notes. One real task.</p>
 <p>No data that cannot leave your institution. We look at code and file names, not protected data.</p>
 <h2>How to ask</h2>
 <p>Message me on Slack, or open an issue on the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/issues">repository</a> with a sentence about your project.</p>
 <h2>Before the call</h2>
-<p>Read the <a href="index.html">essay</a> (10 minutes). If you have five more, try <a href="practice.html">seven cases</a> from my own work: for each result, decide whether it was done, wrong, or not yet measured. We can start the call from whichever one surprised you.</p>
+<p>Read the <a href="index.html">essay</a> (10 minutes). Note which of the seven failure patterns you think you would have missed. We can start there.</p>
 '''
 page('session.html','A 20-minute session',se,'Go through this on your own project with me in 20 minutes.')
 print('ok')

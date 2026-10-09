@@ -48,3 +48,20 @@ button.copy:hover{color:#222;border-color:#999}
 .prompt .ph{font:12px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2em}
 .prompt p{margin:0;padding-right:4.5em}
 .prompt button.copy{top:0}
+.pat{display:grid;grid-template-columns:240px 1fr;gap:1.4em;margin:2.2em 0;align-items:start}
+.pat h3{margin:0 0 .3em}
+.pat p{margin:.35em 0}
+.lbl{font:11px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:#8a2c2c;margin-right:.4em}
+.pat details{font-size:.9em;color:#555;margin-top:.4em}
+.pat summary{cursor:pointer;color:#777;font-size:.92em}
+.mini svg{display:block}
+@media (max-width:600px){.pat{grid-template-columns:1fr;gap:.4em}.mini{max-width:280px}}
+.cta{display:flex;gap:1.2em;align-items:center;justify-content:space-between;border:1px solid #e2ded5;border-left:3px solid #8a2c2c;padding:1em 1.2em;margin:3em 0;font-size:.95em}
+.cta a{white-space:nowrap;font:14px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;text-decoration:none;border:1px solid #8a2c2c;padding:.45em .9em;border-radius:4px}
+.cta a:hover{background:#8a2c2c;color:#fff}
+.steps{display:grid;grid-template-columns:1fr 2fr 1fr;gap:0;margin:1.5em 0;border-top:3px solid #8a2c2c}
+.steps>div{padding:.8em .9em .2em 0}
+.steps>div+div{padding-left:.9em;border-left:1px solid #e2ded5}
+.steps .min{display:block;font:11px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;color:#8a2c2c;margin-bottom:.2em}
+.steps p{font-size:.92em;color:#444;margin:.3em 0}
+@media (max-width:600px){.steps{grid-template-columns:1fr}.steps>div+div{border-left:0;padding-left:0;border-top:1px solid #e2ded5}.cta{flex-direction:column;align-items:flex-start}}
