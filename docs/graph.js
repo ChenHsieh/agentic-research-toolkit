@@ -39,7 +39,8 @@ function graph(el,spec){
   var sim=d3.forceSimulation(nodes).stop()
     .force('x',d3.forceX(function(n){return n.tx}).strength(0.4))
     .force('y',d3.forceY(function(n){return n.ty}).strength(0.4))
-    .force('c',d3.forceCollide(function(n){return n.w/2+6}).strength(0.8));
+    ;
+  if(spec.collide)sim.force('c',d3.forceCollide(function(n){return n.w/2+6}).strength(0.8));
   for(var i=0;i<200;i++){sim.tick();nodes.forEach(function(n){n.x=Math.max(n.w/2+2,Math.min(W-n.w/2-2,n.x));n.y=Math.max(n.h/2+2,Math.min(H-n.h/2-2,n.y))})}
   node.attr('transform',function(n){return 'translate('+n.x+','+n.y+')'}).style('cursor',function(n){return n.url?'pointer':'default'});
   lp.attr('d',function(l){var a=l.source,b=l.target,dx=b.x-a.x,dy=b.y-a.y;

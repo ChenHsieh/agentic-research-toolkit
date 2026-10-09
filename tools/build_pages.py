@@ -62,7 +62,7 @@ page('session.html','A 20-minute session',se,'Go through this on your own projec
 print('ok')
 
 LAND='''<script src="https://cdn.jsdelivr.net/npm/d3@7"></script><script src="graph.js"></script><script>
-drawDiagrams({land:{height:380,axis:['you drive','it drives'],legend:[['you','coding agents'],['file','research assistants'],['agent','autonomous research systems'],['bad','idea-to-paper']],nodes:[
+drawDiagrams({land:{height:380,collide:true,axis:['you drive','it drives'],legend:[['you','coding agents'],['file','research assistants'],['agent','autonomous research systems'],['bad','idea-to-paper']],nodes:[
 {id:'cc',label:'Claude Code',kind:'you',x:.08,y:.2,info:'Terminal agent. You approve commands and set the rules.',url:'https://code.claude.com/docs/en/overview'},
 {id:'cx',label:'Codex CLI',kind:'you',x:.1,y:.42,info:'Terminal agent from OpenAI. Reads AGENTS.md.',url:'https://github.com/openai/codex'},
 {id:'gm',label:'Gemini CLI',kind:'you',x:.08,y:.64,info:'Open-source terminal agent with a free tier.',url:'https://github.com/google-gemini/gemini-cli'},

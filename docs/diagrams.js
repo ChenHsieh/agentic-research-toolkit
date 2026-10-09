@@ -1,4 +1,19 @@
 drawDiagrams({
+modes:{height:120,axis:['you watch every step','you check the result'],nodes:[
+ {id:'a',label:'Approve each step',kind:'you',x:.12,y:.3,info:'<b>Approve each command</b><br>Use for: your first week, anything touching shared data, deleting files, or submitting many jobs.<br>Cost: you are the bottleneck; long tasks stall when you look away.'},
+ {id:'p',label:'Approve the plan',kind:'file',x:.38,y:.3,info:'<b>Plan first, then let it run</b><br>It writes a plan; you read and correct it; then edits run without asking. Safe commands are pre-approved in a list; risky ones still ask.<br>This is where most of my daytime work sits.'},
+ {id:'u',label:'Run unattended',kind:'agent',x:.64,y:.3,info:'<b>No questions asked</b><br>Only inside a bounded space: its own copy of the repository, no access to raw data it could overwrite, a limit on jobs it can submit.'},
+ {id:'n',label:'Overnight',kind:'agent',x:.88,y:.3,info:'<b>Overnight</b><br>Works when the goal is one sentence, success is a check it can run, and the compute is chained in the scheduler. Fails when it needs your judgement at 2 a.m.'}],
+ links:[{s:'a',t:'p'},{s:'p',t:'u'},{s:'u',t:'n'}]},
+night:{height:250,axis:['evening','morning'],nodes:[
+ {id:'b',label:'Brief + done-check',kind:'you',x:.11,y:.2,info:'<b>Before you leave</b><br>One-sentence goal. Which files must exist, how many rows, what range. Which commands it may run without asking.'},
+ {id:'s1',label:'Stage 1',kind:'agent',x:.31,y:.2,info:'A small piece that ends in a file. Committed when done.'},
+ {id:'c1',label:'Check',kind:'ok',x:.45,y:.2,info:'A check that has been seen to fail. If it fails, the agent stops and writes why, rather than trying to make it pass.'},
+ {id:'s2',label:'Stage 2',kind:'agent',x:.6,y:.2,info:'Starts only from stage 1 output that passed.'},
+ {id:'c2',label:'Check',kind:'ok',x:.74,y:.2,info:'Same rule.'},
+ {id:'j',label:'Jobs chained in the scheduler',kind:'file',x:.46,y:.6,info:'Long compute runs as batch jobs that start each other when the previous one succeeds. No agent sits polling the queue.'},
+ {id:'m',label:'Fresh review',kind:'you',x:.9,y:.6,info:'<b>Morning</b><br>A new session reads the commits, STATUS.md and the output files and reports what was done and what is unsupported. You read that, not the night session\'s own summary.'}],
+ links:[{s:'b',t:'s1'},{s:'s1',t:'c1'},{s:'c1',t:'s2'},{s:'s2',t:'c2'},{s:'s1',t:'j',dash:1},{s:'j',t:'s2',dash:1},{s:'c2',t:'m'}]},
 loop:{height:300,note:'Hover a box for detail.',nodes:[
  {id:'you',label:'You',kind:'you',x:.1,y:.5,info:'<b>You</b><br>Type a goal in plain language: "rebuild Table 2 from the raw counts".'},
  {id:'model',label:'Model',kind:'agent',x:.27,y:.5,info:'<b>Language model</b><br>Decides the next action. In chat it can only reply with text.'},

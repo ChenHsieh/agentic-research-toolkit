@@ -147,6 +147,32 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p>Waiting is done by the scheduler (job dependencies) or by one background check that ends when the job leaves the queue. Not by an agent polling.</p>
 
+<h2 id="modes">How much to let it run</h2>
+
+<p>The tools let you choose how often the agent stops to ask. Claude Code has modes from "ask before every command" to "plan first, then edit freely" to "never ask"; Codex, Cursor and others have similar settings. Which one is right depends less on the tool than on what the task can break.</p>
+
+<figure><div class="g" data-g="modes"></div><figcaption>From watching every step to checking only the result. Hover each mode for when I use it.</figcaption></figure>
+
+<p>On a shared cluster, the computing centres that have written guidance agree on one point: keep approval on for anything that submits jobs, cancels them, or deletes files. NCAR's page names the failure directly: a "runaway qsub loop", a recursive delete, or a job that uses a large part of your allocation (<a href="https://ncar-hpc-docs.readthedocs.io/en/latest/best-practices-for-supercomputer-users/agentic-ai/">NCAR</a>; <a href="https://scicomp.aalto.fi/triton/usage/ai-agents/">Aalto</a> says much the same).</p>
+
+<h3>Overnight runs</h3>
+
+<p>An overnight run goes well when you could write the morning check before you leave: which files, how many rows, what range of values. It goes badly when the task needs your judgement halfway through, because the agent will either stop and wait or decide without you.</p>
+
+<figure><div class="g" data-g="night"></div><figcaption>A night that tends to work: a written check, small stages that each end in a committed file, compute chained in the scheduler, and a fresh review in the morning.</figcaption></figure>
+
+<p><span class="lbl">Goes well</span> A one-sentence goal. A check it can run that has been seen to fail. Small stages that each end in a file and a commit. Jobs chained in the scheduler. Its own copy of the repository. Commands it may run decided in advance, so it does not stop at 1 a.m. waiting for a yes.</p>
+
+<p><span class="lbl">Goes badly</span> "Explore the data." Success judged by its own summary. One long job that saves only at the end. A shared folder. An agent polling the queue all night. No limit on how many jobs it can submit.</p>
+
+<p>Benchmarks do not tell you how long you can leave it. METR measures the length of task (in human time) an agent completes half the time; for GPT-5 it was about 2 hours 17 minutes. METR's own explanation says this is not how long an agent can run on its own, and that for tasks of 90 minutes to 3 hours, about a third succeed every time, a third fail every time, and a third vary (<a href="https://metr.org/time-horizons/">METR</a>). Anthropic reports its own engineers' sessions went from about 10 to about 20 actions before a person stepped in, between February and August 2025 (<a href="https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic">Anthropic</a>). Plan a night as several short, checked stages, not one long task.</p>
+
+<h3>While it runs</h3>
+
+<p>Do not watch it. Watching feels productive and mostly is not. In a 2025 randomized trial, experienced open-source developers expected AI tools to make them 24% faster; on 246 real tasks they were 19% slower (<a href="https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf">METR</a>). That was early-2025 tools on mature codebases, and METR is repeating it, but the gap between how fast it felt and how fast it was is the useful part.</p>
+
+<p>What I do instead: give the session a condition to wake me on (the job left the queue, a file appeared) rather than checking in. Work on something only a person can do: reading, writing, a meeting, the bench. Check from my phone when it asks, not to supervise. Review in one batch, from the files and commits, with a fresh session that did not do the work.</p>
+
 <h2 id="models">Models</h2>
 
 <p>I use the strongest model for design, interpretation and review. Cheaper models are fine for bulk edits if the result is checked. Tools can switch to another model when one is overloaded; the session status shows which model answered.</p>
