@@ -76,7 +76,7 @@ se='''<h1>A 20-minute walkthrough</h1>
 <div class="prompt"><div class="ph">Request</div><p>I work on [project, one line]. I would like to try [one task]. I have Claude Code installed / need help installing it.</p></div>
 <p>I reply when I can. No obligation either way, and nothing to prepare beyond the three things above.</p>
 <h2>Before the call</h2>
-<p>Read the <a href="index.html">essay</a> (10 minutes). Note which of the seven failure patterns you think you would have missed. We can start there.</p>
+<p>Read the <a href="index.html">essay</a> (about 15 minutes). Note which of the seven failure patterns you think you would have missed. We can start there.</p>
 '''
 page('session.html','A 20-minute walkthrough',se,'Go through this on your own project with me in 20 minutes. You leave with a rules file for your project and one task already tried.',COPY2)
 print('ok')

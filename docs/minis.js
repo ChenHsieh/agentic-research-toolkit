@@ -9,8 +9,10 @@ var D={
   s.append('rect').attr('x',50).attr('y',45).attr('width',40).attr('height',75).attr('fill',BLUE);
   s.append('rect').attr('x',110).attr('y',45).attr('width',40).attr('height',75).attr('fill','none').attr('stroke',GREY).attr('stroke-dasharray','4 3');
   t(s,70,138,'treated',{a:'middle'});t(s,130,138,'control',{a:'middle'});t(s,130,88,'0 rows',{a:'middle',c:RED});
-  s.append('rect').attr('x',185).attr('y',60).attr('width',62).attr('height',26).attr('rx',5).attr('fill',GREEN);
-  t(s,216,78,'"passed"',{a:'middle',c:'#fff'});s.append('line').attr('x1',188).attr('x2',244).attr('y1',73).attr('y2',73).attr('stroke',RED).attr('stroke-width',2);
+  s.append('rect').attr('x',190).attr('y',50).attr('width',54).attr('height',26).attr('rx',5).attr('fill',GREEN);
+  t(s,217,68,'PASS',{a:'middle',c:'#fff'});
+  s.append('line').attr('x1',152).attr('x2',188).attr('y1',58).attr('y2',63).attr('stroke',RED).attr('stroke-width',1.5).attr('stroke-dasharray','3 2');
+  t(s,217,96,'from no data',{a:'middle',c:RED});
  },
  exit0:function(s){
   s.append('rect').attr('x',20).attr('y',30).attr('width',140).attr('height',14).attr('rx',3).attr('fill',BLUE);
@@ -19,13 +21,13 @@ var D={
   s.append('line').attr('x1',70).attr('x2',130).attr('y1',85).attr('y2',85).attr('stroke',INK);
   t(s,105,118,'header only',{a:'middle',c:RED});t(s,175,100,'0 data rows',{c:RED});
  },
- unit:function(s){ // pooled trend up, within-group flat/down
+ unit:function(s){ // pooled trend up, no trend within groups
   var g=[[30,95],[105,65],[180,35]],r=d3.randomLcg(3);
-  g.forEach(function(c,i){for(var k=0;k<8;k++){var x=c[0]+r()*40,y=c[1]+(x-c[0])*0.45+r()*6;
+  g.forEach(function(c,i){for(var k=0;k<8;k++){var x=c[0]+r()*40,y=c[1]+r()*10;
     s.append('circle').attr('cx',x).attr('cy',y).attr('r',3).attr('fill',[BLUE,OLIVE,RED][i]).attr('opacity',.85)}
-    s.append('line').attr('x1',c[0]).attr('x2',c[0]+40).attr('y1',c[1]+3).attr('y2',c[1]+21).attr('stroke',[BLUE,OLIVE,RED][i])});
+    s.append('line').attr('x1',c[0]).attr('x2',c[0]+40).attr('y1',c[1]+5).attr('y2',c[1]+5).attr('stroke',[BLUE,OLIVE,RED][i])});
   s.append('line').attr('x1',30).attr('x2',225).attr('y1',112).attr('y2',38).attr('stroke',GREY).attr('stroke-dasharray','5 4');
-  t(s,230,30,'pooled: up',{a:'end'});t(s,30,147,'within each group: down',{c:RED});
+  t(s,230,30,'pooled: up',{a:'end'});t(s,30,147,'within each group: no trend',{c:RED});
  },
  crash:function(s){
   s.append('line').attr('x1',20).attr('x2',240).attr('y1',75).attr('y2',75).attr('stroke',GREY);

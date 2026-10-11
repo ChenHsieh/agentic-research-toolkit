@@ -90,3 +90,6 @@ button.copy:hover{color:#222;border-color:#999}
 .uma td{padding:.45em 0;border-bottom:1px solid #eee}
 .gpanel{font:14px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:#333;border-left:2px solid #8a2c2c;padding:.3em 0 .3em .8em;margin:.5em 0}
 .pdl{margin:.3em 0}.pdl dt{display:inline;margin-right:.4em}.pdl dd{display:inline;margin:0}.pdl dd::after{content:"";display:block;margin-bottom:.45em}
+
+@media (prefers-color-scheme:dark){.gtip{background:#222;color:#eee;border-color:#444}.glabel{fill:#aaa}.gpanel{color:#ddd}.ex-q,.ex-inputs button,.gkey,.gnote,.route,.prompt .ph,.steps p,.ex-grid th,figcaption,p.small,.small,button.copy,.toc li a,.toc-h,.toc-inline,nav a{color:#b5b0a6}.lbl,.ex-grid td.n,.uma th,.steps .min,.ex-inputs button.on{color:#e39a8a;border-color:#e39a8a}.ex-grid td.p{color:#7fbf95}.toc li a.on{color:#eee}.cta,.route,.explore{border-color:#444}}
+@media (prefers-color-scheme:dark){.mini svg{filter:invert(.88) hue-rotate(180deg)}}
