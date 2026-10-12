@@ -11,6 +11,7 @@ The short version: an agent fixes the errors that crash and leaves the ones that
 - [Essay](https://chenhsieh.github.io/agentic-research-toolkit/): setup, tasks, failures with dates and numbers, long sessions, models, how to start.
 - [Prompts & files](https://chenhsieh.github.io/agentic-research-toolkit/examples.html): a five-line rules file, a brief, a status file, and the prompts I reuse.
 
+- [Tools](https://chenhsieh.github.io/agentic-research-toolkit/tools.html): seven research-agent tools set up on a cluster, one task each, every output checked. Notes and scripts in `notes/tools_on_sapelo2/`.
 - [Reading](https://chenhsieh.github.io/agentic-research-toolkit/reading.html): papers, tools and guides, with links checked.
 - [Walkthrough](https://chenhsieh.github.io/agentic-research-toolkit/session.html): 20 minutes with me on your own project.
 

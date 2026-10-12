@@ -93,3 +93,13 @@ button.copy:hover{color:#222;border-color:#999}
 
 @media (prefers-color-scheme:dark){.gtip{background:#222;color:#eee;border-color:#444}.glabel{fill:#aaa}.gpanel{color:#ddd}.ex-q,.ex-inputs button,.gkey,.gnote,.route,.prompt .ph,.steps p,.ex-grid th,figcaption,p.small,.small,button.copy,.toc li a,.toc-h,.toc-inline,nav a{color:#b5b0a6}.lbl,.ex-grid td.n,.uma th,.steps .min,.ex-inputs button.on{color:#e39a8a;border-color:#e39a8a}.ex-grid td.p{color:#7fbf95}.toc li a.on{color:#eee}.cta,.route,.explore{border-color:#444}}
 @media (prefers-color-scheme:dark){.mini svg{filter:invert(.88) hue-rotate(180deg)}}
+.tried dt{font-weight:bold;margin-top:1.1em}
+.tried dt .small{font-weight:normal;margin-left:.4em}
+.tried dd{margin:.25em 0 0}
+.score{border-collapse:collapse;width:100%;font:13.5px/1.4 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;margin:1.2em 0}
+.score th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#666;border-bottom:1px solid #ccc;padding:.4em .5em .4em 0}
+.score td{padding:.55em .5em;border-bottom:1px solid #eee;vertical-align:top}
+.score td:first-child{font-weight:600;padding-left:0}
+.score td.ok{background:#e6f1ea;color:#1f4d31}.score td.mid{background:#f5efd9;color:#5c4a12}.score td.bad{background:#f6e3e0;color:#7a231c}.score td.na{color:#888}
+@media (max-width:600px){.score{font-size:12px}.score th:nth-child(2),.score td:nth-child(2){display:none}}
+@media (prefers-color-scheme:dark){.score td.ok{background:#1f3a2a;color:#bfe3cb}.score td.mid{background:#3a3418;color:#eadfae}.score td.bad{background:#42211d;color:#f0bdb6}.score th{color:#b5b0a6}.score td{border-color:#333}}

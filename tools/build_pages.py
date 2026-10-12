@@ -97,11 +97,13 @@ drawDiagrams({land:{height:380,collide:true,axis:['you drive','it drives'],legen
 {id:'ks',label:'Kosmos',kind:'agent',x:.8,y:.6,info:'Long autonomous runs. 79.4% of report statements judged accurate.',url:'https://arxiv.org/abs/2511.02824'},
 {id:'as',label:'AI Scientist',kind:'bad',x:.9,y:.78,info:'Idea to paper with automated review, machine learning only. Independent test: 42% of experiments failed on coding errors.',url:'https://arxiv.org/abs/2408.06292'}],links:[]}});
 </script>'''
+TRIED_LIST='<dl class="tried">\n<dt>Codex CLI <span class="small">read-only review of a figure helper I use</span></dt>\n<dd>Found four edge cases nobody had tested, such as values below 1e-10 printed as "0". One of its concrete claims was wrong when I ran the input: it said a value printed as "1e+09"; it printed "1000M". <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/codex.md">Notes</a></dd>\n<dt>Aider <span class="small">write tests from a plan, $0.0016</span></dt>\n<dd>Wrote working tests in one call. I then broke the code four ways on purpose and the tests caught all four. On the way, Python reused a stale compiled copy of the file and made a correct file look broken, a quiet failure of its own. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/aider.md">Notes</a></dd>\n<dt>Paper2Agent <span class="small">my two manuscripts as tools Claude Code can query</span></dt>\n<dd>Its own checks still pass (61 of 61). It answers "how many genes, from which file, at which commit", and warns when an old number is still in circulation. Setup takes an afternoon per paper.</dd>\n<dt>PaperQA2 <span class="small">a question over 20 open-access papers on young genes</span></dt>\n<dd>Answered in three paragraphs with a citation on every sentence. Checking the citations found one overreach: "at most a third come from divergence" became "the majority are de novo", which the paper does not say. Its agent mode crashed on a version mismatch; the plain mode works. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/paperqa.md">Notes</a></dd>\n<dt>Biomni <span class="small">look up and compare five tandem-duplicated Arabidopsis genes</span></dt>\n<dd>Wrote and ran its own database code; the table matched UniProt. Then it concluded one gene had "functionally diversified" because it had more GO terms, which mostly means it was studied more. Its install left out three packages. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/biomni.md">Notes</a></dd>\n<dt>Virtual Lab <span class="small">four role-played experts plan how to show young genes are real, $0.01</span></dt>\n<dd>A sensible ranked plan in six minutes, close to what my chapter actually did. It also listed the two parent species of my hybrid as outgroups, which they are not, and used stock thresholds with no reason given. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/vlab.md">Notes</a></dd>\n<dt>CellVoyager <span class="small">reanalyse a public single-cell dataset</span></dt>\n<dd>Did not run. Five attempts failed before any analysis: a stale package picked up from my home directory, then two parts of its code that need the same model named two different ways when everything goes through one gateway key. It expects OpenAI and Anthropic keys of its own. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/cellvoyager.md">Notes</a></dd>\n<dt>Not run</dt>\n<dd>Gemini CLI (needs a Google login or key), Robin and Kosmos (need the paid Edison platform), AI co-scientist (not public), AI Scientist (machine-learning experiments on GPUs, not genomics). <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/not_run.md">Why</a></dd>\n</dl>'
 def it(name,url,who,what):
     return f'<p><a href="{url}">{name}</a> <span class="small">({who})</span>. {what}</p>\n'
 rd='''<h1>Reading</h1>
 <p>Papers, tools and guides on agents for research, checked on 6 October 2026. Every link was opened at its source. Numbers are quoted from the source.</p>
 <figure><div class="g" data-g="land"></div><figcaption>Left: you drive, the tool assists. Right: the system plans and runs the research itself. Placement is my reading of each paper. Hover for a summary; click to open the paper.</figcaption></figure>
+<p>I ran the open-source ones on our cluster and checked every output: see <a href="tools.html">Tools tried</a>.</p>
 <h2>Start here</h2>
 '''
 rd+=it("Building effective agents","https://www.anthropic.com/engineering/building-effective-agents","Anthropic, 2024","Start with one model call; add agent steps only when the simpler version measurably falls short.")
@@ -149,3 +151,94 @@ rd+=it("AGENTS.md","https://agents.md/","Linux Foundation","One instructions fil
 rd+=it("Agent Skills","https://agentskills.io/","open standard","A folder with a SKILL.md; loaded only when a task matches.")
 rd+='<p class="small">Not included: several 2026 preprints seen in search but not read. Affiliations for some arXiv entries are from the author groups, not the abstract pages. Full notes: <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/lit_round_2026-10.md">notes/lit_round_2026-10.md</a>.</p>\n'
 page('reading.html','Reading: agents for research',rd,'Papers, tools, benchmarks and critiques on agents for research, checked October 2026.',LAND)
+
+# ---- Tools tried page
+N='https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/'
+tl='''<h1>Tools tried</h1>
+<p>In October 2026 I set up the open-source research agents from the <a href="reading.html">Reading</a> list on our university cluster and gave each one task from my own work, then checked every output by hand. This page is the picture version. One task per tool, on a cheap model, so it shows whether they are usable, not how good they can get.</p>
+
+<h2 id="plug">One key, many tools</h2>
+<figure><div class="g" data-g="gateway"></div><figcaption>Most of these tools do not need their own account. They can all talk to one gateway (OpenRouter), which passes each request to whichever model you name. One key with a spending cap covered five tools; the whole day cost $0.49.</figcaption></figure>
+
+<h2 id="score">What each one did</h2>
+<table class="score">
+<tr><th>Tool</th><th>Task</th><th>Setup</th><th>The work</th><th>The interpretation</th></tr>
+<tr><td>Aider</td><td>Write tests from a plan</td><td class="ok">ready</td><td class="ok">tests caught 4 of 4 planted bugs</td><td class="na">none made</td></tr>
+<tr><td>Codex CLI</td><td>Review a figure helper</td><td class="ok">ready</td><td class="ok">found untested edge cases</td><td class="bad">one stated output was wrong</td></tr>
+<tr><td>Paper2Agent</td><td>Query my two manuscripts</td><td class="mid">an afternoon per paper</td><td class="ok">61 of 61 checks pass</td><td class="na">answers only from tables</td></tr>
+<tr><td>PaperQA2</td><td>Question over 20 papers</td><td class="mid">agent mode crashed</td><td class="ok">every sentence cited</td><td class="bad">"at most a third" became "the majority"</td></tr>
+<tr><td>Biomni</td><td>Compare 5 tandem genes</td><td class="mid">3 packages missing</td><td class="ok">table matched UniProt</td><td class="bad">"more GO terms" read as "diversified"</td></tr>
+<tr><td>Virtual Lab</td><td>Plan how to test young genes</td><td class="ok">clean</td><td class="ok">sensible ranked plan</td><td class="bad">parent species called outgroups</td></tr>
+<tr><td>CellVoyager</td><td>Reanalyse a public dataset</td><td class="bad">5 failed starts</td><td class="na">never ran</td><td class="na">never ran</td></tr>
+</table>
+<p>Read the last column. The retrieval and the code were mostly right. The sentence that explained the result is where every error was.</p>
+
+<h2 id="map">Who drives, and can you check it</h2>
+<figure><div class="g" data-g="map2"></div><figcaption>Left to right: how much the tool decides on its own. Bottom to top: how easy its output is to check (rerun the code, look up the passage, or take its word). Placement is my reading. The corner to be careful in is the bottom right.</figcaption></figure>
+
+<h2 id="jev">A router that picks the model for you</h2>
+<figure><div class="g" data-g="jev"></div><figcaption>Jev Router (on OpenRouter) chooses a model per request. Each cost is shown against my fixed model (DeepSeek V4 Pro) on the same prompt. On two prompts it was 23 times cheaper than my fixed model for a trivial edit and about a third more expensive for a question that needed reasoning. Two prompts is not a test.</figcaption></figure>
+
+<h2 id="fail">Why one tool never ran</h2>
+<figure><div class="g" data-g="cvfail"></div><figcaption>CellVoyager sends the model name down two code paths. Through a gateway, each path needs the name written differently, so one of them always fails. It expects its own OpenAI and Anthropic keys.</figcaption></figure>
+
+<h2 id="notes">Notes for each tool</h2>
+'''+TRIED_LIST
+TOOLS_JS='''<script src="https://cdn.jsdelivr.net/npm/d3@7"></script><script src="graph.js"></script><script>
+drawDiagrams({
+gateway:{height:330,narrow:{height:520,pos:{a:[.25,.05],p:[.75,.05],b:[.25,.15],v:[.75,.15],c:[.5,.25],or:[.5,.45],jr:[.5,.62],m1:[.2,.82],m2:[.5,.82],m3:[.8,.82],m4:[.5,.95]}},
+ groups:[{id:'gt',label:'tools on the cluster',members:['a','p','b','v','c']},{id:'gm',label:'models, billed per use',members:['m1','m2','m3','m4']}],
+ nodes:[
+ {id:'a',label:'Aider',kind:'you',x:.1,y:.14,info:'Works directly: model named openrouter/<model>.'},
+ {id:'p',label:'PaperQA2',kind:'file',x:.1,y:.31,info:'Works directly through LiteLLM, same naming.'},
+ {id:'b',label:'Biomni',kind:'file',x:.1,y:.48,info:'Works with its "Custom" source pointed at the gateway address.'},
+ {id:'v',label:'Virtual Lab',kind:'agent',x:.1,y:.65,info:'Works by pointing its OpenAI settings at the gateway. Its price table only knows OpenAI models, so I added the price by hand.'},
+ {id:'c',label:'CellVoyager',kind:'bad',x:.1,y:.84,info:'Reached the gateway but never ran: see the last diagram.'},
+ {id:'or',label:'OpenRouter: one key, $200 cap',kind:'you',x:.47,y:.42,info:'<b>Gateway</b><br>One account, one key, a spending limit. It forwards each request to the model named in it and bills per use.'},
+ {id:'jr',label:'Jev Router',kind:'muted',x:.47,y:.78,info:'Optional: a "model" that is really a router choosing a model per request.'},
+ {id:'m1',label:'DeepSeek V4 Pro',kind:'agent',x:.86,y:.16,info:'The cheap model I used for every run: $0.21 in, $0.42 out per million tokens.'},
+ {id:'m2',label:'Claude',kind:'agent',x:.86,y:.36,info:'Available through the same key at its own price.'},
+ {id:'m3',label:'GPT',kind:'agent',x:.86,y:.56,info:'Same.'},
+ {id:'m4',label:'Gemini',kind:'agent',x:.86,y:.76,info:'Same.'}],
+ links:[{s:'gt',t:'or'},{s:'or',t:'gm'},{s:'or',t:'jr',dash:1},{s:'jr',t:'gm',dash:1,label:'picks one'}]},
+map2:{height:430,axis:['you drive','it drives'],yaxis:['hard to check: take its word','easy to check: rerun it'],collide:true,
+ legend:[['you','coding agents'],['file','research assistants'],['agent','autonomous research systems'],['bad','idea-to-paper']],
+ nodes:[
+ {id:'cc',label:'Claude Code',kind:'you',x:.17,y:.13,info:'Output is code and files you can rerun.'},
+ {id:'cx',label:'Codex CLI',kind:'you',x:.36,y:.11,info:'Same. Its review claims are testable by running the input.'},
+ {id:'ai',label:'Aider',kind:'you',x:.15,y:.26,info:'Every change is a git commit; pair it with a test.'},
+ {id:'p2',label:'Paper2Agent',kind:'file',x:.34,y:.24,info:'Every number comes with a file, a commit and a hash.'},
+ {id:'bm',label:'Biomni',kind:'file',x:.42,y:.42,info:'The table and code can be rerun; the paragraph explaining them cannot.'},
+ {id:'pq',label:'PaperQA2',kind:'file',x:.32,y:.5,info:'Each sentence points to a passage you can look up.'},
+ {id:'cv',label:'CellVoyager',kind:'agent',x:.58,y:.38,info:'Would produce a notebook you can rerun. Did not run here.'},
+ {id:'ks',label:'Kosmos',kind:'agent',x:.82,y:.52,info:'Long reports with traceable claims; 79.4% of statements judged accurate in its paper. Not run here.'},
+ {id:'rb',label:'Robin',kind:'agent',x:.62,y:.62,info:'Hypotheses with literature behind them; humans run the experiments. Not run here.'},
+ {id:'vl',label:'Virtual Lab',kind:'agent',x:.5,y:.78,info:'A written plan from role-played experts. Nothing to rerun; you need to know the field to catch errors.'},
+ {id:'co',label:'AI co-scientist',kind:'agent',x:.74,y:.7,info:'Ranked hypotheses. Not public.'},
+ {id:'as',label:'AI Scientist',kind:'bad',x:.88,y:.82,info:'A finished paper. Independent test: 42% of experiments failed on coding errors. Not run here.'}],links:[]},
+jev:{height:250,narrow:{height:420,pos:{e:[.5,.05],h:[.5,.17],j:[.5,.36],s:[.27,.56],g:[.73,.56],c1:[.27,.8],c2:[.73,.92]}},
+ nodes:[
+ {id:'e',label:'"rename this variable"',kind:'you',x:.14,y:.25,info:'A trivial request: most of what an agent sends looks like this.'},
+ {id:'h',label:'"is this inference valid?"',kind:'you',x:.14,y:.75,info:'A request that needs reasoning.'},
+ {id:'j',label:'Jev Router',kind:'muted',x:.45,y:.5,info:'Decides per request which model answers.'},
+ {id:'s',label:'small model',kind:'agent',x:.7,y:.25,info:'It picked gpt-6-luna.'},
+ {id:'g',label:'mid model',kind:'agent',x:.7,y:.75,info:'It picked gemini-3.8-flash.'},
+ {id:'c1',label:'$0.000007 vs $0.000166',kind:'ok',x:.86,y:.08,info:'23 times cheaper than DeepSeek V4 Pro on the same prompt. Both answers correct.'},
+ {id:'c2',label:'$0.00226 vs $0.00167',kind:'bad',x:.86,y:.93,info:'About a third more expensive than DeepSeek V4 Pro on the same prompt. Both answers correct.'}],
+ links:[{s:'e',t:'j'},{s:'h',t:'j'},{s:'j',t:'s'},{s:'j',t:'g'},{s:'s',t:'c1'},{s:'g',t:'c2'}]},
+cvfail:{height:260,narrow:{height:420,pos:{n1:[.5,.06],p1:[.5,.2],o1:[.5,.34],x1:[.5,.47],n2:[.5,.6],p2:[.5,.73],o2:[.5,.86],x2:[.5,.97]}},
+ groups:[{id:'g1',label:'name written for the gateway',members:['n1','p1','o1','x1']},{id:'g2',label:'name written plainly',members:['n2','p2','o2','x2']}],
+ nodes:[
+ {id:'n1',label:'openrouter/deepseek/...',kind:'file',x:.14,y:.22,info:'The form LiteLLM wants for a gateway.'},
+ {id:'p1',label:'OpenAI client',kind:'agent',x:.42,y:.22,info:'One code path sends the name unchanged.'},
+ {id:'o1',label:'OpenRouter',kind:'you',x:.64,y:.22,info:'Does not know a model with that prefix.'},
+ {id:'x1',label:'not a valid model ID',kind:'bad',x:.87,y:.22,info:'Attempts 3 and 4.'},
+ {id:'n2',label:'deepseek/...',kind:'file',x:.14,y:.74,info:'The form the gateway itself wants.'},
+ {id:'p2',label:'LiteLLM',kind:'agent',x:.42,y:.74,info:'The other code path reads "deepseek/" as "call DeepSeek directly".'},
+ {id:'o2',label:'DeepSeek directly',kind:'muted',x:.64,y:.74,info:'Skips the gateway; I have no key there.'},
+ {id:'x2',label:'authentication fails',kind:'bad',x:.87,y:.74,info:'Attempt 5.'}],
+ links:[{s:'n1',t:'p1'},{s:'p1',t:'o1'},{s:'o1',t:'x1'},{s:'n2',t:'p2'},{s:'p2',t:'o2'},{s:'o2',t:'x2'}]}
+});
+</script>'''
+
+page('tools.html','Tools tried: research agents on a university cluster',tl,'Seven research-agent tools set up on a cluster, one task each, every output checked.',TOOLS_JS)

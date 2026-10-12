@@ -17,9 +17,12 @@ function graph(el,spec){
   var groups=(spec.groups||[]).map(function(g){var o={id:g.id,label:g.label,members:g.members,group:true,x:0,y:0,w:0,h:0};byId[g.id]=o;return o});
   var gl=svg.append('g');
   var links=(spec.links||[]).map(function(l){return Object.assign({},l,{source:byId[l.s],target:byId[l.t]})});
-  if(spec.axis&&!alt){var ay=H-14;svg.append('line').attr('x1',4).attr('x2',W-4).attr('y1',ay).attr('y2',ay).attr('stroke','#bbb').attr('marker-end','url(#'+id+')');
-    svg.append('text').attr('class','glabel').attr('x',4).attr('y',ay-6).text(spec.axis[0]);
-    svg.append('text').attr('class','glabel').attr('x',W-6).attr('y',ay-6).attr('text-anchor','end').text(spec.axis[1]);}
+  if(spec.axis&&!alt){var ay=spec.yaxis?H-22:H-14,ly=spec.yaxis?ay+15:ay-6;svg.append('line').attr('x1',4).attr('x2',W-4).attr('y1',ay).attr('y2',ay).attr('stroke','#bbb').attr('marker-end','url(#'+id+')');
+    svg.append('text').attr('class','glabel').attr('x',spec.yaxis?24:4).attr('y',ly).text(spec.axis[0]);
+    svg.append('text').attr('class','glabel').attr('x',W-6).attr('y',ly).attr('text-anchor','end').text(spec.axis[1]);}
+  if(spec.yaxis&&!alt){svg.append('line').attr('x1',6).attr('x2',6).attr('y1',H-22).attr('y2',8).attr('stroke','#bbb').attr('marker-end','url(#'+id+')');
+    svg.append('text').attr('class','glabel').attr('x',12).attr('y',12).text(spec.yaxis[1]);
+    svg.append('text').attr('class','glabel').attr('x',12).attr('y',H-30).text(spec.yaxis[0]);}
   var link=svg.append('g').selectAll('g').data(links).join('g');
   var lp=link.append('path').attr('fill','none').attr('stroke',function(l){return l.color?C[l.color]:'#aaa'}).attr('stroke-width',1.4)
     .attr('stroke-dasharray',function(l){return l.dash?'4 4':null}).attr('marker-end','url(#'+id+')');
