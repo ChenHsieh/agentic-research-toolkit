@@ -14,8 +14,7 @@ cross-mapping checks. This is close to what the real chapter ended up doing.
 What it got wrong or missed:
 - Listed P. alba and P. tremula as OUTGROUPS. For hybrid poplar 717 (P. tremula x P. alba)
   they are the parent species, not outgroups. A reader who does not know that would follow it.
-- Never mentioned modelling homology detection failure (e.g. abSENSE-style tests), which is the
-  standard answer to "is it young or just undetected".
+- Never mentioned modelling homology detection failure (e.g. abSENSE-style tests), which is one common answer to "is it young or just undetected".
 - Thresholds (E <= 1e-5, coverage >= 50%, identity >= 30%, >= 10 reads) are stock values with
   no justification, i.e. invented cutoffs.
 Verdict: useful as a checklist generator and a devil's advocate in an hour, not as an authority.

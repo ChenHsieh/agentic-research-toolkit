@@ -18,7 +18,7 @@
 <body>
 <nav><a href="index.html">Essay</a><a href="examples.html">Prompts &amp; files</a><a href="tools.html" class="here">Tools</a><a href="reading.html">Reading</a><a href="session.html">Walkthrough</a></nav>
 <h1>Tools tried</h1>
-<p>In October 2026 I set up the open-source research agents from the <a href="reading.html">Reading</a> list on our university cluster and gave each one task from my own work, then checked every output by hand. This page is the picture version. One task per tool, on a cheap model, so it shows whether they are usable, not how good they can get.</p>
+<p>In October 2026 I set up the open-source research agents from the <a href="reading.html">Reading</a> list on our university cluster and gave each one task from my own work, then checked every output by hand. This page is the picture version. It is a small feasibility diary, not a ranking: each tool got one task that suited it, once, on one cheap model. A failure can belong to the tool, the model, the gateway or my task.</p>
 
 <h2 id="plug">One key, many tools</h2>
 <figure><div class="g" data-g="gateway"></div><figcaption>Most of these tools do not need their own account. They can all talk to one gateway (OpenRouter), which passes each request to whichever model you name. One key with a spending cap covered five tools; the whole day cost $0.49.</figcaption></figure>
@@ -34,13 +34,14 @@
 <tr><td>Virtual Lab</td><td>Plan how to test young genes</td><td class="ok">clean</td><td class="ok">sensible ranked plan</td><td class="bad">parent species called outgroups</td></tr>
 <tr><td>CellVoyager</td><td>Reanalyse a public dataset</td><td class="bad">5 failed starts</td><td class="na">never ran</td><td class="na">never ran</td></tr>
 </table>
-<p>Read the last column. The retrieval and the code were mostly right. The sentence that explained the result is where every error was.</p>
+<p>Read the last column. In these seven small trials, the errors I found were mostly in the sentence after a correct-looking output. That is a reason to check both the table and the claim. It is not a measurement of what agents are good at: one task is not a rate, and I chose tasks I could check.</p>
+<p class="small">What each row did not test. PaperQA2: only its manual local-papers path, not its literature-search agent. Biomni: without its data lake, so as a code-writing database assistant, not its curated tools. Virtual Lab: the meeting, not the design-and-validation workflow in its paper. Paper2Agent: its checks confirm it reproduces my tables, not that a new question is answered correctly. CellVoyager: a setup failure through one gateway key, not a verdict on its analyses.</p>
 
 <h2 id="map">Who drives, and can you check it</h2>
-<figure><div class="g" data-g="map2"></div><figcaption>Left to right: how much the tool decides on its own. Bottom to top: how easy its output is to check (rerun the code, look up the passage, or take its word). Placement is my reading. The corner to be careful in is the bottom right.</figcaption></figure>
+<figure><div class="g" data-g="map2"></div><figcaption>Left to right: how much the tool decides on its own. Bottom to top: how easy its output is to check (rerun the code, look up the passage, or take its word). This is a sketch, not a measurement, and the placement is my reading. "Easy to check" means there is an affordable check for that kind of output; a notebook you can rerun can still be hard to judge. The corner to be careful in is the bottom right.</figcaption></figure>
 
 <h2 id="jev">A router that picks the model for you</h2>
-<figure><div class="g" data-g="jev"></div><figcaption>Jev Router (on OpenRouter) chooses a model per request. Each cost is shown against my fixed model (DeepSeek V4 Pro) on the same prompt. On two prompts it was 23 times cheaper than my fixed model for a trivial edit and about a third more expensive for a question that needed reasoning. Two prompts is not a test.</figcaption></figure>
+<figure><div class="g" data-g="jev"></div><figcaption>Jev Router (on OpenRouter) chooses a model per request. Each cost is shown against my fixed model (DeepSeek V4 Pro) on the same prompt. Two examples, not an evaluation: they show routing can save money on an easy request and cost more on a harder one. I have not measured its average cost, answer quality or stability.</figcaption></figure>
 
 <h2 id="fail">Why one tool never ran</h2>
 <figure><div class="g" data-g="cvfail"></div><figcaption>CellVoyager sends the model name down two code paths. Through a gateway, each path needs the name written differently, so one of them always fails. It expects its own OpenAI and Anthropic keys.</figcaption></figure>
@@ -58,11 +59,11 @@
 <dt>Biomni <span class="small">look up and compare five tandem-duplicated Arabidopsis genes</span></dt>
 <dd>Wrote and ran its own database code; the table matched UniProt. Then it concluded one gene had "functionally diversified" because it had more GO terms, which mostly means it was studied more. Its install left out three packages. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/biomni.md">Notes</a></dd>
 <dt>Virtual Lab <span class="small">four role-played experts plan how to show young genes are real, $0.01</span></dt>
-<dd>A sensible ranked plan in six minutes, close to what my chapter actually did. It also listed the two parent species of my hybrid as outgroups, which they are not, and used stock thresholds with no reason given. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/vlab.md">Notes</a></dd>
+<dd>A sensible ranked plan in six minutes, close to what my chapter actually did. It also listed the two parent species of my hybrid as outgroups, which they are not, and used stock thresholds with no reason given. This tested the meeting only. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/vlab.md">Notes</a></dd>
 <dt>CellVoyager <span class="small">reanalyse a public single-cell dataset</span></dt>
 <dd>Did not run. Five attempts failed before any analysis: a stale package picked up from my home directory, then two parts of its code that need the same model named two different ways when everything goes through one gateway key. It expects OpenAI and Anthropic keys of its own. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/cellvoyager.md">Notes</a></dd>
 <dt>Not run</dt>
-<dd>Gemini CLI (needs a Google login or key), Robin and Kosmos (need the paid Edison platform), AI co-scientist (not public), AI Scientist (machine-learning experiments on GPUs, not genomics). <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/not_run.md">Why</a></dd>
+<dd>Gemini CLI (needs a Google login or key), Robin and Kosmos (need the paid Edison platform), AI co-scientist (not generally available), AI Scientist (machine-learning experiments on GPUs, not genomics). <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/not_run.md">Why</a></dd>
 </dl>
 <p class="small" style="margin-top:4em">Chen Hsieh · <a href="https://github.com/ChenHsieh/agentic-research-toolkit">source</a> · text CC BY 4.0</p>
 <script src="toc.js"></script>
@@ -92,7 +93,7 @@ map2:{height:430,axis:['you drive','it drives'],yaxis:['hard to check: take its 
  {id:'p2',label:'Paper2Agent',kind:'file',x:.34,y:.24,info:'Every number comes with a file, a commit and a hash.'},
  {id:'bm',label:'Biomni',kind:'file',x:.42,y:.42,info:'The table and code can be rerun; the paragraph explaining them cannot.'},
  {id:'pq',label:'PaperQA2',kind:'file',x:.32,y:.5,info:'Each sentence points to a passage you can look up.'},
- {id:'cv',label:'CellVoyager',kind:'agent',x:.58,y:.38,info:'Would produce a notebook you can rerun. Did not run here.'},
+ {id:'cv',label:'CellVoyager',kind:'agent',x:.58,y:.38,info:'Placed from its paper: it writes a notebook. It did not run here, so this position is a guess.'},
  {id:'ks',label:'Kosmos',kind:'agent',x:.82,y:.52,info:'Long reports with traceable claims; 79.4% of statements judged accurate in its paper. Not run here.'},
  {id:'rb',label:'Robin',kind:'agent',x:.62,y:.62,info:'Hypotheses with literature behind them; humans run the experiments. Not run here.'},
  {id:'vl',label:'Virtual Lab',kind:'agent',x:.5,y:.78,info:'A written plan from role-played experts. Nothing to rerun; you need to know the field to catch errors.'},

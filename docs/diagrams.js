@@ -2,7 +2,7 @@ drawDiagrams({
 modes:{height:120,narrow:{height:230,pos:{a:[.5,.1],p:[.5,.37],u:[.5,.63],n:[.5,.9]}},axis:['you watch every step','you check the result'],nodes:[
  {id:'a',label:'Approve each step',kind:'you',x:.12,y:.3,info:'<b>Approve each command</b><br>Use for: your first week, anything touching shared data, deleting files, or submitting many jobs.<br>Cost: you are the bottleneck; long tasks stall when you look away.'},
  {id:'p',label:'Approve the plan',kind:'file',x:.38,y:.3,info:'<b>Plan first, then let it run</b><br>It writes a plan; you read and correct it; then edits run without asking. Safe commands are pre-approved in a list; risky ones still ask.<br>This is where most of my daytime work sits.'},
- {id:'u',label:'Run unattended',kind:'agent',x:.64,y:.3,info:'<b>No questions asked</b><br>Only inside a bounded space: its own copy of the repository, no access to raw data it could overwrite, a limit on jobs it can submit.'},
+ {id:'u',label:'Run unattended',kind:'agent',x:.64,y:.3,info:'<b>No questions asked</b><br>Only inside a bounded space: its own copy of the repository, read-only inputs, no secrets, and limits on jobs, cores and time that the scheduler enforces, not ones requested in a prompt.'},
  {id:'n',label:'Overnight',kind:'agent',x:.88,y:.3,info:'<b>Overnight</b><br>Works when the goal is one sentence, success is a check it can run, and the compute is chained in the scheduler. Fails when it needs your judgement at 2 a.m.'}],
  links:[{s:'a',t:'p'},{s:'p',t:'u'},{s:'u',t:'n'}]},
 night:{height:280,narrow:{height:470,pos:{b:[.5,.05],s1:[.3,.22],c1:[.3,.38],s2:[.3,.54],c2:[.3,.7],j:[.72,.3],x:[.75,.72],m:[.4,.95]}},axis:['evening','morning'],nodes:[

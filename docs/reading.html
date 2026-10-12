@@ -28,8 +28,8 @@
 <p><a href="https://rewrites.bio/">rewrites.bio</a> <span class="small">(Seqera)</span>. Twelve principles for rewriting bioinformatics tools with AI: credit the original authors, match outputs exactly, say how AI was used, validate each small step against the original.</p>
 <p><a href="https://arxiv.org/abs/2605.18661">AI for Auto-Research: Roadmap and User Guide</a> <span class="small">(Kong et al., 2026)</span>. A map of AI use across the research cycle. Conclusion: more automation can hide failure modes rather than remove them.</p>
 <h2>What the benchmarks say</h2>
-<p>The consistent finding: agents run code well and choose methods and interpret biology poorly.</p>
-<p><a href="https://arxiv.org/abs/2503.00096">BixBench</a> <span class="small">(FutureHouse, 2025)</span>. About 300 open-answer bioinformatics questions. GPT-4o and Claude 3.5 Sonnet: 17% correct.</p>
+<p>On the agent setups these papers tested, end-to-end analysis stayed hard, and several point at choosing methods and interpreting results as the weak steps. They do not tell you which step will fail in your task.</p>
+<p><a href="https://arxiv.org/abs/2503.00096">BixBench</a> <span class="small">(FutureHouse, 2025)</span>. About 300 open-answer bioinformatics questions, with repeated runs per analysis. The two models tested (GPT-4o and Claude 3.5 Sonnet) reached at most 17% on open answers.</p>
 <p><a href="https://www.biorxiv.org/content/10.64898/2026.06.12.731844v1">FlowBench</a> <span class="small">(Kurjan and Cribbs, 2026)</span>. 23 models. Choosing a toolchain from the biological goal alone: 44 to 57%. Agents often "fix" a failing run so it exits cleanly while the data stay invalid.</p>
 <p><a href="https://www.biorxiv.org/content/10.64898/2026.05.12.724604v1">BiomniBench</a> <span class="small">(Qu et al., 2026)</span>. Scores the agent's whole working trail against expert rubrics. The harness around the model moved scores more than a model generation did.</p>
 <p><a href="https://arxiv.org/abs/2410.05080">ScienceAgentBench</a> <span class="small">(Chen et al., 2024)</span>. 102 tasks from 44 papers. Best agent solved 32.4%.</p>
