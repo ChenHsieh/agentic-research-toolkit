@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>用程式代理做研究</title>
-<meta name="description" content="一個基因體學博士生在學校叢集上每天用 Claude Code 做研究的紀錄：哪裡出錯、有日期有數字、每次出錯之後改了什麼。">
-<meta property="og:title" content="用程式代理做研究">
+<title>用 AI 代理做研究</title>
+<meta name="description" content="一位基因體學博士生在大學叢集上用 Claude Code 做研究的紀錄：哪裡出錯、有日期有數字、每次出錯之後改了什麼。">
+<meta property="og:title" content="用 AI 代理做研究">
 <meta property="og:description" content="哪裡出錯、有日期有數字、每次出錯之後改了什麼。">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://chenhsieh.github.io/agentic-research-toolkit/img/card.png">
@@ -16,10 +16,10 @@
 <body>
 <nav><a href="index.html" class="here">文章</a><a href="../examples.html">提示</a><a href="../tools.html">工具</a><a href="../reading.html">閱讀</a><a href="../session.html">走一次</a><a href="../index.html">English</a></nav>
 
-<h1>用程式代理做研究</h1>
+<h1>用 AI 代理做研究</h1>
 <p class="small">Chen Hsieh，2026 年 10 月。美國喬治亞大學植物基因體學博士生。程式與檔案在 <a href="https://github.com/ChenHsieh/agentic-research-toolkit">github.com/ChenHsieh/agentic-research-toolkit</a>。這一頁譯自<a href="../index.html">英文版</a>，兩邊有出入時以英文版為準。其他頁面目前只有英文。</p>
 
-<p>我研究裡大部分的打字，現在是程式代理（coding agent）在做。它們很會修「有聲音」的錯：程式當掉、少了套件、語法錯誤。在我那些跑很久的工作階段裡，留下來的反而是看起來像成功的錯。一個沒有任何數值的對照組被回報成「通過」。一個本來要檢查十四個儲存庫的迴圈只跑了一次，卻回報「全部乾淨」。我在全新的小任務上<a href="#tested">實際測過這件事</a>，結果代理連這類錯也抓到了。它抓不到的，是沒有人寫下來的決定。常有人問我怎麼用這些工具，所以這一頁列出我怎麼做、哪裡出過錯、每次出錯之後改了什麼。文中日期都是 2026 年。</p>
+<p>我研究裡大部分的打字，現在是寫程式的 AI 代理（coding agent，以下簡稱代理）在做。它們很會修「有聲音」的錯：程式當掉、少了套件、語法錯誤。在我那些跑很久的工作階段裡，留下來的反而是看起來像成功的錯。一個沒有任何數值的對照組被回報成「通過」。一個本來要檢查十四個儲存庫的迴圈只跑了一次，卻回報「全部乾淨」。我在全新的小任務上<a href="#tested">實際測過這件事</a>，結果代理連這類錯也抓到了。它抓不到的，是沒有人寫下來的決定。常有人問我怎麼用這些工具，所以這一頁列出我怎麼做、哪裡出過錯、每次出錯之後改了什麼。文中日期都是 2026 年。</p>
 
 <p class="route"><a href="#principles">先看八條原則</a> · <a href="../examples.html">複製提示與檔案</a> · <a href="../session.html">用你自己的專案跟我走一次（20 分鐘）</a></p>
 
@@ -30,7 +30,7 @@
 <li><b>空的不算量過。</b>對照組沒有數值，不叫通過。<a href="#failures">案例</a></li>
 <li><b>重要的規則要變成程式。</b>寫在檔案裡的規則只會被讀一次，然後被忘記。<a href="#rules">案例</a></li>
 <li><b>先講清楚單位再去數。</b>單位有分組時，組內的結果也要報。<a href="#rules">案例</a></li>
-<li><b>紀錄在檔案裡，不在對話裡。</b>任務說明、待辦清單、狀態檔、commit。<a href="#long">原因</a></li>
+<li><b>紀錄在檔案裡，不在對話裡。</b>任務說明（brief）、工作清單（task list）、狀態檔（STATUS.md）、commit。<a href="#long">原因</a></li>
 <li><b>只靠 Methods 把結果重做一次。</b>缺的地方標成 BLOCKED，絕不用猜的。<a href="#failures">案例</a></li>
 <li><b>檢查要放在代理碰不到的地方。</b>它改得動的檢查，它就有辦法讓它通過。<a href="#quiet">原因</a></li>
 </ol>
@@ -50,7 +50,7 @@
 
 <h2 id="tasks">我拿它來做什麼</h2>
 
-<p>從檔案和 git 紀錄整理一個專案目前的狀態。把一個分析從頭做到尾，包含寫、送出、檢查叢集上的工作。演講後聽眾問的問題，用手上已有的資料去回答。照寫好的規則重畫圖。整理某個實驗室發表過的方法，每一句都要引到論文原文。在空資料夾裡只靠 Methods 的文字把我的結果重做一次。每週給指導教授的進度更新。</p>
+<p>從檔案和 git 紀錄整理一個專案目前的狀態。把一個分析從頭做到尾，包含撰寫、提交與檢查叢集作業（job）。演講後聽眾問的問題，用手上已有的資料去回答。照寫好的規則重畫圖。整理某個實驗室發表過的方法，每一句都要引到論文原文。在空資料夾裡只靠 Methods 的文字把我的結果重做一次。每週給指導教授的進度更新。</p>
 
 <figure><div class="g" data-g="roles"></div><figcaption>中間的工作是代理做的。要問什麼、答案對不對，還是你的事。</figcaption></figure>
 
@@ -65,12 +65,12 @@
 
 <article class="pat"><div class="mini" data-mini="exit0"></div><div class="pat-t">
 <h3>跑完了，但是空的</h3>
-<dl class="pdl"><dt class="lbl">你會看到</dt><dd>工作顯示正常結束，輸出檔也在，打開只有表頭。</dd><dt class="lbl">怎麼做</dt><dd>在規則檔裡寫清楚「完成」是什麼意思：哪個檔案、幾列、數值範圍多少。結束代碼 0 只代表程式停了。</dd></dl>
+<dl class="pdl"><dt class="lbl">你會看到</dt><dd>作業顯示正常結束，輸出檔也在，打開只有表頭。</dd><dt class="lbl">怎麼做</dt><dd>在規則檔裡寫清楚「完成」是什麼意思：哪個檔案、幾列、數值範圍多少。結束代碼 0 只代表程式停了。</dd></dl>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="unit"></div><div class="pat-t">
 <h3>單位弄錯</h3>
-<dl class="pdl"><dt class="lbl">你會看到</dt><dd>一大批其實有分組的東西（基因在基因家族裡、細胞在個體裡、樣本在批次裡）之間有很強的相關。</dd><dt class="lbl">怎麼做</dt><dd>數任何東西、算任何相關之前，先講出單位是什麼。單位有分組，就連每一組裡面的結果一起要。</dd></dl>
+<dl class="pdl"><dt class="lbl">你會看到</dt><dd>許多其實有分組的項目之間呈現很強的相關，例如基因家族裡的基因、個體裡的細胞、批次裡的樣本。</dd><dt class="lbl">怎麼做</dt><dd>數任何東西、算任何相關之前，先講出單位是什麼。單位有分組的話，也要拿到各組之內的結果。</dd></dl>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="gap"></div><div class="pat-t">
@@ -100,19 +100,19 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 
 <article class="pat"><div class="mini" data-mini="crash"></div><div class="pat-t">
 <h3>最後一步弄丟</h3>
-<dl class="pdl"><dt class="lbl">你會看到</dt><dd>跑很久的工作在印出摘要的時候當掉，而那時它什麼都還沒存。</dd><dt class="lbl">怎麼做</dt><dd>先把結果存到硬碟，再印。要求結果邊算邊寫出去。</dd></dl>
+<dl class="pdl"><dt class="lbl">你會看到</dt><dd>跑很久的作業在印出摘要的時候當掉，而那時它什麼都還沒存。</dd><dt class="lbl">怎麼做</dt><dd>先把結果存到硬碟，再印。要求結果邊算邊寫出去。</dd></dl>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="shared"></div><div class="pat-t">
 <h3>兩個代理，一個資料夾</h3>
-<dl class="pdl"><dt class="lbl">你會看到</dt><dd>一個工作階段把另一個做到一半的修改 commit 掉，或是在它腳下切換了分支。</dd><dt class="lbl">怎麼做</dt><dd>讓每個工作階段有自己的一份儲存庫（git worktree）。</dd></dl>
+<dl class="pdl"><dt class="lbl">你會看到</dt><dd>一個工作階段把另一個做到一半的修改 commit 掉，或是在它腳下切換了分支。</dd><dt class="lbl">怎麼做</dt><dd>讓每個工作階段各有獨立的工作目錄（Git worktree）。</dd></dl>
 </div></article>
 
 <figure><div class="g" data-g="clean"></div><figcaption>主動去找「不出聲的猜測」的方法：請代理在空資料夾裡，只靠 Methods 把你的結果重做一次。每個數字不是對上、對不上，就是照寫的內容算不出來。</figcaption></figure>
 
 <h2 id="quiet">為什麼這些失敗沒有聲音</h2>
 
-<p>回頭看上面那些失敗，只有一個是當掉的。對照組什麼都沒回，被讀成通過。工作正常結束，檔案是空的。網站通過所有檢查，因為每個檢查都是拿它跟自己比。還有開頭說的那個十四個儲存庫的檢查，只跑了一次。每一個都有檢查，而每一個檢查都不可能說「不」。</p>
+<p>回頭看上面那些失敗，只有一個是當掉的。對照組什麼都沒回，被讀成通過。作業正常結束，檔案是空的。網站通過所有檢查，因為每個檢查都是拿它跟自己比。還有開頭說的那個十四個儲存庫的檢查，只跑了一次。每一個都有檢查，而每一個檢查都不可能說「不」。</p>
 
 <p>這個型態有一部分是我「記下了什麼」造成的。有聲音的失敗（當掉、少套件、語法錯誤）在工作階段裡一分鐘就修掉，根本不會進到我的筆記。但這也正是重點。代理那個「執行、讀錯誤、修、再執行」的迴圈，很會清掉有聲音的錯。在我的筆記裡，留下來要我自己發現的，大多是沒聲音的。這件事在我的筆記之外成不成立，是下一節要測的。</p>
 
@@ -163,15 +163,15 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 
 <p>所以我真正能主張的，比我原本相信的窄：</p>
 
-<p>1. 在全新的小任務上，現在的代理被要求執行分析時，也會順便稽核它，並且抓得到跟「它讀得到的東西」互相矛盾的錯：資料、程式、寫好的計畫。<br>
+<p>1. 在全新的小任務上，現在的代理被要求執行分析時，也會一併檢核這個分析，並且抓得到跟「它讀得到的東西」互相矛盾的錯：資料、程式、寫好的計畫。<br>
 2. 它抓不到只存在你腦袋裡的決定。這又是<a href="#failures">不出聲的猜測</a>，也是「執行之前先寫任務說明」的理由。<br>
-3. 這還沒有測到我真正出錯的情境：工作階段已經跑了好幾個小時、程式是代理自己寫的、沒有寫下來的計畫、也沒有人要求稽核。這裡的代理是全新的、只讀檔案，表現很好，這算是支持「長時間執行結束後，開一個新的工作階段來複查」的一點證據。</p>
+3. 這還沒有測到我真正出錯的情境：工作階段已經跑了好幾個小時、程式是代理自己寫的、沒有寫下來的計畫、也沒有人要求檢核。這裡的代理是全新的、只讀檔案，表現很好，這算是支持「長時間執行結束後，開一個新的工作階段來複查」的一點證據。</p>
 
 <p class="small">限制：一個模型、一種任務、虛構資料、每種錯各六個、各跑兩次。這些無聲的錯比真實的容易發現，因為每一個都跟資料夾裡寫著的某樣東西矛盾。有聲和無聲的錯難度也沒有配對。卡片、檢查程式和每一筆結果都在<a href="https://github.com/ChenHsieh/agentic-research-toolkit/tree/main/experiments/loud_quiet">儲存庫</a>裡，另外還有一份我請 Codex 在沒看到結果的情況下寫的設計批評。</p>
 
 <h2 id="rules">規則先在檔案裡，然後在程式裡</h2>
 
-<p>Claude Code 啟動時會讀一個叫 CLAUDE.md 的檔案（Codex 讀的是 AGENTS.md）。我的那份寫了資料放哪裡、什麼不能刪、怎麼送工作、圖的要求，還有過去犯過的錯。每犯一次錯我就加一行。</p>
+<p>Claude Code 啟動時會讀一個叫 CLAUDE.md 的檔案（Codex 讀的是 AGENTS.md）。我的那份寫了資料放哪裡、什麼不能刪、怎麼提交作業、圖的要求，還有過去犯過的錯。每犯一次錯我就加一行。</p>
 
 <p>9 月 4 日，同一個專案裡出了三個那份檔案早就禁止的錯：</p>
 
@@ -183,8 +183,8 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 
 <figure><div class="g" data-g="rules"></div><figcaption>檔案裡的規則只在一開始被讀一次。程式裡的規則擋在路上，適用的時候會把分析停下來。</figcaption></figure>
 
-<p>一支程式在對照組和它的條件用不同的量來配對時會報錯，而且沒有先確認資料夠不夠看得出效應，就拒絕回報「沒有效應」。<br>
-一個 git hook 擋掉在共用工作目錄裡的 commit、切分支和 stash。<br>
+<p>一支程式在對照組和實驗條件用不同的度量來配對時會報錯，而且沒有先確認資料夠不夠看得出效應，就拒絕回報「沒有效應」。<br>
+一個 Git hook 擋掉在共用工作目錄裡的 commit、切分支和 stash。<br>
 一個存圖的函式拒絕沒有樣本數、文字小於 20 pt、或標籤重疊的圖。</p>
 
 <p>程式要有東西去執行它才有用。我在叢集上整理的時候，發現五個寫得正確、卻沒有任何程式呼叫的對照函式；所謂「用程式強制執行對照」，講的是一個沒人 import 的函式庫。從沒被呼叫的檢查是 BLOCKED，不是 PASS。所以寫完一個檢查的最後一步，是找出呼叫它的那一行。</p>
@@ -193,9 +193,9 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 
 <p>1983 年，Lisanne Bainbridge 描述了「自動化的諷刺」（<a href="https://gwern.net/doc/sociology/technology/1983-bainbridge.pdf">PDF</a>）：一個流程自動化得越多，人剩下的工作就越是那些不正常的情況，要發現並補救自動化做錯的地方，可是人對正常情況的練習反而變少。代理正是這樣。例行的執行它們拿走了；留給你的是無聲的失敗，而你待在資料裡的時間比以前少。</p>
 
-<p>科學哲學對「好的檢查」有現成的說法。史丹佛哲學百科這樣總結波普："Every genuine test of a scientific theory, then, is logically an attempt to refute or to falsify it"（<a href="https://plato.stanford.edu/archives/spr2007/entries/popper/">SEP</a>）。Deborah Mayo 的版本是「嚴格檢驗」：只推論那些這個程序真的有機會證明為錯的事（<a href="https://www.journals.uchicago.edu/doi/abs/10.1093/bjps/axl003">Mayo 與 Spanos，2006</a>）。結束代碼對一個生物學結果來說不是嚴格檢驗。一個流程非找到不可的已知訊號才是。</p>
+<p>科學哲學對「好的檢查」有現成的說法。史丹佛哲學百科這樣總結波普："Every genuine test of a scientific theory, then, is logically an attempt to refute or to falsify it"（<a href="https://plato.stanford.edu/archives/spr2007/entries/popper/">SEP</a>）：任何真正檢驗科學理論的測試，在邏輯上都是在試圖反駁它。Deborah Mayo 的版本是「嚴格檢驗」：只推論那些這個程序真的有機會證明為錯的事（<a href="https://www.journals.uchicago.edu/doi/abs/10.1093/bjps/axl003">Mayo 與 Spanos，2006</a>）。結束代碼對一個生物學結果來說不是嚴格檢驗。一個流程非找到不可的已知訊號才是。</p>
 
-<p>Gelman 和 Loken 的「分岔小徑的花園」（<a href="https://sites.stat.columbia.edu/gelman/research/unpublished/forking.pdf">PDF</a>）是另一個風險。看過資料之後才做的選擇（用哪個過濾條件、哪個門檻、丟掉哪些樣本），會讓通往「乾淨結果」的路變多，而且不需要任何人故意去撈。代理一個小時就能走過很多條這樣的路，然後回報走得通的那一條。解法很老：在看到結果之前把決定寫下來，並且記下試過什麼、放棄什麼。<a href="../examples.html#a-brief">任務說明</a>（執行前寫）和<a href="../examples.html#a-status-file">狀態檔</a>裡都留了位置。</p>
+<p>Gelman 和 Loken 的「小徑分岔的花園」（<a href="https://sites.stat.columbia.edu/gelman/research/unpublished/forking.pdf">PDF</a>）是另一個風險。看過資料之後才做的選擇（用哪個過濾條件、哪個門檻、丟掉哪些樣本），會讓通往「漂亮結果」的路變多，而且不需要任何人刻意去挑。代理一個小時就能走過很多條這樣的路，然後回報走得通的那一條。解法很老：在看到結果之前把決定寫下來，並且記下試過什麼、放棄什麼。<a href="../examples.html#a-brief">任務說明</a>（執行前寫）和<a href="../examples.html#a-status-file">狀態檔</a>裡都留了位置。</p>
 
 <p>Merton 把「有組織的懷疑」列為科學的規範之一（<a href="https://www.nationalacademies.org/read/1864/chapter/4">美國國家學院的摘要</a>）：主張要由作者以外的人來檢查。開一個新的工作階段、讓它讀檔案而不是讀摘要，是這件事小而便宜的版本。它抓得到「說做了其實沒做」的工作。但它是第二次檢查，不是獨立的檢查：它跟前一個共用任務說明、儲存庫，通常也是同一個模型。讓它先讀輸入和輸出，再看前一個工作階段的摘要，效果比較好。一個懂這個實驗的同實驗室夥伴，是更強的檢查。</p>
 
@@ -205,7 +205,7 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 <tr><th>善用</th><td>把例行的執行交出去，而且最後有一個你看過它失敗的檢查。</td></tr>
 <tr><th>誤用</th><td>把結束代碼或代理自己的摘要當成結果。</td></tr>
 <tr><th>棄用</th><td>一次不好的經驗之後就不用了，連有測試過的檢查可以把關的例行執行也不用。或是把一個老是對好資料說「不」的檢查關掉。親手學一個方法不算棄用。</td></tr>
-<tr><th>濫用</th><td>設定的方式沒有顧到相關的人：在共用叢集上不設上限地送工作、產出或工作階段多到沒人看得完、或是沒有辦法看見並停下它正在做的事。</td></tr>
+<tr><th>濫用</th><td>設定的方式沒有顧到相關的人：在共用叢集上不設上限地提交作業、產出或工作階段多到沒人看得完、或是沒有辦法看見並停下它正在做的事。</td></tr>
 </table>
 
 <h2 id="long">很長的工作階段</h2>
@@ -214,7 +214,7 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 
 <figure><div class="g" data-g="session"></div><figcaption>幾個小時下來，早期的對話被摘要，細節掉了。沿路寫下的檔案是完整的。</figcaption></figure>
 
-<p>等待這件事交給排程器（工作相依），或是交給一個背景檢查，它在工作離開佇列時結束。不是讓代理一直去問。我也給每一個等待設期限。卡住的工作會一直留在佇列裡直到時間上限，可能是好幾天以後，而且永遠不會寫出它的檔案。所以我的工作每幾分鐘印一行進度，背景檢查把「log 不再變長」當成失敗。</p>
+<p>等待這件事交給排程器（作業相依），或是交給一個背景監測程序，它在作業離開佇列時結束。不需要代理持續輪詢。我也給每一個等待設期限。卡住的作業會一直留在佇列裡直到時間上限，可能是好幾天以後，而且永遠不會寫出它的檔案。所以我的作業每幾分鐘印一行進度，背景監測程序把「log 不再變長」當成失敗。</p>
 
 <h2 id="modes">要放手讓它跑多少</h2>
 
@@ -222,12 +222,12 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 
 <figure><div class="g" data-g="modes"></div><figcaption>從盯著每一步，到只檢查結果。把滑鼠移上去或點一下，可以看我什麼時候用哪一種。</figcaption></figure>
 
-<p>在共用的叢集上，有寫出指引的幾個運算中心在一點上是一致的：凡是會送出工作、取消工作、刪除檔案的事，都要保留人工同意。NCAR 的頁面直接點名了會出的事：失控的 qsub 迴圈、遞迴刪除、或是用掉你一大塊配額的工作（<a href="https://ncar-hpc-docs.readthedocs.io/en/latest/best-practices-for-supercomputer-users/agentic-ai/">NCAR</a>；<a href="https://scicomp.aalto.fi/triton/usage/ai-agents/">Aalto</a> 說的也差不多）。</p>
+<p>在共用的叢集上，有寫出指引的幾個運算中心在一點上是一致的：凡是會提交作業、取消作業、刪除檔案的事，都要保留人工核准。NCAR 的頁面直接點名了會出的事：失控的 qsub 迴圈、遞迴刪除、或是用掉你一大塊配額的作業（<a href="https://ncar-hpc-docs.readthedocs.io/en/latest/best-practices-for-supercomputer-users/agentic-ai/">NCAR</a>；<a href="https://scicomp.aalto.fi/triton/usage/ai-agents/">Aalto</a> 說的也差不多）。</p>
 
 <p>不管用哪種模式，我都留一份很短的清單，寫在規則檔裡，讓它在每個工作階段都有效。到這些點它必須停下來問：</p>
 
 <p>1. 要刪除或覆寫任何不是它自己建立的東西之前。<br>
-2. 要送出超過一定數量的工作，或是用它沒用過的共用硬體之前。<br>
+2. 要提交超過一定數量的作業，或是用它沒用過的共用硬體之前。<br>
 3. 要寫到專案資料夾以外的地方之前：共用磁碟、推到上線中的網站、傳訊息給別人。<br>
 4. 計畫改變的時候：換方法、丟掉樣本、移動門檻。<br>
 5. 任何數字要進到稿子、投影片、或是給指導教授的訊息之前。</p>
@@ -238,26 +238,26 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 
 <p>過夜執行要順利，條件是你在離開前就寫得出隔天早上要做的檢查：哪些檔案、幾列、數值範圍多少。我把它寫進<a href="../examples.html#a-brief">任務說明</a>。如果任務做到一半需要你的判斷，就不會順利，因為代理不是停下來等，就是自己替你決定。</p>
 
-<figure><div class="g" data-g="night"></div><figcaption>比較會成功的一晚：一個寫好的檢查、每個小階段都以一個 commit 過的檔案結束、運算在排程器裡串起來、早上由新的工作階段複查。</figcaption></figure>
+<figure><div class="g" data-g="night"></div><figcaption>比較會成功的一晚：一個寫好的檢查、每個小階段都產出檔案並完成一次 commit、運算在排程器裡串起來、早上由新的工作階段複查。</figcaption></figure>
 
 <div class="prompt"><div class="ph">離開之前：事前驗屍</div><p>It is tomorrow morning. This run produced a result that looks convincing but is wrong. List five ways that could have happened. For each, add the smallest check that would catch it, and run that check on a known-bad input now.</p></div>
 <p class="small">「事前驗屍」（premortem）是 Gary Klein 的方法：先假設專案已經失敗，再問為什麼（<a href="https://hbr.org/2007/09/performing-a-project-premortem">HBR，2007</a>）。提示保留英文，因為我實際上是用英文下的。</p>
 
-<p><span class="lbl">會順利</span> 目標一句話講得完。有一個它跑得了、而且你看過它失敗的檢查。小階段，每個都以一個檔案和一次 commit 結束。工作在排程器裡串好。它有自己的一份儲存庫。哪些指令可以不問就跑，事先決定好，才不會半夜一點停在那裡等你說好。</p>
+<p><span class="lbl">會順利</span> 目標一句話講得完。有一個它跑得了、而且你看過它失敗的檢查。小階段，每個都以一個檔案和一次 commit 結束。作業在排程器裡串好。它有自己獨立的工作目錄。哪些指令可以不問就跑，事先決定好，才不會半夜一點停在那裡等你說好。</p>
 
-<p><span class="lbl">會出事</span> 「去探索一下這份資料。」成功與否由它自己的摘要判斷。一個很長、只在最後才存檔的工作。共用的資料夾。一個整晚在問佇列的代理。可以送的工作數量沒有上限。</p>
+<p><span class="lbl">會出事</span> 「去探索一下這份資料。」成功與否由它自己的摘要判斷。一個很長、只在最後才存檔的作業。共用的資料夾。一個整晚在輪詢佇列的代理。可以提交的作業數量沒有上限。</p>
 
 <p>評測不會告訴你可以放它跑多久。METR 量的是代理有一半機率完成的任務長度（以人類所需時間計）；GPT-5 大約是 2 小時 17 分。METR 自己的說明講得很清楚，這不是代理能獨自執行多久；而且對人類要花 90 分鐘到 3 小時的任務，大約三分之一每次都成功、三分之一每次都失敗、三分之一時好時壞（<a href="https://metr.org/time-horizons/">METR</a>）。Anthropic 的報告說，2025 年 2 月到 8 月之間，他們自己工程師的工作階段，從大約 10 個動作才需要人介入，變成大約 20 個（<a href="https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic">Anthropic</a>）。把一個晚上規劃成幾個短的、有檢查的階段，而不是一個很長的任務。</p>
 
 <h3>它在跑的時候</h3>
 
-<p>不要用「盯著它」來代替一個事先規劃好的檢查。我不知道有哪個研究是在研究盯著代理看，但有一個研究的是「AI 幫忙」感覺起來有多快。在 2025 年的一個隨機試驗裡，有經驗的開源開發者預期 AI 工具會讓他們快 24%；在 246 個真實任務上，他們慢了 19%（<a href="https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf">METR</a>）。那是 2025 年初的工具、成熟的程式庫，而且 METR 正在重做這個研究，但有用的是那個落差：感覺有多快，和實際有多快，是兩回事。</p>
+<p>不要用「盯著它」來代替一個事先規劃好的檢查。我不知道有哪個研究是在研究盯著代理看，不過有一項研究比較了人主觀感覺到的 AI 協助速度和實際的速度。在 2025 年的一個隨機試驗裡，有經驗的開源軟體開發者預期 AI 工具會讓他們快 24%；在 246 個真實任務上，他們慢了 19%（<a href="https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf">METR</a>）。那是 2025 年初的工具、成熟的程式庫，而且 METR 正在重做這個研究，但有用的是那個落差：感覺有多快，和實際有多快，是兩回事。</p>
 
-<p>我自己的做法：給工作階段一個叫醒我的條件（工作離開佇列了、某個檔案出現了），而不是我去查它。去做只有人能做的事：讀、寫、開會、做實驗。它來問的時候才用手機回，不是為了監督。複查一次做完，從檔案和 commit 來看，由一個沒有參與這份工作的新工作階段來做。</p>
+<p>我自己的做法：給工作階段一個叫醒我的條件（作業離開佇列了、某個檔案出現了），而不是我去查它。去做只有人能做的事：讀、寫、開會、做實驗。它來問的時候才用手機回，不是為了監督。複查一次做完，從檔案和 commit 來看，由一個沒有參與這份工作的新工作階段來做。</p>
 
 <h2 id="models">模型</h2>
 
-<p>在研究裡，幾乎到處都是「出錯很貴」，所以設計、解讀和複查我都用最強的模型。比較便宜的模型可以拿來做大量的修改，只要結果有人檢查。我用的一種安排：強的模型把計畫寫成編號的小步驟，每一步附一個測試指令；便宜的模型透過 <a href="https://aider.chat/">Aider</a> 去做每一步；只有通過與否和錯誤訊息的結尾會回來。判斷留在強的模型，打字交給便宜的。工具在某個模型過載時可能會換成另一個；工作階段的狀態會顯示是哪個模型回答的。</p>
+<p>在研究裡，幾乎到處都是「出錯很貴」，所以設計、解讀和複查我都用最強的模型。比較便宜的模型可以拿來做大量的修改，只要結果有人檢查。我用的一種安排：強的模型把計畫寫成編號的小步驟，每一步附一個測試指令；便宜的模型透過 <a href="https://aider.chat/">Aider</a> 去做每一步；只把通過或失敗，以及錯誤訊息的最後一段，回傳給強的模型。判斷留在強的模型，打字交給便宜的。工具在某個模型過載時可能會換成另一個；工作階段的狀態會顯示是哪個模型回答的。</p>
 
 <p>本機模型：在基本款的 M4 Mac 上，一個 70 億參數、4-bit 的模型每秒大約產生 24 個 token（我自己量的）。這對聊天和小修改夠用。我沒有用本機模型跑過好幾個小時的專案工作階段。如果資料不能離開你的機構，可以選擇只讓雲端模型看到程式和摘要，或是在機構自己的 GPU 上跑開源模型。</p>
 
@@ -266,7 +266,7 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 <p>1. 安裝 <a href="https://code.claude.com/docs/en/setup">Claude Code</a>（需要付費的 Claude 方案或 API 額度；免費方案不含）。在一個你已經很熟的資料夾裡打開它。<br>
 2. 問它每個檔案在做什麼、執行順序是什麼。拿它的答案和你知道的比。<br>
 3. 保留「執行指令前要同意」。<br>
-4. 把<a href="../examples.html#a-rules-file">五行的規則檔</a>複製成 CLAUDE.md，把括號裡的內容填好。每犯一次錯加一行。<br>
+4. 把<a href="../examples.html#a-rules-file">五行的規則檔</a>貼進 CLAUDE.md，再把括號裡的內容填好。每犯一次錯加一行。<br>
 5. 讓一個檢查失敗一次。把某個輸入檔只留表頭複製一份（<code>head -n 1 input.tsv &gt; empty.tsv</code>），拿它去跑你的第一步，看有沒有任何東西說「不」。如果沒有，就寫一個會說「不」的檢查，然後看著它說。</p>
 
 <p class="small">這一頁是用 Claude Code 根據我自己的工作階段紀錄和筆記寫成的；每個數字都對回它出處的檔案檢查過。中文版同樣由 Claude Code 翻譯。錯誤由我負責。</p>
