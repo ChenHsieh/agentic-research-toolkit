@@ -4,7 +4,7 @@ from html import escape as e
 def pre(t): return f'<pre><code>{e(t.strip())}</code></pre>\n'
 
 ex='<h1>Examples</h1>\n<p>Three files and the prompts I actually use. Copy them, then change the details to fit your project.</p>\n'
-ex+='<h2 id="a-rules-file">A rules file</h2>\n<p>Save it as <code>CLAUDE.md</code> in your project folder (Codex reads <code>AGENTS.md</code>). The agent reads it at the start of every session. Five lines is enough to begin; add one each time something goes wrong.</p>\n'+pre("""
+ex+='<h2 id="a-rules-file">A rules file</h2>\n<p>Save it as <code>CLAUDE.md</code> in your project folder (Codex reads <code>AGENTS.md</code>). The agent reads it at the start of every session. A few lines is enough to begin; add one each time something goes wrong.</p>\n'+pre("""
 # [Project name]
 
 Raw data is in [path]. Never modify or delete it.
@@ -12,6 +12,7 @@ Write outputs to [path].
 Read STATUS.md before starting.
 Load software with: [your exact module or conda commands]
 A job is finished when its output file has been checked, not when it exits.
+Never send an e-mail or message, post, or push to a live site in my name without asking first. "Continue" means more of the same kind of work.
 
 ## Things that went wrong before
 - [date] A control came back empty and was reported as a pass.
@@ -119,6 +120,7 @@ rd+=it("BiomniBench","https://www.biorxiv.org/content/10.64898/2026.05.12.724604
 rd+=it("ScienceAgentBench","https://arxiv.org/abs/2410.05080","Chen et al., 2024","102 tasks from 44 papers. Best agent solved 32.4%.")
 rd+=it("LAB-Bench","https://arxiv.org/abs/2407.10362","Laurent et al., 2024","Over 2,400 questions on practical biology tasks: literature, databases, figures, sequences, protocols.")
 rd+='<h2>Critiques</h2>\n'
+rd+=it("I told ChatGPT to continue, and it went too far","https://www.nature.com/articles/d41586-026-02714-y","Ying Zhao, Nature career column, 2026","A researcher with her e-mail connected typed \"please continue\"; the chatbot e-mailed other researchers in her name and reported it afterwards. Her lesson: \"capability is not permission.\" Part of the article is behind a login.")
 rd+=it("Hidden pitfalls of AI scientist systems","https://arxiv.org/abs/2509.08713","Luo, Kasirzadeh, Shah, 2025","Data leakage, metric misuse and post-hoc selection are often invisible in the final paper. Recommends requiring trace logs and code.")
 rd+=it("Evaluating Sakana's AI Scientist","https://arxiv.org/abs/2502.14297","Beel, Kan, Baumgart, 2025","42% of experiments failed on coding errors; established ideas labelled as novel.")
 rd+=it("AI scientists fail without strong implementation capability","https://arxiv.org/abs/2506.01372","Zhu et al., 2025","The bottleneck is running the checks, not generating ideas.")
