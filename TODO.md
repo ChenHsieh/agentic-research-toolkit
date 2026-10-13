@@ -16,4 +16,4 @@ Constraint: quiet, fact-based, no AI-vibe aesthetics. Verify every change live.
 
 ## Phase 4: final check
 - [x] all pages at 390 / 1440, no console errors, links 200, preview card
-- [x] summary for Chen
+- [x] summary for the author

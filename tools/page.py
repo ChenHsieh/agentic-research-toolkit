@@ -22,7 +22,7 @@ def page(fn,title,body,desc="",script=""):
 <body>
 {nav}
 {body}
-<p class="small" style="margin-top:4em">Chen Hsieh · <a href="https://github.com/ChenHsieh/agentic-research-toolkit">source</a> · text CC BY 4.0</p>
+<p class="small" style="margin-top:4em"><a href="https://github.com/ChenHsieh/agentic-research-toolkit">Source</a> · text CC BY 4.0</p>
 <script src="toc.js"></script>
 {script}
 </body>
