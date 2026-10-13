@@ -63,6 +63,11 @@ Done when: [which files exist, and what they show]
 
 ## Decisions
 - [choice made]: [alternatives tried and dropped], decided [before / after] seeing results</code></pre>
+<h2 id="skills">Skills</h2>
+<p>The checking procedures I use are packaged as a Claude Code plugin. In Claude Code, run these two lines:</p>
+<pre><code>/plugin marketplace add ChenHsieh/agentic-research-toolkit
+/plugin install result-checks@agentic-research-toolkit</code></pre>
+<p>It adds six skills: check a design for confounds, give a derived statistic a null, try to break a finished result, compare with a second method, trace a data accession to its paper, and the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/setup/AGENT_PLAYBOOK.md">agent playbook</a>. About 1,100 tokens per session until one is used.</p>
 <h2 id="prompts">Prompts</h2>
 <div class="prompt"><div class="ph">Catch me up</div><p>Read STATUS.md and the last ten commits. What is done, what is still open, and what is waiting on someone?</p></div>
 <div class="prompt"><div class="ph">Before I trust this check</div><p>Run this check three ways, through the same script the real run uses: on an input built to have the error this check is for (such as shuffled labels), where it should say no; on a copy with only the header line, where it should say no; and on an input with a planted answer, made without the code being checked, where it should say yes. Show me the output each time and the line that calls the check. If it gets any of the three wrong, stop and tell me before changing anything.</p></div>

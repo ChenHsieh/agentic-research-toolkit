@@ -48,6 +48,7 @@ Done when: [which files exist, and what they show]
 ## Decisions
 - [choice made]: [alternatives tried and dropped], decided [before / after] seeing results
 """)
+ex+='<h2 id="skills">Skills</h2>\n<p>The checking procedures I use are packaged as a Claude Code plugin. In Claude Code, run these two lines:</p>\n'+pre('/plugin marketplace add ChenHsieh/agentic-research-toolkit\n/plugin install result-checks@agentic-research-toolkit')+'<p>It adds six skills: check a design for confounds, give a derived statistic a null, try to break a finished result, compare with a second method, trace a data accession to its paper, and the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/setup/AGENT_PLAYBOOK.md">agent playbook</a>. About 1,100 tokens per session until one is used.</p>\n'
 ex+='<h2 id="prompts">Prompts</h2>\n'
 for t,p in [("Catch me up","Read STATUS.md and the last ten commits. What is done, what is still open, and what is waiting on someone?"),
 ("Before I trust this check","Run this check three ways, through the same script the real run uses: on an input built to have the error this check is for (such as shuffled labels), where it should say no; on a copy with only the header line, where it should say no; and on an input with a planted answer, made without the code being checked, where it should say yes. Show me the output each time and the line that calls the check. If it gets any of the three wrong, stop and tell me before changing anything."),
@@ -147,6 +148,7 @@ rd+=it("Paper2Agent","https://arxiv.org/abs/2509.06917","Miao et al., 2025","Tur
 rd+=it("CellAgent","https://arxiv.org/abs/2407.09811","Xiao et al., 2024","Planner, executor and evaluator agents for single-cell analysis.")
 rd+=it("ChemCrow","https://doi.org/10.1038/s42256-024-00832-8","Bran et al., 2024","GPT-4 with 18 chemistry tools.")
 rd+=it("Claude for Life Sciences","https://www.anthropic.com/news/claude-for-life-sciences","Anthropic, 2025","Connectors (PubMed, Benchling, 10x Genomics and others) and skills.")
+rd+=it("ai-research-skills","https://github.com/WenyuChiou/ai-research-skills","Wenyu Chiou","Seventeen installable skills from literature search to manuscript, tied to Zotero, Obsidian and NotebookLM, with a dated verification record per skill and a written list of where automation must stop. Its author says it was tested by one person, in water resources. I have not run it.")
 rd+=it("AGENTS.md","https://agents.md/","Linux Foundation","One instructions file many agents read.")
 rd+=it("Agent Skills","https://agentskills.io/","open standard","A folder with a SKILL.md; loaded only when a task matches.")
 rd+='<p class="small">Not included: several 2026 preprints seen in search but not read. Affiliations for some arXiv entries are from the author groups, not the abstract pages. Full notes: <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/lit_round_2026-10.md">notes/lit_round_2026-10.md</a>.</p>\n'
@@ -243,3 +245,13 @@ cvfail:{height:260,narrow:{height:420,pos:{n1:[.5,.06],p1:[.5,.2],o1:[.5,.34],x1
 </script>'''
 
 page('tools.html','Tools tried: research agents on a university cluster',tl,'Seven research-agent tools set up on a cluster, one task each, every output checked.',TOOLS_JS)
+
+# ---- keep the installable playbook skill in step with setup/AGENT_PLAYBOOK.md
+_pb=open('setup/AGENT_PLAYBOOK.md').read()
+open('skills/agent-playbook/SKILL.md','w').write("""---
+name: agent-playbook
+description: Rules for an agent doing research work. Use at the start of any analysis, job submission, reproduction or delegation, and again before reporting a result, or when unsure whether a result is done, wrong, or not yet measured.
+---
+Follow the rules below. This file is generated from setup/AGENT_PLAYBOOK.md; edit that file, not this one.
+
+"""+_pb)

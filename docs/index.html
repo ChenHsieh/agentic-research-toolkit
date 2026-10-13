@@ -191,6 +191,16 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p>On a shared cluster, the computing centres that have written guidance agree on one point: keep approval on for anything that submits jobs, cancels them, or deletes files. NCAR's page names the failure directly: a "runaway qsub loop", a recursive delete, or a job that uses a large part of your allocation (<a href="https://ncar-hpc-docs.readthedocs.io/en/latest/best-practices-for-supercomputer-users/agentic-ai/">NCAR</a>; <a href="https://scicomp.aalto.fi/triton/usage/ai-agents/">Aalto</a> says much the same).</p>
 
+<p>Whatever the mode, I keep a short list of points where it must stop and ask, written in the rules file so they hold in every session:</p>
+
+<p>1. Before deleting or overwriting anything it did not create.<br>
+2. Before submitting more than a set number of jobs, or anything on shared hardware it has not used before.<br>
+3. Before writing outside the project folder: a shared drive, a push to a live site, a message to another person.<br>
+4. When the plan changes: a different method, a dropped sample, a moved threshold.<br>
+5. Before any number goes into a manuscript, a slide or a message to my advisor.</p>
+
+<p>The first three protect other people and data. The last two protect the result: they are the points where a choice made after seeing the data would otherwise slip in.</p>
+
 <h3>Overnight runs</h3>
 
 <p>An overnight run goes well when you could write the morning check before you leave: which files, how many rows, what range of values. I write it into a <a href="examples.html#a-brief">brief</a>. It goes badly when the task needs your judgement halfway through, because the agent will either stop and wait or decide without you.</p>

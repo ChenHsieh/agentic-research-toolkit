@@ -1,0 +1,27 @@
+{
+  "name": "agentic-research-toolkit",
+  "owner": { "name": "Chen Hsieh" },
+  "metadata": {
+    "description": "Skills for checking research results produced with coding agents",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "result-checks",
+      "description": "Five procedures for testing a result before you believe it (design confounds, a null for a derived statistic, result autopsy, a second method, accession-to-paper crosswalk) and a short playbook of rules for agents doing research work.",
+      "category": "productivity",
+      "homepage": "https://chenhsieh.github.io/agentic-research-toolkit/",
+      "version": "0.1.0",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/design-confound-audit",
+        "./skills/statistic-null",
+        "./skills/result-autopsy",
+        "./skills/second-opinion-concordance",
+        "./skills/accession-paper-crosswalk",
+        "./skills/agent-playbook"
+      ]
+    }
+  ]
+}

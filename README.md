@@ -15,6 +15,17 @@ The short version: an agent fixes the errors that crash and leaves the ones that
 - [Reading](https://chenhsieh.github.io/agentic-research-toolkit/reading.html): papers, tools and guides, with links checked.
 - [Walkthrough](https://chenhsieh.github.io/agentic-research-toolkit/session.html): 20 minutes with me on your own project.
 
+## Install the skills
+
+In Claude Code:
+
+```
+/plugin marketplace add ChenHsieh/agentic-research-toolkit
+/plugin install result-checks@agentic-research-toolkit
+```
+
+That adds six skills: five procedures for testing a result (design confounds, a null for a derived statistic, result autopsy, a second method, accession-to-paper crosswalk) and the agent playbook. They cost about 1,100 tokens per session until one is used. The other skills in `skills/` are adapted from other people's work or unfinished, and are not in the plugin.
+
 ## In the repository
 
 - `setup/AGENT_PLAYBOOK.md`: rules my agents read at the start of a task and again before reporting, with the incident in brackets where there was one.
