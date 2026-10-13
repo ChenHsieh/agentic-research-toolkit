@@ -1,0 +1,9 @@
+{
+ "card": "card_01",
+ "kind": "loud",
+ "fault": "syntax",
+ "seed": 103,
+ "n_significant": 38,
+ "top_gene": "Gene86296",
+ "top_gene_direction": "up"
+}

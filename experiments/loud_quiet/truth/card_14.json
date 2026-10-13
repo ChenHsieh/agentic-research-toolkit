@@ -1,0 +1,9 @@
+{
+ "card": "card_14",
+ "kind": "quiet",
+ "fault": "stale_cache",
+ "seed": 109,
+ "n_significant": 38,
+ "top_gene": "Gene11559",
+ "top_gene_direction": "up"
+}

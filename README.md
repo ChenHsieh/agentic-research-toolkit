@@ -4,7 +4,7 @@
 
 How I use Claude Code for research on a university cluster, what failed, and what I changed. Written for friends and labmates who asked.
 
-The short version: an agent fixes the errors that crash and leaves the ones that look like success. Before trusting a check, make it fail once. Rules that matter become code that something actually runs.
+The short version: in my long sessions, the errors left behind were the ones that look like success. When I tested that on 15 small fresh tasks (90 runs, in `experiments/loud_quiet/`), the agent caught the quiet faults too; the one it missed was a choice nobody had written down. So: write the plan before the run, make every check fail once, and turn the rules that matter into code that something actually runs.
 
 ## On the site
 

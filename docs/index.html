@@ -19,9 +19,9 @@
 <nav><a href="index.html" class="here">Essay</a><a href="examples.html">Prompts &amp; files</a><a href="tools.html">Tools</a><a href="reading.html">Reading</a><a href="session.html">Walkthrough</a></nav>
 
 <h1>Using an agent for research</h1>
-<p class="small">Chen Hsieh, October 2026. Plant genomics PhD student, University of Georgia. Code and files at <a href="https://github.com/ChenHsieh/agentic-research-toolkit">github.com/ChenHsieh/agentic-research-toolkit</a>.</p>
+<p class="small">Chen Hsieh, October 2026. Plant genomics PhD student, University of Georgia. Code and files at <a href="https://github.com/ChenHsieh/agentic-research-toolkit">github.com/ChenHsieh/agentic-research-toolkit</a>. <a href="zh/index.html" lang="zh-Hant">繁體中文</a></p>
 
-<p>Coding agents now do much of the typing in my research. They are good at fixing errors that make noise: a crash, a missing module, a syntax error. The errors they leave behind look like success. A control with no values was reported as a pass. A loop meant to check fourteen repositories ran once and reported a clean result. Several people asked how I use them, so this page lists what I do, what failed, and what I changed after each failure. All dates are 2026.</p>
+<p>Coding agents now do much of the typing in my research. They are good at fixing errors that make noise: a crash, a missing module, a syntax error. In my long sessions, the errors left behind were the ones that look like success. A control with no values was reported as a pass. A loop meant to check fourteen repositories ran once and reported a clean result. When I <a href="#tested">tested this</a> on small fresh tasks, the agent caught those too. What it could not catch was a choice nobody had written down. Several people asked how I use them, so this page lists what I do, what failed, and what I changed after each failure. All dates are 2026.</p>
 
 <p class="route"><a href="#principles">Read the eight rules</a> · <a href="examples.html">Copy the prompts and files</a> · <a href="session.html">Try it on your project with me (20 minutes)</a></p>
 
@@ -83,6 +83,22 @@
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>The agent rebuilds your result and it matches, but somewhere it chose a setting your notes never mention.</dd><dt class="lbl">What to do</dt><dd>Tell it to stop and say so when information is missing. A guess that happens to match hides the gap.</dd></dl>
 </div></article>
 
+<figure class="explore" id="guess">
+<p class="ex-q">My Methods named the search tool but not its sensitivity setting. Pick the setting a careful reader might use, and see how many of the 13,663 genes in my result the rebuild fails to find.</p>
+<div class="ex-inputs"><button data-i="0" class="on">Default</button><button data-i="1">Sensitive</button><button data-i="2">More sensitive</button></div>
+<div class="gbar"><div class="gfound"></div><div class="gmiss"></div></div>
+<p class="ex-say"></p>
+<figcaption>All three settings run without error and give a plausible table. Only a comparison with the original result shows that one of them loses one gene in twenty. The Methods now state the setting.</figcaption>
+</figure>
+<script>
+(function(){var T=13663,M=[732,126,98],N=["the default setting","the sensitive setting","the more sensitive setting"],f=document.getElementById('guess');
+function show(i){f.querySelectorAll('.ex-inputs button').forEach(function(b){b.classList.toggle('on',+b.dataset.i===i)});
+ var pct=100*M[i]/T;f.querySelector('.gmiss').style.width=Math.max(pct,0.6)+'%';f.querySelector('.gfound').style.width=(100-Math.max(pct,0.6))+'%';
+ f.querySelector('.ex-say').innerHTML='With '+N[i]+': <b>'+M[i].toLocaleString()+'</b> of 13,663 genes missing ('+pct.toFixed(1)+'%).'+(i===0?' This is the one a reader would pick, because it is the default.':'')}
+f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function(){show(+b.dataset.i)}});show(0);})();
+</script>
+
+
 <article class="pat"><div class="mini" data-mini="stale"></div><div class="pat-t">
 <h3>Checks that compare a thing to itself</h3>
 <dl class="pdl"><dt class="lbl">You will see</dt><dd>Something you built from another project's results passes every check, after that project corrected its results.</dd><dt class="lbl">What to do</dt><dd>Before rebuilding, read the source's list of corrections. Pinned inputs prove you match what you built from, not that it still stands.</dd></dl>
@@ -104,7 +120,7 @@
 
 <p>Look back at the failures above. Only one of them crashed. A control returned nothing and was read as a pass. A job exited cleanly with an empty file. A website passed every check because every check compared it with itself. And the fourteen-repository check from the top of the page ran once. Each had a check, and each check could not have said no.</p>
 
-<p>That pattern is partly an artifact of what I wrote down. Loud failures (a crash, a missing module, a syntax error) get fixed inside the session in a minute and never reach my notes. But that is also the point. The agent's loop of run, read the error, fix, run again removes loud errors very well. In my notes, what was left for me to find was mostly the quiet ones.</p>
+<p>That pattern is partly an artifact of what I wrote down. Loud failures (a crash, a missing module, a syntax error) get fixed inside the session in a minute and never reach my notes. But that is also the point. The agent's loop of run, read the error, fix, run again removes loud errors very well. In my notes, what was left for me to find was mostly the quiet ones. Whether that holds beyond my notes is what the next section tests.</p>
 
 <p>It can be worse than a filter. A bioinformatics benchmark from 2026 (<a href="reading.html">FlowBench</a>) found agents often "fix" a failing run so that it exits cleanly while the data stay invalid. When success is easy to see and validity is hard to see, an agent may aim at the part it can see. In METR's benchmark tasks this has included "attempting (often successfully) to get a higher score by modifying the tests or scoring code" (<a href="https://metr.org/blog/2025-06-05-recent-reward-hacking/">METR 2025</a>). Those were scored software tasks, not research, but the lesson carries: treat a clean exit or a green test as a claim to look into. Keep the check, its expected values and the raw inputs outside the folder the agent works in, and run it after the agent has stopped. A git hook only helps if the agent cannot skip whatever runs it.</p>
 
@@ -135,6 +151,29 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 </script>
 
 <p>What is new is the volume. An agent writes checks faster than anyone writes positive controls for them. So the habit I would pass on is small: before trusting a check, make it fail once. Feed it the empty file, the shuffled labels, the case built to be wrong, and watch it say no. A check you have never seen say no is a description, not a test. One forced failure proves one narrow thing: this check catches this fault. So keep a few bad cases that the agent never saw and run them at the end. Then give the check a case you know is right and watch it pass: a check that says no to good data gets switched off.</p>
+
+<h2 id="tested">I tested this, and the simple version failed</h2>
+
+<p>The claim above comes from my notes, so I tried to measure it. I built 15 small analysis folders on made-up gene expression data. Six have a loud fault (the script crashes: a bad import, a wrong column name, a syntax error and so on). Six have a quiet fault (the script finishes and prints a confident, wrong result: an empty control group, labels matched by position, technical replicates counted as plants, a stale cached input, a filter that differs from the plan, a flipped sign). Three are clean. One fixed agent (Claude Code with Sonnet 5.5, none of my rules or memory loaded) ran each folder with the brief "run the analysis and report the result", and a checker it could not see scored the answer. I ran it three ways, twice each: with the written analysis plan in the folder, with the plan plus six checking rules, and with the plan deleted. That is 90 runs for $7.78.</p>
+
+<table class="score all">
+<tr><th>Folders</th><th>Plan in the folder</th><th>Plan plus six rules</th><th>Plan deleted</th></tr>
+<tr><td>Loud fault</td><td class="ok">12 of 12 right</td><td class="ok">12 of 12 right</td><td class="ok">12 of 12 right</td></tr>
+<tr><td>Quiet fault</td><td class="ok">12 of 12 right</td><td class="ok">12 of 12 right</td><td class="mid">11 of 12 right</td></tr>
+<tr><td>Clean</td><td class="ok">6 of 6 right</td><td class="ok">6 of 6 right</td><td class="ok">6 of 6 right</td></tr>
+</table>
+
+<p>I expected the quiet row to be much worse than the loud row. It was not. The agent found every quiet fault and said what it was: "the control group was empty and all p-values were NaN (script falsely reported 0 significant)". The six rules changed nothing, because there was nothing left for them to catch. It raised no false alarm on the clean folders.</p>
+
+<p>The one miss is the useful part. With the plan deleted, the folder whose filter differed from the plan had no record anywhere of what the filter should have been. One of the two runs kept the wrong filter and reported the result as fine. No amount of checking can recover a decision that was never written down.</p>
+
+<p>So what I can support is narrower than what I believed:</p>
+
+<p>1. On a small, fresh task, a current agent asked to run an analysis also audits it, and catches faults that contradict something it can read: the data, the code, a written plan.<br>
+2. It cannot catch a choice that exists only in your head. That is the <a href="#failures">silent guess</a> again, and it is the argument for writing the brief before the run.<br>
+3. This says nothing yet about where my real failures happened: hours into a session, in code the agent itself had written, with no written plan, when nobody had asked for an audit. A fresh agent reading the files did well here, which is some evidence for the fresh review at the end of a long run.</p>
+
+<p class="small">Limits: one model, one kind of task, made-up data, six faults of each kind, two runs each. The quiet faults were easier to spot than real ones, because each contradicted something written in the folder. The loud and quiet faults were not matched for difficulty. Cards, checker and every result are in the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/tree/main/experiments/loud_quiet">repository</a>, along with a critique of the design that Codex wrote without seeing the results.</p>
 
 <h2 id="rules">Rules in a file, then rules in code</h2>
 

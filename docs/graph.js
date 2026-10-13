@@ -1,5 +1,6 @@
 // Small static diagrams with hover (and keyboard focus) for detail. Needs d3 v7.
 (function(){
+function L(x){return (window.G_T&&window.G_T[x])||x}
 var tip=document.createElement('div');tip.className='gtip';document.body.appendChild(tip);
 function showTip(ev,html){if(!html)return;tip.innerHTML=html;tip.style.opacity=1;moveTip(ev)}
 function moveTip(ev){var x=ev.clientX+14,y=ev.clientY+14,w=tip.offsetWidth;if(x+w>innerWidth-8)x=ev.clientX-w-14;if(x<8)x=8;tip.style.left=x+'px';tip.style.top=y+'px'}
@@ -69,29 +70,29 @@ function graph(el,spec){
   if(spec.legend){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.legend.map(function(l){return '<span style="display:inline-block;width:.8em;height:.8em;border-radius:3px;background:'+C[l[0]]+';margin:0 .35em 0 .9em;vertical-align:-1px"></span>'+l[1]}).join('')+'</div>')}
   if(spec.note){el.insertAdjacentHTML('beforeend','<div class="gnote">'+spec.note+'</div>')}
   var withInfo=spec.nodes.filter(function(n){return n.info});
-  if(withInfo.length&&!spec.nokey){el.insertAdjacentHTML('beforeend','<details class="gkey"><summary>What each box means</summary><dl>'+withInfo.map(function(n){return '<dt>'+n.label+'</dt><dd>'+n.info.replace(/^<b>[^<]*<\/b><br>/,'')+'</dd>'}).join('')+'</dl></details>')}
+  if(withInfo.length&&!spec.nokey){el.insertAdjacentHTML('beforeend','<details class="gkey"><summary>'+L('What each box means')+'</summary><dl>'+withInfo.map(function(n){return '<dt>'+n.label+'</dt><dd>'+n.info.replace(/^<b>[^<]*<\/b><br>/,'')+'</dd>'}).join('')+'</dl></details>')}
 }
 
 function timeline(el,spec){
   var W=el.clientWidth||640,H=190,n=spec.steps.length,pad=10,bw=(W-90-pad*n)/n;
   var svg=d3.select(el).append('svg').attr('viewBox',[0,0,W,H]).attr('width','100%').attr('height',H);
-  svg.append('text').attr('class','glabel').attr('x',0).attr('y',42).text('conversation');
-  svg.append('text').attr('class','glabel').attr('x',0).attr('y',122).text('files');
+  svg.append('text').attr('class','glabel').attr('x',0).attr('y',42).text(L('conversation'));
+  svg.append('text').attr('class','glabel').attr('x',0).attr('y',122).text(L('files'));
   var conv=svg.selectAll('.cv').data(spec.steps).join('rect').attr('x',function(d,i){return 90+i*(bw+pad)}).attr('y',25).attr('width',bw).attr('height',30).attr('rx',6).attr('fill',C.agent);
   var file=svg.selectAll('.fl').data(spec.steps).join('rect').attr('x',function(d,i){return 90+i*(bw+pad)}).attr('y',105).attr('width',bw).attr('height',30).attr('rx',6).attr('fill',C.file);
   svg.selectAll('.ft').data(spec.steps).join('text').attr('class','gname').attr('fill','#fff').attr('text-anchor','middle')
     .attr('x',function(d,i){return 90+i*(bw+pad)+bw/2}).attr('y',125).text(function(d){return W<520?'':d.file});
   var label=svg.append('text').attr('class','glabel').attr('x',W/2).attr('y',175).attr('text-anchor','middle');
   var row=document.createElement('div');row.className='gnote';
-  row.innerHTML='<label>hours into the session <input type="range" min="0" max="'+(n-1)+'" value="0" style="vertical-align:middle;width:12em"></label>';
+  row.innerHTML='<label>'+L('hours into the session')+' <input type="range" min="0" max="'+(n-1)+'" value="0" style="vertical-align:middle;width:12em"></label>';
   el.appendChild(row);var inp=row.querySelector('input');
   function upd(){var t=+inp.value,keep=spec.window;
     conv.transition().duration(250).attr('fill-opacity',function(d,i){return i>t?0.08:(t-i<keep?1:0.18)}).attr('fill',function(d,i){return t-i<keep?C.agent:C.muted});
     file.transition().duration(250).attr('fill-opacity',function(d,i){return i>t?0.08:1});
-    var lost=Math.max(0,t+1-keep);label.text(lost?lost+' of '+(t+1)+' steps now only exist as a summary in the conversation; all '+(t+1)+' are on disk':'everything is still in the conversation');}
+    var lost=Math.max(0,t+1-keep);label.text(spec.zh?(lost?(t+1)+' 步裡有 '+lost+' 步在對話中只剩摘要；'+(t+1)+' 步都在硬碟上':'全部都還在對話裡'):(lost?lost+' of '+(t+1)+' steps now only exist as a summary in the conversation; all '+(t+1)+' are on disk':'everything is still in the conversation'));}
   inp.oninput=upd;upd();
-  conv.on('mouseover',function(ev,d){showTip(ev,'<b>Conversation, step '+(spec.steps.indexOf(d)+1)+'</b><br>'+d.talk)}).on('mousemove',moveTip).on('mouseout',hideTip);
-  file.on('mouseover',function(ev,d){showTip(ev,'<b>On disk: '+d.file+'</b><br>'+d.disk)}).on('mousemove',moveTip).on('mouseout',hideTip);
+  conv.on('mouseover',function(ev,d){showTip(ev,'<b>'+L('Conversation, step ')+(spec.steps.indexOf(d)+1)+'</b><br>'+d.talk)}).on('mousemove',moveTip).on('mouseout',hideTip);
+  file.on('mouseover',function(ev,d){showTip(ev,'<b>'+L('On disk: ')+d.file+'</b><br>'+d.disk)}).on('mousemove',moveTip).on('mouseout',hideTip);
 }
 window.drawDiagrams=function(specs){document.querySelectorAll('[data-g]').forEach(function(el){var s=specs[el.dataset.g];if(!s)return;(s.type==='timeline'?timeline:graph)(el,s)})};
 })();

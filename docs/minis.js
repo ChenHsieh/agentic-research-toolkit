@@ -2,7 +2,7 @@
 (function(){
 var INK='#333',RED='#8a2c2c',BLUE='#2f4a5c',OLIVE='#5c5a2f',GREEN='#2e6b45',GREY='#bbb';
 function svg(el){return d3.select(el).append('svg').attr('viewBox','0 0 260 150').attr('width','100%')}
-function t(s,x,y,txt,o){o=o||{};return s.append('text').attr('x',x).attr('y',y).attr('class','glabel').attr('text-anchor',o.a||'start').style('fill',o.c||'#555').style('font-size',(o.size||13)+'px').text(txt)}
+function t(s,x,y,txt,o){o=o||{};return s.append('text').attr('x',x).attr('y',y).attr('class','glabel').attr('text-anchor',o.a||'start').style('fill',o.c||'#555').style('font-size',(o.size||13)+'px').text((window.MINI_T&&window.MINI_T[txt])||txt)}
 var D={
  empty:function(s){ // treatment bar vs empty control, verdict "pass"
   s.append('line').attr('x1',30).attr('x2',170).attr('y1',120).attr('y2',120).attr('stroke',GREY);

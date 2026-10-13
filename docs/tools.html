@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tools tried: research agents on a university cluster</title>
-<meta name="description" content="Seven research-agent tools set up on a cluster, one task each, every output checked.">
+<meta name="description" content="Eight research-agent tools set up on a cluster, one task each, every output checked.">
 <meta property="og:title" content="Tools tried: research agents on a university cluster">
-<meta property="og:description" content="Seven research-agent tools set up on a cluster, one task each, every output checked.">
+<meta property="og:description" content="Eight research-agent tools set up on a cluster, one task each, every output checked.">
 <meta property="og:image" content="https://chenhsieh.github.io/agentic-research-toolkit/img/card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -18,7 +18,7 @@
 <body>
 <nav><a href="index.html">Essay</a><a href="examples.html">Prompts &amp; files</a><a href="tools.html" class="here">Tools</a><a href="reading.html">Reading</a><a href="session.html">Walkthrough</a></nav>
 <h1>Tools tried</h1>
-<p>In October 2026 I set up the open-source research agents from the <a href="reading.html">Reading</a> list on our university cluster and gave each one task from my own work, then checked every output by hand. This page is the picture version. It is a small feasibility diary, not a ranking: each tool got one task that suited it, once, on one cheap model. A failure can belong to the tool, the model, the gateway or my task.</p>
+<p>In October 2026 I set up the open-source research agents from the <a href="reading.html">Reading</a> list on our university cluster and gave each one task, mostly from my own work, then checked every output by hand. This page is the picture version. It is a small feasibility diary, not a ranking: each tool got one task that suited it, once, on one cheap model. A failure can belong to the tool, the model, the gateway or my task.</p>
 
 <h2 id="plug">One key, many tools</h2>
 <figure><div class="g" data-g="gateway"></div><figcaption>Most of these tools do not need their own account. They can all talk to one gateway (OpenRouter), which passes each request to whichever model you name. One key with a spending cap covered five tools; the whole day cost $0.49.</figcaption></figure>
@@ -32,9 +32,10 @@
 <tr><td>PaperQA2</td><td>Question over 20 papers</td><td class="mid">agent mode crashed</td><td class="ok">every sentence cited</td><td class="bad">"at most a third" became "the majority"</td></tr>
 <tr><td>Biomni</td><td>Compare 5 tandem genes</td><td class="mid">3 packages missing</td><td class="ok">table matched UniProt</td><td class="bad">"more GO terms" read as "diversified"</td></tr>
 <tr><td>Virtual Lab</td><td>Plan how to test young genes</td><td class="ok">clean</td><td class="ok">sensible ranked plan</td><td class="bad">parent species called outgroups</td></tr>
+<tr><td>zotero-skills</td><td>Read a public Zotero library</td><td class="ok">one minute</td><td class="ok">122 of its tests pass; read worked, write refused without a key</td><td class="bad">its status check says "connected" without connecting</td></tr>
 <tr><td>CellVoyager</td><td>Reanalyse a public dataset</td><td class="bad">5 failed starts</td><td class="na">never ran</td><td class="na">never ran</td></tr>
 </table>
-<p>Read the last column. In these seven small trials, the errors I found were mostly in the sentence after a correct-looking output. That is a reason to check both the table and the claim. It is not a measurement of what agents are good at: one task is not a rate, and I chose tasks I could check.</p>
+<p>Read the last column. In these eight small trials, the errors I found were mostly in the sentence after a correct-looking output. That is a reason to check both the table and the claim. It is not a measurement of what agents are good at: one task is not a rate, and I chose tasks I could check.</p>
 <p class="small">What each row did not test. PaperQA2: only its manual local-papers path, not its literature-search agent. Biomni: without its data lake, so as a code-writing database assistant, not its curated tools. Virtual Lab: the meeting, not the design-and-validation workflow in its paper. Paper2Agent: its checks confirm it reproduces my tables, not that a new question is answered correctly. CellVoyager: a setup failure through one gateway key, not a verdict on its analyses.</p>
 
 <h2 id="map">Who drives, and can you check it</h2>
@@ -60,6 +61,8 @@
 <dd>Wrote and ran its own database code; the table matched UniProt. Then it concluded one gene had "functionally diversified" because it had more GO terms, which mostly means it was studied more. Its install left out three packages. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/biomni.md">Notes</a></dd>
 <dt>Virtual Lab <span class="small">four role-played experts plan how to show young genes are real, $0.01</span></dt>
 <dd>A sensible ranked plan in six minutes, close to what my chapter actually did. It also listed the two parent species of my hybrid as outgroups, which they are not, and used stock thresholds with no reason given. This tested the meeting only. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/vlab.md">Notes</a></dd>
+<dt>zotero-skills <span class="small">let an agent search and edit a Zotero library</span></dt>
+<dd>I have no Zotero library on the cluster, so this was a read-only trial on a public group. Search worked and a write was correctly refused. Its status check reports "connected" whenever a key is set, without making a request; with a made-up key it said connected and the next call failed. The write paths, which are most of what it is for, are untested. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/zotero-skills.md">Notes</a></dd>
 <dt>CellVoyager <span class="small">reanalyse a public single-cell dataset</span></dt>
 <dd>Did not run. Five attempts failed before any analysis: a stale package picked up from my home directory, then two parts of its code that need the same model named two different ways when everything goes through one gateway key. It expects OpenAI and Anthropic keys of its own. <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/tools_on_sapelo2/cellvoyager.md">Notes</a></dd>
 <dt>Not run</dt>

@@ -103,3 +103,6 @@ button.copy:hover{color:#222;border-color:#999}
 .score td.ok{background:#e6f1ea;color:#1f4d31}.score td.mid{background:#f5efd9;color:#5c4a12}.score td.bad{background:#f6e3e0;color:#7a231c}.score td.na{color:#888}
 @media (max-width:600px){.score{font-size:12px}.score th:nth-child(2),.score td:nth-child(2){display:none}}
 @media (prefers-color-scheme:dark){.score td.ok{background:#1f3a2a;color:#bfe3cb}.score td.mid{background:#3a3418;color:#eadfae}.score td.bad{background:#42211d;color:#f0bdb6}.score th{color:#b5b0a6}.score td{border-color:#333}}
+.gbar{display:flex;height:18px;margin:.6em 0;border:1px solid #ccc}
+.gfound{background:#2f4a5c;transition:width .3s}.gmiss{background:#8a2c2c;transition:width .3s}
+@media (max-width:600px){.score.all th:nth-child(2),.score.all td:nth-child(2){display:table-cell}}

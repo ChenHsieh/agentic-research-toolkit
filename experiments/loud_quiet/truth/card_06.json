@@ -1,0 +1,9 @@
+{
+ "card": "card_06",
+ "kind": "clean",
+ "fault": "none",
+ "seed": 113,
+ "n_significant": 39,
+ "top_gene": "Gene67738",
+ "top_gene_direction": "up"
+}

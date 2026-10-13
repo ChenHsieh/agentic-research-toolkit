@@ -1,0 +1,8 @@
+
+Before you report, follow these rules:
+1. A program that exits without an error has not shown the result is right. Open the output and check it.
+2. Check the number of libraries in each group actually used in the test. An empty group means not measured, not "no difference".
+3. Check that the code follows the analysis plan in data/README.txt, step by step, and that every input it reads is the current one.
+4. Name the unit of replication and make sure the test uses that unit.
+5. Check that sample labels are matched by name, not by position.
+6. If something does not match the plan, fix it and say so in the notes. If you cannot fix it, report status "problem".

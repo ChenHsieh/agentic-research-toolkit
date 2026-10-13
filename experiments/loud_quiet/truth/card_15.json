@@ -1,0 +1,9 @@
+{
+ "card": "card_15",
+ "kind": "quiet",
+ "fault": "flipped_sign",
+ "seed": 111,
+ "n_significant": 39,
+ "top_gene": "Gene55681",
+ "top_gene_direction": "up"
+}
