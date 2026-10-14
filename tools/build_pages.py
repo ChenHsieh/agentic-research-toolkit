@@ -49,6 +49,26 @@ Done when: [which files exist, and what they show]
 ## Decisions
 - [choice made]: [alternatives tried and dropped], decided [before / after] seeing results
 """)
+ex+='<h2 id="git">Git and GitHub habits</h2>\n<p>The lines I put in a new project\'s rules file so that the repository stays the record.</p>\n'+pre("""
+## Git
+- Commit after every real step, with a message that says what changed and why.
+- Quote a commit hash only after the push has succeeded.
+- Each session works in its own worktree and branch; never in a checkout another session is using.
+- Never commit raw data, large outputs or secrets. Commit a pointer instead: path, size, checksum.
+- Anything visual goes in docs/ and is published with GitHub Pages; check the live page, not the local file.
+""")+'<p>Starting a project:</p>\n'+pre("""
+git init my-project && cd my-project
+mkdir docs && echo "first rough version" > docs/index.html
+git add -A && git commit -m "Start: first rough page"
+# create a private repository on github.com, then:
+git remote add origin https://github.com/<you>/my-project.git
+git push -u origin main
+# Settings > Pages > Deploy from a branch > main /docs
+""")+'<p>One worktree per agent session:</p>\n'+pre("""
+git worktree add ../my-project-fix-figures -b fix-figures
+cd ../my-project-fix-figures    # start the agent here
+git worktree remove ../my-project-fix-figures   # when done; the branch stays
+""")
 ex+='<h2 id="skills">Skills</h2>\n<p>The checking procedures I use are packaged as a Claude Code plugin. In Claude Code, run these two lines:</p>\n'+pre('/plugin marketplace add ChenHsieh/agentic-research-toolkit\n/plugin install result-checks@agentic-research-toolkit')+'<p>It adds six skills: check a design for confounds, give a derived statistic a null, try to break a finished result, compare with a second method, trace a data accession to its paper, and the <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/setup/AGENT_PLAYBOOK.md">agent playbook</a>. About 1,100 tokens per session until one is used.</p>\n'
 ex+='<h2 id="prompts">Prompts</h2>\n'
 for t,p in [("Catch me up","Read STATUS.md and the last ten commits. What is done, what is still open, and what is waiting on someone?"),
@@ -151,6 +171,7 @@ rd+=it("CellAgent","https://arxiv.org/abs/2407.09811","Xiao et al., 2024","Plann
 rd+=it("ChemCrow","https://doi.org/10.1038/s42256-024-00832-8","Bran et al., 2024","GPT-4 with 18 chemistry tools.")
 rd+=it("Claude for Life Sciences","https://www.anthropic.com/news/claude-for-life-sciences","Anthropic, 2025","Connectors (PubMed, Benchling, 10x Genomics and others) and skills.")
 rd+=it("ai-research-skills","https://github.com/WenyuChiou/ai-research-skills","Wenyu Chiou","Seventeen installable skills from literature search to manuscript, tied to Zotero, Obsidian and NotebookLM, with a dated verification record per skill and a written list of where automation must stop. Its author says it was tested by one person, in water resources. I have not run it.")
+rd+=it("design-taste","https://github.com/madebymustafa/design-taste","Mustafa, 2026","Plain-text skills that stop an agent from producing the default AI look (purple gradients, centered hero, three cards, emoji icons), plus a pre-flight checklist to run before calling a page done. No service or account needed.")
 rd+=it("AGENTS.md","https://agents.md/","Linux Foundation","One instructions file many agents read.")
 rd+=it("Agent Skills","https://agentskills.io/","open standard","A folder with a SKILL.md; loaded only when a task matches.")
 rd+='<p class="small">Not included: several 2026 preprints seen in search but not read. Affiliations for some arXiv entries are from the author groups, not the abstract pages. Full notes: <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/notes/lit_round_2026-10.md">notes/lit_round_2026-10.md</a>.</p>\n'

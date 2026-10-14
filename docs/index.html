@@ -32,7 +32,7 @@
 <li><b>Empty is not measured.</b> A control with no values is not a pass. <a href="#failures">Case</a></li>
 <li><b>Rules that matter become code.</b> A rule in a file is read once and forgotten. <a href="#rules">Case</a></li>
 <li><b>Name the unit before you count.</b> Grouped units are reported within groups. <a href="#rules">Case</a></li>
-<li><b>Files are the record, not the chat.</b> Brief, task list, status, commit. <a href="#long">Why</a></li>
+<li><b>Files and commits are the record, not the chat.</b> Brief, task list, status, and a commit after every real step. <a href="#github">How</a></li>
 <li><b>Reproduce from the Methods alone.</b> Gaps are marked BLOCKED, never guessed. <a href="#failures">Case</a></li>
 <li><b>Keep the check out of the agent's reach.</b> A check it can edit is a check it can make pass. <a href="#quiet">Why</a></li>
 </ol>
@@ -213,6 +213,22 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 <tr><th>Disuse</th><td>Refusing it after one bad experience, even for routine runs a tested check could cover. Or switching off a check that keeps saying no to good data. Learning a method by hand is not disuse.</td></tr>
 <tr><th>Abuse</th><td>Setting it up without regard for the people involved: unbounded jobs on a shared cluster, more output or more sessions than anyone can review, or no way to see and stop what it is doing.</td></tr>
 </table>
+
+<h2 id="github">GitHub holds it together</h2>
+
+<p>Every project I hand to an agent lives in a GitHub repository, and most of the habits on this page run through it. If you take one practical thing from this page, take this one.</p>
+
+<figure><div class="g" data-g="github"></div><figcaption>Agents on the laptop and on the cluster never pass work to each other directly. They push to GitHub and pull from it. Anything worth showing goes out as a page anyone can open on a phone.</figcaption></figure>
+
+<p><b>The history is the notebook.</b> I ask for a commit after every real step, with a message that says what changed and why. A session's summary is its own account of what it did; the commits are what actually happened. When a session ends, a fresh one reads the log and the diffs, not the chat.</p>
+
+<p><b>It moves work between machines.</b> My laptop and the cluster do not share a disk. Code, small result tables and figures go through GitHub; jobs on the cluster pull the commit they should run. A number in a report carries the commit it came from, and I only quote a commit after the push has succeeded.</p>
+
+<p><b>It keeps agents apart.</b> Each session works in its own copy (a git worktree, see <a href="#failures">two agents, one folder</a>). If one breaks something, the damage stays on its branch.</p>
+
+<p><b>It is how I show work.</b> A private repository can publish a public website from its <code>docs/</code> folder (GitHub Pages; free for public repositories, a paid account for private ones). I turn that on with the first rough version, so my advisor or a friend can open a link on a phone instead of pulling a branch. This site is one of those. The published site is public even when the repository is not, so nothing goes in <code>docs/</code> that is not cleared for the open web.</p>
+
+<p><b>What stays out.</b> Raw data, large files and anything secret. Big outputs stay on the cluster's storage and the repository holds a pointer to them: a path, a size and a checksum.</p>
 
 <h2 id="long">Long sessions</h2>
 

@@ -1,4 +1,12 @@
 drawDiagrams({
+github:{height:260,narrow:{height:420,pos:{lap:[.25,.08],clu:[.75,.08],gh:[.5,.4],hist:[.2,.7],pages:[.8,.7],ppl:[.8,.93]}},nodes:[
+ {id:'lap',label:'Laptop sessions',kind:'agent',x:.12,y:.2,info:'Writing, figures, review. Pushes and pulls; never copies files to the cluster by hand.'},
+ {id:'clu',label:'Cluster sessions and jobs',kind:'agent',x:.12,y:.8,info:'Heavy compute. Jobs check out the commit they should run; small results come back as commits.'},
+ {id:'gh',label:'GitHub repository',kind:'you',x:.48,y:.5,info:'<b>The record</b><br>A commit after every real step. Each session works on its own worktree and branch.'},
+ {id:'hist',label:'History: log and diffs',kind:'file',x:.82,y:.15,info:'What a fresh session reads at the end, instead of the first session\'s summary.'},
+ {id:'pages',label:'Pages site from docs/',kind:'file',x:.82,y:.55,info:'Public web page from a private repository. Only what is cleared for the open web goes in docs/.'},
+ {id:'ppl',label:'Advisor, friends, phone',kind:'ok',x:.82,y:.88,info:'A link instead of "pull my branch".'}],
+ links:[{s:'lap',t:'gh',label:'push / pull'},{s:'clu',t:'gh',label:'push / pull'},{s:'gh',t:'hist'},{s:'gh',t:'pages'},{s:'pages',t:'ppl'}]},
 modes:{height:120,narrow:{height:230,pos:{a:[.5,.1],p:[.5,.37],u:[.5,.63],n:[.5,.9]}},axis:['you watch every step','you check the result'],nodes:[
  {id:'a',label:'Approve each step',kind:'you',x:.12,y:.3,info:'<b>Approve each command</b><br>Use for: your first week, anything touching shared data, deleting files, or submitting many jobs.<br>Cost: you are the bottleneck; long tasks stall when you look away.'},
  {id:'p',label:'Approve the plan',kind:'file',x:.38,y:.3,info:'<b>Plan first, then let it run</b><br>It writes a plan; you read and correct it; then edits run without asking. Safe commands are pre-approved in a list; risky ones still ask.<br>This is where most of my daytime work sits.'},

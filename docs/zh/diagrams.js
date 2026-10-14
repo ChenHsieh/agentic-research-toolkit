@@ -1,5 +1,13 @@
 // 繁體中文版的圖。結構與 ../diagrams.js 相同，只改中文文字。
 drawDiagrams({
+github:{height:260,narrow:{height:420,pos:{lap:[.25,.08],clu:[.75,.08],gh:[.5,.4],hist:[.2,.7],pages:[.8,.7],ppl:[.8,.93]}},nodes:[
+ {id:'lap',label:'筆電上的 session',kind:'agent',x:.12,y:.2,info:'寫作、畫圖、複查。只透過 push / pull，不手動把檔案搬到叢集。'},
+ {id:'clu',label:'叢集上的 session 和 job',kind:'agent',x:.12,y:.8,info:'重的運算。job 拉下它該跑的 commit；小的結果以 commit 回來。'},
+ {id:'gh',label:'GitHub repo',kind:'you',x:.48,y:.5,info:'<b>紀錄</b><br>每個實際步驟 commit 一次。每個 session 在自己的 worktree 和 branch 上做事。'},
+ {id:'hist',label:'歷史：log 和 diff',kind:'file',x:.82,y:.15,info:'結束時新的 session 讀這個，而不是前一個 session 的摘要。'},
+ {id:'pages',label:'從 docs/ 發布的網站',kind:'file',x:.82,y:.55,info:'private repo 發布的公開網頁。docs/ 裡只放可以公開的東西。'},
+ {id:'ppl',label:'指導教授、朋友、手機',kind:'ok',x:.82,y:.88,info:'給一個連結，而不是叫人 pull branch。'}],
+ links:[{s:'lap',t:'gh',label:'push / pull'},{s:'clu',t:'gh',label:'push / pull'},{s:'gh',t:'hist'},{s:'gh',t:'pages'},{s:'pages',t:'ppl'}]},
 modes:{height:120,narrow:{height:230,pos:{a:[.5,.1],p:[.5,.37],u:[.5,.63],n:[.5,.9]}},axis:['每步都看','只看結果'],nodes:[
  {id:'a',label:'逐步核准',kind:'you',x:.12,y:.3,info:'<b>每個 command 都要核准</b><br>適用於剛開始的第一週、會動到共用資料、刪檔，或一次送很多 job 的工作。<br>代價是你會變瓶頸，一離開，長 task 就停住。'},
  {id:'p',label:'核准計畫',kind:'file',x:.38,y:.3,info:'<b>先看計畫，再放它跑</b><br>它先寫 plan，你讀過、修正後，之後的修改不再逐一問。安全 command 事先列白名單，有風險的照樣要問。<br>我白天大部分工作都在這格。'},

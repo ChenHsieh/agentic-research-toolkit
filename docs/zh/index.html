@@ -30,7 +30,7 @@
 <li><b>空的不算有量到。</b>對照組沒有數值，不能算通過。<a href="#failures">案例</a></li>
 <li><b>重要規則要寫進程式。</b>規則只寫在檔案裡，讀過一次就很容易被忘掉。<a href="#rules">案例</a></li>
 <li><b>數之前先講清楚單位。</b>單位有分組，就要報各組裡的結果。<a href="#rules">案例</a></li>
-<li><b>紀錄要留在檔案，不要只留在對話。</b>brief、task list、STATUS.md、commit。<a href="#long">原因</a></li>
+<li><b>紀錄要留在檔案和 commit，不要只留在對話。</b>brief、task list、STATUS.md、commit。<a href="#github">做法</a></li>
 <li><b>只靠 Methods 重做一次結果。</b>缺資料就標 BLOCKED，不要猜。<a href="#failures">案例</a></li>
 <li><b>檢查要放在代理改不到的地方。</b>它能改的檢查，就可能被它改到通過。<a href="#quiet">原因</a></li>
 </ol>
@@ -207,6 +207,22 @@ f.querySelectorAll('.ex-inputs button').forEach(function(b){b.onclick=function()
 <tr><th>棄用</th><td>一次不好的經驗後就完全不用，連有測試過的 check 能把關的例行工作也不交出去。或把老是對好資料說「不」的 check 關掉。自己親手學一個方法不算棄用。</td></tr>
 <tr><th>濫用</th><td>設定時沒顧到別人：在共用叢集無上限送 job、產出或 session 多到沒人看得完，或根本看不見、也停不下它正在做的事。</td></tr>
 </table>
+
+<h2 id="github">一切都靠 GitHub 串起來</h2>
+
+<p>每個交給代理的專案，我都放在一個 GitHub repo 裡，這頁大部分的習慣也都是透過它在運作。如果這頁只能帶走一件實際的事，就帶走這件。</p>
+
+<figure><div class="g" data-g="github"></div><figcaption>筆電上和叢集上的代理從不直接交接工作，而是推到 GitHub、再從 GitHub 拉下來。值得給人看的東西，就變成一個手機打開就能看的網頁。</figcaption></figure>
+
+<p><b>commit 紀錄就是實驗紀錄本。</b>我要求每做完一個實際的步驟就 commit 一次，訊息寫清楚改了什麼、為什麼。session 的摘要是它自己的說法；commit 才是實際發生的事。session 結束後，新的 session 讀的是 log 和 diff，不是對話。</p>
+
+<p><b>它在不同機器之間搬工作。</b>我的筆電和叢集沒有共用硬碟。程式、小的結果表和圖都經過 GitHub；叢集上的 job 拉下它該跑的那個 commit。報告裡的數字會附上它來自哪個 commit，而且要等 push 成功之後我才引用那個 commit。</p>
+
+<p><b>它讓代理彼此隔開。</b>每個 session 在自己的工作目錄裡做事（Git worktree，見<a href="#failures">兩個代理共用一個資料夾</a>）。哪一個弄壞了東西，影響只留在它自己的 branch 上。</p>
+
+<p><b>它是我給人看成果的方式。</b>private repo 也可以從 <code>docs/</code> 資料夾發布一個公開網站（GitHub Pages；public repo 免費，private repo 需要付費帳號）。我在第一個粗糙的版本就把它打開，讓指導教授或朋友用手機點連結就能看，不用 pull branch。這個網站就是這樣做的。repo 是 private，發布出去的網站仍然是公開的，所以 <code>docs/</code> 裡只放可以公開的東西。</p>
+
+<p><b>哪些不放進去。</b>原始資料、大檔案和任何機密。大的輸出留在叢集的儲存空間，repo 裡只放一個指標：路徑、大小和 checksum。</p>
 
 <h2 id="long">長 session 怎麼收尾</h2>
 

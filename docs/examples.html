@@ -64,6 +64,26 @@ Done when: [which files exist, and what they show]
 
 ## Decisions
 - [choice made]: [alternatives tried and dropped], decided [before / after] seeing results</code></pre>
+<h2 id="git">Git and GitHub habits</h2>
+<p>The lines I put in a new project's rules file so that the repository stays the record.</p>
+<pre><code>## Git
+- Commit after every real step, with a message that says what changed and why.
+- Quote a commit hash only after the push has succeeded.
+- Each session works in its own worktree and branch; never in a checkout another session is using.
+- Never commit raw data, large outputs or secrets. Commit a pointer instead: path, size, checksum.
+- Anything visual goes in docs/ and is published with GitHub Pages; check the live page, not the local file.</code></pre>
+<p>Starting a project:</p>
+<pre><code>git init my-project &amp;&amp; cd my-project
+mkdir docs &amp;&amp; echo &quot;first rough version&quot; &gt; docs/index.html
+git add -A &amp;&amp; git commit -m &quot;Start: first rough page&quot;
+# create a private repository on github.com, then:
+git remote add origin https://github.com/&lt;you&gt;/my-project.git
+git push -u origin main
+# Settings &gt; Pages &gt; Deploy from a branch &gt; main /docs</code></pre>
+<p>One worktree per agent session:</p>
+<pre><code>git worktree add ../my-project-fix-figures -b fix-figures
+cd ../my-project-fix-figures    # start the agent here
+git worktree remove ../my-project-fix-figures   # when done; the branch stays</code></pre>
 <h2 id="skills">Skills</h2>
 <p>The checking procedures I use are packaged as a Claude Code plugin. In Claude Code, run these two lines:</p>
 <pre><code>/plugin marketplace add ChenHsieh/agentic-research-toolkit
