@@ -70,7 +70,7 @@
 
 <article class="pat"><div class="mini" data-mini="exit0"></div><div class="pat-t">
 <h3>Finished, but empty</h3>
-<dl class="pdl"><dt class="lbl">You will see</dt><dd>The job says it finished without errors. The output file exists. It has a header and nothing else.</dd><dt class="lbl">What to do</dt><dd>Write in your rules file what "done" means: which file, how many rows, what range of values. Exit code 0 only means the program stopped.</dd></dl>
+<dl class="pdl"><dt class="lbl">You will see</dt><dd>The job says it finished without errors. The output file exists. It has a header and nothing else.</dd><dt class="lbl">What to do</dt><dd>Write in your rules file what "done" means: which file, how many rows, what range of values. Exit code 0 only means the program stopped. Then ask the agent to list every place its code catches an error and carries on (<code>except: pass</code> in Python, <code>tryCatch(..., error = function(e) NULL)</code> in R, <code>|| true</code> in shell). In one study of 48 catastrophic failures in five distributed data systems, a quarter came from an error handler that ignored the error (<a href="https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan">Yuan et al. 2014</a>).</dd></dl>
 </div></article>
 
 <article class="pat"><div class="mini" data-mini="unit"></div><div class="pat-t">
@@ -197,7 +197,7 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <h2 id="harder">Why this gets harder, not easier</h2>
 
-<p>In 1983 Lisanne Bainbridge described the "ironies of automation" (<a href="https://gwern.net/doc/sociology/technology/1983-bainbridge.pdf">PDF</a>): the more of a process is automated, the more the person's remaining job is the abnormal cases, noticing and recovering from what the automation got wrong, while they get less practice at the normal ones. Agents fit that description. They take the routine runs; you are left with the quiet failures, with less time spent inside the data than before.</p>
+<p>In 1983 Lisanne Bainbridge described the "ironies of automation" (<a href="https://doi.org/10.1016/0005-1098(83)90046-8">Automatica</a>; <a href="https://ckrybus.com/static/papers/Bainbridge_1983_Automatica.pdf">searchable PDF</a>): the more of a process is automated, the more the person's remaining job is the abnormal cases, noticing and recovering from what the automation got wrong, while they get less practice at the normal ones. Agents fit that description. They take the routine runs; you are left with the quiet failures. She also saw why those are hard to see: "automatic control can 'camouflage' system failure by controlling against the variable changes, so that trends do not become apparent until they are beyond control." An agent that patches a run until it exits cleanly is doing the same thing. Her design rule was that "automatic systems should fail obviously", which is what a check you have seen fail gives you.</p>
 
 <p>Philosophy of science has words for what a good check is. The Stanford Encyclopedia summarizes Popper: "Every genuine test of a scientific theory, then, is logically an attempt to refute or to falsify it" (<a href="https://plato.stanford.edu/archives/spr2007/entries/popper/">SEP</a>). Deborah Mayo's version is the severe test: only infer what the procedure had a real chance of showing to be wrong (<a href="https://www.journals.uchicago.edu/doi/abs/10.1093/bjps/axl003">Mayo and Spanos 2006</a>). An exit code is not a severe test of a biological result. A planted signal that the pipeline must find is.</p>
 
@@ -267,7 +267,7 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 <div class="prompt"><div class="ph">Before you leave: a premortem</div><p>It is tomorrow morning. This run produced a result that looks convincing but is wrong. List five ways that could have happened. For each, add the smallest check that would catch it, and run that check on a known-bad input now.</p></div>
 <p class="small">The premortem is Gary Klein's: imagine the project has already failed, then ask why (<a href="https://hbr.org/2007/09/performing-a-project-premortem">HBR, 2007</a>).</p>
 
-<p><span class="lbl">Goes well</span> A one-sentence goal. A check it can run that has been seen to fail. Small stages that each end in a file and a commit. Jobs chained in the scheduler. Its own copy of the repository. Commands it may run decided in advance, so it does not stop at 1 a.m. waiting for a yes.</p>
+<p><span class="lbl">Goes well</span> A one-sentence goal. A check it can run that has been seen to fail. One sample or one chromosome taken through every stage and checked before the full set is launched (release engineers call this a <a href="https://sre.google/workbook/canarying-releases/">canary</a>). Small stages that each end in a file and a commit. Jobs chained in the scheduler. Its own copy of the repository. Commands it may run decided in advance, so it does not stop at 1 a.m. waiting for a yes.</p>
 
 <p><span class="lbl">Goes badly</span> "Explore the data." Success judged by its own summary. One long job that saves only at the end. A shared folder. An agent polling the queue all night. No limit on how many jobs it can submit.</p>
 
@@ -275,9 +275,9 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <h3>While it runs</h3>
 
-<p>Do not let watching it stand in for a planned check. I know of no study of watching an agent, but there is one on how fast AI help feels. In a 2025 randomized trial, experienced open-source developers expected AI tools to make them 24% faster; on 246 real tasks they were 19% slower (<a href="https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf">METR</a>). That was early-2025 tools on mature codebases, and METR is repeating it, but the gap between how fast it felt and how fast it was is the useful part.</p>
+<p>Do not let watching it stand in for a planned check. I know of no study of watching an agent, but there is one on how fast AI help feels. In a 2025 randomized trial, experienced open-source developers expected AI tools to make them 24% faster; on 246 real tasks they were 19% slower (<a href="https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf">METR</a>). That was early-2025 tools on mature codebases, and METR has since changed the study design and reads its newer numbers as a lower bound on the speedup (<a href="https://metr.org/blog/2026-02-24-uplift-update/">METR 2026</a>), but the gap between how fast it felt and how fast it was is the useful part.</p>
 
-<p>What I do instead: give the session a condition to wake me on (the job left the queue, a file appeared) rather than checking in. Work on something only a person can do: reading, writing, a meeting, the bench. Check from my phone when it asks, not to supervise. Review in one batch, from the files and commits, with a fresh session that did not do the work.</p>
+<p>What I do instead: give the session a condition to wake me on (the job left the queue, a file appeared) rather than checking in. Work on something only a person can do: reading, writing, a meeting, the bench. I open my phone when a session asks for something, and otherwise leave it alone. Review in one batch, from the files and commits, with a fresh session that did not do the work. Then open one output file and check one number against something already known. A fresh session's report is still something you read. In one automation study, people lost track of the situation when the system made the decisions, and the authors traced it to "the shift from active to passive processing" (<a href="https://doi.org/10.1518/001872095779064555">Endsley and Kiris 1995</a>).</p>
 
 <h2 id="models">Models</h2>
 
