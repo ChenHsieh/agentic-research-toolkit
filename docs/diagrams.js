@@ -7,6 +7,13 @@ github:{height:260,narrow:{height:420,pos:{lap:[.25,.08],clu:[.75,.08],gh:[.5,.4
  {id:'pages',label:'Pages site from docs/',kind:'file',x:.82,y:.55,info:'Public web page from a private repository. Only what is cleared for the open web goes in docs/.'},
  {id:'ppl',label:'Advisor, friends, phone',kind:'ok',x:.82,y:.88,info:'A link instead of "pull my branch".'}],
  links:[{s:'lap',t:'gh',label:'push / pull'},{s:'clu',t:'gh',label:'push / pull'},{s:'gh',t:'hist'},{s:'gh',t:'pages'},{s:'pages',t:'ppl'}]},
+several:{height:250,narrow:{height:380,pos:{you:[.5,.06],sep:[.27,.36],hand:[.73,.36],fan:[.5,.62],files:[.5,.93]}},nodes:[
+ {id:'you',label:'You',kind:'you',x:.5,y:.08,info:'<b>You</b><br>Decide what to split, and read what comes back.'},
+ {id:'sep',label:'Separate sessions',kind:'agent',x:.15,y:.5,info:'<b>Separate sessions on separate work</b><br>One on an analysis, one on a figure, one on a site. Each has its own copy of the repository and reads the same playbook.<br>Goes wrong by: two sessions in one folder.'},
+ {id:'fan',label:'One task, several readers',kind:'agent',x:.5,y:.5,info:'<b>One task spread over several agents</b><br>Independent parts only: searches, reviews, checks. Edits to the same files stay with one writer.<br>Goes wrong by: parts that do not fit, agreement that is not independent, and token cost (about 15 times a chat in Anthropic\'s report).'},
+ {id:'hand',label:'Hand off a step',kind:'agent',x:.85,y:.5,info:'<b>A mechanical step to a cheaper tool</b><br>Codex or Aider, with a test to pass.<br>Goes wrong by: a job that looks running and is not. Give it an output file and a deadline; judge it by the file.'},
+ {id:'files',label:'Files and commits',kind:'file',x:.5,y:.9,info:'<b>Files and commits</b><br>What every agent hands back. One session, or you, reads them and decides.'}],
+ links:[{s:'you',t:'sep'},{s:'you',t:'fan'},{s:'you',t:'hand'},{s:'sep',t:'files'},{s:'fan',t:'files'},{s:'hand',t:'files'}]},
 modes:{height:120,narrow:{height:230,pos:{a:[.5,.1],p:[.5,.37],u:[.5,.63],n:[.5,.9]}},axis:['you watch every step','you check the result'],nodes:[
  {id:'a',label:'Approve each step',kind:'you',x:.12,y:.3,info:'<b>Approve each command</b><br>Use for: your first week, anything touching shared data, deleting files, or submitting many jobs.<br>Cost: you are the bottleneck; long tasks stall when you look away.'},
  {id:'p',label:'Approve the plan',kind:'file',x:.38,y:.3,info:'<b>Plan first, then let it run</b><br>It writes a plan; you read and correct it; then edits run without asking. Safe commands are pre-approved in a list; risky ones still ask.<br>This is where most of my daytime work sits.'},

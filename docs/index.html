@@ -238,6 +238,22 @@ A figure-saving function refuses a figure with no sample size, text under 20 pt,
 
 <p>Waiting is done by the scheduler (job dependencies) or by one background check that ends when the job leaves the queue. Not by an agent polling. I also give every wait a deadline. A job that hangs stays in the queue until its time limit, which can be days away, and never writes its file. So my jobs print a progress line every few minutes, and the background check counts a log that has stopped growing as a failure.</p>
 
+<h2 id="several">Several agents at once</h2>
+
+<p>Much of my volume comes from running several sessions at the same time. Three different things go under that name, and they fail in different ways.</p>
+
+<figure><div class="g" data-g="several"></div><figcaption>Three ways to use more than one agent. Each one comes back to files that a person, or one session, reads and decides on.</figcaption></figure>
+
+<p><b>Separate sessions on separate work.</b> This is most of it: one session on an analysis, one on a figure, one on a site. They go wrong by colliding, as in <a href="#failures">two agents, one folder</a>. Each gets its own copy of the repository, and all of them read the same <a href="https://github.com/ChenHsieh/agentic-research-toolkit/blob/main/setup/AGENT_PLAYBOOK.md">playbook</a> at the start.</p>
+
+<p><b>One task spread over several agents.</b> Worth it when the parts are independent: a literature search from five angles, a draft read by reviewers with different briefs, one result checked several ways. Not worth it when the parts depend on each other. Cognition's example is two subagents building the background and the bird of one Flappy Bird clone: each misreads its part in its own way, and the pieces do not fit together (<a href="https://cognition.ai/blog/dont-build-multi-agents">Cognition 2025</a>). It is also expensive. Anthropic reports that its multi-agent research system used about 15 times the tokens of a chat, and that most coding tasks have fewer truly parallel parts than research (<a href="https://www.anthropic.com/engineering/multi-agent-research-system">Anthropic 2025</a>). I ran out of weekly usage halfway through one such run and finished it by hand.</p>
+
+<p>Reviewers that agree are not independent if they are the same model reading the same thing. Give them different inputs, a different model, or the job of arguing against the result.</p>
+
+<p><b>Handing a step to another tool.</b> I give mechanical steps that have a test to a cheaper model (Codex, or Aider with a model through OpenRouter). The failure here is quiet: a job that looks like it is running and is not. One review job sat for 40 minutes waiting for keyboard input that would never come. Every handed-off job now gets an output file to wait on and a deadline, and I judge it by the file. Numbers it reports get checked before I repeat them: one reported a folder as 38 GB when the quota counted 28.</p>
+
+<p>More agents produce more. They check more only if the checking was planned.</p>
+
 <h2 id="modes">How much to let it run</h2>
 
 <p>The tools let you choose how often the agent stops to ask. Claude Code has modes from "ask before every command" to "plan first, then edit freely" to "never ask"; Codex, Cursor and others have similar settings. Which one is right depends less on the tool than on what the task can break.</p>
